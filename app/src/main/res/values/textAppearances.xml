@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.Talkable" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/font</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.main_b_20">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sub_m_14">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sub_m_16">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sub_r_12">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.main_sm_20">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.button_b_18">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sub_m_12">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sub_b_14">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">38dp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sb_16">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.sm_18">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.b_34">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.b_12">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>
