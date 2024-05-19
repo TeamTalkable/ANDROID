@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main Color -->
+    <color name="main">#FF6B6B</color>
+    <color name="main_1">#FFADAD</color>
+    <color name="main_2">#FFE1E1</color>
+    <color name="main_3">#FFF1F1</color>
+    <color name="main_4">#D7484D</color>
+    <color name="main_5">#8F001A</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Font Color-->
+    <color name="font">#0F0F0F</color>
+    <color name="font2">#1F1F1F</color>
+    <color name="font3">#353535</color>
+    <color name="font4">#cccccc</color>
+    <color name="font5">#F5F5F5</color>
+
+    <!-- Sub Color-->
+    <color name="gray">#646464</color>
+    <color name="sub">#F1FFF8</color>
+</resources>
