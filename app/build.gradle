@@ -1,0 +1,77 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlinx.serialization)
+    id("org.jetbrains.kotlin.plugin.parcelize")
+}
+
+android {
+    namespace = "com.talkable"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId "com.talkable"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+        buildConfig = true
+    }
+}
+
+dependencies {
+    // Google
+    implementation(libs.material)
+
+    // Test Dependency
+    testImplementation(libs.junit)
+    // ("test-espresso", "test-junit")
+    androidTestImplementation(libs.bundles.androidx.android.test)
+
+    // AndroidX
+    implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
+    // ("core-ktx", "constraintlayout", "appcompat", "activity")
+    implementation(libs.bundles.androidx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+
+    // Third-Party
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.serialization.converter)
+    implementation(platform(libs.okhttp3.bom))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation(libs.timber)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlin.coroutines)
+
+    // Coil
+    implementation(libs.coil)
+
+    // Lottie
+    implementation(libs.lottie)
+
+    // Jetpack navi
+    implementation(libs.bundles.jetpack.navi)
+}
