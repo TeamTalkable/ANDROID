@@ -6,34 +6,35 @@ plugins {
 }
 
 android {
-    namespace = "com.talkable"
-    compileSdk = 34
+    namespace = libs.versions.applicationId.get()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId "com.talkable"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        applicationId = libs.versions.applicationId.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.appVersion.get()
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            isMinifyEnabled = true
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = libs.versions.jvmTarget.get()
     }
     buildFeatures {
-        viewBinding = true
         dataBinding = true
         buildConfig = true
     }
@@ -53,15 +54,15 @@ dependencies {
     implementation(libs.fragment.ktx)
     // ("core-ktx", "constraintlayout", "appcompat", "activity")
     implementation(libs.bundles.androidx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
+    //("lifecycle-runtime-ktx", "lifecycle-viewmodel-ktx", "lifecycle-livedata")
+    implementation(libs.bundles.lifecycle)
 
     // Third-Party
     implementation(libs.retrofit2)
     implementation(libs.retrofit2.serialization.converter)
     implementation(platform(libs.okhttp3.bom))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    //("retrofit2", "retrofit2-serialization-converter", "okhttp", "okhttp-logging-interceptor")
+    implementation(libs.bundles.retrofit)
     implementation(libs.timber)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlin.coroutines)
