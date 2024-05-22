@@ -2,6 +2,11 @@
     <string name="app_name">Talkable</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy">testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</string>
+
+   <!-- talk feedback -->
+    <string name="tv_talk_feedback_bottom_graph"><u>그래프가 변형되었어요. 확인해보세요!</u></string>
+    <string name="btn_talk_feedback_bottom_complete">대화 끝내기</string>
 
     <!--login-->
     <string name="login_intro">HAI 대화를 통한\n맞춤형 영어 회화 학습,</string>

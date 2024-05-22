@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinx.serialization)
+    kotlin("kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
@@ -61,6 +62,7 @@ dependencies {
     implementation(libs.bundles.androidx)
     //("lifecycle-runtime-ktx", "lifecycle-viewmodel-ktx", "lifecycle-livedata")
     implementation(libs.bundles.lifecycle)
+    implementation(libs.recyclerview)
 
     // Third-Party
     implementation(libs.retrofit2)
