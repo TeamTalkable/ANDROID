@@ -7,4 +7,19 @@
    <!-- talk feedback -->
     <string name="tv_talk_feedback_bottom_graph"><u>그래프가 변형되었어요. 확인해보세요!</u></string>
     <string name="btn_talk_feedback_bottom_complete">대화 끝내기</string>
+
+    <!--login-->
+    <string name="login_intro">HAI 대화를 통한\n맞춤형 영어 회화 학습,</string>
+    <string name="login_sign_up"><u>카카오계정으로 회원가입</u></string>
+    <string name="sign_up_title">약관을 확인해주세요</string>
+    <string name="sign_up_all">전체 약관 동의</string>
+    <string name="sign_up_age">[필수] 만 14세 이상</string>
+    <string name="sign_up_terms">[필수] 서비스 이용약관</string>
+    <string name="sign_up_privacy">[필수] 개인정보 처리방침</string>
+    <string name="sign_up_marketing">[선택] 광고성 정보 수신 및 마케팅 활용 동의</string>
+
+
+    <!--home-->
+    <string name="home_user_name">000님,</string>
+    <string name="home_continue">이어서 대화해볼까요?</string>
 </resources>
