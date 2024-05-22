@@ -68,7 +68,7 @@
             android:layout_marginTop="12dp"
             android:text="@{model.remainTime + `분만 더 대화하면 꽃을 피울 수 있어요!`}"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_talk_feedback_top_flower"
