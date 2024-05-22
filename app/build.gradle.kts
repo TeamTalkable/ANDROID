@@ -73,6 +73,9 @@ dependencies {
     // Lottie
     implementation(libs.lottie)
 
+    // Kakao
+    implementation(libs.kakao)
+
     // Jetpack navi
     implementation(libs.bundles.jetpack.navi)
 }
