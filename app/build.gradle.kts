@@ -17,6 +17,11 @@ android {
         versionName = libs.versions.appVersion.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        val apiKey = properties["native.app.key"] as? String ?: ""
+        manifestPlaceholders["apiKey"] = properties["native.app.key"] as String
+        buildConfigField ("String", "NATIVE_APP_KEY", "${properties["native.app.key"]}")
     }
 
     buildTypes {
