@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.talkable.presentation.talk.feedback.model.TalkFeedbackModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_3"
+        android:paddingBottom="23dp">
+
+        <ImageView
+            android:id="@+id/iv_talk_feedback_top_talk_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/ic_my_page_talk_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_talk_feedback_talk_top_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="오늘 대화 시간"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/font_3"
+            app:layout_constraintBottom_toBottomOf="@id/iv_talk_feedback_top_talk_time"
+            app:layout_constraintStart_toEndOf="@id/iv_talk_feedback_top_talk_time"
+            app:layout_constraintTop_toTopOf="@id/iv_talk_feedback_top_talk_time" />
+
+        <TextView
+            android:id="@+id/tv_talk_feedback_top_talk_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{model.talkTime + `M`}"
+            android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+            app:layout_constraintBottom_toBottomOf="@id/tv_talk_feedback_talk_top_time_label"
+            app:layout_constraintStart_toEndOf="@id/tv_talk_feedback_talk_top_time_label"
+            app:layout_constraintTop_toTopOf="@id/tv_talk_feedback_talk_top_time_label"
+            tools:text="10M" />
+
+        <ImageView
+            android:id="@+id/iv_talk_feedback_top_flower"
+            imageUrl="@{model.flowerImage}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_top_talk_time"
+            tools:src="@drawable/background_splash_screen" />
+
+        <TextView
+            android:id="@+id/tv_talk_feedback_top_flower_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="12dp"
+            android:text="@{model.remainTime + `분만 더 대화하면 꽃을 피울 수 있어요!`}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_talk_feedback_top_flower"
+            tools:text="@string/dummy" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

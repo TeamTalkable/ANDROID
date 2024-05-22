@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Talkable.Splash">
+        <item name="android:windowBackground">@color/main_3</item>
+    </style>
+</resources>
