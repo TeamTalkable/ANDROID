@@ -52,6 +52,7 @@
 
         <ImageView
             android:id="@+id/iv_talk_feedback_top_flower"
+            imageUrl="@{model.flowerImage}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
