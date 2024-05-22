@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.talkable.presentation.talk.feedback.model.TalkFeedbackModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:background="@color/main_3"
+        android:paddingBottom="91dp">
+
+        <TextView
+            android:id="@+id/tv_talk_feedback_bottom_graph"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_talk_feedback_bottom_graph"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:visibility="@{model.graphChanged ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_talk_feedback_bottom_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingVertical="18dp"
+            android:text="@string/btn_talk_feedback_bottom_complete"
+            android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_bottom_graph" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
