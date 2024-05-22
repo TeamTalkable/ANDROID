@@ -6,7 +6,7 @@
             android:shape="rectangle"
             android:tint="@color/main_3" />
     </item>
-    <item>
+    <item android:bottom="80dp">
         <bitmap
             android:gravity="center"
             android:src="@drawable/img_splash_logo" />
