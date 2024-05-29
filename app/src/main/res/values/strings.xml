@@ -17,6 +17,7 @@
     <string name="agreement_terms">[필수] 서비스 이용약관</string>
     <string name="agreement_privacy">[필수] 개인정보 처리방침</string>
     <string name="agreement_marketing">[선택] 광고성 정보 수신 및 마케팅 활용 동의</string>
+    <string name="agreement_start">시작하기</string>
 
     <!--home-->
     <string name="home_user_name">000님,</string>
