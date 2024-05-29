@@ -1,25 +1,51 @@
 package com.talkable.presentation.login
 
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.databinding.FragmentLoginBinding
 import com.talkable.presentation.MainActivity
+import com.talkable.presentation.login.kakao.KakaoLoginService
+import com.talkable.presentation.login.kakao.LoginViewModelFactory
+import kotlinx.coroutines.launch
 
 class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
+    private lateinit var loginViewModel: LoginViewModel
+
     override fun initView() {
-
         (activity as? MainActivity)?.hideBottomNavigation()
+        initLoginBtnClickListener()
+        init()
+        initKaKaoLoginObserve()
+    }
 
-        // 회원가입으로 이동
-        binding.tvLoginSignUp.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+    private fun init(){
+        // KakaoLoginService 초기화
+        val kakaoLoginService = KakaoLoginService(requireContext())
+
+        // ViewModel 초기화
+        val factory = LoginViewModelFactory(kakaoLoginService)
+        loginViewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
+    }
+
+    // 로그인
+    private fun initLoginBtnClickListener() {
+        binding.btnLoginKakao.setOnClickListener {
+            loginViewModel.kakaoLogin()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        (activity as? MainActivity)?.showBottomNavigation()
+    // isKakaoLogin LiveData 관찰
+    private fun initKaKaoLoginObserve() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            loginViewModel.isKakaoLogin.collect { isLoggedIn ->
+                if (isLoggedIn) {
+                    findNavController().navigate(R.id.action_loginFragment_to_agreementFragment)
+                }
+            }
+        }
     }
 }

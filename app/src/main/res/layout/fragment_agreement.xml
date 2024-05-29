@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="32dp"
-            android:text="@string/sign_up_title"
+            android:text="@string/agreement_title"
             android:textAppearance="@style/TextAppearance.Talkable.b_24"
             android:textColor="@color/main"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="59dp"
             android:button="@null"
-            android:background="@drawable/sel_sign_up_selected_all_agree"
+            android:background="@drawable/sel_agreement_selected_all_agree"
             app:layout_constraintStart_toStartOf="@+id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_agreement_title" />
 
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/sign_up_all"
+            android:text="@string/agreement_all"
             android:textColor="@color/gray"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             app:layout_constraintStart_toEndOf="@+id/btn_agreement_all"
@@ -81,15 +81,18 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_agreement_all" />
 
         <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_agreement_check"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btn_agreement_age, btn_agreement_terms, btn_agreement_privacy, btn_agreement_marketing" />
+
         <CheckBox
             android:id="@+id/btn_agreement_age"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="24dp"
             android:button="@null"
-            android:background="@drawable/sel_sign_up_selected_agree"
+            android:background="@drawable/sel_agreement_selected_agree"
             app:layout_constraintStart_toStartOf="@+id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -97,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/sign_up_age"
+            android:text="@string/agreement_age"
             android:textColor="@color/gray"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
             app:layout_constraintStart_toEndOf="@+id/btn_agreement_age"
@@ -109,7 +112,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="18dp"
             android:button="@null"
-            android:background="@drawable/sel_sign_up_selected_agree"
+            android:background="@drawable/sel_agreement_selected_agree"
             app:layout_constraintStart_toStartOf="@+id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@+id/btn_agreement_age" />
 
@@ -117,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/sign_up_terms"
+            android:text="@string/agreement_terms"
             android:textColor="@color/gray"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
             app:layout_constraintStart_toEndOf="@+id/btn_agreement_terms"
@@ -129,7 +132,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="18dp"
             android:button="@null"
-            android:background="@drawable/sel_sign_up_selected_agree"
+            android:background="@drawable/sel_agreement_selected_agree"
             app:layout_constraintStart_toStartOf="@+id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@+id/btn_agreement_terms" />
 
@@ -137,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/sign_up_privacy"
+            android:text="@string/agreement_privacy"
             android:textColor="@color/gray"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
             app:layout_constraintStart_toEndOf="@+id/btn_agreement_privacy"
@@ -149,7 +152,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="18dp"
             android:button="@null"
-            android:background="@drawable/sel_sign_up_selected_agree"
+            android:background="@drawable/sel_agreement_selected_agree"
             app:layout_constraintStart_toStartOf="@+id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@+id/btn_agreement_privacy" />
 
@@ -157,19 +160,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/sign_up_marketing"
+            android:text="@string/agreement_marketing"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
             android:textColor="@color/gray"
             app:layout_constraintStart_toEndOf="@+id/btn_agreement_marketing"
             app:layout_constraintTop_toTopOf="@+id/btn_agreement_marketing" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login_kakao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_agreement_start"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:text="@string/agreement_start"
+            android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
+            android:textColor="@color/white"
+            android:enabled="false"
             android:layout_marginHorizontal="38dp"
-            android:layout_marginBottom="107dp"
-            android:background="@drawable/ic_login"
+            android:layout_marginBottom="103dp"
+            android:background="@drawable/sel_agreement_selected_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
