@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,7 +8,12 @@ plugins {
     id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
+
 android {
+
     namespace = libs.versions.applicationId.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
@@ -21,7 +28,8 @@ android {
 
 
         val appKey = properties["native.app.key"] as? String ?: ""
-        manifestPlaceholders["appKey"] = properties["native.app.key"] as? String ?: ""
+
+        manifestPlaceholders["appKey"] = properties["native.app.key"] as String
         buildConfigField ("String", "NATIVE_APP_KEY", "\"${appKey}\"")
     }
 
