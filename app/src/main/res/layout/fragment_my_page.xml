@@ -19,17 +19,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp">
 
             <ImageView
                 android:id="@+id/iv_my_page_profile_image"
-                imageUrl="@{model.userProfileImage}"
+                setCircleImage="@{model.userProfileImage}"
                 android:layout_width="60dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginTop="29dp"
                 android:background="@drawable/shape_font4_line_circle"
-                android:clipToOutline="true"
+                android:padding="1dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:text="@{model.userNickName}"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintBottom_toBottomOf="@id/iv_my_page_profile_image"
                 app:layout_constraintStart_toEndOf="@id/iv_my_page_profile_image"
                 app:layout_constraintTop_toTopOf="@id/iv_my_page_profile_image"
@@ -53,12 +56,13 @@
                 android:layout_marginHorizontal="22dp"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/shape_fill_main3_8_rec"
-                android:drawableEnd="@drawable/ic_my_page_my_flower_navigate"
+                android:elevation="2dp"
                 android:paddingHorizontal="22dp"
                 android:paddingVertical="20dp"
-                android:text="My Flower"
+                android:text="@string/tv_my_page_my_flower"
                 android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
                 android:textColor="@color/main_5"
+                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_my_page_profile_image" />
@@ -74,6 +78,7 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tl_my_page"
+                style="@style/Widget.Material3.TabLayout.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -145,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="45dp"
-                android:text="내 실력차트"
+                android:text="@string/tv_my_page_chart_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_talk_time" />
@@ -157,7 +162,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="16dp"
                 android:drawablePadding="5dp"
-                android:text="최근학습"
+                android:text="@string/tv_my_page_chart_recent"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
                 app:drawableStartCompat="@drawable/ic_my_page_indicator"
                 app:layout_constraintStart_toStartOf="parent"
@@ -169,21 +174,68 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="6dp"
                 android:drawablePadding="5dp"
-                android:text="이전학습"
+                android:text="@string/tv_my_page_chart_before"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
                 app:drawableStartCompat="@drawable/ic_my_page_indicator"
-                app:drawableTint="@color/font_2"
+                app:drawableTint="@color/gray"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_chart_recent"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_recent" />
 
             <com.talkable.core.view.ChartView
                 android:id="@+id/cv_my_page_chart"
+                setChartPercentage="@{model.chartData}"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="50dp"
                 android:layout_marginTop="33dp"
+                app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_before" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_grammar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:text="@string/tv_my_page_chart_label_grammar"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
+                app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_expression"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:text="@string/tv_my_page_chart_label_expression"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart"
+                app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_pronunciation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="38dp"
+                android:text="@string/tv_my_page_chart_label_pronunciation"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+                app:layout_constraintStart_toStartOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_Listening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="38dp"
+                android:text="@string/tv_my_page_chart_label_Listening"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+                app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart" />
 
             <TextView
                 android:id="@+id/tv_my_page_navigate_save"
@@ -193,15 +245,34 @@
                 android:layout_marginTop="50dp"
                 android:background="@drawable/shape_gray_fill_12_rect"
                 android:backgroundTint="@color/font_5"
-                android:drawableEnd="@drawable/ic_my_page_my_flower_navigate"
-                android:drawableTint="@color/gray"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp"
-                android:text="저장 표현"
+                android:text="@string/tv_my_page_navigate_save"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
+                app:drawableTint="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_empty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:background="@color/main_3"
+                android:elevation="4dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/tv_my_page_chart_label_empty"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                android:textColor="@color/tv_chart"
+                android:visibility="@{model.chartData.isEmpty ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+                app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart"
+                app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
+                app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
 
             <TextView
                 android:id="@+id/tv_my_page_navigate_feedback"
@@ -211,12 +282,12 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/shape_gray_fill_12_rect"
                 android:backgroundTint="@color/font_5"
-                android:drawableEnd="@drawable/ic_my_page_my_flower_navigate"
-                android:drawableTint="@color/gray"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp"
-                android:text="피드백"
+                android:text="@string/tv_my_page_navigate_feedback"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
+                app:drawableTint="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_navigate_save" />
@@ -259,7 +330,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="40dp"
-                android:text="개인정보/설정"
+                android:text="@string/tv_my_page_setting_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
                 android:textColor="@color/main_1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -270,7 +341,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="학습알림설정"
+                android:text="@string/tv_my_page_alarm_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_setting_label" />
@@ -280,7 +351,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="|"
+                android:text="@string/tv_my_page_alarm_divide"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
                 android:textColor="@color/font_4"
                 app:layout_constraintBottom_toBottomOf="@id/tv_my_page_alarm_label"
@@ -297,7 +368,7 @@
                 app:layout_constraintStart_toEndOf="@id/tv_my_page_alarm_divide"
                 app:layout_constraintTop_toTopOf="@id/tv_my_page_alarm_label" />
 
-            <Switch
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -310,7 +381,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="로그아웃"
+                android:text="@string/tv_my_page_logout_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_alarm_label" />
@@ -320,7 +391,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="회원탈퇴"
+                android:text="@string/tv_my_page_withdraw_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_logout_label" />
