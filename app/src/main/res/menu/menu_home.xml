@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Home -->
     <item
-        android:id="@+id/menu_home"
+        android:id="@+id/fragment_home"
         android:icon="@drawable/sel_nav_selected_home"
         android:title="홈" />
 
     <!-- Challenge -->
     <item
-        android:id="@+id/menu_challenge"
+        android:id="@+id/fragment_challenge"
         android:icon="@drawable/sel_nav_selected_challenge"
         android:title="챌린지" />
 
     <!-- MyPage -->
     <item
-        android:id="@+id/menu_mypage"
+        android:id="@+id/fragment_my_page"
         android:icon="@drawable/sel_nav_selected_mypage"
         android:title="마이" />
 </menu>
