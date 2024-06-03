@@ -2,12 +2,14 @@ package com.talkable.presentation.mypage
 
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentMyPageBinding
+import com.talkable.presentation.mypage.model.Chart
 import com.talkable.presentation.mypage.model.MyPageModel
 
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun initView() {
-        // 로직 작성
+        statusBarColorOf(R.color.white)
         binding.model = mockData
     }
 
@@ -19,7 +21,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             true,
             "10",
             "18",
-            "200"
+            "200",
+            "09:00 AM",
+            "매일",
+            Chart(10, 20, 30, 40, 20, 40, 60, 90, false)
         )
     }
 }
