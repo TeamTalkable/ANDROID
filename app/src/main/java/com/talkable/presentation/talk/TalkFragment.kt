@@ -19,6 +19,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initListenBtnClickListener()
         initTranslateBtnClickListener()
         initShowBtnClickListener()
+        initHintTextViewClickListener()
     }
 
     // 코치 마크 레이아웃
@@ -76,5 +77,42 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 tvTalkListen.isVisible = !binding.tvTalkListen.isVisible
             }
         }
+    }
+
+    // 힌트 클릭
+    private fun initHintTextViewClickListener() {
+        var clickCount = FIRST_CLICK
+        binding.tvTalkHint.setOnClickListener {
+            when (clickCount) {
+                FIRST_CLICK -> {
+                    HintToast.createToast(
+                        requireActivity(),
+                        getString(R.string.hint_talk),
+                        getString(R.string.tv_talk_content_hint)
+                    )?.show()
+                    changeHintText()
+                }
+
+                else -> {
+                    HintToast.createToast(
+                        requireActivity(),
+                        getString(R.string.hint_talk_example),
+                        getString(R.string.tv_talk_content_example)
+                    )?.show()
+                }
+            }
+            clickCount++
+        }
+    }
+
+    //3초 뒤 텍스트 변경
+    private fun changeHintText() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.tvTalkHint.text = getString(R.string.hint_talk_example)
+        }, 3000)
+    }
+
+    companion object {
+        const val FIRST_CLICK = 0
     }
 }
