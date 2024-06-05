@@ -19,7 +19,7 @@
             android:id="@+id/iv_my_flower"
             imageUrl="@{model.flowerImage}"
             android:layout_width="wrap_content"
-            android:layout_height="184dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,10 +51,10 @@
             tools:text="2024.04.09 ~" />
 
         <include
+            android:id="@+id/layout_my_flower_progress"
             layout="@layout/view_my_flower_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="58dp"
             app:layout_constraintBottom_toTopOf="@id/rv_my_flower_item"
             app:layout_constraintTop_toBottomOf="@id/tv_my_flower_date" />
 
@@ -63,6 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_white_fill_20_rec"
+            android:overScrollMode="never"
             android:paddingHorizontal="33dp"
             android:paddingTop="46dp"
             android:paddingBottom="21dp"
@@ -84,6 +85,5 @@
             app:layout_constraintStart_toStartOf="@id/rv_my_flower_item"
             app:layout_constraintTop_toTopOf="@id/rv_my_flower_item"
             tools:text="아이템을 사용하여 꽃을 키워보세요!" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
