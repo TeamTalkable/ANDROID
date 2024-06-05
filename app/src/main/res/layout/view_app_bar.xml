@@ -29,8 +29,6 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="0dp"
-                android:paddingVertical="38dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp">
 
