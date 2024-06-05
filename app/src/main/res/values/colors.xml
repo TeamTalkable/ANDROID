@@ -22,6 +22,12 @@
     <color name="gray">#646464</color>
     <color name="sub">#F1FFF8</color>
     <color name="yellow">#FEE500</color>
+
+    <!-- 디자인 시스템에 없는 컬러 -->
+    <color name="tab_line">#E6E0E9</color>
+    <color name="divide">#E7E7E7</color>
+    <color name="tv_chart">#565656</color>
+    <color name="chart_before">#26505050</color>
     <color name="light_gray">#D9D9D9</color>
     <color name="semi_transparent_black">#99262626</color>
 </resources>

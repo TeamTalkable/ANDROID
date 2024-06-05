@@ -14,6 +14,10 @@
         android:theme="@style/Theme.Talkable"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="${appKey}" />
+
         <activity
             android:name=".presentation.SplashActivity"
             android:exported="true"
@@ -30,10 +34,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="oauth"
-                    android:scheme="kakao${apiKey}" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao${appKey}" />
             </intent-filter>
         </activity>
         <activity

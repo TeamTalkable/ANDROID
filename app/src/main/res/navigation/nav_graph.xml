@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/fragment_my_page">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -18,10 +18,18 @@
         android:label="AgreementFragment" >
         <action
             android:id="@+id/action_agreementFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/fragment_home" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/fragment_home"
         android:name="com.talkable.presentation.home.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/fragment_my_page"
+        android:name="com.talkable.presentation.mypage.MyPageFragment"
+        android:label="MyPageFragment" />
+    <fragment
+        android:id="@+id/fragment_challenge"
+        android:name="com.talkable.presentation.challenge.ChallengeFragment"
+        android:label="ChallengeFragment" />
 </navigation>

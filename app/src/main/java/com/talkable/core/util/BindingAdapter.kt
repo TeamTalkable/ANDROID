@@ -4,6 +4,8 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.talkable.core.view.ChartView
+import com.talkable.presentation.mypage.model.Chart
 
 @BindingAdapter("imageUrl")
 fun loadImage(
@@ -18,4 +20,9 @@ fun ImageView.setCircleImage(img: String?) {
     load(img) {
         transformations(RoundedCornersTransformation(1000f))
     }
+}
+
+@BindingAdapter("setChartPercentage")
+fun setChartPercentage(view: ChartView, percentage: Chart) {
+    view.setChartPercentage(percentage)
 }

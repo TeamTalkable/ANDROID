@@ -1,56 +1,46 @@
 package com.talkable.presentation
 
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.talkable.R
 import com.talkable.core.base.BindingActivity
 import com.talkable.databinding.ActivityMainBinding
-import com.talkable.presentation.challenge.ChallengeFragment
-import com.talkable.presentation.home.HomeFragment
-import com.talkable.presentation.mypage.MyPageFragment
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initView() {
-        initHomeFragment()
+        initMainBottomNavigation()
     }
 
-    private fun initHomeFragment(){
-        val currentFragment = supportFragmentManager.findFragmentById(binding.fcvHome.id)
-        if (currentFragment == null){
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_home, HomeFragment())
-                .commit()
+    private fun initMainBottomNavigation() {
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.fcv_home) as NavHostFragment).findNavController()
+        binding.bnvHome.apply {
+            setupWithNavController(navController)
+            itemIconTintList = null
         }
-        clickBottomNavigation()
+
+        setBottomNaviVisible(navController)
     }
 
-    private fun clickBottomNavigation() {
-        binding.bnvHome.setOnItemSelectedListener{
-            when (it.itemId) {
-                R.id.menu_home -> {
-                    replaceFragment(HomeFragment())
-                    true
+    private fun setBottomNaviVisible(navController: NavController) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.bnvHome.visibility =
+                if (destination.id in
+                    listOf(
+                        R.id.fragment_home,
+                        R.id.fragment_challenge,
+                        R.id.fragment_my_page
+                    )
+                ) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
                 }
-
-                R.id.menu_challenge -> {
-                    replaceFragment(ChallengeFragment())
-                    true
-                }
-
-                R.id.menu_mypage -> {
-                    replaceFragment(MyPageFragment())
-                    true
-                }
-                else -> false
-            }
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_home, fragment)
-            .commit()
     }
 
     fun hideBottomNavigation() {
