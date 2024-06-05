@@ -16,6 +16,7 @@
     <color name="font_4">#cccccc</color>
     <color name="font_5">#F5F5F5</color>
     <color name="font_6">#414141</color>
+    <color name="font_sub">#505050</color>
 
     <!-- Sub Color-->
     <color name="gray">#646464</color>
