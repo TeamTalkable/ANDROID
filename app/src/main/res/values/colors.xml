@@ -15,9 +15,12 @@
     <color name="font_3">#353535</color>
     <color name="font_4">#cccccc</color>
     <color name="font_5">#F5F5F5</color>
+    <color name="font_6">#414141</color>
 
     <!-- Sub Color-->
     <color name="gray">#646464</color>
     <color name="sub">#F1FFF8</color>
     <color name="yellow">#FEE500</color>
+    <color name="light_gray">#D9D9D9</color>
+    <color name="semi_transparent_black">#99262626</color>
 </resources>
