@@ -30,6 +30,12 @@
     <string name="tv_talk_content_hint">take를 사용해서 말해보세요!</string>
     <string name="tv_talk_content_example">I took a science class.</string>
 
+    <!--guide-->
+    <string name="tv_guide_feedback">오늘 받은 AI 피드백과 \n저장한 표현을 확인해보아요</string>
+    <string name="tv_guide_click">단어나 문장을 눌러\n원하는 표현을 저장하고\n모르는 단어의 뜻을 살펴봐요</string>
+    <string name="tv_guide_speak">버튼을 누른 후 말해주세요</string>
+    <string name="tv_guide_hint">말하기 어려울 땐 힌트를 봐요</string>
+
     <!--home-->
     <string name="home_user_name">000님,</string>
     <string name="home_continue">이어서 대화해볼까요?</string>
