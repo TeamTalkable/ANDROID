@@ -12,6 +12,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         (activity as? MainActivity)?.hideBottomNavigation()
         initGuideLayoutClickListener()
         initTranslateBtnClickListener()
+        initShowBtnClickListener()
     }
 
     // 코치 마크 레이아웃
@@ -28,6 +29,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             btnTalkTranslate.setOnClickListener {
                 btnTalkTranslate.isSelected = !binding.btnTalkTranslate.isSelected
                 tvTalkTranslate.isVisible = !binding.tvTalkTranslate.isVisible
+            }
+        }
+    }
+
+    // 보기 버튼 클릭
+    private fun initShowBtnClickListener() {
+        with(binding) {
+            btnTalkShow.setOnClickListener {
+                btnTalkShow.isSelected = !binding.btnTalkShow.isSelected
+                tvTalkText.isVisible = !binding.tvTalkText.isVisible
+                tvTalkListen.isVisible = !binding.tvTalkListen.isVisible
             }
         }
     }
