@@ -46,15 +46,15 @@
 
         <ImageView
             android:id="@+id/iv_my_flower_progress_first"
+            tint="@{model.getDateData.get(0).getDate != null ? 0 : @color/font_4 }"
             android:layout_width="30dp"
             android:layout_height="0dp"
             android:layout_marginTop="7dp"
-            android:src="@drawable/logo_talkable"
+            android:src="@drawable/img_my_flower_step1"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_second"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sb_my_flower"
-            app:tint="@{model.getDateData.get(0).getDate ?? @color/font_4}" />
+            app:layout_constraintTop_toBottomOf="@id/sb_my_flower" />
 
         <TextView
             android:id="@+id/tv_my_flower_progress_first"
@@ -83,14 +83,14 @@
 
         <ImageView
             android:id="@+id/iv_my_flower_progress_second"
+            tint="@{model.getDateData.get(1).getDate != null ? 0: @color/font_4}"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:src="@color/font_4"
+            android:src="@drawable/img_my_flower_step2"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_third"
             app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_first"
-            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first"
-            app:tint="@{model.getDateData.get(0).getDate ?? @color/font_4}" />
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
 
         <TextView
             android:id="@+id/tv_my_flower_progress_second"
@@ -99,7 +99,7 @@
             android:layout_marginTop="6dp"
             android:text="@string/tv_my_flower_progress_second"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            android:textColor="@{model.getDateData.get(0).getDate != null ? @color/gray : @color/font_4}"
+            android:textColor="@{model.getDateData.get(1).getDate != null ? @color/gray : @color/font_4}"
             app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_second"
             app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_second"
             app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_second" />
@@ -119,14 +119,14 @@
 
         <ImageView
             android:id="@+id/iv_my_flower_progress_third"
+            tint="@{model.getDateData.get(2).getDate != null ?0: @color/font_4}"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:src="@color/font_4"
+            android:src="@drawable/img_my_flower_step3"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_fourth"
             app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_second"
-            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first"
-            app:tint="@{model.getDateData.get(0).getDate ?? @color/font_4}" />
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
 
         <TextView
             android:id="@+id/tv_my_flower_progress_third"
@@ -135,7 +135,7 @@
             android:layout_marginTop="6dp"
             android:text="@string/tv_my_flower_progress_third"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            android:textColor="@{model.getDateData.get(0).getDate != null ? @color/gray : @color/font_4}"
+            android:textColor="@{model.getDateData.get(2).getDate != null ? @color/gray : @color/font_4}"
             app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_third"
             app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_third"
             app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_third" />
@@ -155,14 +155,14 @@
 
         <ImageView
             android:id="@+id/iv_my_flower_progress_fourth"
+            tint="@{model.getDateData.get(3).getDate != null ?0 : @color/font_4}"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:src="@color/font_4"
+            android:src="@drawable/img_my_flower_step4"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_fifth"
             app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_third"
-            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first"
-            app:tint="@{model.getDateData.get(0).getDate ?? @color/font_4}" />
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
 
         <TextView
             android:id="@+id/tv_my_flower_progress_fourth"
@@ -171,7 +171,7 @@
             android:layout_marginTop="6dp"
             android:text="@string/tv_my_flower_progress_fourth"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            android:textColor="@{model.getDateData.get(0).getDate != null ? @color/gray : @color/font_4}"
+            android:textColor="@{model.getDateData.get(3).getDate != null ? @color/gray : @color/font_4}"
             app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fourth"
             app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_fourth"
             app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_fourth" />
@@ -191,14 +191,14 @@
 
         <ImageView
             android:id="@+id/iv_my_flower_progress_fifth"
+            tint="@{model.getDateData.get(4).getDate != null ? 0 : @color/font_4}"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:src="@color/font_4"
+            android:src="@drawable/img_my_flower_step5"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_fourth"
-            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first"
-            app:tint="@{model.getDateData.get(0).getDate ?? @color/font_4}" />
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
 
         <TextView
             android:id="@+id/tv_my_flower_progress_fifth"
@@ -207,7 +207,7 @@
             android:layout_marginTop="6dp"
             android:text="@string/tv_my_flower_progress_fifth"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            android:textColor="@{model.getDateData.get(0).getDate != null ? @color/gray : @color/font_4}"
+            android:textColor="@{model.getDateData.get(4).getDate != null ? @color/gray : @color/font_4}"
             app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fifth"
             app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_fifth"
             app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_fifth" />
