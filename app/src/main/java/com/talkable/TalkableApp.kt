@@ -2,6 +2,7 @@ package com.talkable
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
+import com.talkable.BuildConfig.NATIVE_APP_KEY
 import timber.log.Timber
 
 class TalkableApp : Application() {
@@ -10,7 +11,7 @@ class TalkableApp : Application() {
         setTimber()
 
         // Kakao SDK 초기화
-        KakaoSdk.init(this, "{NATIVE_APP_KEY}")
+        KakaoSdk.init(this, NATIVE_APP_KEY)
     }
 
     private fun setTimber() {

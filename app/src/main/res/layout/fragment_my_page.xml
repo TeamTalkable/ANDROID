@@ -1,23 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="model"
+            type="com.talkable.presentation.mypage.model.MyPageModel" />
+
+        <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="myPage / 소현"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="28dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/iv_my_page_profile_image"
+                setCircleImage="@{model.userProfileImage}"
+                android:layout_width="60dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/shape_font4_line_circle"
+                android:padding="1dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/logo_talkable" />
+
+            <TextView
+                android:id="@+id/tv_my_page_profile_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:text="@{model.userNickName}"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                app:layout_constraintBottom_toBottomOf="@id/iv_my_page_profile_image"
+                app:layout_constraintStart_toEndOf="@id/iv_my_page_profile_image"
+                app:layout_constraintTop_toTopOf="@id/iv_my_page_profile_image"
+                tools:text="김지은" />
+
+            <TextView
+                android:id="@+id/tv_my_page_my_flower"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/shape_fill_main3_8_rec"
+                android:elevation="2dp"
+                android:paddingHorizontal="22dp"
+                android:paddingVertical="20dp"
+                android:text="@string/tv_my_page_my_flower"
+                android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
+                android:textColor="@color/main_5"
+                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_my_page_profile_image" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_my_page"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/tab_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tl_my_page" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_my_page"
+                style="@style/Widget.Material3.TabLayout.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_my_flower"
+                app:tabIndicatorFullWidth="true"
+                app:tabSelectedTextAppearance="@style/TextAppearance.Talkable.sub_b_14"
+                app:tabSelectedTextColor="@color/main"
+                app:tabTextAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                app:tabTextColor="@color/gray">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="일간" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주간" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="월간" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <ImageView
+                android:id="@+id/iv_my_page_talk_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/ic_my_page_talk_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_my_page" />
+
+            <TextView
+                android:id="@+id/tv_my_page_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{model.isTodayTalk ? `오늘 대화시간` : `오늘은 아직 학습하지 않았어요.`}"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/font_3"
+                app:layout_constraintBottom_toBottomOf="@id/iv_my_page_talk_time"
+                app:layout_constraintStart_toEndOf="@id/iv_my_page_talk_time"
+                app:layout_constraintTop_toTopOf="@id/iv_my_page_talk_time" />
+
+            <TextView
+                android:id="@+id/tv_my_page_talk_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@{model.talkTime + `M`}"
+                android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+                android:visibility="@{model.isTodayTalk ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_time_label"
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_time_label"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_time_label"
+                tools:text="10M" />
+
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="45dp"
+                android:text="@string/tv_my_page_chart_label"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_talk_time" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="5dp"
+                android:text="@string/tv_my_page_chart_recent"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                app:drawableStartCompat="@drawable/ic_my_page_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_label" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_before"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="5dp"
+                android:text="@string/tv_my_page_chart_before"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                app:drawableStartCompat="@drawable/ic_my_page_indicator"
+                app:drawableTint="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_my_page_chart_recent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_recent" />
+
+            <com.talkable.core.view.ChartView
+                android:id="@+id/cv_my_page_chart"
+                setChartPercentage="@{model.chartData}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="33dp"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_before" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_grammar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:text="@string/tv_my_page_chart_label_grammar"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
+                app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_expression"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:text="@string/tv_my_page_chart_label_expression"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart"
+                app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_pronunciation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="38dp"
+                android:text="@string/tv_my_page_chart_label_pronunciation"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+                app:layout_constraintStart_toStartOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_Listening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="38dp"
+                android:text="@string/tv_my_page_chart_label_Listening"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+                app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_navigate_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_gray_fill_12_rect"
+                android:backgroundTint="@color/font_5"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                android:text="@string/tv_my_page_navigate_save"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_label_empty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:background="@color/main_3"
+                android:elevation="4dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/tv_my_page_chart_label_empty"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                android:textColor="@color/tv_chart"
+                android:visibility="@{model.chartData.isEmpty ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+                app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart"
+                app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
+                app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_navigate_feedback"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_gray_fill_12_rect"
+                android:backgroundTint="@color/font_5"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                android:text="@string/tv_my_page_navigate_feedback"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_navigate_save" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="48dp"
+                android:text="@{model.saveCount + `개`}"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/main"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_navigate_save"
+                app:layout_constraintEnd_toEndOf="@id/tv_my_page_navigate_save"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_navigate_save"
+                tools:text="17개" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="48dp"
+                android:text="@{model.feedbackCount + `개`}"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/main"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_navigate_feedback"
+                app:layout_constraintEnd_toEndOf="@id/tv_my_page_navigate_feedback"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_navigate_feedback"
+                tools:text="115개" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divier_my_page_2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/divide"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_navigate_feedback" />
+
+            <TextView
+                android:id="@+id/tv_my_page_setting_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/tv_my_page_setting_label"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                android:textColor="@color/main_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divier_my_page_2" />
+
+            <TextView
+                android:id="@+id/tv_my_page_alarm_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/tv_my_page_alarm_label"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_setting_label" />
+
+            <TextView
+                android:id="@+id/tv_my_page_alarm_divide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/tv_my_page_alarm_divide"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+                android:textColor="@color/font_4"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_alarm_label"
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_alarm_label"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_alarm_label" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="09:00 AM  매일"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_alarm_label"
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_alarm_divide"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_alarm_label" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_alarm_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_alarm_label" />
+
+            <TextView
+                android:id="@+id/tv_my_page_logout_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/tv_my_page_logout_label"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_alarm_label" />
+
+            <TextView
+                android:id="@+id/tv_my_page_withdraw_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/tv_my_page_withdraw_label"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_logout_label" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

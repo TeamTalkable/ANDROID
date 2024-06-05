@@ -27,6 +27,11 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="TextAppearance.Talkable.sub_r_14">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextAppearance.Talkable.sub_r_16">
         <item name="fontFamily">@font/font_pretendard_regular</item>
         <item name="android:textSize">16sp</item>
