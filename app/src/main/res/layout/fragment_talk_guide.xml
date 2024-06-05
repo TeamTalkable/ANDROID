@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_talk_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semi_transparent_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_guide_stack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_talk_stack_selected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_guide_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_talk_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/iv_guide_stack"
+            app:layout_constraintEnd_toStartOf="@id/iv_guide_stack"
+            app:layout_constraintTop_toTopOf="@id/iv_guide_stack" />
+
+        <TextView
+            android:id="@+id/tv_guide_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_guide_feedback"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/iv_guide_arrow"
+            app:layout_constraintEnd_toStartOf="@id/iv_guide_arrow"
+            app:layout_constraintTop_toTopOf="@id/iv_guide_arrow" />
+
+        <TextView
+            android:id="@+id/tv_guide_english_talk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="58dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="55dp"
+            android:background="@drawable/shape_white_fill_12_rect"
+            android:gravity="center"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="5dp"
+            android:text="@string/tv_talk_english"
+            android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_guide_feedback" />
+
+        <ImageView
+            android:id="@+id/iv_guide_click_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_talk_click_mark"
+            app:layout_constraintEnd_toEndOf="@id/tv_guide_english_talk"
+            app:layout_constraintStart_toStartOf="@id/tv_guide_english_talk"
+            app:layout_constraintTop_toBottomOf="@id/tv_guide_english_talk" />
+
+        <TextView
+            android:id="@+id/tv_guide_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_guide_click"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_guide_click_mark" />
+
+        <TextView
+            android:id="@+id/tv_guide_speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="21dp"
+            android:text="@string/tv_guide_speak"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/iv_guide_speak"
+            app:layout_constraintEnd_toEndOf="@id/iv_guide_speak"
+            app:layout_constraintStart_toStartOf="@id/iv_guide_speak" />
+
+        <ImageView
+            android:id="@+id/iv_guide_speak_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_talk_broken_arrow"
+            app:layout_constraintBottom_toTopOf="@id/iv_guide_speak"
+            app:layout_constraintEnd_toEndOf="@id/iv_guide_speak" />
+
+        <ImageView
+            android:id="@+id/iv_guide_speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_talk_speak_selected"
+            app:layout_constraintBottom_toTopOf="@id/tv_guide_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_guide_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/tv_guide_hint"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/hint_guide"
+            app:layout_constraintEnd_toEndOf="@id/iv_guide_speak"
+            app:layout_constraintStart_toStartOf="@id/iv_guide_speak" />
+
+        <ImageView
+            android:id="@+id/iv_guide_hint_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_talk_broken_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/hint_guide"
+            app:layout_constraintStart_toEndOf="@id/hint_guide"
+            app:layout_constraintTop_toBottomOf="@id/tv_guide_hint" />
+
+        <TextView
+            android:id="@+id/hint_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="55dp"
+            android:text="@string/hint_talk"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
