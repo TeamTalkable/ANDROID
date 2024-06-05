@@ -16,6 +16,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         (activity as? MainActivity)?.hideBottomNavigation()
         initGuideLayoutClickListener()
         setRandomVideo()
+        initListenBtnClickListener()
         initTranslateBtnClickListener()
         initShowBtnClickListener()
     }
@@ -25,6 +26,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         val layoutGuide = binding.includeLayoutTalkGuide.layoutTalkGuide
         layoutGuide.setOnClickListener {
             layoutGuide.visibility = GONE
+        }
+    }
+
+    // 듣기 버튼 클릭
+    private fun initListenBtnClickListener() {
+        with(binding) {
+            btnTalkListen.setOnClickListener {
+                binding.videoViewTalkBackground.start()
+            }
         }
     }
 
