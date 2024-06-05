@@ -26,4 +26,5 @@
     <color name="divide">#E7E7E7</color>
     <color name="tv_chart">#565656</color>
     <color name="chart_before">#26505050</color>
+    <color name="item_empty">#85010101</color>
 </resources>
