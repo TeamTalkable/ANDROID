@@ -9,6 +9,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
@@ -28,6 +29,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initTranslateBtnClickListener()
         initShowBtnClickListener()
         initHintTextViewClickListener()
+        initTalkAdapter()
+    }
+
+    // 어댑터 연결
+    private fun initTalkAdapter() {
+        binding.layoutBottomSheetTalk.rvBottomSheet.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = TalkAdapter().apply {
+                submitList(talkMockData.toMutableList())
+            }
+        }
     }
 
     // 코치 마크 레이아웃
@@ -162,5 +174,23 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     companion object {
         const val FIRST_CLICK = 0
+
+        // 더미 데이터
+        val talkMockData = listOf(
+            TalkData(type = "ai", message = "What did you do today in scool?"),
+            TalkData(type = "user", message = "I took a science class today."),
+            TalkData(type = "ai", message = "What did you learn today?"),
+            TalkData(type = "user", message = "I learn about photosynthesis."),
+            TalkData(type = "ai", message = "What did you do today in scool?"),
+            TalkData(type = "user", message = "I took a science class today."),
+            TalkData(type = "ai", message = "What did you learn today?"),
+            TalkData(type = "user", message = "I took a science class today."),
+            TalkData(type = "ai", message = "What did you learn today?"),
+            TalkData(type = "user", message = "I learn about photosynthesis."),
+            TalkData(type = "ai", message = "What did you do today in scool?"),
+            TalkData(type = "user", message = "I took a science class today."),
+            TalkData(type = "ai", message = "What did you learn today?"),
+            TalkData(type = "user", message = "I learn about photosynthesis."),
+        )
     }
 }
