@@ -19,6 +19,20 @@
             app:title="@{`My Flower`}"
             app:visible="@{true}" />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_my_flower_indicator"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginHorizontal="132dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/main_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_app_bar"
+            app:tabBackground="@drawable/sel_my_flower_indicator"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="0dp"
+            app:tabPaddingStart="2dp" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_my_flower"
@@ -28,6 +42,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_app_bar" />
+            app:layout_constraintTop_toBottomOf="@id/tl_my_flower_indicator" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

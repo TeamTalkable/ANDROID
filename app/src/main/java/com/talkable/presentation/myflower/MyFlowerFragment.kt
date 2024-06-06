@@ -1,5 +1,6 @@
 package com.talkable.presentation.myflower
 
+import com.google.android.material.tabs.TabLayoutMediator
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
@@ -14,6 +15,6 @@ class MyFlowerFragment : BindingFragment<FragmentMyFlowerBinding>(R.layout.fragm
 
     private fun initMyFlowerAdapter() = with(binding) {
         vpMyFlower.adapter = MyFlowerAdapter(this@MyFlowerFragment)
-        //TabLayoutMediator(vpMyFlowerIndicator, vpMyFlower) { tab, position -> }.attach()
+        TabLayoutMediator(tlMyFlowerIndicator, vpMyFlower) { tab, position -> }.attach()
     }
 }
