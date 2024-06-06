@@ -1,10 +1,17 @@
 package com.talkable.presentation.talk
 
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.databinding.FragmentTalkBinding
@@ -16,6 +23,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         (activity as? MainActivity)?.hideBottomNavigation()
         initGuideLayoutClickListener()
         setRandomVideo()
+        initBottomSheet()
         initListenBtnClickListener()
         initTranslateBtnClickListener()
         initShowBtnClickListener()
@@ -28,6 +36,46 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         layoutGuide.setOnClickListener {
             layoutGuide.visibility = GONE
         }
+    }
+
+    // 바텀 시트
+    private fun initBottomSheet() {
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheetTalk.root)
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    // 하단 상태일 때 버튼 숨김
+                    STATE_COLLAPSED -> {
+                        val customColor =
+                            ContextCompat.getColor(requireContext(), R.color.font_4)
+                        with(binding.layoutBottomSheetTalk) {
+                            btnBottomSheetSelectArea.visibility = GONE
+                            tvBottomSheetShow.setTextColor(customColor)
+                            ivBottomSheetDragHandle.setColorFilter(
+                                customColor, PorterDuff.Mode.SRC_IN
+                            )
+                        }
+                    }
+                    // 바텀 시트가 완전히 펼쳐졌을 때 버튼 보이게
+                    STATE_EXPANDED -> {
+                        val customColor =
+                            ContextCompat.getColor(requireContext(), R.color.font)
+                        with(binding.layoutBottomSheetTalk) {
+                            btnBottomSheetSelectArea.visibility = VISIBLE
+                            tvBottomSheetShow.setTextColor(customColor)
+                            ivBottomSheetDragHandle.setColorFilter(
+                                customColor, PorterDuff.Mode.SRC_IN
+                            )
+                        }
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
     }
 
     // 듣기 버튼 클릭
@@ -55,7 +103,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         binding.videoViewTalkBackground.start()
         Handler(Looper.getMainLooper()).postDelayed({
             binding.videoViewTalkBackground.pause()
-        }, 1000)
+        }, 500)
     }
 
     // 번역 버튼 클릭
