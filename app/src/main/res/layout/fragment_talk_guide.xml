@@ -144,7 +144,7 @@
             android:id="@+id/hint_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="55dp"
+            android:layout_marginBottom="66dp"
             android:text="@string/hint_talk"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/white"

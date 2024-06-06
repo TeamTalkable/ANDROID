@@ -160,11 +160,11 @@
             android:id="@+id/tv_talk_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="66dp"
             android:text="@string/hint_talk"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/include_bottom_sheet_talk"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/btn_talk_speak"
             app:layout_constraintStart_toStartOf="@id/btn_talk_speak" />
 
