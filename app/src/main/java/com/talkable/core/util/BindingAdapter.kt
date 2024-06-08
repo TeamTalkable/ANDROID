@@ -7,8 +7,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.talkable.R
 import com.talkable.core.view.ChartView
 import com.talkable.presentation.mypage.model.Chart
+import timber.log.Timber
 
 
 @BindingAdapter("imageUrl")
@@ -16,7 +18,8 @@ fun loadImage(
     view: ImageView,
     url: String?,
 ) {
-    view.load(url)
+    if (!url.isNullOrBlank())
+        view.load(url)
 }
 
 @BindingAdapter("setCircleImage")
