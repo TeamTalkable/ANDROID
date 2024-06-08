@@ -15,12 +15,17 @@ class MyFlowerDetailFragment :
         binding.model = mockData
         binding.layoutMyFlowerProgress.model = mockData
         initMyFlowerItemAdapter()
+        setSeekbarDisabled()
     }
 
     private fun initMyFlowerItemAdapter() {
         binding.rvMyFlowerItem.adapter = MyFlowerDetailItemAdapter(requireContext()).apply {
             submitList(mockData.itemData)
         }
+    }
+
+    private fun setSeekbarDisabled(){
+        binding.layoutMyFlowerProgress.sbMyFlower.isEnabled = false
     }
 
     companion object {
