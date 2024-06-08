@@ -27,4 +27,5 @@
     <color name="tv_chart">#565656</color>
     <color name="chart_before">#26505050</color>
     <color name="item_empty">#85010101</color>
+    <color name="my_flower_list_bg">#F1FFF8</color>
 </resources>
