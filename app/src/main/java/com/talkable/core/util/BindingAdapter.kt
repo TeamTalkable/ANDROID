@@ -72,3 +72,10 @@ fun setConstraintBias(view: View, studyTime: String) {
     }
     view.layoutParams = layoutParams
 }
+
+@BindingAdapter("setTopBottom")
+fun setLayoutConstraintTopToBottomOf(view: View, targetId: Int) {
+    val params = view.layoutParams as ConstraintLayout.LayoutParams
+    params.topToBottom = targetId
+    view.layoutParams = params
+}
