@@ -19,7 +19,7 @@ object HintToast {
         binding.tvToastTalkContent.text = message
 
         return Toast(context).apply {
-            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 50.toPx())
+            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 60.toPx())
             duration = Toast.LENGTH_LONG
             view = binding.root
         }
