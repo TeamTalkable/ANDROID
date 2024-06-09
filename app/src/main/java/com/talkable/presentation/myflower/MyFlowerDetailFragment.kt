@@ -8,7 +8,6 @@ import com.talkable.presentation.myflower.model.MyFlowerGetDate
 import com.talkable.presentation.myflower.model.MyFlowerItem
 import com.talkable.presentation.myflower.model.MyFlowerItemType
 import com.talkable.presentation.myflower.model.MyFlowerModel
-import timber.log.Timber
 
 class MyFlowerDetailFragment :
     BindingFragment<FragmentMyFlowerDetailBinding>(R.layout.fragment_my_flower_detail) {
@@ -80,11 +79,8 @@ class MyFlowerDetailFragment :
                 ),
                 itemData = listOf(
                     MyFlowerItem(itemType = MyFlowerItemType.SUN, count = 1),
-                    MyFlowerItem(itemType = MyFlowerItemType.COMPOST),
                     MyFlowerItem(itemType = MyFlowerItemType.WATER, count = 1),
-                    MyFlowerItem(itemType = MyFlowerItemType.MEDICINE),
                     MyFlowerItem(itemType = MyFlowerItemType.WIND, count = 1),
-                    MyFlowerItem(itemType = MyFlowerItemType.SHOVEL),
                 )
             ), MyFlowerModel(
                 flowerId = 1,
@@ -102,11 +98,6 @@ class MyFlowerDetailFragment :
                 ),
                 itemData = listOf(
                     MyFlowerItem(itemType = MyFlowerItemType.SUN, count = 1),
-                    MyFlowerItem(itemType = MyFlowerItemType.COMPOST),
-                    MyFlowerItem(itemType = MyFlowerItemType.WATER),
-                    MyFlowerItem(itemType = MyFlowerItemType.MEDICINE),
-                    MyFlowerItem(itemType = MyFlowerItemType.WIND),
-                    MyFlowerItem(itemType = MyFlowerItemType.SHOVEL),
                 )
             )
         )

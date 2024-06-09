@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/fragment_my_page">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -27,9 +27,25 @@
     <fragment
         android:id="@+id/fragment_my_page"
         android:name="com.talkable.presentation.mypage.MyPageFragment"
-        android:label="MyPageFragment" />
+        android:label="MyPageFragment">
+        <action
+            android:id="@+id/action_my_page_to_my_flower"
+            app:destination="@id/fragment_my_flower" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
         android:name="com.talkable.presentation.challenge.ChallengeFragment"
         android:label="ChallengeFragment" />
+    <fragment
+        android:id="@+id/fragment_my_flower"
+        android:name="com.talkable.presentation.myflower.MyFlowerFragment"
+        android:label="MyFlowerFragment" >
+        <action
+            android:id="@+id/action_my_flower_to_my_flower_detail"
+            app:destination="@id/my_flower_detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/my_flower_detail_fragment"
+        android:name="com.talkable.presentation.myflower.MyFlowerDetailFragment"
+        android:label="MyFlowerDetailFragment" />
 </navigation>

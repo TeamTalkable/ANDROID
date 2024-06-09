@@ -1,5 +1,8 @@
 package com.talkable.presentation.myflower.viewholder
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.talkable.R
 import com.talkable.databinding.ItemMyFlowerItemBinding
@@ -23,5 +26,10 @@ class MyFlowerDetailItemViewHolder(private val binding: ItemMyFlowerItemBinding)
             MyFlowerItemType.WIND -> R.drawable.ic_my_flower_item_wind
             MyFlowerItemType.SHOVEL -> R.drawable.ic_my_flower_item_shovel
         }
+    }
+
+    fun bindEmpty() = with(binding) {
+        ivMyFlowerEmpty.isVisible = true
+        ivMyFlowerItem.isVisible = false
     }
 }

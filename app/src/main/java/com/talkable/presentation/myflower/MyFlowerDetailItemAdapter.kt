@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.talkable.core.view.ItemDiffCallback
 import com.talkable.databinding.ItemMyFlowerItemBinding
+import com.talkable.presentation.myflower.MyFlowerListAdapter.Companion.EMPTY
+import com.talkable.presentation.myflower.MyFlowerListAdapter.Companion.ITEM
 import com.talkable.presentation.myflower.model.MyFlowerItem
 import com.talkable.presentation.myflower.viewholder.MyFlowerDetailItemViewHolder
 
@@ -14,6 +16,11 @@ class MyFlowerDetailItemAdapter(context: Context) :
         MyFlowerItemDiffCallback
     ) {
     private val inflater by lazy { LayoutInflater.from(context) }
+
+    override fun getItemCount(): Int = 6
+
+    override fun getItemViewType(position: Int): Int =
+        if (currentList.getOrNull(position) != null) ITEM else EMPTY
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,7 +32,10 @@ class MyFlowerDetailItemAdapter(context: Context) :
     }
 
     override fun onBindViewHolder(holder: MyFlowerDetailItemViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        when (getItemViewType(position)) {
+            ITEM -> holder.bind(currentList[position])
+            else -> holder.bindEmpty()
+        }
     }
 
     companion object {
