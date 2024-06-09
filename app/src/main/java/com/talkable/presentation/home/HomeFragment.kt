@@ -11,6 +11,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         statusBarColorOf(R.color.white)
         initViewPagerAdapter()
         initStartBtnClickListener()
+        setLearningTextView()
+    }
+
+    private fun setLearningTextView() {
+        with(binding.includeLayoutTalkGuide) {
+            tvHomeLearningTime.text = getString(R.string.tv_home_learning_time, 20)
+            tvHomeLearningStorage.text = getString(R.string.tv_home_learning_storage, 5)
+            tvHomeLearningFeedback.text = getString(R.string.tv_home_learning_feedback, 3)
+        }
     }
 
     private fun initStartBtnClickListener() {
