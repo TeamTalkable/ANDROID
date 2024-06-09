@@ -10,7 +10,6 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorRes
 import com.talkable.R
-import com.talkable.core.util.context.colorOf
 import com.talkable.presentation.mypage.model.Chart
 import kotlin.math.cos
 import kotlin.math.sin
@@ -39,12 +38,12 @@ class ChartView @JvmOverloads constructor(
     private fun setCircleStyle() {
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 3f
-        paint.color = context.colorOf(R.color.font_4)
+//        paint.color = context.colorOf(R.color.font_4)
     }
 
     private fun setFillCircleStyle(@ColorRes resId: Int, paint: Paint) {
         paint.style = Paint.Style.FILL
-        paint.color = context.colorOf(resId)
+//        paint.color = context.colorOf(resId)
     }
 
     override fun onDraw(canvas: Canvas) {

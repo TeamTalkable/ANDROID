@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.talkable.presentation.login.LoginFragment"
+        android:name="com.talkable.presentation.talk.TalkFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_agreementFragment"
@@ -23,7 +23,15 @@
     <fragment
         android:id="@+id/fragment_home"
         android:name="com.talkable.presentation.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_talk"
+            app:destination="@id/fragment_talk" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_talk"
+        android:name="com.talkable.presentation.talk.TalkFragment"
+        android:label="TalkFragment" />
     <fragment
         android:id="@+id/fragment_my_page"
         android:name="com.talkable.presentation.mypage.MyPageFragment"
