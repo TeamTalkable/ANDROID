@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_my_page">
+    app:startDestination="@id/feedbackExpressionFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -48,4 +48,8 @@
         android:id="@+id/my_flower_detail_fragment"
         android:name="com.talkable.presentation.myflower.MyFlowerDetailFragment"
         android:label="MyFlowerDetailFragment" />
+    <fragment
+        android:id="@+id/feedbackExpressionFragment"
+        android:name="com.talkable.presentation.feedback.FeedbackExpressionFragment"
+        android:label="FeedbackExpressionFragment" />
 </navigation>

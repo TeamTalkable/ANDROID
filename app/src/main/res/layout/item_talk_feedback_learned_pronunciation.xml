@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_talk_learned_pronunciation_word_korean"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="scienced" />
+            tools:text="science" />
 
         <TextView
             android:id="@+id/tv_talk_learned_pronunciation_word_pronun"
