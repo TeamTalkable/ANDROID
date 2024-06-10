@@ -11,7 +11,7 @@ import com.talkable.presentation.talk.feedback.model.Learned
 
 class FeedbackPronunciationWordAdapter(
     context: Context,
-    private val onClickWordItem: (Learned.Pronunciation, Boolean, Int) -> Unit
+    private val onClickWordItem: (Learned.Pronunciation, Boolean) -> Unit
 ) :
     ListAdapter<Learned.Pronunciation, PronunciationWordViewHolder>(
         pronunciationWordDiffCallback
@@ -25,25 +25,14 @@ class FeedbackPronunciationWordAdapter(
     ): PronunciationWordViewHolder {
         val binding =
             ItemPronunciationWordBinding.inflate(inflater, parent, false)
-        return PronunciationWordViewHolder(binding, onClickWordItem)
+        return PronunciationWordViewHolder(binding, onClickWordItem) {
+            selectItem(it)
+        }
     }
 
     override fun onBindViewHolder(holder: PronunciationWordViewHolder, position: Int) {
         val isSelected = position == selectedItemPosition
         holder.onBind(currentList[position], isSelected)
-    }
-
-    override fun onBindViewHolder(
-        holder: PronunciationWordViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        if (payloads.isEmpty()) {
-            onBindViewHolder(holder, position)
-        } else {
-            val isSelected = position == selectedItemPosition
-            holder.onBind(getItem(position), isSelected)
-        }
     }
 
     fun selectItem(position: Int) {

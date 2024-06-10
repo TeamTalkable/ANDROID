@@ -6,7 +6,8 @@ import com.talkable.presentation.talk.feedback.model.Learned
 
 class PronunciationWordViewHolder(
     private val binding: ItemPronunciationWordBinding,
-    private val onClickWordItem: (Learned.Pronunciation, Boolean, Int) -> Unit,
+    private val onClickWordItem: (Learned.Pronunciation, Boolean) -> Unit,
+    private val onSelectClick: (Int) -> Unit = { _ -> }
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -15,8 +16,9 @@ class PronunciationWordViewHolder(
         root.isSelected = isSelected
         executePendingBindings()
         root.setOnClickListener {
-            onClickWordItem(data, root.isSelected, absoluteAdapterPosition)
+            onClickWordItem(data, root.isSelected)
             root.isSelected = !root.isSelected
+            onSelectClick(absoluteAdapterPosition)
         }
     }
 }

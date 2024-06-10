@@ -26,16 +26,13 @@ class FeedbackPronunciationFragment :
     }
 
     private fun initPronunciationWordAdapter() {
-        var selectedPosition = -1
         binding.rvFeedbackPronunciation.adapter =
             FeedbackPronunciationWordAdapter(
                 requireContext(),
-                onClickWordItem = { data, isSelected, position ->
+                onClickWordItem = { data, isSelected ->
                     handleWordItemClick(data, isSelected)
-                    selectedPosition = position
                 }).apply {
                 submitList(mockData.learnedPronunciation)
-                selectItem(selectedPosition)
             }
     }
 
@@ -111,6 +108,7 @@ class FeedbackPronunciationFragment :
     private fun initRecordCheckClickListener() {
         binding.ivFeedbackPronunciationCheck.setOnClickListener {
             handleMickItemEvent(false)
+            FeedbackPronunciationCompleteDialog().show(childFragmentManager, PRONUNCIATION_DIALOG)
         }
     }
 
@@ -138,5 +136,7 @@ class FeedbackPronunciationFragment :
                 )
             ),
         )
+
+        const val PRONUNCIATION_DIALOG = "pronunciationDialog"
     }
 }
