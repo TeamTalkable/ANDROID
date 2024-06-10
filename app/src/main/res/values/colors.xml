@@ -15,6 +15,8 @@
     <color name="font_3">#353535</color>
     <color name="font_4">#cccccc</color>
     <color name="font_5">#F5F5F5</color>
+    <color name="font_6">#414141</color>
+    <color name="font_sub">#505050</color>
 
     <!-- Sub Color-->
     <color name="gray">#646464</color>
@@ -26,4 +28,9 @@
     <color name="divide">#E7E7E7</color>
     <color name="tv_chart">#565656</color>
     <color name="chart_before">#26505050</color>
+    <color name="item_empty">#85010101</color>
+    <color name="my_flower_list_bg">#F1FFF8</color>
+    <color name="my_flower_end_item_bg">#CCC1C1</color>
+    <color name="light_gray">#D9D9D9</color>
+    <color name="semi_transparent_black">#99262626</color>
 </resources>
