@@ -1,5 +1,6 @@
 package com.talkable.presentation.myflower
 
+import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.databinding.FragmentMyFlowerDetailBinding
@@ -16,6 +17,7 @@ class MyFlowerDetailFragment :
         binding.layoutMyFlowerProgress.model = getFlowerModelData()
         initMyFlowerItemAdapter(getFlowerModelData())
         setSeekbarDisabled()
+        navigateToBack()
     }
 
     private fun getFlowerModelData(): MyFlowerModel? {
@@ -36,6 +38,12 @@ class MyFlowerDetailFragment :
 
     private fun setSeekbarDisabled() {
         binding.layoutMyFlowerProgress.sbMyFlower.isEnabled = false
+    }
+
+    private fun navigateToBack() {
+        binding.layoutAppBar.btnAppBarBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     companion object {
