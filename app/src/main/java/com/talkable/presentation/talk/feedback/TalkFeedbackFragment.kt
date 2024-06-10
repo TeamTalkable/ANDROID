@@ -3,7 +3,7 @@ package com.talkable.presentation.talk.feedback
 import androidx.recyclerview.widget.ConcatAdapter
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-//import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentTalkFeedbackBinding
 import com.talkable.presentation.talk.feedback.mapper.toLearnedList
 import com.talkable.presentation.talk.feedback.model.Learned
@@ -16,7 +16,7 @@ class TalkFeedbackFragment :
     private lateinit var feedbackBottomAdapter: TalkFeedbackBottomAdapter
 
     override fun initView() {
-//        statusBarColorOf(R.color.main_3)
+        statusBarColorOf(R.color.main_3)
         initFeedbackTopAdapter()
         initFeedbackLearnedAdapter()
         initFeedbackBottomAdapter()

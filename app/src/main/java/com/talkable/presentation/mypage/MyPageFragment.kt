@@ -3,14 +3,14 @@ package com.talkable.presentation.mypage
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-//import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentMyPageBinding
 import com.talkable.presentation.mypage.model.Chart
 import com.talkable.presentation.mypage.model.MyPageModel
 
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun initView() {
-//        statusBarColorOf(R.color.white)
+        statusBarColorOf(R.color.white)
         binding.model = mockData
         initMyFlowerBtnClickListener()
     }
