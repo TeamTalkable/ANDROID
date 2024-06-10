@@ -57,6 +57,11 @@
     <string name="tv_my_page_chart_label_pronunciation">발음</string>
     <string name="tv_my_page_chart_label_Listening">듣기</string>
     <string name="tv_my_page_chart_label_empty">학습 데이터를 모으고 있어요.</string>
+    <string name="tv_my_flower_progress_first">0분</string>
+    <string name="tv_my_flower_progress_second">20분</string>
+    <string name="tv_my_flower_progress_third">40분</string>
+    <string name="tv_my_flower_progress_fourth">70분</string>
+    <string name="tv_my_flower_progress_fifth">100분</string>
     <string name="tv_home_talk_start">대화 시작하기</string>
     <string name="tv_home_no_learning">학습하지 않았어요.</string>
 </resources>

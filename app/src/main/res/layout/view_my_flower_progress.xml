@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.talkable.presentation.myflower.model.MyFlowerModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_3">
+
+        <TextView
+            android:id="@+id/tv_my_flower_study_time"
+            setProgressRatio="@{model.studyTime}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.studyTime + `분`}"
+            android:textColor="@color/main"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintHorizontal_bias="0.875"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="75분" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/sb_my_flower"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sb_my_flower" />
+
+        <SeekBar
+            android:id="@+id/sb_my_flower"
+            setProgressRatio="@{model.studyTime}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:clickable="false"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:progress="89"
+            android:progressBackgroundTint="@color/white"
+            android:progressBackgroundTintMode="add"
+            android:progressTint="@color/white"
+            android:thumb="@drawable/shape_main_fill_8_circle"
+            android:thumbOffset="0dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_study_time" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower_progress_first"
+            tint="@{model.getDateData.get(0).getDate != null ? 0 : @color/font_4 }"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/img_my_flower_step1"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_second"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sb_my_flower" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/tv_my_flower_progress_first"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@{model.getDateData.get(0).getDate != null ? @color/gray : @color/font_4}"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_first" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_first_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{model.getDateData.get(0).getDate ?? ``}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_progress_first"
+            tools:text="04.09" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower_progress_second"
+            tint="@{model.getDateData.get(1).getDate != null ? 0: @color/font_4}"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_my_flower_step2"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_third"
+            app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_first"
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/tv_my_flower_progress_second"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@{model.getDateData.get(1).getDate != null ? @color/gray : @color/font_4}"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_second"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_second"
+            app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_second" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_second_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{model.getDateData.get(1).getDate ?? ``}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_second"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_second"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_progress_second"
+            tools:text="04.09" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower_progress_third"
+            tint="@{model.getDateData.get(2).getDate != null ?0: @color/font_4}"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_my_flower_step3"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_fourth"
+            app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_second"
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/tv_my_flower_progress_third"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@{model.getDateData.get(2).getDate != null ? @color/gray : @color/font_4}"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_third"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_third"
+            app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_third" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_third_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{model.getDateData.get(2).getDate ?? ``}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_third"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_third"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_progress_third"
+            tools:text="04.09" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower_progress_fourth"
+            tint="@{model.getDateData.get(3).getDate != null ?0 : @color/font_4}"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_my_flower_step4"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_third"
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_fourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/tv_my_flower_progress_fourth"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@{model.getDateData.get(3).getDate != null ? @color/gray : @color/font_4}"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fourth"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_fourth"
+            app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_fourth" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_fourth_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{model.getDateData.get(3).getDate ?? ``}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fourth"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_fourth"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_progress_fourth"
+            tools:text="04.09" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower_progress_fifth"
+            tint="@{model.getDateData.get(4).getDate != null ? 0 : @color/font_4}"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_my_flower_step5"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_my_flower_progress_fourth"
+            app:layout_constraintTop_toTopOf="@id/iv_my_flower_progress_first" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_fifth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/tv_my_flower_progress_fifth"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@{model.getDateData.get(4).getDate != null ? @color/gray : @color/font_4}"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintTop_toBottomOf="@id/iv_my_flower_progress_fifth" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_progress_fifth_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{model.getDateData.get(4).getDate ?? ``}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintStart_toStartOf="@id/iv_my_flower_progress_fifth"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_progress_fifth"
+            tools:text="04.09" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
