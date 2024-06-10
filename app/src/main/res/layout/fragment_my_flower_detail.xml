@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.talkable.presentation.myflower.model.MyFlowerModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_3">
+
+        <include
+            android:id="@+id/layout_app_bar"
+            layout="@layout/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{model.flowerEndDate == null ? View.GONE : View.VISIBLE}"
+            app:visible="@{false}" />
+
+        <View
+            android:id="@+id/view_my_flower_detail_flower_bg"
+            android:layout_width="240dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_main_fill_8_circle"
+            android:backgroundTint="@color/my_flower_list_bg"
+            android:visibility="@{model.flowerEndDate == null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_my_flower_end"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_app_bar"
+            tools:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower_end"
+            imageUrl="@{model.flowerImage}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:scaleType="fitCenter"
+            android:visibility="@{model.flowerEndDate == null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/view_my_flower_detail_flower_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_my_flower_detail_flower_bg"
+            app:layout_constraintStart_toStartOf="@id/view_my_flower_detail_flower_bg"
+            app:layout_constraintTop_toTopOf="@id/view_my_flower_detail_flower_bg"
+            tools:src="@drawable/background_splash_screen"
+            tools:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_my_flower"
+            imageUrl="@{model.flowerImage}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:visibility="@{model.flowerEndDate == null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/background_splash_screen" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_name"
+            setTopBottom="@{model.flowerEndDate == null ? @id/iv_my_flower : @id/view_my_flower_detail_flower_bg}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@{model.flowerName}"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="코스모스" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@{model.flowerEndDate == null ? model.flowerStartDate + ` ~` : model.flowerStartDate + ` ~ ` + model.flowerEndDate}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_name"
+            tools:text="2024.04.09 ~" />
+
+        <include
+            android:id="@+id/layout_my_flower_progress"
+            layout="@layout/view_my_flower_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/rv_my_flower_item"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_flower_date" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_flower_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_white_fill_20_rec"
+            android:overScrollMode="never"
+            android:paddingHorizontal="33dp"
+            android:paddingTop="46dp"
+            android:paddingBottom="21dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:spanCount="3"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_my_flower_item" />
+
+        <TextView
+            android:id="@+id/tv_my_flower_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{model.flowerEndDate == null ? `아이템을 사용하여 꽃을 키워보세요!`: `장미꽃을 키우며 아래 아이템을 사용했어요`}"
+            app:layout_constraintEnd_toEndOf="@id/rv_my_flower_item"
+            app:layout_constraintStart_toStartOf="@id/rv_my_flower_item"
+            app:layout_constraintTop_toTopOf="@id/rv_my_flower_item"
+            tools:text="아이템을 사용하여 꽃을 키워보세요!" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

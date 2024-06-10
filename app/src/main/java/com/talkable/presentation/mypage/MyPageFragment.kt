@@ -1,5 +1,6 @@
 package com.talkable.presentation.mypage
 
+import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 //import com.talkable.core.util.fragment.statusBarColorOf
@@ -11,6 +12,17 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     override fun initView() {
 //        statusBarColorOf(R.color.white)
         binding.model = mockData
+        initMyFlowerBtnClickListener()
+    }
+
+    private fun initMyFlowerBtnClickListener() {
+        binding.tvMyPageMyFlower.setOnClickListener {
+            navigateToMyFlowerFragment()
+        }
+    }
+
+    private fun navigateToMyFlowerFragment() {
+        findNavController().navigate(R.id.action_my_page_to_my_flower)
     }
 
     companion object {

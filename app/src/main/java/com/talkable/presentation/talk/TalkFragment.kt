@@ -115,7 +115,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         binding.videoViewTalkBackground.start()
         Handler(Looper.getMainLooper()).postDelayed({
             binding.videoViewTalkBackground.pause()
-        }, 500)
+        }, 1000)
     }
 
     // 번역 버튼 클릭
