@@ -48,7 +48,7 @@ class FeedbackExpressionFragment :
             val startIndex = fullText.indexOf(part)
             if (startIndex != -1) {
                 val endIndex = startIndex + part.length
-                val span = ForegroundColorSpan(colorOf(R.color.main_4))  // 적용할 색상 지정, 예를 들어 빨간색
+                val span = ForegroundColorSpan(colorOf(R.color.main_4))
                 spannableString.setSpan(
                     span,
                     startIndex,
