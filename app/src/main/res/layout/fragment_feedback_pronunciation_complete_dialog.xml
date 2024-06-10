@@ -12,13 +12,13 @@
 
         <TextView
             android:id="@+id/tv_dialog_feedback_pronunciation_complete"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_gray_2_fill_12_rect"
             android:backgroundTint="@color/dialog_bg"
-            android:paddingHorizontal="80dp"
             android:paddingVertical="19dp"
             android:text="@string/tv_dialog_feedback_pronunciation_complete"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
