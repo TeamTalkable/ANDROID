@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/feedbackPronunciationFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -39,7 +40,7 @@
     <fragment
         android:id="@+id/fragment_my_flower"
         android:name="com.talkable.presentation.myflower.MyFlowerFragment"
-        android:label="MyFlowerFragment" >
+        android:label="MyFlowerFragment">
         <action
             android:id="@+id/action_my_flower_to_my_flower_detail"
             app:destination="@id/my_flower_detail_fragment" />
@@ -49,11 +50,13 @@
         android:name="com.talkable.presentation.myflower.MyFlowerDetailFragment"
         android:label="MyFlowerDetailFragment" />
     <fragment
-        android:id="@+id/feedbackExpressionFragment"
+        android:id="@+id/fragment_feedback_expression"
         android:name="com.talkable.presentation.feedback.FeedbackExpressionFragment"
-        android:label="FeedbackExpressionFragment" />
+        android:label="FeedbackExpressionFragment"
+        tools:layout="@layout/fragment_talk_feedback_expression" />
     <fragment
-        android:id="@+id/feedbackPronunciationFragment"
+        android:id="@+id/fragment_feedback_pronunciation"
         android:name="com.talkable.presentation.feedback.FeedbackPronunciationFragment"
-        android:label="FeedbackPronunciationFragment" />
+        android:label="FeedbackPronunciationFragment"
+        tools:layout="@layout/fragment_feedback_pronunciation"/>
 </navigation>
