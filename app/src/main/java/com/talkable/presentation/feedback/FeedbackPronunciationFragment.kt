@@ -47,19 +47,19 @@ class FeedbackPronunciationFragment :
         }
 
     private fun handleViewVisibility(isSelected: Boolean) = with(binding) {
+        val invisibleIfSelected = if (!isSelected) View.VISIBLE else View.INVISIBLE
+
         tvFeedbackPronunciationEnglish.isVisible = isSelected
         tvFeedbackPronunciationKorean.isVisible = isSelected
-        tvFeedbackPronunciationEnglishSmall.visibility =
-            if (!isSelected) View.VISIBLE else View.INVISIBLE
-        tvFeedbackPronunciationEnglishWord.visibility =
-            if (!isSelected) View.VISIBLE else View.INVISIBLE
+        tvFeedbackPronunciationEnglishSmall.visibility = invisibleIfSelected
+        tvFeedbackPronunciationEnglishWord.visibility = invisibleIfSelected
         tvFeedbackPronunciationWordKorean.isVisible = !isSelected
+        tvFeedbackPronunciationEnglishWordPronun.visibility = invisibleIfSelected
+
         if (isSelected) {
             tvFeedbackPronunciationAccuracy.text = mockData.accuracy + "%"
             pbFeedbackPronunciation.progress = mockData.accuracy.toInt()
         }
-        tvFeedbackPronunciationEnglishWordPronun.visibility =
-            if (!isSelected) View.VISIBLE else View.INVISIBLE
     }
 
     private fun setAfterAnswerTextColor(fullText: String, partsText: List<String>) {
