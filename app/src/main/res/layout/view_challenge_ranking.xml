@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingHorizontal="13dp">
+
+        <TextView
+            android:id="@+id/tv_ranking_2_usre_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="최우지"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintBottom_toTopOf="@id/tv_ranking_2_time"
+            app:layout_constraintEnd_toEndOf="@id/iv_ranking_2"
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_2" />
+
+        <TextView
+            android:id="@+id/tv_ranking_2_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="164분"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/iv_ranking_2"
+            app:layout_constraintEnd_toEndOf="@id/tv_ranking_2_usre_name"
+            app:layout_constraintStart_toStartOf="@id/tv_ranking_2_usre_name" />
+
+        <ImageView
+            android:id="@+id/iv_ranking_2"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:background="@drawable/shape_main3_fill_12_top_rect"
+            app:layout_constraintBottom_toBottomOf="@id/iv_ranking_1"
+            app:layout_constraintEnd_toStartOf="@+id/iv_ranking_1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_ranking_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:text="2"
+            android:textAppearance="@style/TextAppearance.Talkable.b_12"
+            android:textColor="@color/main_4"
+            app:layout_constraintBottom_toBottomOf="@id/iv_ranking_2"
+            app:layout_constraintEnd_toEndOf="@id/iv_ranking_2"
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_2" />
+
+        <TextView
+            android:id="@+id/tv_ranking_1_usre_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="김지은"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintBottom_toTopOf="@id/tv_ranking_1_time"
+            app:layout_constraintEnd_toEndOf="@id/iv_ranking_1"
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_1" />
+
+        <TextView
+            android:id="@+id/tv_ranking_1_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="190분"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/iv_ranking_1"
+            app:layout_constraintEnd_toEndOf="@id/tv_ranking_1_usre_name"
+            app:layout_constraintStart_toStartOf="@id/tv_ranking_1_usre_name" />
+
+        <ImageView
+            android:id="@+id/iv_ranking_1"
+            android:layout_width="0dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_main3_fill_12_top_rect"
+            app:layout_constraintEnd_toStartOf="@+id/iv_ranking_3"
+            app:layout_constraintStart_toEndOf="@id/iv_ranking_2"
+            app:layout_constraintTop_toBottomOf="@id/tv_ranking_1_time" />
+
+        <TextView
+            android:id="@+id/tv_ranking_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:text="1"
+            android:textAppearance="@style/TextAppearance.Talkable.b_12"
+            android:textColor="@color/main_4"
+            app:layout_constraintBottom_toBottomOf="@id/iv_ranking_1"
+            app:layout_constraintEnd_toEndOf="@id/iv_ranking_1"
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_1" />
+
+        <TextView
+            android:id="@+id/tv_ranking_3_usre_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="박가은"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintBottom_toTopOf="@id/tv_ranking_3_time"
+            app:layout_constraintEnd_toEndOf="@id/iv_ranking_3"
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_3" />
+
+        <TextView
+            android:id="@+id/tv_ranking_3_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="70분"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/iv_ranking_3"
+            app:layout_constraintEnd_toEndOf="@id/tv_ranking_3_usre_name"
+            app:layout_constraintStart_toStartOf="@id/tv_ranking_3_usre_name" />
+
+        <ImageView
+            android:id="@+id/iv_ranking_3"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/shape_main3_fill_12_top_rect"
+            app:layout_constraintBottom_toBottomOf="@id/iv_ranking_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_ranking_1" />
+
+        <TextView
+            android:id="@+id/tv_ranking_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textAppearance="@style/TextAppearance.Talkable.b_12"
+            android:textColor="@color/main_4"
+            app:layout_constraintBottom_toBottomOf="@id/iv_ranking_3"
+            app:layout_constraintEnd_toEndOf="@id/iv_ranking_3"
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_3"
+            app:layout_constraintTop_toBottomOf="@id/tv_ranking_3_time" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

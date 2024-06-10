@@ -1,23 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="challenge / 유진"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_challenge_participation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="56dp"
+                android:text="@string/tv_challenge_participation"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                android:textColor="@color/font_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager_challenge_participation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_challenge_participation" />
+
+            <TextView
+                android:id="@+id/tv_challenge_successful"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:background="@drawable/shape_font5_fill_12_rect"
+                android:paddingHorizontal="15.5dp"
+                android:paddingVertical="5dp"
+                android:text="@string/tv_challenge_successful"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_challenge_participation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_challenge_participation" />
+
+            <TextView
+                android:id="@+id/tv_challenge_recruitment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="58dp"
+                android:text="@string/tv_challenge_recruitment"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                android:textColor="@color/font_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewpager_challenge_participation" />
+
+            <ImageButton
+                android:id="@+id/btn_challenge_recruitment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/ic_challenge_next"
+                app:layout_constraintBottom_toBottomOf="@id/tv_challenge_recruitment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_challenge_recruitment" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager_challenge_recruitment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_challenge_recruitment" />
+
+            <TextView
+                android:id="@+id/tv_challenge_ranking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="58dp"
+                android:text="@string/tv_challenge_ranking"
+                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                android:textColor="@color/font_3"
+                app:layout_constraintStart_toStartOf="@id/tv_challenge_recruitment"
+                app:layout_constraintTop_toBottomOf="@id/viewpager_challenge_recruitment" />
+
+            <include
+                android:id="@+id/include_layout_challenge_ranking"
+                layout="@layout/view_challenge_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginEnd="22dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_challenge_ranking" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_challenge_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="74dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_layout_challenge_ranking"
+                tools:listitem="@layout/item_challenge_ranking" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
