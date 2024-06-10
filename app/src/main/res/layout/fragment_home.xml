@@ -6,101 +6,119 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:paddingHorizontal="20dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_home_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:src="@drawable/img_home_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingHorizontal="20dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_home_main"
-            android:layout_width="0dp"
-            android:layout_height="191dp"
-            android:layout_marginHorizontal="2dp"
-            android:layout_marginTop="42dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/img_home_logo"
-            app:layout_constraintTop_toBottomOf="@id/img_home_logo">
+            <ImageView
+                android:id="@+id/img_home_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:src="@drawable/img_home_logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageButton
+                android:id="@+id/ic_home_quiz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_home_quiz"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_home_main"
+                android:layout_width="0dp"
+                android:layout_height="191dp"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginTop="42dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1.6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_home_logo"
+                app:layout_constraintTop_toBottomOf="@id/img_home_logo">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="30dp">
+
+                    <TextView
+                        android:id="@+id/tv_home_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="57dp"
+                        android:text="@string/tv_home_user_name"
+                        android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_home_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginBottom="55dp"
+                        android:text="@string/tv_home_learning_step"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/img_home_seed"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_home_progress"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_home_user_name" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_home_talk_start"
+                style="@style/AppButtonOnPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingVertical="20dp"
+                android:text="@string/tv_home_talk_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_view_home_main" />
+
+            <include
+                android:id="@+id/include_layout_talk_guide"
+                layout="@layout/item_home_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="30dp">
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_home_talk_start" />
 
-                <TextView
-                    android:id="@+id/tv_home_user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="57dp"
-                    android:text="김지은님,"
-                    android:textAppearance="@style/TextAppearance.Talkable.sb_16"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_home_progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="55dp"
-                    android:text="아직은 씨앗이에요!\n학습을 통해 예쁜 꽃을 피워보세요:)"
-                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/img_home_seed"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_home_progress"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_home_user_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btn_home_talk_start"
-            style="@style/AppButtonOnPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:paddingVertical="20dp"
-            android:text="@string/tv_home_talk_start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_home_main" />
-
-        <include
-            android:id="@+id/include_layout_talk_guide"
-            layout="@layout/item_home_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_home_talk_start" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager_home_challenge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/include_layout_talk_guide" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager_home_challenge"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="26dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/include_layout_talk_guide" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

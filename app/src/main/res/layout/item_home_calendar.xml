@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -9,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:background="@color/white">
 
         <androidx.cardview.widget.CardView
@@ -18,112 +17,179 @@
             android:layout_height="191dp"
             android:layout_margin="5dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="5dp"
+            app:cardElevation="1.6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_calendar_toggleGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:paddingHorizontal="28dp">
+                android:layout_marginTop="30dp">
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_mon"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="월"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleGroup_home_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    app:checkedButton="@id/btn_home_calendar_wednes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:singleSelection="true">
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_tues"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="화"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_mon"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_mon"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_wednes"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="수"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_tues"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_tues"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_thurs"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="목"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_wednes"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_wednes"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_fri"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="금"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_thurs"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_thurs"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_satur"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="토"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_fri"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_fri"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_calendar_sun"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="일"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_satur"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_satur"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
 
-<!--                <androidx.constraintlayout.helper.widget.Flow-->
-<!--                    android:id="@+id/group_home_week"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:constraint_referenced_ids="tv_calendar_mon, tv_calendar_tues, tv_calendar_wednes, tv_calendar_thurs, tv_calendar_fri, tv_calendar_satur, tv_calendar_sun"-->
-<!--                    app:flow_horizontalGap="20dp"-->
-<!--                    app:flow_horizontalStyle="spread"-->
-<!--                    app:flow_maxElementsWrap="7"-->
-<!--                    app:flow_wrapMode="aligned"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constriantEnd_toEndOf="parent" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_home_calendar_sun"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_home_calendar_sun"
+                        android:textAppearance="@style/TextAppearance.Talkable.sub_m_16" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/iv_home_clock"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="48dp"-->
-<!--                    android:src="@drawable/ic_home_clock"-->
-<!--                    app:layout_constraintEnd_toStartOf="@id/tv_home_no_learning"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/group_home_week"-->
-<!--                    app:layout_constraintHorizontal_chainStyle="packed"/>-->
+                <ImageView
+                    android:id="@+id/iv_home_no_learning_clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:src="@drawable/ic_home_clock"
+                    app:layout_constraintEnd_toStartOf="@id/tv_home_no_learning"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toggleGroup_home_calendar" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_home_no_learning"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="11dp"-->
-<!--                    android:text="@string/tv_home_no_learning"-->
-<!--                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"-->
-<!--                    android:textColor="@color/font_sub"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/iv_home_clock"-->
-<!--                    app:layout_constraintTop_toTopOf="@id/iv_home_clock" />-->
+                <TextView
+                    android:id="@+id/tv_home_no_learning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:text="@string/tv_home_no_learning"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                    android:textColor="@color/font_sub"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_home_no_learning_clock"
+                    app:layout_constraintTop_toTopOf="@id/iv_home_no_learning_clock" />
 
-<!--                <androidx.constraintlayout.widget.Group-->
-<!--                    android:id="@+id/group_home_no_learning"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:visibility="visible"-->
-<!--                    app:constraint_referenced_ids="iv_home_clock, tv_home_no_learning" />-->
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_home_no_learning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="iv_home_no_learning_clock, tv_home_no_learning" />
+
+                <ImageView
+                    android:id="@+id/iv_home_learning_clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="36dp"
+                    android:src="@drawable/ic_home_clock"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toggleGroup_home_calendar" />
+
+                <TextView
+                    android:id="@+id/tv_home_learning_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/tv_home_learning_time"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_home_learning_clock"
+                    app:layout_constraintStart_toEndOf="@id/iv_home_learning_clock"
+                    app:layout_constraintTop_toTopOf="@id/iv_home_learning_clock" />
+
+                <TextView
+                    android:id="@+id/tv_home_learning_storage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="@string/tv_home_learning_storage"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                    android:textColor="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/iv_home_learning_clock"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home_learning_clock" />
+
+                <TextView
+                    android:id="@+id/tv_home_learning_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:text="@string/tv_home_learning_feedback"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                    android:textColor="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_home_learning_storage"
+                    app:layout_constraintTop_toTopOf="@id/tv_home_learning_storage" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_home_learning_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_main1_fill_12_rect"
+                    android:text="@string/tv_home_learning_review"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_home_learning_feedback"
+                    app:layout_constraintTop_toTopOf="@id/tv_home_learning_time" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_home_learning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="iv_home_learning_clock, tv_home_learning_time, tv_home_learning_storage, tv_home_learning_feedback, btn_home_learning_review" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

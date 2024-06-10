@@ -1,46 +1,49 @@
 package com.talkable.presentation.home
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentHomeBinding
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun initView() {
+        statusBarColorOf(R.color.white)
         initViewPagerAdapter()
+        initStartBtnClickListener()
+        setLearningTextView()
     }
-    private val imageList = listOf(
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-        "https://example.com/image3.jpg"
-    )
+
+    private fun setLearningTextView() {
+        with(binding.includeLayoutTalkGuide) {
+            tvHomeLearningTime.text = getString(R.string.tv_home_learning_time, 20)
+            tvHomeLearningStorage.text = getString(R.string.tv_home_learning_storage, 5)
+            tvHomeLearningFeedback.text = getString(R.string.tv_home_learning_feedback, 3)
+        }
+    }
+
+    private fun initStartBtnClickListener() {
+        binding.btnHomeTalkStart.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_home_to_fragment_talk)
+        }
+    }
 
     private fun initViewPagerAdapter() {
-        binding.viewpagerHomeChallenge.adapter = ImagePagerAdapter(imageList)
-    }
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin) // 페이지끼리 간격
+        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth) // 페이지 보이는 정도
+        val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 가로 길이
+        val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
-    class ImagePagerAdapter(private val imageList: List<String>) :
-        RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder>() {
-
-        inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_home, parent, false)
-            return ImageViewHolder(view)
+        binding.viewpagerHomeChallenge.setPageTransformer { page, position ->
+            page.translationX = position * -offsetPx
         }
 
-        override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-            val imageView = holder.itemView.findViewById<ImageView>(R.id.imageView)
-            imageView.load(imageList[position])
-        }
-
-        override fun getItemCount(): Int = imageList.size
+        binding.viewpagerHomeChallenge.adapter = HomeChallengeAdapter(challengeList)
     }
+
+    private val challengeList = listOf(
+        R.drawable.img_home_challenge_done,
+        R.drawable.img_home_no_challenge,
+        R.drawable.img_home_challenge_progress,
+    )
 }
