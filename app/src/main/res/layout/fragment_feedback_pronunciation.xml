@@ -130,13 +130,13 @@
             android:id="@+id/tv_feedback_pronunciation_accuracy_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="85dp"
             android:text="정확도"
             android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
             app:layout_constraintBottom_toTopOf="@id/tv_feedback_pronunciation_accuracy"
             app:layout_constraintEnd_toEndOf="@id/pb_feedback_pronunciation"
             app:layout_constraintStart_toStartOf="@id/pb_feedback_pronunciation"
-            app:layout_constraintTop_toTopOf="@id/pb_feedback_pronunciation" />
+            app:layout_constraintTop_toTopOf="@id/pb_feedback_pronunciation"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/tv_feedback_pronunciation_accuracy"
@@ -144,6 +144,7 @@
             android:layout_height="wrap_content"
             android:text="@{model.accuracy + `%`}"
             android:textAppearance="@style/TextAppearance.Talkable.b_24"
+            app:layout_constraintBottom_toBottomOf="@id/pb_feedback_pronunciation"
             app:layout_constraintEnd_toEndOf="@id/pb_feedback_pronunciation"
             app:layout_constraintStart_toStartOf="@id/pb_feedback_pronunciation"
             app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_accuracy_label"
@@ -187,7 +188,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/menu_feedback" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_feedback_pronunciation_mick"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -204,29 +205,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:src="@drawable/ic_feedback_trash" />
+                android:src="@drawable/ic_feedback_trash"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lotti"
-                android:layout_width="267dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_feedback_pronunciation_check"
+                app:layout_constraintStart_toEndOf="@id/iv_feedback_pronunciatoin_trash"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/lottie_pronunciation"
-                app:lottie_repeatCount="4" />
+                app:lottie_rawRes="@raw/lottie_pronunciation" />
 
             <ImageView
                 android:id="@+id/iv_feedback_pronunciation_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:src="@drawable/ic_feedback_check" />
-        </LinearLayout>
-
-
+                android:src="@drawable/ic_feedback_check"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
