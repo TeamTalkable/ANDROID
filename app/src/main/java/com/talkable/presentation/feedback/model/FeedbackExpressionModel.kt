@@ -8,7 +8,7 @@ data class FeedbackExpressionModel(
     val beforeAnswer: String,
     val afterFullAnswer: String,
     val afterAnswerParts: List<String>,
-    val learnedExpression: List<Learned.Expression>,
+    val learnedExpression: List<Learned>,
 )
 
 data class FeedbackGrammarModel(
@@ -17,7 +17,7 @@ data class FeedbackGrammarModel(
     val beforeAnswer: String,
     val afterFullAnswer: String,
     val afterAnswerParts: List<String>,
-    val learnedGrammar: List<Learned.Grammar>,
+    val learnedGrammar: List<Learned>,
 )
 
 data class FeedbackPronunciationModel(

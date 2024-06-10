@@ -1,5 +1,6 @@
 package com.talkable.presentation.feedback
 
+import android.content.res.Resources
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -9,6 +10,7 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.context.pxToDp
 import com.talkable.core.util.fragment.colorOf
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentTalkFeedbackExpressionBinding
 import com.talkable.presentation.feedback.model.FeedbackExpressionModel
 import com.talkable.presentation.feedback.model.FeedbackGrammarModel
@@ -20,6 +22,7 @@ class FeedbackExpressionFragment :
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     override fun initView() {
+        statusBarColorOf(R.color.white)
         initCommentBottomSheet()
         initFeedbackAdapter()
         setAfterAnswerTextColor(
@@ -31,8 +34,13 @@ class FeedbackExpressionFragment :
 
     private fun initCommentBottomSheet() {
         bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheet.root)
-        bottomSheetBehavior.expandedOffset = requireContext().pxToDp(20)
-        bottomSheetBehavior.halfExpandedRatio = 0.2F
+        bottomSheetBehavior.isFitToContents = false
+        bottomSheetBehavior.expandedOffset = requireContext().pxToDp(80)
+        val displayMetrics = Resources.getSystem().displayMetrics
+        val screenHeight = displayMetrics.heightPixels
+        val halfScreenHeight = screenHeight / 2
+
+        bottomSheetBehavior.peekHeight = halfScreenHeight
     }
 
     private fun initFeedbackAdapter() {
@@ -72,6 +80,9 @@ class FeedbackExpressionFragment :
                 "which allows me to enjoy"
             ),
             learnedExpression = listOf(
+                Learned.Label(
+                    type = "변경된 표현"
+                ),
                 Learned.Expression(
                     type = "변경된 표현",
                     wordEnglish = "the proximity to Central Park",
@@ -99,11 +110,17 @@ class FeedbackExpressionFragment :
                 "took"
             ),
             learnedGrammar = listOf(
+                Learned.Label(
+                    type = "동사의 시제"
+                ),
                 Learned.Grammar(
                     type = "동사의 시제",
                     wrongGrammar = "take",
                     correctGrammar = "took",
                     reason = "과거의 사실을 얘기할 때는 동사의 과거형을 사용"
+                ),
+                Learned.Label(
+                    type = "동사의 수일치"
                 ),
                 Learned.Grammar(
                     type = "동사의 수일치",
