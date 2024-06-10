@@ -37,8 +37,22 @@
     <string name="tv_guide_hint">말하기 어려울 땐 힌트를 봐요</string>
 
     <!--home-->
-    <string name="home_user_name">000님,</string>
+    <string name="tv_home_user_name">김지은님,</string>
     <string name="home_continue">이어서 대화해볼까요?</string>
+    <string name="tv_home_learning_step">아직은 씨앗이에요!\n학습을 통해 예쁜 꽃을 피워보세요:)</string>
+    <string name="tv_home_talk_start">대화 시작하기</string>
+    <string name="tv_home_no_learning">학습하지 않았어요.</string>
+    <string name="tv_home_calendar_mon">월</string>
+    <string name="tv_home_calendar_tues">화</string>
+    <string name="tv_home_calendar_wednes">수</string>
+    <string name="tv_home_calendar_thurs">목</string>
+    <string name="tv_home_calendar_fri">금</string>
+    <string name="tv_home_calendar_satur">토</string>
+    <string name="tv_home_calendar_sun">일</string>
+    <string name="tv_home_learning_time">대화시간 %1$dM</string>
+    <string name="tv_home_learning_storage">저장 목록 %1$d개</string>
+    <string name="tv_home_learning_feedback">피드백 %1$d개</string>
+    <string name="tv_home_learning_review">복습하기</string>
 
     <!--my page-->
     <string name="tv_my_page_setting_label">개인정보/설정</string>
@@ -62,6 +76,4 @@
     <string name="tv_my_flower_progress_third">40분</string>
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
-    <string name="tv_home_talk_start">대화 시작하기</string>
-    <string name="tv_home_no_learning">학습하지 않았어요.</string>
 </resources>

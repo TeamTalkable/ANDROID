@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/fragment_my_page">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.talkable.presentation.login.LoginFragment"
-        android:label="LoginFragment">
+        android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_agreementFragment"
             app:destination="@id/agreementFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/agreementFragment"
         android:name="com.talkable.presentation.login.AgreementFragment"
-        android:label="AgreementFragment">
+        android:label="AgreementFragment" >
         <action
             android:id="@+id/action_agreementFragment_to_homeFragment"
             app:destination="@id/fragment_home" />
@@ -23,18 +23,22 @@
     <fragment
         android:id="@+id/fragment_home"
         android:name="com.talkable.presentation.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_talk"
+            app:destination="@id/fragment_talk" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_my_page"
         android:name="com.talkable.presentation.mypage.MyPageFragment"
-        android:label="MyPageFragment">
+        android:label="MyPageFragment" >
         <action
             android:id="@+id/action_my_page_to_my_flower"
             app:destination="@id/fragment_my_flower" />
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
-        android:name="com.talkable.presentation.challenge.ChallengeFragment"
+        android:name="com.talkable.presentation.talk.feedback.TalkFeedbackFragment"
         android:label="ChallengeFragment" />
     <fragment
         android:id="@+id/fragment_my_flower"
@@ -42,10 +46,14 @@
         android:label="MyFlowerFragment" >
         <action
             android:id="@+id/action_my_flower_to_my_flower_detail"
-            app:destination="@id/my_flower_detail_fragment" />
+            app:destination="@id/fragment_my_flower_detail" />
     </fragment>
     <fragment
-        android:id="@+id/my_flower_detail_fragment"
+        android:id="@+id/fragment_my_flower_detail"
         android:name="com.talkable.presentation.myflower.MyFlowerDetailFragment"
-        android:label="MyFlowerDetailFragment" />
+        android:label="MyFlowerFragment" />
+    <fragment
+        android:id="@+id/fragment_talk"
+        android:name="com.talkable.presentation.talk.TalkFragment"
+        android:label="TalkFragment" />
 </navigation>
