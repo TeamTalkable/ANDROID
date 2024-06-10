@@ -10,4 +10,5 @@ class TalkFeedbackLearnedPronunciationViewHolder(private val binding: ItemTalkFe
         model = data
         executePendingBindings()
     }
+
 }

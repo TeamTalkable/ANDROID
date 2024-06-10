@@ -68,8 +68,18 @@ class TalkFeedbackFragment :
                 )
             ),
             learnedPronunciation = listOf(
-                Learned.Pronunciation(type = "발음", word = "science"),
-                Learned.Pronunciation(type = "발음", word = "today")
+                Learned.Pronunciation(
+                    type = "발음",
+                    englishWord = "science",
+                    pronunciationEnglish = "[ ˈsaɪəns ]",
+                    koreanWord = "과학"
+                ),
+                Learned.Pronunciation(
+                    type = "발음",
+                    englishWord = "today",
+                    pronunciationEnglish = "[ ˈtodai ]",
+                    koreanWord = "오늘"
+                )
             ),
             isGraphChanged = true
         )

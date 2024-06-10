@@ -2,14 +2,19 @@ package com.talkable.core.util.context
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import com.google.android.material.snackbar.Snackbar
 
 fun Context.toast(message: String) {
@@ -49,4 +54,18 @@ fun Context.statusBarColorOf(
     if (this is Activity) {
         window?.statusBarColor = colorOf(resId)
     }
+}
+
+fun Context.dialogFragmentResize(
+    dialogFragment: DialogFragment,
+    horizontalMargin: Float,
+) {
+    val dpToPixel = Resources.getSystem().displayMetrics.density
+    val dialogHorizontalMarginInPixels = (dpToPixel * horizontalMargin + 0.5f).toInt()
+    val deviceWidth = Resources.getSystem().displayMetrics.widthPixels
+    dialogFragment.dialog?.window?.setLayout(
+        deviceWidth - 2 * dialogHorizontalMarginInPixels,
+        WindowManager.LayoutParams.WRAP_CONTENT,
+    )
+    dialogFragment.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 }
