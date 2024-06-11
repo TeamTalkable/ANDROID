@@ -5,6 +5,7 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.colorOf
@@ -87,10 +88,14 @@ class FeedbackPronunciationFragment :
         binding.bnvFeedbackPronunciation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.mick -> handleMickItemEvent(true)
-                else -> Unit
+                else -> navigate()
             }
             true
         }
+    }
+
+    private fun navigate() {
+        findNavController().navigate(R.id.action_fragment_feedback_pronunciation_to_fragment_feedback_expression)
     }
 
     private fun handleMickItemEvent(isSelected: Boolean) {

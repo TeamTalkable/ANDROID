@@ -62,7 +62,11 @@
         android:id="@+id/fragment_feedback_pronunciation"
         android:name="com.talkable.presentation.feedback.FeedbackPronunciationFragment"
         android:label="FeedbackPronunciationFragment"
-        tools:layout="@layout/fragment_feedback_pronunciation"/>
+        tools:layout="@layout/fragment_feedback_pronunciation">
+        <action
+            android:id="@+id/action_fragment_feedback_pronunciation_to_fragment_feedback_expression"
+            app:destination="@id/fragment_feedback_expression" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_talk"
         android:name="com.talkable.presentation.talk.TalkFragment"
