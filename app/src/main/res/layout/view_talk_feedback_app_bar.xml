@@ -8,6 +8,16 @@
         <variable
             name="title"
             type="String" />
+
+        <variable
+            name="leftBackIsVisible"
+            type="Boolean" />
+
+        <variable
+            name="rightBackIsVisible"
+            type="Boolean" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +41,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
-                    android:src="@drawable/ic_app_bar_back" />
+                    android:src="@drawable/ic_app_bar_back"
+                    android:visibility="@{leftBackIsVisible ? View.VISIBLE : View.INVISIBLE}" />
 
                 <TextView
                     android:id="@+id/tv_app_bar_title"
@@ -50,7 +61,9 @@
                     android:layout_gravity="end"
                     android:layout_marginStart="22dp"
                     android:layout_marginEnd="21dp"
-                    android:src="@drawable/ic_talk_feedback_bookmark" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_challenge_next"
+                    android:visibility="@{rightBackIsVisible ? View.VISIBLE : View.INVISIBLE}" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,14 @@ class MyPageChartDetailFragment :
     override fun initView() {
         binding.chartDetail = mockData
         binding.chart = getChartData()
-        binding.layoutMyPageChartDetailAppBar.ivAppBarBack.setImageResource(R.drawable.ic_my_page_cancel)
+        setAppbarStatus()
         initBackBtnClickListener()
+    }
+
+    private fun setAppbarStatus() {
+        binding.layoutMyPageChartDetailAppBar.leftBackIsVisible = true
+        binding.layoutMyPageChartDetailAppBar.rightBackIsVisible = false
+        binding.layoutMyPageChartDetailAppBar.ivAppBarBack.setImageResource(R.drawable.ic_my_page_cancel)
     }
 
     private fun getChartData() = requireArguments().parcelable<Parcelable>(CHART_KEY) as? Chart
