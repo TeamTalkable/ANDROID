@@ -113,6 +113,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             btnTalkTranslate.setOnClickListener {
                 btnTalkTranslate.isSelected = !binding.btnTalkTranslate.isSelected
                 tvTalkTranslate.isVisible = !binding.tvTalkTranslate.isVisible
+                initShowListenTextView()
             }
         }
     }
@@ -123,34 +124,43 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             btnTalkShow.setOnClickListener {
                 btnTalkShow.isSelected = !binding.btnTalkShow.isSelected
                 tvTalkText.isVisible = !binding.tvTalkText.isVisible
-                tvTalkListen.isVisible = !binding.tvTalkListen.isVisible
+                initShowListenTextView()
             }
+        }
+    }
+
+    // listen 텍스트 보여주기
+    private fun initShowListenTextView() {
+        with(binding) {
+            if (btnTalkTranslate.isSelected || btnTalkShow.isSelected)
+                tvTalkListen.visibility = GONE
+            else
+                tvTalkListen.visibility = VISIBLE
         }
     }
 
     // 힌트 클릭
     private fun initHintTextViewClickListener() {
         var clickCount = FIRST_CLICK
-        binding.tvTalkHint.setOnClickListener {
-            when (clickCount) {
-                FIRST_CLICK -> {
-                    HintToast.createToast(
-                        requireActivity(),
-                        getString(R.string.hint_talk),
-                        getString(R.string.tv_talk_content_hint)
-                    )?.show()
-                    changeHintText()
-                }
+        with(binding) {
+            tvTalkHint.setOnClickListener {
+                when (clickCount) {
+                    FIRST_CLICK -> {
+                        HintToast.createToast(
+                            requireActivity(),
+                            getString(R.string.hint_talk),
+                            getString(R.string.tv_talk_content_hint)
+                        )?.show()
+                        changeHintText()
+                    }
 
-                else -> {
-                    HintToast.createToast(
-                        requireActivity(),
-                        getString(R.string.hint_talk_example),
-                        getString(R.string.tv_talk_content_example)
-                    )?.show()
+                    else -> {
+                        tvTalkHint.text = getString(R.string.hint_talk_example)
+                        includeTalkToastExample.viewTalkToastExample.visibility = VISIBLE
+                    }
                 }
+                clickCount++
             }
-            clickCount++
         }
     }
 
