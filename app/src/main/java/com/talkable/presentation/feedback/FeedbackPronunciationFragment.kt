@@ -1,16 +1,13 @@
 package com.talkable.presentation.feedback
 
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.fragment.colorOf
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentFeedbackPronunciationBinding
+import com.talkable.presentation.FeedbackTextColor
 import com.talkable.presentation.feedback.model.FeedbackPronunciationModel
 import com.talkable.presentation.talk.feedback.model.Learned
 
@@ -64,21 +61,8 @@ class FeedbackPronunciationFragment :
     }
 
     private fun setAfterAnswerTextColor(fullText: String, partsText: List<String>) {
-        val spannableString = SpannableString(fullText)
-
-        partsText.forEach { part ->
-            val startIndex = fullText.indexOf(part)
-            if (startIndex != -1) {
-                val endIndex = startIndex + part.length
-                val span = ForegroundColorSpan(colorOf(R.color.main_4))
-                spannableString.setSpan(
-                    span,
-                    startIndex,
-                    endIndex,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }
-        }
+        val spannableString =
+            FeedbackTextColor(requireContext()).setAfterAnswerTextColor(fullText, partsText)
 
         binding.tvFeedbackPronunciationEnglish.text = spannableString
         binding.tvFeedbackPronunciationEnglishSmall.text = spannableString
