@@ -85,4 +85,6 @@
     <string name="tv_my_flower_progress_third">40분</string>
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
+    <string name="tv_bottom_sheet_talk_title">문장의 의미를 보다 명확하고 자연스럽게 전달하기 위해 재구성되었습니다.</string>
+    <string name="tv_dialog_feedback_pronunciation_complete">AI가 분석하고 있어요!\n잠시만 기다려 주세요:)</string>
 </resources>

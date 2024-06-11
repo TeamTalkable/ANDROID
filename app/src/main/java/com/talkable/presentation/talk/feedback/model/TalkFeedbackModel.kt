@@ -33,7 +33,11 @@ sealed class Learned {
 
     data class Pronunciation(
         override val type: String,
-        val word: String,
+        val englishWord: String,
+        val koreanWord: String,
+        val pronunciationEnglish: String,
+        val wordAccuracy: String? = null,
+        var isSelected: Boolean = false,
     ) : Learned()
 }
 
