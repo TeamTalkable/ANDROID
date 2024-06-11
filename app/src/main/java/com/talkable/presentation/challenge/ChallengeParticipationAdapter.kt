@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.databinding.ItemChallengeParticipationBinding
 
-class ChallengeParticipationAdapter(private val imgList: List<Participation>) :
+class ChallengeParticipationAdapter(private val participationList: List<Participation>) :
     RecyclerView.Adapter<ParticipationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticipationViewHolder {
@@ -18,9 +18,9 @@ class ChallengeParticipationAdapter(private val imgList: List<Participation>) :
         return ParticipationViewHolder(binding)
     }
 
-    override fun getItemCount() = imgList.size
+    override fun getItemCount() = participationList.size
 
     override fun onBindViewHolder(holder: ParticipationViewHolder, position: Int) {
-        holder.bind(imgList[position])
+        holder.bind(participationList[position])
     }
 }
