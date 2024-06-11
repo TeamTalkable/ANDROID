@@ -7,8 +7,10 @@ fun TalkFeedbackModel.toLearnedList(): List<Learned> {
     val learnedList = mutableListOf<Learned>()
     learnedList.add(Learned.Label(learnedExpression.first().type))
     learnedExpression.forEach { learnedList.add(it) }
+    learnedList.add(learnedAfterAnswer.first())
     learnedList.add(Learned.Label(learnedGrammar.first().type))
     learnedGrammar.forEach { learnedList.add(it) }
+    learnedList.add(learnedAfterAnswer[1])
     learnedList.add(Learned.Label(learnedPronunciation.first().type))
     learnedPronunciation.forEach { learnedList.add(it) }
 

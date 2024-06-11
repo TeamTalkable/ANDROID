@@ -8,6 +8,7 @@ data class TalkFeedbackModel(
     val learnedExpression: List<Learned.Expression>,
     val learnedGrammar: List<Learned.Grammar>,
     val learnedPronunciation: List<Learned.Pronunciation>,
+    val learnedAfterAnswer: List<Learned.AfterAnswer>,
     val isGraphChanged: Boolean,
 )
 
@@ -38,6 +39,12 @@ sealed class Learned {
         val pronunciationEnglish: String,
         val wordAccuracy: String? = null,
         var isSelected: Boolean = false,
+    ) : Learned()
+
+    data class AfterAnswer(
+        override val type: String,
+        val afterFullAnswer: String,
+        val afterAnswerParts: List<String>,
     ) : Learned()
 }
 
