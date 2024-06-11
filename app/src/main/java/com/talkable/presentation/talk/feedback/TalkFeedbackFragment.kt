@@ -52,7 +52,7 @@ class TalkFeedbackFragment :
     private fun setRecyclerviewItemDecoration() {
         if (binding.rvTalkFeedback.itemDecorationCount == 0) {
             binding.rvTalkFeedback.addItemDecoration(
-                TalkFeedbackDecorator(requireContext(), mockData.learnedExpression.size + 1),
+                TalkFeedbackDecorator(requireContext(), mockData.learnedExpression.size + 4),
             )
         }
     }
