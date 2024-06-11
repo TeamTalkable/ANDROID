@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="model"
+            type="com.talkable.presentation.talk.feedback.model.Learned.AfterAnswer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/shape_fill_white_bottom_12_rec"
+        android:paddingBottom="24dp">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_talk_feedback_learned_after_senetence"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/font_5"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_talk_feedback_learned_after_sentence_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/shape_font4_fill_40_rect"
             android:paddingHorizontal="11dp"
             android:paddingVertical="2dp"
-            android:text="교정된 문장"
+            android:text="@string/tv_talk_feedback_learned_after_sentence_label"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
             android:textColor="@color/gray_2_56"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/divider_talk_feedback_learned_after_senetence" />
 
         <TextView
+            android:id="@+id/tv_talk_feedback_learned_after_sentence"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="19dp"
+            android:layout_marginTop="12dp"
+            android:text="@{model.afterFullAnswer}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_b_15"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text=""
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_learned_after_sentence_label"
+            tools:text="@string/dummy" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

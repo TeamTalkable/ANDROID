@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/shape_gray_fill_12_rect"
+        android:background="@color/white"
         android:backgroundTint="@color/white"
         android:paddingVertical="16dp">
 
@@ -25,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@{model.wordEnglish}"
+            android:text="@{`• ` + model.wordEnglish}"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
