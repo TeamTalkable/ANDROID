@@ -1,8 +1,10 @@
 package com.talkable.presentation.mypage
 
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key.CHART_KEY
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentMyPageBinding
 import com.talkable.presentation.mypage.model.Chart
@@ -13,6 +15,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         statusBarColorOf(R.color.white)
         binding.model = mockData
         initMyFlowerBtnClickListener()
+        initChartDetailBtnClickListener()
     }
 
     private fun initMyFlowerBtnClickListener() {
@@ -23,6 +26,19 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun navigateToMyFlowerFragment() {
         findNavController().navigate(R.id.action_my_page_to_my_flower)
+    }
+
+    private fun initChartDetailBtnClickListener() {
+        binding.ivMyPageNavigateChartDetail.setOnClickListener {
+            navigateToChartDetailFragment()
+        }
+    }
+
+    private fun navigateToChartDetailFragment() {
+        findNavController().navigate(
+            R.id.action_my_page_to_my_page_chart_detail,
+            bundleOf(CHART_KEY to mockData.chartData)
+        )
     }
 
     companion object {
