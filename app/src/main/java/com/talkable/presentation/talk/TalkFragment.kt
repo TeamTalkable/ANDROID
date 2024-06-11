@@ -132,10 +132,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     // listen 텍스트 보여주기
     private fun initShowListenTextView() {
         with(binding) {
-            if (btnTalkTranslate.isSelected || btnTalkShow.isSelected)
-                tvTalkListen.visibility = GONE
-            else
-                tvTalkListen.visibility = VISIBLE
+            tvTalkListen.isVisible = !(btnTalkTranslate.isSelected || btnTalkShow.isSelected)
         }
     }
 
