@@ -62,22 +62,24 @@
             android:id="@+id/iv_talk_learned_pronunciation_ai_voice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="35dp"
-            android:backgroundTint="@color/sel_icon"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
             android:src="@drawable/ic_talk_ai_voice"
             app:layout_constraintBottom_toBottomOf="@id/iv_talk_learned_pronunciation_user_voice"
             app:layout_constraintEnd_toStartOf="@id/iv_talk_learned_pronunciation_user_voice"
-            app:layout_constraintTop_toTopOf="@id/iv_talk_learned_pronunciation_user_voice" />
+            app:layout_constraintTop_toTopOf="@id/iv_talk_learned_pronunciation_user_voice"
+            app:tint="@color/sel_icon" />
 
         <ImageView
             android:id="@+id/iv_talk_learned_pronunciation_user_voice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="35dp"
-            android:backgroundTint="@color/sel_icon"
+            android:layout_marginEnd="25dp"
+            android:padding="10dp"
             android:src="@drawable/ic_talk_user_voice"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/sel_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
