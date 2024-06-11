@@ -59,19 +59,19 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     // 더미 데이터
     private val participationList = listOf(
         Participation(
-            image = R.drawable.img_challenge_fertilizer,
+            image = R.drawable.ic_my_flower_item_compost,
             date = "06.00 ~ 06.03",
             title = "3일동안 10분 이상\n매일 학습하기",
             progress = 90
         ),
         Participation(
-            image = R.drawable.img_challenge_shovel,
+            image = R.drawable.ic_my_flower_item_shovel,
             date = "06.00 ~ 06.07",
             title = "7일동안 20분 이상\n매일 학습하기",
             progress = 50
         ),
         Participation(
-            image = R.drawable.img_challenge_medicine,
+            image = R.drawable.ic_my_flower_item_medicine,
             date = "06.00 ~ 06.10",
             title = "10일동안 30분 이상\n매일 학습하기",
             progress = 10
@@ -80,17 +80,17 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
 
     private val challengeList = listOf(
         Recruitment(
-            image = R.drawable.img_challenge_sun,
+            image = R.drawable.ic_my_flower_item_sun,
             date = "06.00 ~ 06.03",
             title = "3일동안 10분 이상\n매일 학습하기",
         ),
         Recruitment(
-            image = R.drawable.img_challenge_wind,
+            image = R.drawable.ic_my_flower_item_wind,
             date = "06.00 ~ 06.07",
             title = "7일동안 20분 이상\n매일 학습하기",
         ),
         Recruitment(
-            image = R.drawable.img_challenge_water,
+            image = R.drawable.ic_my_flower_item_water,
             date = "06.00 ~ 06.10",
             title = "10일동안 30분 이상\n매일 학습하기",
         )

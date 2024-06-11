@@ -30,7 +30,7 @@
                     android:layout_height="100dp"
                     android:layout_marginHorizontal="28dp"
                     android:layout_marginTop="25dp"
-                    android:src="@drawable/img_challenge_sun"
+                    android:src="@drawable/ic_my_flower_item_sun"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
