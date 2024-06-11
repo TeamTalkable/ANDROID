@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="4dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
-        android:paddingVertical="22dp">
+        android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/tv_talk_feedback_learned_grammar_wrong"
