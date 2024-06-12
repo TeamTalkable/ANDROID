@@ -143,17 +143,36 @@
                 app:layout_constraintTop_toTopOf="@id/tv_my_page_time_label"
                 tools:text="10M" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_my_page_tab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="30dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_my_page_talk_time"
+                tools:listitem="@layout/item_my_page_bar_chart" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_my_page_3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="41dp"
+                android:background="@color/font_5"
+                app:layout_constraintTop_toBottomOf="@id/rv_my_page_tab" />
 
             <TextView
                 android:id="@+id/tv_my_page_chart_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="35dp"
                 android:text="@string/tv_my_page_chart_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_talk_time" />
+                app:layout_constraintTop_toBottomOf="@id/divider_my_page_3" />
 
             <ImageView
                 android:id="@+id/iv_my_page_navigate_chart_detail"
