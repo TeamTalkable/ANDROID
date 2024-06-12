@@ -36,3 +36,9 @@ data class ChartDetail(
     val pronunciationDetail: String,
     val listeningDetail: String,
 )
+
+data class BarChart(
+    val id: Int,
+    val date: String,
+    val studyTime: Int
+)
