@@ -2,4 +2,6 @@
 <resources>
     <dimen name="pageMargin">60dp</dimen>
     <dimen name="pageWidth">316dp</dimen>
+    <dimen name="viewpager_item_width">38dp</dimen>
+    <dimen name="viewpager_item_margin">10dp</dimen>
 </resources>
