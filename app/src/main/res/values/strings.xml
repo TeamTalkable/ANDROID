@@ -83,8 +83,9 @@
     <string name="tv_my_feedback_sort_alphabetical">알파벳 순</string>
     <string name="tv_my_feedback_category_word">단어</string>
     <string name="tv_my_feedback_category_sentence">문장</string>
-    <string name="tv_my_page_feedback_category">카테고리</string>
     <string name="tv_my_page_feedback_expression">표현</string>
+    <string name="tv_my_page_feedback_sort">정렬</string>
+    <string name="tv_my_page_feedback_category">카테고리</string>
 
     <!--challenge-->
     <string name="tv_challenge_participation">🔥 참여중인 챌린지</string>
