@@ -7,6 +7,9 @@
    <!-- talk feedback -->
     <string name="tv_talk_feedback_bottom_graph"><u>그래프가 변형되었어요. 확인해보세요!</u></string>
     <string name="btn_talk_feedback_bottom_complete">대화 끝내기</string>
+    <string name="tv_bottom_sheet_talk_title">문장의 의미를 보다 명확하고 자연스럽게 전달하기 위해 재구성되었습니다.</string>
+    <string name="tv_dialog_feedback_pronunciation_complete">AI가 분석하고 있어요!\n잠시만 기다려 주세요:)</string>
+    <string name="tv_talk_feedback_learned_after_sentence_label">교정된 문장</string>
 
     <!--login-->
     <string name="login_intro">HAI 대화를 통한\n맞춤형 영어 회화 학습,</string>
@@ -81,11 +84,13 @@
     <string name="tv_challenge_participation_title">10일동안 15분 이상\n매일 학습하기</string>
     <string name="tv_challenge_participation_date">04.20 ~ 04.30</string>
     <string name="tv_challenge_participation_progress">4/10일</string>
+
+    <!--my flower-->
     <string name="tv_my_flower_progress_first">0분</string>
     <string name="tv_my_flower_progress_second">20분</string>
     <string name="tv_my_flower_progress_third">40분</string>
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
-    <string name="tv_bottom_sheet_talk_title">문장의 의미를 보다 명확하고 자연스럽게 전달하기 위해 재구성되었습니다.</string>
-    <string name="tv_dialog_feedback_pronunciation_complete">AI가 분석하고 있어요!\n잠시만 기다려 주세요:)</string>
+    <string name="appbar_title_talk_feedback">대화 피드백</string>
+
 </resources>

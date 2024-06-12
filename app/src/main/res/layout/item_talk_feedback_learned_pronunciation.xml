@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/shape_gray_fill_12_rect"
         android:backgroundTint="@color/white"
         android:paddingVertical="20dp">
@@ -26,15 +25,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@{model.englishWord}"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-            app:layout_constraintEnd_toStartOf="@id/tv_talk_learned_pronunciation_word_korean"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="science" />
 
         <TextView
             android:id="@+id/tv_talk_learned_pronunciation_word_pronun"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:text="@{model.pronunciationEnglish}"
@@ -49,15 +48,14 @@
 
         <TextView
             android:id="@+id/tv_talk_learned_pronunciation_word_korean"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
             android:text="@{model.koreanWord}"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             android:textColor="@color/font_3"
             app:layout_constraintBottom_toBottomOf="@id/tv_talk_learned_pronunciation_word_pronun"
             app:layout_constraintEnd_toStartOf="@id/iv_talk_learned_pronunciation_ai_voice"
-            app:layout_constraintStart_toEndOf="@id/tv_talk_learned_pronunciation_word"
             app:layout_constraintTop_toTopOf="@id/tv_talk_learned_pronunciation_word"
             tools:text="과학" />
 
@@ -65,20 +63,24 @@
             android:id="@+id/iv_talk_learned_pronunciation_ai_voice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="35dp"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
             android:src="@drawable/ic_talk_ai_voice"
             app:layout_constraintBottom_toBottomOf="@id/iv_talk_learned_pronunciation_user_voice"
             app:layout_constraintEnd_toStartOf="@id/iv_talk_learned_pronunciation_user_voice"
-            app:layout_constraintTop_toTopOf="@id/iv_talk_learned_pronunciation_user_voice" />
+            app:layout_constraintTop_toTopOf="@id/iv_talk_learned_pronunciation_user_voice"
+            app:tint="@color/sel_icon" />
 
         <ImageView
             android:id="@+id/iv_talk_learned_pronunciation_user_voice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="35dp"
+            android:layout_marginEnd="25dp"
+            android:padding="10dp"
             android:src="@drawable/ic_talk_user_voice"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/sel_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

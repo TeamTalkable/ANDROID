@@ -116,6 +116,8 @@
             android:layout_marginHorizontal="94dp"
             android:layout_marginBottom="40dp"
             android:progress="50"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             app:indicatorTrackGapSize="0dp"
             app:layout_constraintBottom_toTopOf="@id/rv_feedback_pronunciation"
             app:layout_constraintDimensionRatio="1"

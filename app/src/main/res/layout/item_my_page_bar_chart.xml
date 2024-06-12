@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.talkable.presentation.mypage.model.BarChart" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:background="@color/white">
+
+        <com.talkable.core.view.BarGraphView
+            android:id="@+id/bar_graph_my_page"
+            android:layout_width="60dp"
+            android:layout_height="178dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/main" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_study_time"
+            formatMinutesToHoursMinutes="@{model.studyTime}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/bar_graph_my_page"
+            app:layout_constraintStart_toStartOf="@id/bar_graph_my_page"
+            app:layout_constraintTop_toTopOf="@id/bar_graph_my_page"
+            tools:text="1시간" />
+
+        <TextView
+            android:id="@+id/tv_my_page_bar_chart_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="@{model.date}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@color/gray_2_56"
+            app:layout_constraintEnd_toEndOf="@id/bar_graph_my_page"
+            app:layout_constraintStart_toStartOf="@id/bar_graph_my_page"
+            app:layout_constraintTop_toBottomOf="@id/bar_graph_my_page"
+            tools:text="3월 1주차" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

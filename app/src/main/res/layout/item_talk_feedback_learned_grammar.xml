@@ -14,17 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/shape_gray_fill_12_rect"
+        android:background="@color/white"
         android:backgroundTint="@color/white"
-        android:paddingVertical="22dp">
+        android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/tv_talk_feedback_learned_grammar_wrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:text="@{model.wrongGrammar}"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +56,7 @@
             android:id="@+id/tv_talk_feedback_learned_grammar_reason"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="12dp"
             android:text="@{model.reason}"
             android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"

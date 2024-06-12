@@ -6,17 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.talkable.core.view.ItemDiffCallback
+import com.talkable.databinding.ItemTalkFeedbackLearnedAfterSentenceBinding
 import com.talkable.databinding.ItemTalkFeedbackLearnedExpressionBinding
 import com.talkable.databinding.ItemTalkFeedbackLearnedGrammarBinding
 import com.talkable.databinding.ItemTalkFeedbackLearnedLabelBinding
 import com.talkable.databinding.ItemTalkFeedbackLearnedPronunciationBinding
 import com.talkable.presentation.talk.feedback.model.Learned
+import com.talkable.presentation.talk.feedback.viewholder.TalkFeedbackLearnedAfterAnswerViewHolder
 import com.talkable.presentation.talk.feedback.viewholder.TalkFeedbackLearnedExpressionViewHolder
 import com.talkable.presentation.talk.feedback.viewholder.TalkFeedbackLearnedGrammarViewHolder
 import com.talkable.presentation.talk.feedback.viewholder.TalkFeedbackLearnedLabelViewHolder
 import com.talkable.presentation.talk.feedback.viewholder.TalkFeedbackLearnedPronunciationViewHolder
 
-class TalkFeedbackLearnedAdapter(context: Context) : ListAdapter<Learned, ViewHolder>(
+class TalkFeedbackLearnedAdapter(private val context: Context) : ListAdapter<Learned, ViewHolder>(
     TalkFeedbackLearnedDiffCallback
 ) {
     private val inflater by lazy { LayoutInflater.from(context) }
@@ -26,6 +28,7 @@ class TalkFeedbackLearnedAdapter(context: Context) : ListAdapter<Learned, ViewHo
             is Learned.Expression -> VIEW_TYPE_EXPRESSION
             is Learned.Grammar -> VIEW_TYPE_GRAMMAR
             is Learned.Pronunciation -> VIEW_TYPE_PRONUNCIATION
+            is Learned.AfterAnswer -> VIEW_TYPE_AFTER_ANSWER
             else -> VIEW_TYPE_LABEL
         }
     }
@@ -59,6 +62,14 @@ class TalkFeedbackLearnedAdapter(context: Context) : ListAdapter<Learned, ViewHo
                 TalkFeedbackLearnedPronunciationViewHolder(binding)
             }
 
+            VIEW_TYPE_AFTER_ANSWER -> {
+                val binding = ItemTalkFeedbackLearnedAfterSentenceBinding.inflate(
+                    inflater, parent, false
+                )
+
+                TalkFeedbackLearnedAfterAnswerViewHolder(binding, context)
+            }
+
             else -> {
                 val binding = ItemTalkFeedbackLearnedLabelBinding.inflate(
                     inflater, parent, false
@@ -75,21 +86,19 @@ class TalkFeedbackLearnedAdapter(context: Context) : ListAdapter<Learned, ViewHo
     ) {
         when (val data = currentList[position]) {
             is Learned.Expression -> (holder as? TalkFeedbackLearnedExpressionViewHolder)?.run {
-                onBind(
-                    data
-                )
+                onBind(data)
             }
 
             is Learned.Grammar -> (holder as? TalkFeedbackLearnedGrammarViewHolder)?.run {
-                onBind(
-                    data
-                )
+                onBind(data)
             }
 
             is Learned.Pronunciation -> (holder as? TalkFeedbackLearnedPronunciationViewHolder)?.run {
-                onBind(
-                    data
-                )
+                onBind(data)
+            }
+
+            is Learned.AfterAnswer -> (holder as? TalkFeedbackLearnedAfterAnswerViewHolder)?.run {
+                onBind(data)
             }
 
             is Learned.Label -> (holder as? TalkFeedbackLearnedLabelViewHolder)?.run { onBind(data) }
@@ -105,5 +114,6 @@ class TalkFeedbackLearnedAdapter(context: Context) : ListAdapter<Learned, ViewHo
         const val VIEW_TYPE_EXPRESSION = 1
         const val VIEW_TYPE_GRAMMAR = 2
         const val VIEW_TYPE_PRONUNCIATION = 3
+        const val VIEW_TYPE_AFTER_ANSWER = 4
     }
 }

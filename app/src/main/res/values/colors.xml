@@ -38,4 +38,5 @@
     <color name="bottom_sheet_bar">#D9D9D9</color>
     <color name="eaeaea">#EAEAEA</color>
     <color name="dialog_bg">#252525</color>
+    <color name="unselect_icon">#929292</color>
 </resources>

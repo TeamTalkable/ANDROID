@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="chart"
+            type="com.talkable.presentation.mypage.model.Chart" />
+
+        <variable
+            name="chartDetail"
+            type="com.talkable.presentation.mypage.model.ChartDetail" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/layout_my_page_chart_detail_app_bar"
+            layout="@layout/view_talk_feedback_app_bar"
+            app:title="@{`내 실력 차트`}" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:text="@{`지난 대화보다 ` + chartDetail.totalPercent + `만큼 더 상승했어요!`}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sm_18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_my_page_chart_detail_app_bar"
+            tools:text="@string/dummy" />
+
+
+        <com.talkable.core.view.ChartView
+            android:id="@+id/cv_my_page_chart"
+            setChartPercentage="@{chart}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="33dp"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_detail_title"
+            app:layout_goneMarginTop="40dp" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_label_grammar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:text="@string/tv_my_page_chart_label_grammar"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
+            app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_label_expression"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:text="@string/tv_my_page_chart_label_expression"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart"
+            app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_label_pronunciation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="38dp"
+            android:text="@string/tv_my_page_chart_label_pronunciation"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+            app:layout_constraintStart_toStartOf="@id/cv_my_page_chart" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_label_Listening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="38dp"
+            android:text="@string/tv_my_page_chart_label_Listening"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+            app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_recent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawablePadding="5dp"
+            android:text="@string/tv_my_page_chart_recent"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            app:drawableStartCompat="@drawable/ic_my_page_indicator"
+            app:layout_constraintEnd_toStartOf="@id/tv_my_page_chart_before"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_my_page_chart" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:drawablePadding="5dp"
+            android:text="@string/tv_my_page_chart_before"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            app:drawableStartCompat="@drawable/ic_my_page_indicator"
+            app:drawableTint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_page_chart_recent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_my_page_chart_recent"
+            app:layout_constraintTop_toTopOf="@id/tv_my_page_chart_recent" />
+
+        <TextView
+            android:id="@+id/tv_my_page_chart_label_empty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:background="@color/main_3"
+            android:elevation="4dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="@string/tv_my_page_chart_label_empty"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@color/tv_chart"
+            android:visibility="@{chart.isEmpty ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/cv_my_page_chart"
+            app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart"
+            app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
+            app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
+
+        <View
+            android:id="@+id/view_my_page_chart_detail_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_gray2_fill_top_12_rec"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_recent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_my_page_chart_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="15dp"
+            app:chipSpacingHorizontal="6dp"
+            app:layout_constraintStart_toStartOf="@id/view_my_page_chart_detail_bg"
+            app:layout_constraintTop_toTopOf="@id/view_my_page_chart_detail_bg"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/tv_my_page_chart_label_grammar"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_my_page_chart_detail_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_my_page_chart_label_expression"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_my_page_chart_detail_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_my_page_chart_label_pronunciation"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_my_page_chart_detail_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_my_page_chart_label_Listening"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_my_page_chart_detail_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="42dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="@{chartDetail.grammarDetail}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cg_my_page_chart_detail"
+            tools:text="@string/dummy" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

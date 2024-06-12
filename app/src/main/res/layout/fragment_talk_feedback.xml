@@ -27,7 +27,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                app:title="학습 피드백"
+                app:title="@string/appbar_title_talk_feedback"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/TextAppearance.Talkable.sub_m_14" />
         </com.google.android.material.appbar.AppBarLayout>
