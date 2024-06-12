@@ -76,4 +76,8 @@
         <item name="fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <style name="TextAppearance.Talkable.m_10">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>
