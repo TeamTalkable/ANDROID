@@ -71,7 +71,7 @@
                 android:id="@+id/divider_my_page"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/tab_line"
+                app:dividerColor="@color/tab_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tl_my_page" />
@@ -160,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="41dp"
-                android:background="@color/font_5"
+                app:dividerColor="@color/divide"
                 app:layout_constraintTop_toBottomOf="@id/rv_my_page_tab" />
 
             <TextView
@@ -351,7 +351,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="24dp"
-                android:background="@color/divide"
+                app:dividerColor="@color/divide"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_navigate_feedback" />
 
             <TextView

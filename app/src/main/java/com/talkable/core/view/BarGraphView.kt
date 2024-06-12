@@ -21,7 +21,7 @@ class BarGraphView @JvmOverloads constructor(
     fun setProgress(value: Int, maxValue: Int) {
         progress = value
         this.maxValue = maxValue
-        paint.color = if (value <= maxValue.div(2)) context.colorOf(R.color.main_1) else
+        paint.color = if (value <= maxValue.div(2)) context.colorOf(R.color.main_2) else
             context.colorOf(R.color.main)
         invalidate()
     }
@@ -34,7 +34,7 @@ class BarGraphView @JvmOverloads constructor(
             rect.top = (this.height - calculatedHeight).toFloat()
             rect.right = width.toFloat()
             rect.bottom = this.height.toFloat()
-            canvas.drawRoundRect(rect, 40f, 40f, paint)
+            canvas.drawRoundRect(rect, 30f, 30f, paint)
         }
     }
 }

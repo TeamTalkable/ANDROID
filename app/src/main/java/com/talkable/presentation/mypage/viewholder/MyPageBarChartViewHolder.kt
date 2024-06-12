@@ -18,17 +18,9 @@ class MyPageBarChartViewHolder(
     fun bind(data: BarChart) = with(binding) {
         model = data
         executePendingBindings()
+
         barGraphMyPage.setProgress(data.studyTime, maxStudyTime)
-
-        initStudyTimeTextColor(data.studyTime)
         setStudyTimeTextTopMargin(data.studyTime)
-    }
-
-    private fun initStudyTimeTextColor(studyTime: Int) {
-        binding.tvMyPageChartStudyTime.setTextColor(
-            if (studyTime <= maxStudyTime.div(2)) context.colorOf(R.color.font_3) else
-                context.colorOf(R.color.white)
-        )
     }
 
     private fun setStudyTimeTextTopMargin(studyTime: Int) = with(binding) {
@@ -38,6 +30,14 @@ class MyPageBarChartViewHolder(
                 tvMyPageChartStudyTime.layoutParams as ConstraintLayout.LayoutParams
             layoutParams.topMargin = (barGraphMyPage.height - calculatedHeight) + context.pxToDp(7)
             tvMyPageChartStudyTime.layoutParams = layoutParams
+            initStudyTimeTextColor(studyTime)
         }
+    }
+
+    private fun initStudyTimeTextColor(studyTime: Int) {
+        binding.tvMyPageChartStudyTime.setTextColor(
+            if (studyTime <= maxStudyTime.div(2)) context.colorOf(R.color.gray_2_56) else
+                context.colorOf(R.color.white)
+        )
     }
 }
