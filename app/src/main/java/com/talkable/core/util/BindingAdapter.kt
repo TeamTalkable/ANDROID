@@ -3,14 +3,13 @@ package com.talkable.core.util
 import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.talkable.R
 import com.talkable.core.view.ChartView
 import com.talkable.presentation.mypage.model.Chart
-import timber.log.Timber
 
 
 @BindingAdapter("imageUrl")
@@ -79,3 +78,15 @@ fun setLayoutConstraintTopToBottomOf(view: View, targetId: Int) {
     params.topToBottom = targetId
     view.layoutParams = params
 }
+
+@BindingAdapter("formatMinutesToHoursMinutes")
+fun TextView.formatMinutesToHoursMinutes(minutes: Int) {
+    val hours = minutes / 60
+    val remainingMinutes = minutes % 60
+    text = when {
+        hours > 0 && remainingMinutes > 0 -> "${hours}시간 ${remainingMinutes}분"
+        hours > 0 -> "${hours}시간"
+        else -> "${minutes}분"
+    }
+}
+
