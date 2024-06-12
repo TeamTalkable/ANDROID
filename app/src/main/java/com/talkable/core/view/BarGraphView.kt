@@ -18,17 +18,11 @@ class BarGraphView @JvmOverloads constructor(
     private val paint = Paint()
     private val rect = RectF()
 
-//    init {
-//        paint.color = if (progress <= maxValue.div(2)) context.colorOf(R.color.main_1) else
-//            context.colorOf(R.color.main)
-//    }
-
     fun setProgress(value: Int, maxValue: Int) {
         progress = value
         this.maxValue = maxValue
         paint.color = if (value <= maxValue.div(2)) context.colorOf(R.color.main_1) else
             context.colorOf(R.color.main)
-
         invalidate()
     }
 
