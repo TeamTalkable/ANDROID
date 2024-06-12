@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_my_page">
+    app:startDestination="@id/fragment_home">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
-        android:name="com.talkable.presentation.talk.feedback.TalkFeedbackFragment"
+        android:name="com.talkable.presentation.challenge.ChallengeFragment"
         android:label="ChallengeFragment" />
     <fragment
         android:id="@+id/fragment_my_flower"
