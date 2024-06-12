@@ -10,13 +10,14 @@
     <color name="white">#FFFFFF</color>
 
     <!-- Font Color-->
-    <color name="font">#0F0F0F</color>
+    <color name="font">#282828</color>
     <color name="font_2">#1F1F1F</color>
     <color name="font_3">#353535</color>
     <color name="font_4">#cccccc</color>
     <color name="font_5">#F5F5F5</color>
     <color name="font_6">#414141</color>
     <color name="font_sub">#505050</color>
+    <color name="font_gray">#AAAAAA</color>
 
     <!-- Sub Color-->
     <color name="gray">#646464</color>
