@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.talkable.presentation.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_agreementFragment"
             app:destination="@id/agreementFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/agreementFragment"
         android:name="com.talkable.presentation.login.AgreementFragment"
-        android:label="AgreementFragment" >
+        android:label="AgreementFragment">
         <action
             android:id="@+id/action_agreementFragment_to_homeFragment"
             app:destination="@id/fragment_home" />
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/fragment_home"
         android:name="com.talkable.presentation.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_fragment_home_to_fragment_talk"
             app:destination="@id/fragment_talk" />
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/fragment_my_page"
         android:name="com.talkable.presentation.mypage.MyPageFragment"
-        android:label="MyPageFragment" >
+        android:label="MyPageFragment">
         <action
             android:id="@+id/action_my_page_to_my_flower"
             app:destination="@id/fragment_my_flower" />
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/fragment_my_flower"
         android:name="com.talkable.presentation.myflower.MyFlowerFragment"
-        android:label="MyFlowerFragment" >
+        android:label="MyFlowerFragment">
         <action
             android:id="@+id/action_my_flower_to_my_flower_detail"
             app:destination="@id/fragment_my_flower_detail" />
@@ -56,4 +56,17 @@
         android:id="@+id/fragment_talk"
         android:name="com.talkable.presentation.talk.TalkFragment"
         android:label="TalkFragment" />
+
+    <fragment
+        android:id="@+id/fragment_my_page_feedback"
+        android:name="com.talkable.presentation.mypage.feedback.MyFeedbackFragment"
+        android:label="MyPageFeedbackFragment">
+        <action
+            android:id="@+id/action_my_page_feedback_to_my_page_feedback_dialog"
+            app:destination="@id/dialog_my_page_feedback" />
+    </fragment>
+    <dialog
+        android:id="@+id/dialog_my_page_feedback"
+        android:name="com.talkable.presentation.mypage.feedback.MyFeedbackDialogFragment"
+        android:label="MyPageFeedbackDialogFragment" />
 </navigation>
