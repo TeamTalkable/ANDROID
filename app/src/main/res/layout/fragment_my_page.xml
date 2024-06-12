@@ -9,6 +9,10 @@
             name="model"
             type="com.talkable.presentation.mypage.model.MyPageModel" />
 
+        <variable
+            name="calendar"
+            type="com.talkable.presentation.mypage.model.CalendarModel" />
+
         <import type="android.view.View" />
     </data>
 
@@ -143,25 +147,97 @@
                 app:layout_constraintTop_toTopOf="@id/tv_my_page_time_label"
                 tools:text="10M" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_my_page_tab"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_my_page_calendar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="30dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingTop="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_my_page_talk_time"
-                tools:listitem="@layout/item_my_page_bar_chart" />
+                app:layout_constraintTop_toBottomOf="@id/iv_my_page_talk_time">
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider_my_page_3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="41dp"
-                app:dividerColor="@color/divide"
-                app:layout_constraintTop_toBottomOf="@id/rv_my_page_tab" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_my_page_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="30dp"
+                    android:visibility="invisible"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_my_page_bar_chart" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_my_page_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="41dp"
+                    android:visibility="invisible"
+                    app:dividerColor="@color/divide"
+                    app:layout_constraintTop_toBottomOf="@id/rv_my_page_tab" />
+
+                <TextView
+                    android:id="@+id/tv_my_page_calendar_year_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:drawablePadding="8dp"
+                    android:text="@{Integer.toString(model.calendarYear) + `. 0` + Integer.toString(model.calendarMonth)}"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                    app:drawableEndCompat="@drawable/ic_my_page_calendar_togle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2024.04" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp_my_page_calendar"
+                    android:layout_width="0dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="14dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_calendar_year_month" />
+
+                <ImageView
+                    android:id="@+id/iv_my_page_calendar_guide"
+                    android:layout_width="48dp"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_my_page_calendar_select"
+                    app:layout_constraintBottom_toBottomOf="@id/vp_my_page_calendar"
+                    app:layout_constraintEnd_toEndOf="@id/vp_my_page_calendar"
+                    app:layout_constraintStart_toStartOf="@id/vp_my_page_calendar"
+                    app:layout_constraintTop_toTopOf="@id/vp_my_page_calendar" />
+
+                <TextView
+                    android:id="@+id/tv_my_page_calendar_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{calendar.week}"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@id/iv_my_page_calendar_guide"
+                    app:layout_constraintStart_toStartOf="@id/iv_my_page_calendar_guide"
+                    app:layout_constraintTop_toTopOf="@id/iv_my_page_calendar_guide" />
+
+                <TextView
+                    android:id="@+id/tv_my_page_calendar_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="17dp"
+                    android:text="@{Integer.toString(calendar.date)}"
+                    android:textAppearance="@style/TextAppearance.Talkable.b_12"
+                    android:textColor="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_my_page_calendar_guide"
+                    app:layout_constraintEnd_toEndOf="@id/iv_my_page_calendar_guide"
+                    app:layout_constraintStart_toStartOf="@id/iv_my_page_calendar_guide" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_my_page_chart_label"
@@ -172,7 +248,7 @@
                 android:text="@string/tv_my_page_chart_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_my_page_3" />
+                app:layout_constraintTop_toBottomOf="@id/layout_my_page_calendar" />
 
             <ImageView
                 android:id="@+id/iv_my_page_navigate_chart_detail"
