@@ -90,5 +90,6 @@
     <string name="tv_my_flower_progress_third">40분</string>
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
+    <string name="appbar_title_talk_feedback">대화 피드백</string>
 
 </resources>

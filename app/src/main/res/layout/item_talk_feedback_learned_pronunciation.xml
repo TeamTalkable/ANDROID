@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@{model.englishWord}"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,12 +50,12 @@
             android:id="@+id/tv_talk_learned_pronunciation_word_korean"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
             android:text="@{model.koreanWord}"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             android:textColor="@color/font_3"
             app:layout_constraintBottom_toBottomOf="@id/tv_talk_learned_pronunciation_word_pronun"
-            app:layout_constraintStart_toEndOf="@id/tv_talk_learned_pronunciation_word"
+            app:layout_constraintEnd_toStartOf="@id/iv_talk_learned_pronunciation_ai_voice"
             app:layout_constraintTop_toTopOf="@id/tv_talk_learned_pronunciation_word"
             tools:text="과학" />
 
