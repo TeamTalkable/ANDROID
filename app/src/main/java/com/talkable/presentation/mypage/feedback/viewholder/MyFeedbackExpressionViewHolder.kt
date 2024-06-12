@@ -1,7 +1,8 @@
-package com.talkable.presentation.mypage.feedback
+package com.talkable.presentation.mypage.feedback.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.databinding.ItemMyFeedbackExpressionBinding
+import com.talkable.presentation.mypage.feedback.data.Expression
 
 class MyFeedbackExpressionViewHolder(
     private val binding: ItemMyFeedbackExpressionBinding

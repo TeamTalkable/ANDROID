@@ -1,4 +1,4 @@
-package com.talkable.presentation.mypage.feedback
+package com.talkable.presentation.mypage.feedback.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.databinding.ItemMyFeedbackPronunciationBinding

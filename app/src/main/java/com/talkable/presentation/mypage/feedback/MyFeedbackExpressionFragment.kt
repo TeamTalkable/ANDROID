@@ -6,18 +6,33 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentMyFeedbackExpressionBinding
+import com.talkable.presentation.mypage.feedback.data.Expression
 
 class MyFeedbackExpressionFragment :
     BindingFragment<FragmentMyFeedbackExpressionBinding>(R.layout.fragment_my_feedback_expression) {
     override fun initView() {
         statusBarColorOf(R.color.main_3)
+        initLatestTextViewClickListener()
         initCategoryTextViewClickListener()
         initMyFeedbackAdapter()
     }
 
+    private fun initLatestTextViewClickListener() {
+        with(binding) {
+            tvMyFeedbackExpressionLatest.setOnClickListener {
+                tvMyFeedbackExpressionLatest.isSelected = !tvMyFeedbackExpressionLatest.isSelected
+                navigateToFeedbackDialog()
+            }
+        }
+    }
+
     private fun initCategoryTextViewClickListener() {
-        binding.tvMyFeedbackExpressionCategory.setOnClickListener {
-            navigateToFeedbackDialog()
+        with(binding) {
+            tvMyFeedbackExpressionCategory.setOnClickListener {
+                tvMyFeedbackExpressionCategory.isSelected =
+                    !tvMyFeedbackExpressionCategory.isSelected
+                navigateToFeedbackDialog()
+            }
         }
     }
 

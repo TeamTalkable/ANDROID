@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.databinding.ItemMyFeedbackExpressionBinding
+import com.talkable.presentation.mypage.feedback.data.Expression
+import com.talkable.presentation.mypage.feedback.viewholder.MyFeedbackExpressionViewHolder
 
 class MyExpressionAdapter(private val feedbackList: List<Expression>) :
     RecyclerView.Adapter<MyFeedbackExpressionViewHolder>() {

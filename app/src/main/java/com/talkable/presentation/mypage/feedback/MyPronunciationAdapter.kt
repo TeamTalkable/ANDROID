@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.databinding.ItemMyFeedbackPronunciationBinding
+import com.talkable.presentation.mypage.feedback.viewholder.MyFeedbackPronunciationViewHolder
 
 class MyPronunciationAdapter(private val feedbackList: List<String>) :
     RecyclerView.Adapter<MyFeedbackPronunciationViewHolder>() {

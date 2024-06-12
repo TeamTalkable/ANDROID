@@ -6,18 +6,32 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentMyFeedbackGrammarBinding
+import com.talkable.presentation.mypage.feedback.data.Grammar
 
 class MyFeedbackGrammarFragment :
     BindingFragment<FragmentMyFeedbackGrammarBinding>(R.layout.fragment_my_feedback_grammar) {
     override fun initView() {
         statusBarColorOf(R.color.main_3)
+        initLatestTextViewClickListener()
         initCategoryTextViewClickListener()
         initMyFeedbackAdapter()
     }
 
+    private fun initLatestTextViewClickListener() {
+        with(binding) {
+            tvMyFeedbackGrammarLatest.setOnClickListener {
+                tvMyFeedbackGrammarLatest.isSelected = !tvMyFeedbackGrammarLatest.isSelected
+                navigateToFeedbackDialog()
+            }
+        }
+    }
+
     private fun initCategoryTextViewClickListener() {
-        binding.tvMyFeedbackGrammarCategory.setOnClickListener {
-            navigateToFeedbackDialog()
+        with(binding) {
+            tvMyFeedbackGrammarCategory.setOnClickListener {
+                tvMyFeedbackGrammarCategory.isSelected = !tvMyFeedbackGrammarCategory.isSelected
+                navigateToFeedbackDialog()
+            }
         }
     }
 
