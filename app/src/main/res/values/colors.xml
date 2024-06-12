@@ -21,6 +21,8 @@
 
     <!-- Sub Color-->
     <color name="gray">#646464</color>
+    <color name="gray_2_56">#565656</color>
+    <color name="gray_2_f4">#F4F4F6</color>
     <color name="sub">#F1FFF8</color>
     <color name="yellow">#FEE500</color>
 
@@ -34,4 +36,8 @@
     <color name="my_flower_end_item_bg">#CCC1C1</color>
     <color name="light_gray">#D9D9D9</color>
     <color name="semi_transparent_black">#99262626</color>
+    <color name="bottom_sheet_bar">#D9D9D9</color>
+    <color name="eaeaea">#EAEAEA</color>
+    <color name="dialog_bg">#252525</color>
+    <color name="unselect_icon">#929292</color>
 </resources>

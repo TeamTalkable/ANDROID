@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ai_voice"
+        android:checkable="false"
+        android:icon="@drawable/ic_talk_ai_voice"
+        android:title="ai" />
+
+    <item
+        android:id="@+id/user_voice"
+        android:checkable="false"
+        android:icon="@drawable/ic_talk_user_voice"
+        android:title="user" />
+
+    <item
+        android:id="@+id/mick"
+        android:checkable="false"
+        android:icon="@drawable/ic_feedback_mick"
+        android:title="mick" />
+</menu>

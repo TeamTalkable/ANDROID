@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/main_3"
-            android:elevation="0dp"
+            app:cardElevation="0dp"
             app:cardCornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                     android:layout_marginTop="92dp"
                     android:layout_marginEnd="7dp"
                     android:layout_marginBottom="9dp"
-                    android:src="@drawable/img_challenge_fertilizer"
+                    android:src="@drawable/ic_my_flower_item_shovel"
                     app:layout_constraintBottom_toTopOf="@id/progressbar_challenge_participation"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

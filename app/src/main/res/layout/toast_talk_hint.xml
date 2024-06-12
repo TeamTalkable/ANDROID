@@ -7,9 +7,12 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/view_talk_toast_example"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/light_gray"
+        android:layout_marginHorizontal="14dp"
+        app:cardElevation="0dp"
         app:cardCornerRadius="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +25,7 @@
                 android:id="@+id/tv_toast_talk_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_talk_hint_title"
+                android:text="@string/tv_talk_hint_title_example"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
                 android:textColor="@color/font_6"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="98dp"
-                android:text="@string/tv_talk_content_hint"
+                android:text="@string/tv_talk_content_example"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
                 android:textColor="@color/font_6"
                 app:layout_constraintBottom_toBottomOf="parent"
