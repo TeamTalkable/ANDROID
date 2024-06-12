@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingHorizontal="13dp">
+
+        <TextView
+            android:id="@+id/tv_my_feedback_pronunciation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_my_feedback_pronunciation"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_my_feedback_pronunciation_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_my_feedback_category_unselected"
+            android:padding="5dp"
+            android:text="@string/tv_my_page_feedback_category"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_feedback_pronunciation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_my_feedback_pronunciation" />
+
+        <TextView
+            android:id="@+id/tv_my_feedback_pronunciation_latest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/ic_my_feedback_category_unselected"
+            android:padding="5dp"
+            android:text="@string/tv_my_feedback_sort_latest"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_feedback_pronunciation"
+            app:layout_constraintEnd_toStartOf="@id/tv_my_feedback_pronunciation_category"
+            app:layout_constraintTop_toTopOf="@id/tv_my_feedback_pronunciation" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_feedback_pronunciation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_feedback_pronunciation"
+            tools:listitem="@layout/item_my_feedback_pronunciation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
