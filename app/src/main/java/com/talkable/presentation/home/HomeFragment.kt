@@ -29,15 +29,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun initViewPagerAdapter() {
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin) // 페이지끼리 간격
-        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth) // 페이지 보이는 정도
-        val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 가로 길이
-        val offsetPx = screenWidth - pageMarginPx - pagerWidth
-
-        binding.viewpagerHomeChallenge.setPageTransformer { page, position ->
-            page.translationX = position * -offsetPx
-        }
-
         binding.viewpagerHomeChallenge.adapter = HomeChallengeAdapter(challengeList)
     }
 

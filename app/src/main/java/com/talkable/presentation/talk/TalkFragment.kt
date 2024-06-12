@@ -1,13 +1,11 @@
 package com.talkable.presentation.talk
 
-import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -15,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.context.pxToDp
 import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.MainActivity
 import kotlin.random.Random
@@ -53,7 +52,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     // 바텀 시트
     private fun initBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheetTalk.root)
-
+        bottomSheetBehavior.isFitToContents = false
+        bottomSheetBehavior.expandedOffset = requireContext().pxToDp(80)
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -61,25 +61,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     // 하단 상태일 때 버튼 숨김
                     STATE_COLLAPSED -> {
                         val customColor =
-                            ContextCompat.getColor(requireContext(), R.color.font_4)
-                        with(binding.layoutBottomSheetTalk) {
-                            btnBottomSheetSelectArea.visibility = GONE
-                            tvBottomSheetShow.setTextColor(customColor)
-                            ivBottomSheetDragHandle.setColorFilter(
-                                customColor, PorterDuff.Mode.SRC_IN
-                            )
-                        }
+                            with(binding.layoutBottomSheetTalk) {
+                                btnBottomSheetSelectArea.visibility = GONE
+                            }
                     }
                     // 바텀 시트가 완전히 펼쳐졌을 때 버튼 보이게
                     STATE_EXPANDED -> {
-                        val customColor =
-                            ContextCompat.getColor(requireContext(), R.color.font)
                         with(binding.layoutBottomSheetTalk) {
                             btnBottomSheetSelectArea.visibility = VISIBLE
-                            tvBottomSheetShow.setTextColor(customColor)
-                            ivBottomSheetDragHandle.setColorFilter(
-                                customColor, PorterDuff.Mode.SRC_IN
-                            )
                         }
                     }
                 }
@@ -115,7 +104,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         binding.videoViewTalkBackground.start()
         Handler(Looper.getMainLooper()).postDelayed({
             binding.videoViewTalkBackground.pause()
-        }, 1000)
+        }, 500)
     }
 
     // 번역 버튼 클릭
@@ -124,6 +113,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             btnTalkTranslate.setOnClickListener {
                 btnTalkTranslate.isSelected = !binding.btnTalkTranslate.isSelected
                 tvTalkTranslate.isVisible = !binding.tvTalkTranslate.isVisible
+                initShowListenTextView()
             }
         }
     }
@@ -134,34 +124,40 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             btnTalkShow.setOnClickListener {
                 btnTalkShow.isSelected = !binding.btnTalkShow.isSelected
                 tvTalkText.isVisible = !binding.tvTalkText.isVisible
-                tvTalkListen.isVisible = !binding.tvTalkListen.isVisible
+                initShowListenTextView()
             }
+        }
+    }
+
+    // listen 텍스트 보여주기
+    private fun initShowListenTextView() {
+        with(binding) {
+            tvTalkListen.isVisible = !(btnTalkTranslate.isSelected || btnTalkShow.isSelected)
         }
     }
 
     // 힌트 클릭
     private fun initHintTextViewClickListener() {
         var clickCount = FIRST_CLICK
-        binding.tvTalkHint.setOnClickListener {
-            when (clickCount) {
-                FIRST_CLICK -> {
-                    HintToast.createToast(
-                        requireActivity(),
-                        getString(R.string.hint_talk),
-                        getString(R.string.tv_talk_content_hint)
-                    )?.show()
-                    changeHintText()
-                }
+        with(binding) {
+            tvTalkHint.setOnClickListener {
+                when (clickCount) {
+                    FIRST_CLICK -> {
+                        HintToast.createToast(
+                            requireActivity(),
+                            getString(R.string.hint_talk),
+                            getString(R.string.tv_talk_content_hint)
+                        )?.show()
+                        changeHintText()
+                    }
 
-                else -> {
-                    HintToast.createToast(
-                        requireActivity(),
-                        getString(R.string.hint_talk_example),
-                        getString(R.string.tv_talk_content_example)
-                    )?.show()
+                    else -> {
+                        tvTalkHint.text = getString(R.string.hint_talk_example)
+                        includeTalkToastExample.viewTalkToastExample.visibility = VISIBLE
+                    }
                 }
+                clickCount++
             }
-            clickCount++
         }
     }
 
