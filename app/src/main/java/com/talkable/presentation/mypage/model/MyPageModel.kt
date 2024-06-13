@@ -14,6 +14,8 @@ data class MyPageModel(
     val alarmTime: String,
     val alarmDate: String,
     val chartData: Chart,
+    val calendarYear: Int,
+    val calendarMonth: Int,
 )
 
 @Parcelize
@@ -41,4 +43,10 @@ data class BarChart(
     val id: Int,
     val date: String,
     val studyTime: Int
+)
+
+data class CalendarModel(
+    val week: String,
+    val date: Int,
+    val isStudy: Boolean = false,
 )

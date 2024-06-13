@@ -44,7 +44,7 @@
             android:paddingBottom="11dp"
             android:text="@{model.fullAnswer}"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
             android:textColor="@color/gray"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,17 +161,31 @@
             android:paddingHorizontal="8dp"
             android:paddingTop="14dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/divider_feedback_pronunciation"
+            app:layout_constraintBottom_toTopOf="@id/tv_feedback_pronunciation_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:spanCount="3"
             tools:listitem="@layout/item_pronunciation_word" />
 
+        <TextView
+            android:id="@+id/tv_feedback_pronunciation_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:background="@color/white"
+            android:text="@string/tv_feedback_pronunciation_back"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/font_3"
+            app:layout_constraintBottom_toTopOf="@id/divider_feedback_pronunciation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider_feedback_pronunciation"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/font_5"
+            app:dividerColor="@color/font_5"
             app:layout_constraintBottom_toTopOf="@id/bnv_feedback_pronunciation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

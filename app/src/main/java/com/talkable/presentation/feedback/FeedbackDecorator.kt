@@ -1,14 +1,15 @@
-package com.talkable.presentation.talk.feedback
+package com.talkable.presentation.feedback
 
 import android.content.Context
 import android.graphics.Rect
 import android.view.View
+import androidx.core.view.marginTop
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.R
 import com.talkable.core.util.context.pxToDp
 
-class TalkFeedbackDecorator(val context: Context, private val grammarPosition: Int) :
+class FeedbackDecorator(val context: Context) :
     RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -17,15 +18,10 @@ class TalkFeedbackDecorator(val context: Context, private val grammarPosition: I
         state: RecyclerView.State,
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        val position = parent.getChildAdapterPosition(view)
 
-        if (position == 2) {
-            view.setBackgroundResource(R.drawable.shape_gray2_fill_top_12_rec)
-            view.updatePadding(top = context.pxToDp(24))
-        }
-
-        if (position == grammarPosition) {
-            view.setBackgroundResource(R.drawable.shape_gray2_fill_top_12_rec)
+        if(view.background != null){
+            outRect.bottom = context.pxToDp(12)
+            view.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
         }
     }
 }
