@@ -9,7 +9,11 @@ import com.talkable.presentation.talk.feedback.TalkFeedbackTopAdapter.Companion.
 import com.talkable.presentation.talk.feedback.model.TalkFeedbackModel
 import com.talkable.presentation.talk.feedback.viewholder.TalkFeedbackBottomViewHolder
 
-class TalkFeedbackBottomAdapter(context: Context) :
+class TalkFeedbackBottomAdapter(
+    context: Context,
+    private val onClickNavigateToMyPage: () -> Unit,
+    private val onClickNavigateToHome: () -> Unit
+) :
     ListAdapter<TalkFeedbackModel, TalkFeedbackBottomViewHolder>(
         TalkFeedbackDiffCallback,
     ) {
@@ -25,7 +29,7 @@ class TalkFeedbackBottomAdapter(context: Context) :
                 parent,
                 false
             )
-        return TalkFeedbackBottomViewHolder(binding)
+        return TalkFeedbackBottomViewHolder(binding, onClickNavigateToMyPage, onClickNavigateToHome)
     }
 
     override fun onBindViewHolder(

@@ -25,11 +25,20 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     override fun initView() {
         statusBarColorOf(R.color.white)
         binding.model = mockData
+        initNavigateFeedbackBtnClickListener()
         initMyFlowerBtnClickListener()
         initChartDetailBtnClickListener()
         setClickEventOnTabLayout()
         initMyPageCalendarAdapter(getMonthDays(mockData.calendarYear, mockData.calendarMonth))
     }
+
+    private fun initNavigateFeedbackBtnClickListener(){
+        binding.tvMyPageNavigateFeedback.setOnClickListener {
+            navigateToFeedbackStore()
+        }
+    }
+
+    private fun navigateToFeedbackStore() = findNavController().navigate(R.id.action_my_page_to_my_page_feedback)
 
     private fun initMyFlowerBtnClickListener() {
         binding.tvMyPageMyFlower.setOnClickListener {
