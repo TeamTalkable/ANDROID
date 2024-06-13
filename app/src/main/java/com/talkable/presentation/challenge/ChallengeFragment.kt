@@ -23,17 +23,24 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
 
     // 참여중인 챌린지
     private fun initParticipationAdapter() {
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.participation_margin)
+        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.participation_width)
+        val screenWidth = resources.displayMetrics.widthPixels
+        val offsetPx = screenWidth - pageMarginPx - pagerWidth
+
         with(binding.viewpagerChallengeParticipation) {
-            offscreenPageLimit = 2 // 미리 로드할 페이지 수
-            setPadding(0, 0, 18, 0)
+            offscreenPageLimit = 2
             adapter = ChallengeParticipationAdapter(participationList)
+            setPageTransformer { page, position ->
+                page.translationX = position * -offsetPx
+            }
         }
     }
 
     // 모집중인 챌린지
     private fun initRecruitmentAdapter() {
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin) // 페이지끼리 간격
-        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth) // 페이지 보이는 정도
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.recruitment_margin) // 페이지끼리 간격
+        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.recruitment_width) // 페이지 보이는 정도
         val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 가로 길이
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
@@ -60,19 +67,19 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     private val participationList = listOf(
         Participation(
             image = R.drawable.ic_my_flower_item_compost,
-            date = "06.00 ~ 06.03",
+            date = "06.01 ~ 06.04",
             title = "3일동안 10분 이상\n매일 학습하기",
             progress = 90
         ),
         Participation(
             image = R.drawable.ic_my_flower_item_shovel,
-            date = "06.00 ~ 06.07",
+            date = "06.05 ~ 06.12",
             title = "7일동안 20분 이상\n매일 학습하기",
             progress = 50
         ),
         Participation(
             image = R.drawable.ic_my_flower_item_medicine,
-            date = "06.00 ~ 06.10",
+            date = "06.10 ~ 06.20",
             title = "10일동안 30분 이상\n매일 학습하기",
             progress = 10
         ),
@@ -81,18 +88,18 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     private val challengeList = listOf(
         Recruitment(
             image = R.drawable.ic_my_flower_item_sun,
-            date = "06.00 ~ 06.03",
-            title = "3일동안 10분 이상\n매일 학습하기",
+            date = "06.01 ~ 06.08",
+            title = "하루에 15분 이상 \n매일 학습하기",
         ),
         Recruitment(
             image = R.drawable.ic_my_flower_item_wind,
-            date = "06.00 ~ 06.07",
-            title = "7일동안 20분 이상\n매일 학습하기",
+            date = "06.10 ~ 06.17",
+            title = "하루에 30분 이상 \n매일 학습하기",
         ),
         Recruitment(
             image = R.drawable.ic_my_flower_item_water,
-            date = "06.00 ~ 06.10",
-            title = "10일동안 30분 이상\n매일 학습하기",
+            date = "06.18 ~ 06.25",
+            title = "하루에 50분 이상 \n매일 학습하기",
         )
     )
 
