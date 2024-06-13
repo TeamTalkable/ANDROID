@@ -17,6 +17,7 @@ class MyPageChartDetailFragment :
         binding.chart = getChartData()
         setAppbarStatus()
         initBackBtnClickListener()
+        initFeedbackDetailChipClickListener()
     }
 
     private fun setAppbarStatus() {
@@ -30,6 +31,20 @@ class MyPageChartDetailFragment :
     private fun initBackBtnClickListener() {
         binding.layoutMyPageChartDetailAppBar.ivAppBarBack.setOnClickListener {
             navigateToBack()
+        }
+    }
+
+    private fun initFeedbackDetailChipClickListener() {
+        binding.cgMyPageChartDetail.setOnCheckedStateChangeListener { chipGroup, ints ->
+            with(binding.tvMyPageChartDetailDescription) {
+                when (chipGroup.checkedChipId) {
+                    R.id.chip_my_page_chart_detail_grammar -> text = mockData.grammarDetail
+                    R.id.chip_my_page_chart_detail_expression -> text = mockData.expressionDetail
+                    R.id.chip_my_page_chart_detail_listening -> text = mockData.listeningDetail
+                    R.id.chip_my_page_chart_detail_pronunciation -> text =
+                        mockData.pronunciationDetail
+                }
+            }
         }
     }
 
