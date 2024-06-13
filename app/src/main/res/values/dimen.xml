@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pageMargin">30dp</dimen>
-    <dimen name="pageWidth">156dp</dimen>
     <dimen name="viewpager_item_width">38dp</dimen>
     <dimen name="viewpager_item_margin">10dp</dimen>
+
+    <dimen name="participation_margin">35dp</dimen>
+    <dimen name="participation_width">311dp</dimen>
+
+    <dimen name="recruitment_margin">30dp</dimen>
+    <dimen name="recruitment_width">156dp</dimen>
 </resources>

@@ -41,4 +41,6 @@
     <color name="dialog_bg">#252525</color>
     <color name="unselect_icon">#929292</color>
     <color name="speech_bg">#EFEFEF</color>
+    <color name="brown">#E1C19E</color>
+    <color name="challenge_date">#717171</color>
 </resources>

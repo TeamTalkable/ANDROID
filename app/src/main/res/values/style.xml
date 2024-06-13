@@ -6,6 +6,11 @@
         <item name="android:textAppearance">@style/TextAppearance.Talkable.button_b_18</item>
     </style>
 
+    <style name="ChallengeButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/shape_main_fill_12_rect</item>
+        <item name="android:textAppearance">@style/TextAppearance.Talkable.sub_m_16</item>
+    </style>
+
     <!--요일 버튼-->
     <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="iconPadding">0dp</item>

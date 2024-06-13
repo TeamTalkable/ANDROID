@@ -12,6 +12,12 @@ class RecruitmentViewHolder(
             ivChallengeRecruitmentItem.load(data.image)
             tvChallengeRecruitmentDate.text = data.date
             tvChallengeRecruitmentTitle.text = data.title
+
+            root.setOnClickListener {
+                val context = it.context
+                val dialog = ChallengeDialog(context, data.date, data.title)
+                dialog.show()
+            }
         }
     }
 }
