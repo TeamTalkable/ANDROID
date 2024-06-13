@@ -40,4 +40,5 @@
     <color name="eaeaea">#EAEAEA</color>
     <color name="dialog_bg">#252525</color>
     <color name="unselect_icon">#929292</color>
+    <color name="speech_bg">#EFEFEF</color>
 </resources>

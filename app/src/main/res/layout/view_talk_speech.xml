@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_talk_speech"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_talk_speech_title"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginHorizontal="41dp"
+            android:layout_marginBottom="19dp"
+            android:background="@drawable/shape_white_fill_12_rect"
+            app:layout_constraintBottom_toTopOf="@id/iv_talk_speech_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_talk_speech_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_talk_speech"
+            android:textColor="@color/main_4"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
+            app:layout_constraintBottom_toBottomOf="@id/iv_talk_speech_title"
+            app:layout_constraintEnd_toEndOf="@id/iv_talk_speech_title"
+            app:layout_constraintStart_toStartOf="@id/iv_talk_speech_title"
+            app:layout_constraintTop_toTopOf="@id/iv_talk_speech_title" />
+
+        <ImageView
+            android:id="@+id/iv_talk_speech_bg"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:background="@drawable/shape_speech_fill_12_top_rect"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_talk_user_speech"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="35dp"
+            android:layout_marginStart="21dp"
+            android:textAppearance="@style/TextAppearance.Talkable.m_20"
+            android:layout_marginEnd="70dp"
+            android:text="I take a since class today."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_talk_speech_bg" />
+
+        <ImageButton
+            android:id="@+id/iv_talk_speech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_talk_speech_check"
+            app:layout_constraintBottom_toBottomOf="@id/tv_talk_user_speech"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_talk_user_speech" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

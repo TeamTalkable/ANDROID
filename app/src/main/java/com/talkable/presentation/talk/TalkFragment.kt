@@ -28,6 +28,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initListenBtnClickListener()
         initTranslateBtnClickListener()
         initShowBtnClickListener()
+        initSpeakBtnClickListener()
         initHintTextViewClickListener()
         initTalkAdapter()
     }
@@ -140,6 +141,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initShowListenTextView() {
         with(binding) {
             tvTalkListen.isVisible = !(btnTalkTranslate.isSelected || btnTalkShow.isSelected)
+        }
+    }
+
+    // 말하기 버튼 클릭
+    private fun initSpeakBtnClickListener() {
+        with(binding) {
+            btnTalkSpeak.setOnClickListener {
+                includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
+                btnTalkSpeak.visibility = GONE
+                includeBottomSheetTalk.visibility = GONE
+            }
         }
     }
 
