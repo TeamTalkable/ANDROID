@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_my_page_to_my_page_chart_detail"
             app:destination="@id/fragment_my_page_chart_detail" />
+        <action
+            android:id="@+id/action_my_page_to_my_page_feedback"
+            app:destination="@id/fragment_my_page_feedback" />
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
@@ -61,25 +64,45 @@
         android:id="@+id/fragment_feedback_expression"
         android:name="com.talkable.presentation.feedback.FeedbackExpressionFragment"
         android:label="FeedbackExpressionFragment"
-        tools:layout="@layout/fragment_talk_feedback_expression" >
+        tools:layout="@layout/fragment_talk_feedback_expression">
         <action
             android:id="@+id/action_feedback_expression_to_feedback_pronunciation"
-            app:destination="@id/fragment_feedback_pronunciation" />
+            app:destination="@id/fragment_feedback_pronunciation"
+            app:popUpTo="@id/fragment_feedback_loading" />
     </fragment>
     <fragment
         android:id="@+id/fragment_feedback_pronunciation"
         android:name="com.talkable.presentation.feedback.FeedbackPronunciationFragment"
         android:label="FeedbackPronunciationFragment"
-        tools:layout="@layout/fragment_feedback_pronunciation"/>
+        tools:layout="@layout/fragment_feedback_pronunciation" />
     <fragment
         android:id="@+id/fragment_talk"
         android:name="com.talkable.presentation.talk.TalkFragment"
-        android:label="TalkFragment" />
+        android:label="TalkFragment"
+        tools:layout="@layout/fragment_talk">
+        <action
+            android:id="@+id/action_talk_to_talk_feedback"
+            app:destination="@id/fragment_talk_feedback" />
+        <action
+            android:id="@+id/action_talk_to_fragment_loading"
+            app:destination="@id/fragment_feedback_loading" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_talk_feedback"
         android:name="com.talkable.presentation.talk.feedback.TalkFeedbackFragment"
         android:label="TalkFeedbackFragment"
-        tools:layout="@layout/fragment_talk_feedback" />
+        tools:layout="@layout/fragment_talk_feedback">
+        <action
+            android:id="@+id/action_talk_feedback_to_my_page"
+            app:destination="@id/fragment_my_page"
+            app:popUpTo="@id/fragment_my_page"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_talk_feedback_to_home"
+            app:destination="@id/fragment_home"
+            app:popUpTo="@id/fragment_home"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_my_page_chart_detail"
         android:name="com.talkable.presentation.mypage.MyPageChartDetailFragment"
@@ -102,7 +125,7 @@
         android:id="@+id/fragment_feedback_loading"
         android:name="com.talkable.presentation.feedback.FeedbackLoadingFragment"
         android:label="FeedbackLoadingFragment"
-        tools:layout="@layout/fragment_feedback_loading" >
+        tools:layout="@layout/fragment_feedback_loading">
         <action
             android:id="@+id/action_feedback_loading_to_feedback_expression"
             app:destination="@id/fragment_feedback_expression" />
