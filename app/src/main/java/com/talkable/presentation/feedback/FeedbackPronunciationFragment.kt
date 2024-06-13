@@ -1,5 +1,7 @@
 package com.talkable.presentation.feedback
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,8 @@ class FeedbackPronunciationFragment :
         initBottomNavigationItemClickListener()
         initRecordCancelClickListener()
         initRecordCheckClickListener()
+        setAppBar()
+        initAppbarBackClickListener()
     }
 
     private fun initPronunciationWordAdapter() {
@@ -72,15 +76,19 @@ class FeedbackPronunciationFragment :
         binding.bnvFeedbackPronunciation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.mick -> handleMickItemEvent(true)
-                else -> navigate()
+                else -> Unit
             }
             true
         }
     }
 
-    private fun navigate() {
-        findNavController().navigate(R.id.action_fragment_feedback_pronunciation_to_fragment_feedback_expression)
+    private fun initAppbarBackClickListener() {
+        binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
+            navigateToBack()
+        }
     }
+
+    private fun navigateToBack() = findNavController().popBackStack()
 
     private fun handleMickItemEvent(isSelected: Boolean) {
         binding.layoutFeedbackPronunciationMick.isVisible = isSelected
@@ -99,6 +107,11 @@ class FeedbackPronunciationFragment :
             handleMickItemEvent(false)
             FeedbackPronunciationCompleteDialog().show(childFragmentManager, PRONUNCIATION_DIALOG)
         }
+    }
+
+    private fun setAppBar() {
+        binding.appBarTalkFeedbackExpression.leftBackIsVisible = true
+        binding.appBarTalkFeedbackExpression.rightBackIsVisible = false
     }
 
     companion object {
