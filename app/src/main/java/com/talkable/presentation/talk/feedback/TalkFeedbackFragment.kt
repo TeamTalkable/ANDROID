@@ -1,5 +1,6 @@
 package com.talkable.presentation.talk.feedback
 
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
@@ -37,8 +38,16 @@ class TalkFeedbackFragment :
 
     private fun initFeedbackBottomAdapter() {
         feedbackBottomAdapter = TalkFeedbackBottomAdapter(
-            context = requireContext()
+            context = requireContext(), ::navigateToMyPageFragment, ::navigateToHomeFragment
         ).apply { submitList(listOf(mockData)) }
+    }
+
+    private fun navigateToMyPageFragment() {
+        findNavController().navigate(R.id.action_talk_feedback_to_my_page)
+    }
+
+    private fun navigateToHomeFragment(){
+        findNavController().navigate(R.id.action_talk_feedback_to_home)
     }
 
     private fun concatFeedbackAdapters() {
