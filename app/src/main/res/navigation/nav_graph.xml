@@ -85,4 +85,17 @@
         android:name="com.talkable.presentation.mypage.MyPageChartDetailFragment"
         android:label="MyPageChartDetailFragment"
         tools:layout="@layout/fragment_my_page_chart_detail" />
+
+    <fragment
+        android:id="@+id/fragment_my_page_feedback"
+        android:name="com.talkable.presentation.mypage.feedback.MyFeedbackFragment"
+        android:label="MyPageFeedbackFragment">
+        <action
+            android:id="@+id/action_my_page_feedback_to_my_page_feedback_dialog"
+            app:destination="@id/dialog_my_page_feedback" />
+    </fragment>
+    <dialog
+        android:id="@+id/dialog_my_page_feedback"
+        android:name="com.talkable.presentation.mypage.feedback.MyFeedbackDialogFragment"
+        android:label="MyPageFeedbackDialogFragment" />
 </navigation>
