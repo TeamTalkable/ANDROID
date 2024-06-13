@@ -38,10 +38,10 @@ class MyPageChartDetailFragment :
     companion object {
         val mockData = ChartDetail(
             totalPercent = "70%",
-            grammarDetail = "과거의 사실을 얘기할 때는 동사의 과거형을 사용",
-            listeningDetail = "과거의 사실을 얘기할 때는 동사의 과거형을 사용",
-            expressionDetail = "과거의 사실을 얘기할 때는 동사의 과거형을 사용",
-            pronunciationDetail = "과거의 사실을 얘기할 때는 동사의 과거형을 사용",
+            grammarDetail = "문장의 주어가 2인칭일 때에는 복수형을 사용한다는 점을 주의하세요!",
+            listeningDetail = "문장이 길어질 때에도 끝까지 집중해보세요",
+            expressionDetail = "노트북은 콩글리시에요! 학교에서 있었던 일을 이야기할 때, \"랩탑\"이라는 표현으로 대체해보세요",
+            pronunciationDetail = "th 발음에 주의하며 말해보세요",
         )
     }
 }
