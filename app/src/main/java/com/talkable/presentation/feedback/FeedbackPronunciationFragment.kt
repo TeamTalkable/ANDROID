@@ -1,7 +1,5 @@
 package com.talkable.presentation.feedback
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -25,7 +23,16 @@ class FeedbackPronunciationFragment :
         initRecordCheckClickListener()
         setAppBar()
         initAppbarBackClickListener()
+        initNavigateToTalkBtnClickListener()
     }
+
+    private fun initNavigateToTalkBtnClickListener() {
+        binding.tvFeedbackPronunciationBack.setOnClickListener {
+            navigateToTalkFragment()
+        }
+    }
+
+    private fun navigateToTalkFragment() = findNavController().navigate(R.id.fragment_talk)
 
     private fun initPronunciationWordAdapter() {
         binding.rvFeedbackPronunciation.adapter =
