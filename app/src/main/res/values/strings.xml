@@ -91,5 +91,7 @@
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
     <string name="appbar_title_talk_feedback">대화 피드백</string>
+    <string name="tv_feedback_loading_title">AI가 문장을 분석하고 있어요\n잠시만 기다려주세요:)</string>
+    <string name="tv_feedback_pronunciation_back"><u>대화로 돌아가기</u></string>
 
 </resources>
