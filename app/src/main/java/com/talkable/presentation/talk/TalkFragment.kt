@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -20,7 +21,7 @@ import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
     override fun initView() {
-        (activity as? MainActivity)?.hideBottomNavigation()
+        initAppbarCancelClickListener()
         initGuideLayoutClickListener()
         setRandomVideo()
         initBottomSheet()
@@ -29,6 +30,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initShowBtnClickListener()
         initHintTextViewClickListener()
         initTalkAdapter()
+    }
+
+    private fun initAppbarCancelClickListener(){
+        binding.btnTalkClose.setOnClickListener {
+            findNavController().navigate(R.id.action_talk_to_talk_feedback)
+        }
     }
 
     // 어댑터 연결
