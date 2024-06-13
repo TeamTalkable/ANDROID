@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="22dp"
             android:text="@{model.wrongGrammar}"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             app:layout_constraintStart_toStartOf="parent"
