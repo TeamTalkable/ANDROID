@@ -103,5 +103,6 @@
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
     <string name="appbar_title_talk_feedback">대화 피드백</string>
+    <string name="tv_talk_speech">텍스트를 눌러 수정해보세요.</string>
 
 </resources>
