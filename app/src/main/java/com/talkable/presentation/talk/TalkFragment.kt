@@ -16,7 +16,6 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.context.pxToDp
 import com.talkable.databinding.FragmentTalkBinding
-import com.talkable.presentation.MainActivity
 import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
@@ -31,13 +30,24 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initSpeakBtnClickListener()
         initHintTextViewClickListener()
         initTalkAdapter()
+        initSpeakCompleteBtnClickListener()
     }
 
     private fun initAppbarCancelClickListener(){
         binding.btnTalkClose.setOnClickListener {
-            findNavController().navigate(R.id.action_talk_to_talk_feedback)
+            navigateToTotalTalkFeedback()
         }
     }
+
+    private fun navigateToTotalTalkFeedback() = findNavController().navigate(R.id.action_talk_to_talk_feedback)
+
+    private fun initSpeakCompleteBtnClickListener(){
+        binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
+            navigateToFeedbackLoadingFragment()
+        }
+    }
+
+    private fun navigateToFeedbackLoadingFragment() = findNavController().navigate(R.id.action_talk_to_feedback_loading)
 
     // 어댑터 연결
     private fun initTalkAdapter() {
