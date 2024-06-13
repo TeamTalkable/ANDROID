@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pageMargin">60dp</dimen>
-    <dimen name="pageWidth">316dp</dimen>
+    <dimen name="pageMargin">30dp</dimen>
+    <dimen name="pageWidth">156dp</dimen>
     <dimen name="viewpager_item_width">38dp</dimen>
     <dimen name="viewpager_item_margin">10dp</dimen>
 </resources>
