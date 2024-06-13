@@ -4,13 +4,10 @@ import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.databinding.FragmentAgreementBinding
-import com.talkable.presentation.MainActivity
 
 class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fragment_agreement) {
 
     override fun initView() {
-        (activity as? MainActivity)?.hideBottomNavigation()
-
         initStartBtnClickListener()
         initAgreementAllBtnClickListener()
     }
@@ -25,17 +22,14 @@ class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fra
     // 전체 동의
     private fun initAgreementAllBtnClickListener() {
         binding.btnAgreementAll.setOnClickListener {
-            with(binding){
+            with(binding) {
                 btnAgreementAge.isChecked = !btnAgreementAge.isChecked
-                btnAgreementTerms.isChecked  = !btnAgreementTerms.isChecked
+                btnAgreementTerms.isChecked = !btnAgreementTerms.isChecked
                 btnAgreementPrivacy.isChecked = !btnAgreementPrivacy.isChecked
                 btnAgreementMarketing.isChecked = !btnAgreementMarketing.isChecked
             }
+            //조건 검사 다시 해야함 일단 임시로 해둠
+            binding.btnAgreementStart.isEnabled = true
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        (activity as? MainActivity)?.showBottomNavigation()
     }
 }
