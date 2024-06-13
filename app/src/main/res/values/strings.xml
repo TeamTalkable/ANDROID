@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy">testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</string>
 
-   <!-- talk feedback -->
+    <!-- talk feedback -->
     <string name="tv_talk_feedback_bottom_graph"><u>그래프가 변형되었어요. 확인해보세요!</u></string>
     <string name="btn_talk_feedback_bottom_complete">대화 끝내기</string>
     <string name="tv_bottom_sheet_talk_title">문장의 의미를 보다 명확하고 자연스럽게 전달하기 위해 재구성되었습니다.</string>
@@ -75,6 +75,17 @@
     <string name="tv_my_page_chart_label_pronunciation">발음</string>
     <string name="tv_my_page_chart_label_Listening">듣기</string>
     <string name="tv_my_page_chart_label_empty">학습 데이터를 모으고 있어요.</string>
+
+    <!--feedback-->
+    <string name="ty_my_feedback_title">피드백</string>
+    <string name="tv_my_feedback_pronunciation">6개의 피드백이 있어요!</string>
+    <string name="tv_my_feedback_sort_latest">최신 순</string>
+    <string name="tv_my_feedback_sort_alphabetical">알파벳 순</string>
+    <string name="tv_my_feedback_category_word">단어</string>
+    <string name="tv_my_feedback_category_sentence">문장</string>
+    <string name="tv_my_page_feedback_expression">표현</string>
+    <string name="tv_my_page_feedback_sort">정렬</string>
+    <string name="tv_my_page_feedback_category">카테고리</string>
 
     <!--challenge-->
     <string name="tv_challenge_participation">🔥 참여중인 챌린지</string>
