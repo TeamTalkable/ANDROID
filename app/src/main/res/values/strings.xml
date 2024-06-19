@@ -75,6 +75,10 @@
     <string name="tv_my_page_chart_label_pronunciation">발음</string>
     <string name="tv_my_page_chart_label_Listening">듣기</string>
     <string name="tv_my_page_chart_label_empty">학습 데이터를 모으고 있어요.</string>
+    <string name="tv_my_page_chart_recent_week">이번주</string>
+    <string name="tv_my_page_chart_before_week">지난주</string>
+    <string name="tv_my_page_chart_recent_month">이번달</string>
+    <string name="tv_my_page_chart_before_month">지난달</string>
 
     <!--feedback-->
     <string name="ty_my_feedback_title">피드백</string>
@@ -106,5 +110,6 @@
     <string name="tv_feedback_loading_title">AI가 문장을 분석하고 있어요\n잠시만 기다려주세요:)</string>
     <string name="tv_feedback_pronunciation_back"><u>대화로 돌아가기</u></string>
     <string name="tv_talk_speech">텍스트를 눌러 수정해보세요.</string>
+
 
 </resources>

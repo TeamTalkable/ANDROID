@@ -92,18 +92,18 @@ class TalkFeedbackFragment :
             learnedExpression = listOf(
                 Learned.Expression(
                     type = "학습한 표현",
-                    wordEnglish = "the proximity to Central Park",
-                    wordKorean = "중앙공원과의 가까운 거리’ 를 의미하는 표현"
+                    wordEnglish = "•  the proximity to Central Park",
+                    wordKorean = "   중앙공원과의 가까운 거리’ 를 의미하는 표현"
                 ),
                 Learned.Expression(
                     type = "학습한 표현",
-                    wordEnglish = "which allows me to enjoy nature",
-                    wordKorean = "이로 인해 자연을 즐길 수 있다는 점을 강조하는 표현"
+                    wordEnglish = "•  which allows me to enjoy nature",
+                    wordKorean = "   이로 인해 자연을 즐길 수 있다는 점을 강조하는 표현"
                 ),
                 Learned.Expression(
                     type = "학습한 표현",
-                    wordEnglish = "enjoy nature",
-                    wordKorean = "자연을 즐기다'라는 자연스러운 표현"
+                    wordEnglish = "•  enjoy nature",
+                    wordKorean = "   자연을 즐기다'라는 자연스러운 표현"
                 )
             ),
             learnedGrammar = listOf(

@@ -134,6 +134,7 @@
         tools:layout="@layout/fragment_feedback_loading">
         <action
             android:id="@+id/action_feedback_loading_to_feedback_expression"
-            app:destination="@id/fragment_feedback_expression" />
+            app:destination="@id/fragment_feedback_expression"
+            app:popUpTo="@id/fragment_talk" />
     </fragment>
 </navigation>
