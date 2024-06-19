@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_main3_line_rect"
+        android:background="@drawable/shape_main3_line_2_rect"
         android:paddingVertical="18dp"
         android:paddingStart="16dp"
         android:paddingEnd="19dp">
