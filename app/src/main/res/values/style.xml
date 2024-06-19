@@ -6,6 +6,13 @@
         <item name="android:textAppearance">@style/TextAppearance.Talkable.button_b_18</item>
     </style>
 
+    <!--시작 버튼-->
+    <style name="StartButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/sel_agreement_selected_next</item>
+        <item name="android:textAppearance">@style/TextAppearance.Talkable.button_b_18</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="ChallengeButton" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:background">@drawable/shape_main_fill_12_rect</item>
         <item name="android:textAppearance">@style/TextAppearance.Talkable.sub_m_16</item>
