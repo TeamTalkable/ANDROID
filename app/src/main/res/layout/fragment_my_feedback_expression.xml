@@ -13,17 +13,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:paddingHorizontal="13dp">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tv_my_feedback_expression"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
+            android:layout_marginStart="22dp"
             android:layout_marginTop="25dp"
             android:text="@string/tv_my_feedback_pronunciation"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,9 +30,12 @@
             android:id="@+id/tv_my_feedback_expression_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
             android:background="@drawable/sel_my_feedback_category"
             android:padding="5dp"
+            android:paddingEnd="20dp"
             android:text="@string/tv_my_page_feedback_category"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@drawable/sel_my_feedback_txt_color"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_feedback_expression"
@@ -47,7 +49,9 @@
             android:layout_marginEnd="11dp"
             android:background="@drawable/sel_my_feedback_category"
             android:padding="5dp"
+            android:paddingEnd="20dp"
             android:text="@string/tv_my_feedback_sort_latest"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@drawable/sel_my_feedback_txt_color"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_feedback_expression"
@@ -58,10 +62,10 @@
             android:id="@+id/rv_my_feedback_expression"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_my_feedback_expression"
-            tools:listitem="@layout/item_talk_feedback_learned_expression" />
+            tools:listitem="@layout/item_my_feedback_expression" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
