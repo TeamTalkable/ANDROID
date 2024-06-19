@@ -1,5 +1,6 @@
 package com.talkable.presentation.talk
 
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -19,6 +20,9 @@ import com.talkable.databinding.FragmentTalkBinding
 import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
+
+    var clickCount = FIRST_CLICK
+
     override fun initView() {
         initAppbarCancelClickListener()
         initGuideLayoutClickListener()
@@ -33,21 +37,23 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initSpeakCompleteBtnClickListener()
     }
 
-    private fun initAppbarCancelClickListener(){
+    private fun initAppbarCancelClickListener() {
         binding.btnTalkClose.setOnClickListener {
             navigateToTotalTalkFeedback()
         }
     }
 
-    private fun navigateToTotalTalkFeedback() = findNavController().navigate(R.id.action_talk_to_talk_feedback)
+    private fun navigateToTotalTalkFeedback() =
+        findNavController().navigate(R.id.action_talk_to_talk_feedback)
 
-    private fun initSpeakCompleteBtnClickListener(){
+    private fun initSpeakCompleteBtnClickListener() {
         binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
             navigateToFeedbackLoadingFragment()
         }
     }
 
-    private fun navigateToFeedbackLoadingFragment() = findNavController().navigate(R.id.action_talk_to_feedback_loading)
+    private fun navigateToFeedbackLoadingFragment() =
+        findNavController().navigate(R.id.action_talk_to_feedback_loading)
 
     // 어댑터 연결
     private fun initTalkAdapter() {
@@ -167,7 +173,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 힌트 클릭
     private fun initHintTextViewClickListener() {
-        var clickCount = FIRST_CLICK
         with(binding) {
             tvTalkHint.setOnClickListener {
                 when (clickCount) {
@@ -181,7 +186,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     }
 
                     else -> {
-                        tvTalkHint.text = getString(R.string.hint_talk_example)
                         includeTalkToastExample.viewTalkToastExample.visibility = VISIBLE
                     }
                 }
@@ -193,7 +197,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     //3초 뒤 텍스트 변경
     private fun changeHintText() {
         Handler(Looper.getMainLooper()).postDelayed({
-            binding.tvTalkHint.text = getString(R.string.hint_talk_example)
+            with(binding) {
+                tvTalkHint.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄
+                binding.tvTalkHint.text = getString(R.string.hint_talk_example)
+            }
         }, 3000)
     }
 
