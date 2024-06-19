@@ -151,7 +151,6 @@
             android:id="@+id/btn_talk_speak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
             android:background="@drawable/ic_talk_speak"
             app:layout_constraintBottom_toTopOf="@id/tv_talk_hint"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +160,8 @@
             android:id="@+id/tv_talk_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="66dp"
+            android:layout_marginBottom="34dp"
+            android:padding="32dp"
             android:text="@string/hint_talk"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/white"
@@ -176,9 +176,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="14dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/include_bottom_sheet_talk"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_talk_hint"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/video_view_talk_background" />
+            app:layout_constraintStart_toEndOf="@id/video_view_talk_background"
+            app:layout_constraintTop_toBottomOf="@+id/btn_talk_speak" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/include_bottom_sheet_talk"
