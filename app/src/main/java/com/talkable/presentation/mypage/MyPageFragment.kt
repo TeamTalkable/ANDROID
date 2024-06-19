@@ -32,13 +32,14 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initMyPageCalendarAdapter(getMonthDays(mockData.calendarYear, mockData.calendarMonth))
     }
 
-    private fun initNavigateFeedbackBtnClickListener(){
+    private fun initNavigateFeedbackBtnClickListener() {
         binding.tvMyPageNavigateFeedback.setOnClickListener {
             navigateToFeedbackStore()
         }
     }
 
-    private fun navigateToFeedbackStore() = findNavController().navigate(R.id.action_my_page_to_my_page_feedback)
+    private fun navigateToFeedbackStore() =
+        findNavController().navigate(R.id.action_my_page_to_my_page_feedback)
 
     private fun initMyFlowerBtnClickListener() {
         binding.tvMyPageMyFlower.setOnClickListener {
@@ -69,18 +70,37 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                     0 -> {
                         setCalendarVisible(true)
                         setBarChartVisible(false)
+                        setChartData(mockData.chartData)
+                        setMyPageChartLabel(
+                            getString(R.string.tv_my_page_chart_recent),
+                            getString(R.string.tv_my_page_chart_before)
+                        )
                     }
 
                     1 -> {
                         setCalendarVisible(false)
                         setBarChartVisible(true)
                         initMyPageBarChartAdapter(mockWeekBarData)
+                        setChartData(mockWeekChartData)
+                        setMyPageChartLabel(
+                            getString(R.string.tv_my_page_chart_recent_week),
+                            getString(
+                                R.string.tv_my_page_chart_before_week
+                            )
+                        )
                     }
 
                     else -> {
                         setCalendarVisible(false)
                         setBarChartVisible(true)
                         initMyPageBarChartAdapter(mockMonthBarData)
+                        binding.model = mockData.copy(chartData = Chart())
+                        setMyPageChartLabel(
+                            getString(R.string.tv_my_page_chart_recent_month),
+                            getString(
+                                R.string.tv_my_page_chart_before_month
+                            )
+                        )
                     }
                 }
             }
@@ -88,6 +108,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+    }
+
+    private fun setMyPageChartLabel(recent: String, before: String) = with(binding) {
+        tvMyPageChartRecent.text = recent
+        tvMyPageChartBefore.text = before
     }
 
     private fun initMyPageBarChartAdapter(data: List<BarChart>) {
@@ -189,6 +214,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         tvMyPageCalendarDate.isVisible = isVisible
     }
 
+    private fun setChartData(data: Chart) {
+        binding.cvMyPageChart.setChartPercentage(data)
+    }
+
     companion object {
         val mockData = MyPageModel(
             1,
@@ -204,6 +233,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             2024,
             4
         )
+
+        val mockWeekChartData = Chart(50, 70, 40, 50, 30, 80, 40, 70, false)
 
         val mockWeekBarData = listOf(
             BarChart(
