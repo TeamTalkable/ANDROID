@@ -10,18 +10,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/shape_gray_fill_12_rect"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="16dp">
+        android:background="@drawable/shape_font4_fill_12_rect"
+        android:backgroundTint="@color/white">
 
         <TextView
             android:id="@+id/tv_talk_feedback_learned_expression_english"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="20dp"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,12 +28,23 @@
             android:id="@+id/tv_talk_feedback_learned_expression_korean"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="33dp"
             android:layout_marginTop="12dp"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_learned_expression_english"
             tools:text="@string/dummy" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_my_feed_back"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginTop="23dp"
+            app:dividerColor="@color/font_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_learned_expression_korean" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,7 +16,7 @@
             android:id="@+id/tv_my_feedback_grammar_wrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
             android:id="@+id/tv_my_feedback_grammar_reason"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="25dp"
             android:layout_marginTop="12dp"
             android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,15 +57,15 @@
             app:layout_constraintTop_toBottomOf="@id/tv_my_feedback_grammar_wrong"
             tools:text="@string/dummy" />
 
-        <View
-            android:layout_width="match_parent"
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_my_feed_back"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginHorizontal="22dp"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/font_5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_my_feedback_grammar_reason"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_feedback_grammar_reason" />
+            android:layout_marginTop="23dp"
+            app:dividerColor="@color/font_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_feedback_grammar_reason" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
