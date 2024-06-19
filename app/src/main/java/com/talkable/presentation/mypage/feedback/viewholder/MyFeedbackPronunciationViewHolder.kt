@@ -8,7 +8,7 @@ class MyFeedbackPronunciationViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(data: String) {
         with(binding) {
-            tvMyFeedback.text = data
+            tvMyFeedbackPronunciation.text = data
         }
     }
 }
