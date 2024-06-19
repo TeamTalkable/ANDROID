@@ -29,6 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="17dp"
+                android:layout_marginTop="20dp"
                 android:text="@{model.question}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
