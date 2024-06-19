@@ -47,7 +47,7 @@
             android:layout_marginStart="12dp"
             android:text="@{model.correctGrammar}"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
-            android:textColor="@color/main"
+            android:textColor="@color/main_4"
             app:layout_constraintBottom_toBottomOf="@id/tv_talk_feedback_learned_grammar_arrow"
             app:layout_constraintStart_toEndOf="@id/tv_talk_feedback_learned_grammar_arrow"
             app:layout_constraintTop_toTopOf="@id/tv_talk_feedback_learned_grammar_arrow"
