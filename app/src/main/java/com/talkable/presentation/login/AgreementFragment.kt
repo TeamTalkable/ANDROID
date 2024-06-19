@@ -8,8 +8,16 @@ import com.talkable.databinding.FragmentAgreementBinding
 class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fragment_agreement) {
 
     override fun initView() {
+        navigateToBack()
         initStartBtnClickListener()
         initAgreementAllBtnClickListener()
+    }
+
+    // 뒤로가기
+    private fun navigateToBack() {
+        binding.btnAgreementBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     // 시작하기
