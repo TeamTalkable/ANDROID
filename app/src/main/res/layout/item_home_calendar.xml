@@ -160,15 +160,15 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_home_learning_review"
+            style="@style/AppButtonOnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="34dp"
             android:background="@drawable/shape_main1_fill_12_rect"
             android:text="@string/tv_home_learning_review"
-            style="@style/AppButtonOnPrimary"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_home_learning_feedback"
             app:layout_constraintTop_toTopOf="@id/tv_home_learning_time" />
 
         <androidx.constraintlayout.widget.Group
