@@ -23,7 +23,7 @@ class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fra
     // 시작하기
     private fun initStartBtnClickListener() {
         binding.btnAgreementStart.setOnClickListener {
-            findNavController().navigate(R.id.action_agreementFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_agreement_to_startSetting)
         }
     }
 
