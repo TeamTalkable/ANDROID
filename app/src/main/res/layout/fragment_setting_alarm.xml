@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_3">
+
+        <TextView
+            android:id="@+id/tv_setting_alarm_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="94dp"
+            android:text="@string/tv_setting_alarm_title"
+            android:textAppearance="@style/TextAppearance.Talkable.b_24"
+            android:textColor="@color/main"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_setting_alarm_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/tv_setting_alarm_description"
+            android:textAppearance="@style/TextAppearance.Talkable.m_16"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/tv_setting_alarm_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_alarm_title" />
+
+
+        <TextView
+            android:id="@+id/tv_setting_alarm_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:text="@string/tv_setting_alarm_hour"
+            android:textAppearance="@style/TextAppearance.Talkable.m_32"
+            app:layout_constraintEnd_toStartOf="@id/tv_setting_alarm_colon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_alarm_description" />
+
+        <TextView
+            android:id="@+id/tv_setting_alarm_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="@string/tv_setting_alarm_colon"
+            android:textAppearance="@style/TextAppearance.Talkable.m_64"
+            android:textColor="@color/font_3"
+            app:layout_constraintBottom_toBottomOf="@id/tv_setting_alarm_hour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_setting_alarm_hour" />
+
+        <TextView
+            android:id="@+id/tv_setting_alarm_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_setting_alarm_min"
+            android:textAppearance="@style/TextAppearance.Talkable.m_32"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_setting_alarm_colon"
+            app:layout_constraintTop_toTopOf="@id/tv_setting_alarm_hour" />
+
+        <TextView
+            android:id="@+id/tv_setting_alarm_cap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/tv_setting_alarm_cap"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/btn_setting_alarm"
+            app:layout_constraintEnd_toEndOf="@id/btn_setting_alarm"
+            app:layout_constraintStart_toStartOf="@id/btn_setting_alarm" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_setting_alarm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="38dp"
+            android:layout_marginBottom="103dp"
+            android:paddingVertical="20dp"
+            android:text="@string/btn_setting_alarm"
+            android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
+            android:textColor="@color/font_5"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
