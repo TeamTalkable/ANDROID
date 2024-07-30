@@ -14,9 +14,8 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_onboarding_indicator"
-            android:layout_width="0dp"
+            android:layout_width="110dp"
             android:layout_height="8dp"
-            android:layout_marginHorizontal="132dp"
             android:layout_marginTop="83dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,26 +31,36 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="14dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_onboarding_start_label"
+            app:layout_constraintBottom_toTopOf="@id/layout_onboarding_start_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tl_onboarding_indicator" />
 
-        <TextView
-            android:id="@+id/tv_onboarding_start_label"
+        <LinearLayout
+            android:id="@+id/layout_onboarding_start_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/main"
             android:gravity="center"
-            android:paddingHorizontal="100dp"
             android:paddingVertical="31dp"
-            android:text="@string/tv_onboarding_start_label"
-            android:textAppearance="@style/TextAppearance.Talkable.main_sm_20"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/img_home_logo"
-            app:drawableTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/img_home_logo"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_onboarding_start_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_onboarding_start_label"
+                android:textAppearance="@style/TextAppearance.Talkable.main_sm_20"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
