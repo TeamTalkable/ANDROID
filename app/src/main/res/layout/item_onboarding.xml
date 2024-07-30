@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.talkable.presentation.onboarding.model.Onboarding" />
+            type="com.talkable.presentation.onboarding.Onboarding" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

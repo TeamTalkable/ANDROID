@@ -2,6 +2,7 @@ package com.talkable.core.util
 
 object Key {
     const val CHART_KEY = "chart"
+    const val ONBOARDING_KEY = "onboarding"
 }
 
 object DialogKey {
