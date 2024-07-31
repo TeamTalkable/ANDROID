@@ -59,20 +59,20 @@ class SavedSyntaxFragment :
             savedWordList = listOf(
                 SavedWord(
                     type = 0,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "How was your day?",
+                    translation = "오늘 하루 어땠어?",
                     tag = "어려워요"
                 ),
                 SavedWord(
                     type = 1,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "Have you finished your homework?",
+                    translation = "숙제 다 했니?",
                     tag = "외웠어요"
                 ),
                 SavedWord(
                     type = 2,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "What did you eat for lunch?",
+                    translation = "점심으로 뭐 먹었어?",
                     tag = "암기 중"
                 )
             )
@@ -83,20 +83,20 @@ class SavedSyntaxFragment :
             savedWordList = listOf(
                 SavedWord(
                     type = 0,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "Can you help me with this problem?",
+                    translation = "이 문제 좀 도와줄 수 있어?",
                     tag = "어려워요"
                 ),
                 SavedWord(
                     type = 0,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "This is too difficult for me.",
+                    translation = "이건 나에게 너무 어려워.",
                     tag = "어려워요"
                 ),
                 SavedWord(
                     type = 0,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "I don't understand this topic.",
+                    translation = "이 주제를 이해할 수 없어.",
                     tag = "어려워요"
                 )
             )
@@ -107,20 +107,20 @@ class SavedSyntaxFragment :
             savedWordList = listOf(
                 SavedWord(
                     type = 1,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "I'm trying to remember this.",
+                    translation = "이걸 기억하려고 노력 중이야.",
                     tag = "외웠어요"
                 ),
                 SavedWord(
                     type = 1,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "I've been studying hard.",
+                    translation = "열심히 공부하고 있어.",
                     tag = "외웠어요"
                 ),
                 SavedWord(
                     type = 1,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "I need to practice more.",
+                    translation = "더 연습해야 돼.",
                     tag = "외웠어요"
                 )
             )
@@ -131,20 +131,20 @@ class SavedSyntaxFragment :
             savedWordList = listOf(
                 SavedWord(
                     type = 2,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "I remember this perfectly.",
+                    translation = "이걸 완벽하게 기억해.",
                     tag = "암기 중"
                 ),
                 SavedWord(
                     type = 2,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "This is easy for me now.",
+                    translation = "이제 이건 나에게 쉬워.",
                     tag = "암기 중"
                 ),
                 SavedWord(
                     type = 2,
-                    word = "What did you do today in school?",
-                    translation = "오늘 학교에서 무엇을 했니?",
+                    word = "I have mastered this.",
+                    translation = "이걸 완전히 익혔어.",
                     tag = "암기 중"
                 )
             )

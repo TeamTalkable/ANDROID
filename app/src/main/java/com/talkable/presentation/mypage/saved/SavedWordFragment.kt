@@ -53,101 +53,99 @@ class SavedWordFragment :
         }
     }
 
-    companion object {
-        val mockData = SavedListModel(
-            savedWordId = 1,
-            savedWordList = listOf(
-                SavedWord(
-                    type = 0,
-                    word = "public holiday",
-                    translation = "공휴일",
-                    tag = "어려워요"
-                ),
-                SavedWord(
-                    type = 1,
-                    word = "fair",
-                    translation = "1. 타당한, 온당한 \n2. 공정한, 공평한",
-                    tag = "외웠어요"
-                ),
-                SavedWord(
-                    type = 2,
-                    word = "candid",
-                    translation = "솔직한",
-                    tag = "암기 중"
-                )
+    val mockData = SavedListModel(
+        savedWordId = 1,
+        savedWordList = listOf(
+            SavedWord(
+                type = 0,
+                word = "justice",
+                translation = "1. 정의, 공정 \n2. 사법, 재판",
+                tag = "어려워요"
+            ),
+            SavedWord(
+                type = 1,
+                word = "library",
+                translation = "도서관",
+                tag = "외웠어요"
+            ),
+            SavedWord(
+                type = 2,
+                word = "transparent",
+                translation = "투명한",
+                tag = "암기 중"
             )
         )
+    )
 
-        val difficultWord = SavedListModel(
-            savedWordId = 2,
-            savedWordList = listOf(
-                SavedWord(
-                    type = 0,
-                    word = "public holiday",
-                    translation = "공휴일",
-                    tag = "어려워요"
-                ),
-                SavedWord(
-                    type = 0,
-                    word = "public holiday",
-                    translation = "공휴일",
-                    tag = "어려워요"
-                ),
-                SavedWord(
-                    type = 0,
-                    word = "public holiday",
-                    translation = "공휴일",
-                    tag = "어려워요"
-                )
+    val difficultWord = SavedListModel(
+        savedWordId = 2,
+        savedWordList = listOf(
+            SavedWord(
+                type = 0,
+                word = "obfuscate",
+                translation = "혼란스럽게 만들다",
+                tag = "어려워요"
+            ),
+            SavedWord(
+                type = 0,
+                word = "pernicious",
+                translation = "치명적인, 해로운",
+                tag = "어려워요"
+            ),
+            SavedWord(
+                type = 0,
+                word = "esoteric",
+                translation = "난해한, 소수만 이해하는",
+                tag = "어려워요"
             )
         )
+    )
 
-        val memorizingWord = SavedListModel(
-            savedWordId = 3,
-            savedWordList = listOf(
-                SavedWord(
-                    type = 1,
-                    word = "fair",
-                    translation = "1. 타당한, 온당한 \n2. 공정한, 공평한",
-                    tag = "외웠어요"
-                ),
-                SavedWord(
-                    type = 1,
-                    word = "fair",
-                    translation = "1. 타당한, 온당한 \n2. 공정한, 공평한",
-                    tag = "외웠어요"
-                ),
-                SavedWord(
-                    type = 1,
-                    word = "fair",
-                    translation = "1. 타당한, 온당한 \n2. 공정한, 공평한",
-                    tag = "외웠어요"
-                )
+    val memorizingWord = SavedListModel(
+        savedWordId = 3,
+        savedWordList = listOf(
+            SavedWord(
+                type = 1,
+                word = "understand",
+                translation = "이해하다",
+                tag = "외웠어요"
+            ),
+            SavedWord(
+                type = 1,
+                word = "comprehend",
+                translation = "이해하다, 파악하다",
+                tag = "외웠어요"
+            ),
+            SavedWord(
+                type = 1,
+                word = "grasp",
+                translation = "1. 꽉 잡다 \n2. 이해하다",
+                tag = "외웠어요"
             )
         )
+    )
 
-        val memorizedWord = SavedListModel(
-            savedWordId = 4,
-            savedWordList = listOf(
-                SavedWord(
-                    type = 2,
-                    word = "candid",
-                    translation = "솔직한",
-                    tag = "암기 중"
-                ),
-                SavedWord(
-                    type = 2,
-                    word = "candid",
-                    translation = "솔직한",
-                    tag = "암기 중"
-                ),
-                SavedWord(
-                    type = 2,
-                    word = "candid",
-                    translation = "솔직한",
-                    tag = "암기 중"
-                )
+    val memorizedWord = SavedListModel(
+        savedWordId = 4,
+        savedWordList = listOf(
+            SavedWord(
+                type = 2,
+                word = "honest",
+                translation = "정직한",
+                tag = "암기 중"
+            ),
+            SavedWord(
+                type = 2,
+                word = "frank",
+                translation = "솔직한",
+                tag = "암기 중"
+            ),
+            SavedWord(
+                type = 2,
+                word = "sincere",
+                translation = "진실한",
+                tag = "암기 중"
             )
         )
-    }
+    )
 }
