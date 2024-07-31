@@ -3,6 +3,7 @@ package com.talkable.presentation.mypage.saved
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentSavedWordBinding
 import com.talkable.presentation.mypage.saved.SavedFragment.Companion.NO_CHIP_SELECTED
 import com.talkable.presentation.mypage.saved.model.SavedListModel
@@ -11,6 +12,7 @@ import com.talkable.presentation.mypage.saved.model.SavedWord
 class SavedWordFragment :
     BindingFragment<FragmentSavedWordBinding>(R.layout.fragment_saved_word) {
     override fun initView() {
+        statusBarColorOf(R.color.main_3)
         initSavedWordAdapter()
         initSavedWordChipClickListener()
     }
