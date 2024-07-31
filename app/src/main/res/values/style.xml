@@ -18,6 +18,12 @@
         <item name="android:textAppearance">@style/TextAppearance.Talkable.sub_m_16</item>
     </style>
 
+    <!--저장 목록-->
+    <style name="SavedWordTag" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/shape_main_fill_12_rect</item>
+        <item name="android:textAppearance">@style/TextAppearance.Talkable.m_10</item>
+    </style>
+
     <!--요일 버튼-->
     <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="iconPadding">0dp</item>
