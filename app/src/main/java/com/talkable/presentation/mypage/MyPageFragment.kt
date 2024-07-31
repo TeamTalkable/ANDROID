@@ -26,6 +26,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         statusBarColorOf(R.color.white)
         binding.model = mockData
         initNavigateFeedbackBtnClickListener()
+        initNavigateSavedBtnClickListener()
         initMyFlowerBtnClickListener()
         initChartDetailBtnClickListener()
         setClickEventOnTabLayout()
@@ -38,8 +39,20 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
     }
 
+
     private fun navigateToFeedbackStore() =
         findNavController().navigate(R.id.action_my_page_to_my_page_feedback)
+
+
+    private fun initNavigateSavedBtnClickListener() {
+        binding.tvMyPageNavigateSave.setOnClickListener {
+            navigateToSaved()
+        }
+    }
+
+    private fun navigateToSaved() =
+        findNavController().navigate(R.id.action_fragment_my_page_to_saved)
+
 
     private fun initMyFlowerBtnClickListener() {
         binding.tvMyPageMyFlower.setOnClickListener {

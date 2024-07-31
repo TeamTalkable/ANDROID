@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_my_page_to_my_page_feedback"
             app:destination="@id/fragment_my_page_feedback" />
+        <action
+            android:id="@+id/action_fragment_my_page_to_saved"
+            app:destination="@id/savedFragment"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
@@ -137,4 +140,9 @@
             app:destination="@id/fragment_feedback_expression"
             app:popUpTo="@id/fragment_talk" />
     </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.talkable.presentation.mypage.saved.SavedFragment"
+        android:label="SavedFragment"
+        tools:layout="@layout/fragment_saved"/>
 </navigation>
