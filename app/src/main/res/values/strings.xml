@@ -79,6 +79,12 @@
     <string name="tv_my_page_chart_before_week">지난주</string>
     <string name="tv_my_page_chart_recent_month">이번달</string>
     <string name="tv_my_page_chart_before_month">지난달</string>
+    <string name="btn_logout_to_login">로그인</string>
+    <string name="tv_logout_title">로그아웃 되었습니다.</string>
+    <string name="tv_withdraw_title">정말 탈퇴하시겠습니까?</string>
+    <string name="tv_withdraw_description">기록이 모두 삭제되며,\n다시 복구할 수 없습니다.</string>
+    <string name="btn_withdraw_yes">탈퇴</string>
+    <string name="btn_withdraw_no">취소</string>
 
     <!--saved-->
     <string name="tv_saved_syntax">구문</string>
@@ -117,6 +123,25 @@
     <string name="tv_feedback_pronunciation_back"><u>대화로 돌아가기</u></string>
     <string name="tv_talk_speech">텍스트를 눌러 수정해보세요.</string>
 
-
-
+    <!-- 온보딩 -->
+    <string name="tv_onboarding_start_label">시작하기</string>
+    <string name="tv_start_setting_flower_title">코스모스 씨앗이\n심어졌어요!</string>
+    <string name="tv_start_setting_flower_description">학습을 통해 예쁜 꽃을 피워보세요:)</string>
+    <string name="tv_setting_alarm_title">영어 습관 만들기</string>
+    <string name="tv_setting_alarm_description">꾸준히 공부할 수 있는 시간을 알려주세요</string>
+    <string name="tv_setting_alarm_cap">\'마이\'탭에서 언제든 변경할 수 있습니다.</string>
+    <string name="btn_setting_alarm">이 시간으로 정할게요</string>
+    <string name="tv_setting_alarm_colon">:</string>
+    <string name="tv_start_setting_title">님,\n반가워요:)</string>
+    <string name="tv_setting_alarm_min">0분</string>
+    <string name="tv_setting_alarm_hour">0시</string>
+    <string name="label_alarm_setting_hour_input">%1$d시</string>
+    <string name="label_alarm_setting_minute_input">%1$d분</string>
+    <string name="label_alarm_day_sun">일</string>
+    <string name="label_alarm_day_mon">월</string>
+    <string name="label_alarm_day_tue">화</string>
+    <string name="label_alarm_day_wed">수</string>
+    <string name="label_alarm_day_thu">목</string>
+    <string name="label_alarm_day_fri">금</string>
+    <string name="label_alarm_day_sat">토</string>
 </resources>

@@ -3,25 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/onboardingFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.talkable.presentation.login.LoginFragment"
-        android:label="LoginFragment">
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_agreementFragment"
-            app:destination="@id/agreementFragment" />
+            app:destination="@id/agreementFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/agreementFragment"
         android:name="com.talkable.presentation.login.AgreementFragment"
         android:label="AgreementFragment">
         <action
-            android:id="@+id/action_agreementFragment_to_homeFragment"
-            app:destination="@id/fragment_home"
-            app:popUpTo="@id/fragment_home"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_agreement_to_startSetting"
+            app:destination="@id/startSettingFragment"
+            app:popUpTo="@id/agreementFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragment_home"
@@ -45,6 +48,11 @@
         <action
             android:id="@+id/action_my_page_to_my_page_feedback"
             app:destination="@id/fragment_my_page_feedback" />
+        <action
+            android:id="@+id/action_my_page_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/fragment_home"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_fragment_my_page_to_saved"
             app:destination="@id/savedFragment"/>
@@ -139,6 +147,50 @@
             android:id="@+id/action_feedback_loading_to_feedback_expression"
             app:destination="@id/fragment_feedback_expression"
             app:popUpTo="@id/fragment_talk" />
+    </fragment>
+    <dialog
+        android:id="@+id/feedbackPronunciationCompleteDialog"
+        android:name="com.talkable.presentation.feedback.FeedbackPronunciationCompleteDialog"
+        android:label="FeedbackPronunciationCompleteDialog" />
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.talkable.presentation.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment">
+        <action
+            android:id="@+id/action_onboarding_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/logoutDialog"
+        android:name="com.talkable.presentation.mypage.LogoutDialog"
+        android:label="LogoutDialog" />
+    <dialog
+        android:id="@+id/withdrawDialog"
+        android:name="com.talkable.presentation.mypage.WithdrawDialog"
+        android:label="WithdrawDialog" />
+    <fragment
+        android:id="@+id/startSettingFragment"
+        android:name="com.talkable.presentation.onboarding.StartSettingFragment"
+        android:label="StartSettingFragment"
+        tools:layout="@layout/fragment_start_setting">
+        <action
+            android:id="@+id/action_startSetting_to_alarmSetting"
+            app:destination="@id/alarmSettingFragment"
+            app:popUpTo="@id/startSettingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmSettingFragment"
+        android:name="com.talkable.presentation.onboarding.AlarmSettingFragment"
+        android:label="AlarmSettingFragment"
+        tools:layout="@layout/fragment_setting_alarm">
+        <action
+            android:id="@+id/action_alarmSetting_to_home"
+            app:destination="@id/fragment_home"
+            app:popUpTo="@id/alarmSettingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"

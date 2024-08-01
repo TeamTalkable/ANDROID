@@ -44,4 +44,5 @@
     <color name="brown">#E1C19E</color>
     <color name="challenge_date">#717171</color>
     <color name="listen_word">#ABABAB</color>
+    <color name="indicator">#EDEDED</color>
 </resources>
