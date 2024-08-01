@@ -102,29 +102,31 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="36dp"
-            app:singleSelection="true"
             android:visibility="@{type == type.MEANING  ? View.VISIBLE : View.INVISIBLE}"
             app:chipSpacingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:singleSelection="true"
             tools:visibility="invisible">
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/cg_quiz_meaning_answer_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="18dp"
                 android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                app:chipCornerRadius="12dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:chipStrokeWidth="0dp"
                 app:rippleColor="@null"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-                android:textColor="@color/sel_pronunciation_word_text"
-                app:chipBackgroundColor="@color/sel_quiz_word_chip"
-                app:chipCornerRadius="12dp"
-                app:chipMinTouchTargetSize="0dp"
-                app:chipStrokeWidth="0dp"
                 tools:text="학교" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/cg_quiz_meaning_answer_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="18dp"
@@ -138,6 +140,7 @@
                 tools:text="학교" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/cg_quiz_meaning_answer_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="18dp"
@@ -151,6 +154,7 @@
                 tools:text="학교" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/cg_quiz_meaning_answer_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="18dp"
