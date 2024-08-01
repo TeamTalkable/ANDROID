@@ -144,5 +144,14 @@
         android:id="@+id/savedFragment"
         android:name="com.talkable.presentation.mypage.saved.SavedFragment"
         android:label="SavedFragment"
-        tools:layout="@layout/fragment_saved"/>
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_saved_to_quiz_spelling_meaning"
+            app:destination="@id/fragment_quiz_spelling_meaning" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_quiz_spelling_meaning"
+        android:name="com.talkable.presentation.quiz.QuizSpellingMeaningFragment"
+        android:label="QuizSpellingMeaningFragment"
+        tools:layout="@layout/fragment_quiz_spelling_meaning"/>
 </navigation>
