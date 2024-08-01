@@ -104,7 +104,7 @@
             android:id="@+id/rv_my_flower_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_white_fill_20_rec"
+            android:background="@drawable/shape_white_fill_top_20_rec"
             android:overScrollMode="never"
             android:paddingHorizontal="33dp"
             android:paddingTop="46dp"
