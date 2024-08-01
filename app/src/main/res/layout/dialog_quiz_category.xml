@@ -18,7 +18,7 @@
         <include
             android:id="@+id/layout_quiz_category_spelling"
             data="@{data.SPELLING}"
-            layout="@layout/item_quiz_dialog"
+            layout="@layout/view_quiz_dialog_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowSpan="1"
@@ -34,7 +34,7 @@
         <include
             android:id="@+id/layout_quiz_category_meaning"
             data="@{data.MEANING}"
-            layout="@layout/item_quiz_dialog"
+            layout="@layout/view_quiz_dialog_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowSpan="1"
@@ -50,7 +50,7 @@
         <include
             android:id="@+id/layout_quiz_category_flash"
             data="@{data.FLASH}"
-            layout="@layout/item_quiz_dialog"
+            layout="@layout/view_quiz_dialog_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowSpan="1"
@@ -65,7 +65,7 @@
         <include
             android:id="@+id/layout_quiz_category_auto"
             data="@{data.AUTO}"
-            layout="@layout/item_quiz_dialog"
+            layout="@layout/view_quiz_dialog_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowSpan="1"
