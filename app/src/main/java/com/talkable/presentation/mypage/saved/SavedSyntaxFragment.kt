@@ -15,6 +15,21 @@ class SavedSyntaxFragment :
         statusBarColorOf(R.color.main_3)
         initSavedSyntaxAdapter()
         initSavedSyntaxChipClickListener()
+        initTranslationBtnClickListener()
+    }
+
+    private fun initTranslationBtnClickListener() {
+        with(binding) {
+            layoutSavedSort.btnSavedTranslate.setOnClickListener {
+                layoutSavedSort.btnSavedTranslate.isSelected =
+                    !layoutSavedSort.btnSavedTranslate.isSelected
+                for (i in 0 until rvSavedWord.childCount) {
+                    val holder =
+                        rvSavedWord.findViewHolderForAdapterPosition(i) as? SavedSyntaxViewHolder
+                    holder?.initSyntaxTranslation()
+                }
+            }
+        }
     }
 
     private fun initSavedSyntaxAdapter() {

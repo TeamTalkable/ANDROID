@@ -15,6 +15,21 @@ class SavedWordFragment :
         statusBarColorOf(R.color.main_3)
         initSavedWordAdapter()
         initSavedWordChipClickListener()
+        initTranslationBtnClickListener()
+    }
+
+    private fun initTranslationBtnClickListener() {
+        with(binding) {
+            layoutSavedSort.btnSavedTranslate.setOnClickListener {
+                layoutSavedSort.btnSavedTranslate.isSelected =
+                    !layoutSavedSort.btnSavedTranslate.isSelected
+                for (i in 0 until rvSavedWord.childCount) {
+                    val holder =
+                        rvSavedWord.findViewHolderForAdapterPosition(i) as? SavedWordViewHolder
+                    holder?.initWordTranslation()
+                }
+            }
+        }
     }
 
     private fun initSavedWordAdapter() {

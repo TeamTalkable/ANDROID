@@ -32,11 +32,15 @@ class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
 
     private fun initItemViewClickListener() {
         itemView.setOnClickListener {
-            with(binding) {
-                itemView.isSelected = !itemView.isSelected
-                tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
-                btnSavedWordTag.visibility = if (itemView.isSelected) View.GONE else View.VISIBLE
-            }
+            initWordTranslation()
+        }
+    }
+
+    fun initWordTranslation() {
+        itemView.isSelected = !itemView.isSelected
+        with(binding) {
+            tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
+            btnSavedWordTag.visibility = if (itemView.isSelected) View.GONE else View.VISIBLE
         }
     }
 
