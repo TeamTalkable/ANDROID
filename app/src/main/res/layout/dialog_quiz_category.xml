@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.talkable.presentation.quiz.Quiz" />
+    </data>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:rowCount="3">
+
+        <include
+            android:id="@+id/layout_quiz_category_spelling"
+            data="@{data.SPELLING}"
+            layout="@layout/item_quiz_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            android:padding="100dp" />
+
+        <Space
+            android:layout_width="16dp"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1" />
+
+        <include
+            android:id="@+id/layout_quiz_category_meaning"
+            data="@{data.MEANING}"
+            layout="@layout/item_quiz_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1" />
+
+        <Space
+            android:layout_height="16dp"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="3"
+            android:layout_columnWeight="3" />
+
+        <include
+            android:id="@+id/layout_quiz_category_flash"
+            data="@{data.FLASH}"
+            layout="@layout/item_quiz_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1" />
+
+        <Space
+            android:layout_width="16dp"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1" />
+
+        <include
+            android:id="@+id/layout_quiz_category_auto"
+            data="@{data.AUTO}"
+            layout="@layout/item_quiz_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1" />
+    </GridLayout>
+</layout>
