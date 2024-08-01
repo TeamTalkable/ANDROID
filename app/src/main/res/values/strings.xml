@@ -79,6 +79,12 @@
     <string name="tv_my_page_chart_before_week">지난주</string>
     <string name="tv_my_page_chart_recent_month">이번달</string>
     <string name="tv_my_page_chart_before_month">지난달</string>
+    <string name="btn_logout_to_login">로그인</string>
+    <string name="tv_logout_title">로그아웃 되었습니다.</string>
+    <string name="tv_withdraw_title">정말 탈퇴하시겠습니까?</string>
+    <string name="tv_withdraw_description">기록이 모두 삭제되며,\n다시 복구할 수 없습니다.</string>
+    <string name="btn_withdraw_yes">탈퇴</string>
+    <string name="btn_withdraw_no">취소</string>
 
     <!--saved-->
     <string name="tv_saved_syntax">구문</string>
@@ -138,6 +144,7 @@
     <string name="label_alarm_day_thu">목</string>
     <string name="label_alarm_day_fri">금</string>
     <string name="label_alarm_day_sat">토</string>
+
     <!--quiz-->
     <string name="label_quiz_spelling">스펠링</string>
     <string name="description_quiz_spelling">단어의 철자를\n입력하세요</string>
@@ -148,6 +155,4 @@
     <string name="label_quiz_auto">AUTO</string>
     <string name="description_quiz_auto">단어 뜻과 발음\n들으며 외우기</string>
     <string name="tv_spelling_meaning_error">오답입니다!</string>
-
-
 </resources>

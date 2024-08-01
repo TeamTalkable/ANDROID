@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentLoginBinding
 import com.talkable.presentation.MainActivity
 import com.talkable.presentation.login.kakao.KakaoLoginService
@@ -16,6 +17,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     private lateinit var loginViewModel: LoginViewModel
 
     override fun initView() {
+        statusBarColorOf(R.color.main_3)
         (activity as? MainActivity)?.hideBottomNavigation()
         initLoginBtnClickListener()
         init()

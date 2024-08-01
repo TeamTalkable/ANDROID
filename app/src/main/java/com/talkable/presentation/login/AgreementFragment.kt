@@ -3,11 +3,13 @@ package com.talkable.presentation.login
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentAgreementBinding
 
 class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fragment_agreement) {
 
     override fun initView() {
+        statusBarColorOf(R.color.main_3)
         navigateToBack()
         initStartBtnClickListener()
         initAgreementAllBtnClickListener()
