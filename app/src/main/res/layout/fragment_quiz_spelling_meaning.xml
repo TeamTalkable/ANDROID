@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="type"
+            type="com.talkable.presentation.quiz.Quiz" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/layout_quiz_spelling_meaning_appbar"
+            layout="@layout/view_quiz_app_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_quiz_spelling_meaning_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="@{type == type.MEANING ? `단어의 알맞은 뜻을 선택하세요` : `단어의 스펠링을 적어보세요`}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_quiz_spelling_meaning_appbar"
+            tools:text="@string/dummy" />
+
+        <View
+            android:id="@+id/view_quiz_spelling_meaning_word_bg"
+            android:layout_width="0dp"
+            android:layout_height="251dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_gray_2_fill_12_rect"
+            android:backgroundTint="@color/font_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_spelling_meaning_command" />
+
+        <TextView
+            android:id="@+id/tv_quiz_spelling_meaning_word"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.main_sm_24"
+            app:layout_constraintBottom_toBottomOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_spelling_answer"
+            tools:text="school" />
+
+        <TextView
+            android:id="@+id/tv_quiz_spelling_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.main_sm_30"
+            android:textColor="@color/main"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_quiz_spelling_meaning_word"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:layout_constraintTop_toTopOf="@id/view_quiz_spelling_meaning_word_bg"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="school" />
+
+        <EditText
+            android:id="@+id/et_quiz_spelling_user_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/shape_font5_fill_12_rect"
+            android:lines="1"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:visibility="@{type == type.SPELLING  ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_quiz_spelling_meaning_word_bg" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_quiz_meaning_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="36dp"
+            app:singleSelection="true"
+            android:visibility="@{type == type.MEANING  ? View.VISIBLE : View.INVISIBLE}"
+            app:chipSpacingVertical="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_quiz_spelling_meaning_word_bg"
+            tools:visibility="invisible">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="18dp"
+                android:textAlignment="center"
+                app:rippleColor="@null"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                app:chipCornerRadius="12dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:chipStrokeWidth="0dp"
+                tools:text="학교" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="18dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                app:chipCornerRadius="12dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:chipStrokeWidth="0dp"
+                tools:text="학교" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="18dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                app:chipCornerRadius="12dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:chipStrokeWidth="0dp"
+                tools:text="학교" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="18dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/sel_pronunciation_word_text"
+                app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                app:chipCornerRadius="12dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:chipStrokeWidth="0dp"
+                tools:text="학교" />
+        </com.google.android.material.chip.ChipGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
