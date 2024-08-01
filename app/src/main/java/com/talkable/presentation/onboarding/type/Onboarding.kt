@@ -1,4 +1,4 @@
-package com.talkable.presentation.onboarding
+package com.talkable.presentation.onboarding.type
 
 import com.talkable.R
 

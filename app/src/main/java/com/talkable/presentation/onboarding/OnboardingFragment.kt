@@ -6,6 +6,7 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentOnboardingBinding
+import com.talkable.presentation.onboarding.type.Onboarding
 
 class OnboardingFragment() :
     BindingFragment<FragmentOnboardingBinding>(R.layout.fragment_onboarding) {

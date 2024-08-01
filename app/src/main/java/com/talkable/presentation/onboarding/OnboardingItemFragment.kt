@@ -6,6 +6,7 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key
 import com.talkable.databinding.ItemOnboardingBinding
+import com.talkable.presentation.onboarding.type.Onboarding
 
 class OnboardingItemFragment() :
     BindingFragment<ItemOnboardingBinding>(R.layout.item_onboarding) {
