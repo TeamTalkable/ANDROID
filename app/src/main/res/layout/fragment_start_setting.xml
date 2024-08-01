@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_3">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_start_setting_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="iv_start_setting_logo, tv_start_setting_title" />
+
+        <ImageView
+            android:id="@+id/iv_start_setting_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_logo_graphic"
+            app:layout_constraintBottom_toTopOf="@id/tv_start_setting_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_start_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="@string/tv_start_setting_title"
+            android:textAppearance="@style/TextAppearance.Talkable.b_24"
+            android:textColor="@color/main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_start_setting_logo"
+            tools:text="@string/dummy" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_start_setting_flower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="tv_start_setting_flower_title, iv_start_setting_seed, tv_start_setting_flower_description" />
+
+        <TextView
+            android:id="@+id/tv_start_setting_flower_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="94dp"
+            android:text="@string/tv_start_setting_flower_title"
+            android:textAppearance="@style/TextAppearance.Talkable.b_24"
+            android:textColor="@color/main"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_start_setting_seed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="94dp"
+            android:src="@drawable/img_start_setting_seed"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_start_setting_flower_title" />
+
+        <TextView
+            android:id="@+id/tv_start_setting_flower_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:text="@string/tv_start_setting_flower_description"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.m_16"
+            android:textColor="@color/gray"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_start_setting_seed" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
