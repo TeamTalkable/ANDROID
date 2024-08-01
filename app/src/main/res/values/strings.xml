@@ -129,4 +129,13 @@
     <string name="tv_start_setting_title">님,\n반가워요:)</string>
     <string name="tv_setting_alarm_min">0분</string>
     <string name="tv_setting_alarm_hour">0시</string>
+    <string name="label_alarm_setting_hour_input">%1$d시</string>
+    <string name="label_alarm_setting_minute_input">%1$d분</string>
+    <string name="label_alarm_day_sun">일</string>
+    <string name="label_alarm_day_mon">월</string>
+    <string name="label_alarm_day_tue">화</string>
+    <string name="label_alarm_day_wed">수</string>
+    <string name="label_alarm_day_thu">목</string>
+    <string name="label_alarm_day_fri">금</string>
+    <string name="label_alarm_day_sat">토</string>
 </resources>
