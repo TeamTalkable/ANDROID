@@ -43,23 +43,12 @@ class StartSettingFragment :
 
     private fun handleViewVisibilityDelay() {
         Handler(Looper.getMainLooper()).postDelayed({
-            setWelcomeTextViewVisibility(false)
-            setFlowerSettingViewVisibility(true)
-        }, 2500)
+            binding.groupStartSettingWelcome.isVisible = false
+            binding.groupStartSettingFlower.isVisible = true
+        }, 1500)
         Handler(Looper.getMainLooper()).postDelayed({
             navigateToAlarmSettingFragment()
-        }, 5000)
-    }
-
-    private fun setWelcomeTextViewVisibility(isVisible: Boolean) = with(binding) {
-        tvStartSettingTitle.isVisible = isVisible
-        ivStartSettingLogo.isVisible = isVisible
-    }
-
-    private fun setFlowerSettingViewVisibility(isVisible: Boolean) = with(binding) {
-        tvStartSettingFlowerTitle.isVisible = isVisible
-        ivStartSettingSeed.isVisible = isVisible
-        tvStartSettingFlowerDescription.isVisible = isVisible
+        }, 3000)
     }
 
     private fun navigateToAlarmSettingFragment() =

@@ -12,6 +12,12 @@
         android:layout_height="match_parent"
         android:background="@color/main_3">
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_start_setting_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="iv_start_setting_logo, tv_start_setting_title" />
+
         <ImageView
             android:id="@+id/iv_start_setting_logo"
             android:layout_width="wrap_content"
@@ -36,6 +42,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_start_setting_logo"
             tools:text="@string/dummy" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_start_setting_flower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="tv_start_setting_flower_title, iv_start_setting_seed, tv_start_setting_flower_description" />
 
         <TextView
             android:id="@+id/tv_start_setting_flower_title"
