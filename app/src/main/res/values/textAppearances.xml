@@ -102,12 +102,29 @@
         <item name="fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="TextAppearance.Talkable.m_10">
         <item name="fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">10sp</item>
     </style>
+
+    <style name="TextAppearance.Talkable.m_16">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TextAppearance.Talkable.m_20">
         <item name="fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.m_32">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.m_64">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">64sp</item>
     </style>
 </resources>

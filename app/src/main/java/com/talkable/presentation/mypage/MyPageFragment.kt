@@ -8,6 +8,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.DialogKey.LOGOUT_DIALOG
+import com.talkable.core.util.DialogKey.WITHDRAW_DIALOG
 import com.talkable.core.util.Key.CHART_KEY
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentMyPageBinding
@@ -23,6 +25,7 @@ import java.util.Locale
 
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun initView() {
+        binding.switchMyPageAlarm.isChecked = true
         statusBarColorOf(R.color.white)
         binding.model = mockData
         initNavigateFeedbackBtnClickListener()
@@ -31,6 +34,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initChartDetailBtnClickListener()
         setClickEventOnTabLayout()
         initMyPageCalendarAdapter(getMonthDays(mockData.calendarYear, mockData.calendarMonth))
+        initLogoutBtnClickListener()
+        initWithdrawBtnClickListener()
     }
 
     private fun initNavigateFeedbackBtnClickListener() {
@@ -230,6 +235,23 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun setChartData(data: Chart) {
         binding.cvMyPageChart.setChartPercentage(data)
     }
+
+    private fun initLogoutBtnClickListener() {
+        binding.tvMyPageLogoutLabel.setOnClickListener {
+            showLogoutDialog()
+        }
+    }
+
+    private fun showLogoutDialog() = LogoutDialog().show(childFragmentManager, LOGOUT_DIALOG)
+
+    private fun initWithdrawBtnClickListener() {
+        binding.tvMyPageWithdrawLabel.setOnClickListener {
+            showWithdrawDialog()
+        }
+    }
+
+    private fun showWithdrawDialog() = WithdrawDialog().show(childFragmentManager, WITHDRAW_DIALOG)
+
 
     companion object {
         val mockData = MyPageModel(

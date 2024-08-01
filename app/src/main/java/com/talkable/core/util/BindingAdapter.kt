@@ -21,6 +21,14 @@ fun loadImage(
         view.load(url)
 }
 
+@BindingAdapter("imageDrawable")
+fun loadImageDrawable(
+    view: ImageView,
+    id: Int,
+) {
+    view.setImageResource(id)
+}
+
 @BindingAdapter("setCircleImage")
 fun ImageView.setCircleImage(img: String?) {
     load(img) {

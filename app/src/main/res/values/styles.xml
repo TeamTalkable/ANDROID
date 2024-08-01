@@ -8,4 +8,9 @@
     <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
         <item name="cornerSize">10%</item>
     </style>
+
+    <style name="OnboardingImageCircle" parent="">
+        <item name="cornerSizeTopLeft">26dp</item>
+        <item name="cornerSizeTopRight">26dp</item>
+    </style>
 </resources>
