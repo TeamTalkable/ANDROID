@@ -8,8 +8,172 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_fill_20_rec"
+        android:paddingBottom="29dp">
 
+        <View
+            android:id="@+id/view_select_alarm_time"
+            android:layout_width="48dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/shape_fill_main3_8_rec"
+            android:backgroundTint="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <NumberPicker
+            android:id="@+id/picker_select_alarm_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:selectionDividerHeight="0dp"
+            android:theme="@style/AlarmNumberPicker"
+            android:timePickerMode="spinner"
+            app:layout_constraintEnd_toStartOf="@id/picker_select_alarm_time_hour"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_select_alarm_time" />
+
+        <NumberPicker
+            android:id="@+id/picker_select_alarm_time_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginVertical="45dp"
+            android:selectionDividerHeight="0dp"
+            android:theme="@style/AlarmNumberPicker"
+            android:timePickerMode="spinner"
+            app:layout_constraintBottom_toBottomOf="@id/divider_select_alarm_time"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time"
+            app:layout_constraintStart_toEndOf="@id/picker_select_alarm_time"
+            app:layout_constraintTop_toTopOf="@id/picker_select_alarm_time" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textAppearance="@style/TextAppearance.Talkable.b_24"
+            app:layout_constraintBottom_toBottomOf="@id/picker_select_alarm_time"
+            app:layout_constraintEnd_toStartOf="@id/picker_select_alarm_minute"
+            app:layout_constraintStart_toEndOf="@id/picker_select_alarm_time_hour"
+            app:layout_constraintTop_toTopOf="@id/picker_select_alarm_time" />
+
+        <NumberPicker
+            android:id="@+id/picker_select_alarm_minute"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="20dp"
+            android:selectionDividerHeight="0dp"
+            android:theme="@style/AlarmNumberPicker"
+            android:timePickerMode="spinner"
+            app:layout_constraintBottom_toBottomOf="@id/picker_select_alarm_time_hour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time"
+            app:layout_constraintTop_toTopOf="@id/picker_select_alarm_time_hour" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_select_alarm_time"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginVertical="24dp"
+            app:dividerColor="@color/font_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/picker_select_alarm_time" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_sun"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_sun"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time_mon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/divider_select_alarm_time" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_mon"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_mon"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time_tue"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time_sun"
+            app:layout_constraintTop_toTopOf="@id/tv_select_alarm_time_sun" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_tue"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_tue"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time_wed"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time_mon"
+            app:layout_constraintTop_toTopOf="@id/tv_select_alarm_time_mon" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_wed"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_wed"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time_thu"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time_tue"
+            app:layout_constraintTop_toTopOf="@id/tv_select_alarm_time_tue" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_thu"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_thu"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time_fri"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time_wed"
+            app:layout_constraintTop_toTopOf="@id/tv_select_alarm_time_sun" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_fri"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_fri"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_select_alarm_time_thu"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time_sat"
+            app:layout_constraintTop_toTopOf="@id/tv_select_alarm_time_sun" />
+
+        <TextView
+            android:id="@+id/tv_select_alarm_time_sat"
+            style="@style/Base.Widget.AppCompat.TextView.AlarmDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/sel_setting_alarm_day_picker"
+            android:text="@string/label_alarm_day_sat"
+            android:textColor="@color/sel_pronunciation_word_text"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_select_alarm_time_fri"
+            app:layout_constraintTop_toTopOf="@id/tv_select_alarm_time_sun" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -34,6 +34,13 @@
             app:layout_constraintStart_toStartOf="@id/tv_setting_alarm_title"
             app:layout_constraintTop_toBottomOf="@id/tv_setting_alarm_title" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_setting_alarm_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="tv_setting_alarm_hour, tv_setting_alarm_colon, tv_setting_alarm_min"
+            app:layout_constraintBottom_toBottomOf="@id/tv_setting_alarm_hour"
+            app:layout_constraintTop_toTopOf="@id/tv_setting_alarm_hour" />
 
         <TextView
             android:id="@+id/tv_setting_alarm_hour"
