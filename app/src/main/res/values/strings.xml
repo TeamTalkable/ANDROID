@@ -155,4 +155,5 @@
     <string name="label_quiz_auto">AUTO</string>
     <string name="description_quiz_auto">단어 뜻과 발음\n들으며 외우기</string>
     <string name="tv_spelling_meaning_error">오답입니다!</string>
+    <string name="label_quiz_app_bar_count">%1$d/%2$d</string>
 </resources>

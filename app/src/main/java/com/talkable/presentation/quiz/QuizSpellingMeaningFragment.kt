@@ -18,7 +18,8 @@ class QuizSpellingMeaningFragment :
     override fun initView() {
         statusBarColorOf(R.color.white)
         initBackNavigationIconClickListener()
-        binding.layoutQuizSpellingMeaningAppbar.count = "1/${mock.size}"
+        binding.layoutQuizSpellingMeaningAppbar.count =
+            getString(R.string.label_quiz_app_bar_count, 1, mock.size)
         binding.type = if (type == Quiz.SPELLING.title) Quiz.SPELLING else Quiz.MEANING
         initMeaningLayout()
     }
@@ -29,7 +30,7 @@ class QuizSpellingMeaningFragment :
         }
     }
 
-    private fun initMeaningLayout() = with(binding) {
+    private fun initMeaningLayout() {
         setQuizWordText(mock[0].first)
         updateMeaningQuestion(mock[0])
         observeQuestionIndex()
@@ -70,7 +71,8 @@ class QuizSpellingMeaningFragment :
             if (index < mock.size) {
                 setQuizWordText(mock[index].first)
                 updateMeaningQuestion(mock[index])
-                binding.layoutQuizSpellingMeaningAppbar.count = "${index + 1}/${mock.size}"
+                binding.layoutQuizSpellingMeaningAppbar.count =
+                    getString(R.string.label_quiz_app_bar_count, index + 1, mock.size)
             } else {
                 navigateToBack()
             }
