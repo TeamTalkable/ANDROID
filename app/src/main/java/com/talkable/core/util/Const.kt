@@ -13,3 +13,7 @@ object DialogKey {
     const val WITHDRAW_DIALOG = "withdraw"
     const val ALARM_SETTING_DIALOG = "alarmSetting"
 }
+
+object BottomSheetKey {
+    const val QUIZ_AUTO_SPEED = "quiz_auto_speed"
+}

@@ -7,21 +7,28 @@ import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.DialogKey
 import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.view.setOnDuplicateBlockClick
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentQuizSpellingMeaningBinding
+import timber.log.Timber
 
 class QuizSpellingMeaningFragment :
     BindingFragment<FragmentQuizSpellingMeaningBinding>(R.layout.fragment_quiz_spelling_meaning) {
 
     private val quizViewModel: QuizViewModel by viewModels()
-    val type = arguments?.getInt(Key.QUIZ_KEY)
+    private var spellingIndex = 0
 
     override fun initView() {
+        val type = arguments?.getInt(Key.QUIZ_KEY)
         statusBarColorOf(R.color.white)
         initBackNavigationIconClickListener()
         binding.layoutQuizSpellingMeaningAppbar.count =
             getString(R.string.label_quiz_app_bar_count, 1, mock.size)
+        Timber.d(type.toString())
         binding.type = if (type == Quiz.SPELLING.title) Quiz.SPELLING else Quiz.MEANING
+        observeQuestionIndex(type)
         initMeaningLayout()
+        initCompleteBtnClickListener()
     }
 
     private fun initBackNavigationIconClickListener() {
@@ -33,7 +40,6 @@ class QuizSpellingMeaningFragment :
     private fun initMeaningLayout() {
         setQuizWordText(mock[0].first)
         updateMeaningQuestion(mock[0])
-        observeQuestionIndex()
     }
 
     private fun setQuizWordText(text: String) {
@@ -58,18 +64,26 @@ class QuizSpellingMeaningFragment :
                 if (allOptions[index] == answer) {
                     quizViewModel.setNextQuestion()
                 } else {
-                    QuizErrorDialog.createNewInstance().show(
-                        childFragmentManager, DialogKey.QUIZ_ERROR_DIALOG
-                    )
+                    showQuizErrorDialog()
                 }
             }
         }
     }
 
-    private fun observeQuestionIndex() {
+    private fun showQuizErrorDialog() {
+        QuizErrorDialog.createNewInstance().show(
+            childFragmentManager, DialogKey.QUIZ_ERROR_DIALOG
+        )
+    }
+
+    private fun observeQuestionIndex(type: Int?) {
+        var question = ""
         quizViewModel.currentQuestionIndex.observe(this) { index ->
+            spellingIndex = index
             if (index < mock.size) {
-                setQuizWordText(mock[index].first)
+                question =
+                    if (type == Quiz.SPELLING.title) mock[index].second else mock[index].first
+                setQuizWordText(question)
                 updateMeaningQuestion(mock[index])
                 binding.layoutQuizSpellingMeaningAppbar.count =
                     getString(R.string.label_quiz_app_bar_count, index + 1, mock.size)
@@ -80,6 +94,23 @@ class QuizSpellingMeaningFragment :
     }
 
     private fun navigateToBack() = findNavController().popBackStack()
+
+    private fun initCompleteBtnClickListener() {
+        binding.btnQuizSpellingMeaningCompelte.setOnDuplicateBlockClick {
+            if (binding.etQuizSpellingUserAnswer.text.toString().lowercase() == mock.get(
+                    spellingIndex
+                ).first.lowercase()
+            ) {
+                binding.tvQuizSpellingAnswer.visible(false)
+                quizViewModel.setNextQuestion()
+            } else {
+                showQuizErrorDialog()
+                binding.tvQuizSpellingAnswer.text = mock[spellingIndex].first
+                binding.tvQuizSpellingMeaningCommand.text = "단어를 따라 적어보세요"
+                binding.tvQuizSpellingAnswer.visible(true)
+            }
+        }
+    }
 
     companion object {
         val mock = listOf(

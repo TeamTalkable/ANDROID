@@ -167,5 +167,22 @@
                 app:chipStrokeWidth="0dp"
                 tools:text="학교" />
         </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quiz_spelling_meaning_compelte"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="27dp"
+            android:layout_marginTop="52dp"
+            android:backgroundTint="@color/main"
+            android:paddingVertical="19dp"
+            android:text="완료"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+            android:textColor="@color/main_3"
+            android:visibility="@{type ==  type.SPELLING  ? View.VISIBLE : View.INVISIBLE}"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
