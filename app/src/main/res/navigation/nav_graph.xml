@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/savedFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -200,10 +200,26 @@
         <action
             android:id="@+id/action_saved_to_quiz_spelling_meaning"
             app:destination="@id/fragment_quiz_spelling_meaning" />
+        <action
+            android:id="@+id/action_saved_to_quiz_flash"
+            app:destination="@id/fragment_quiz_flash" />
+        <action
+            android:id="@+id/action_saved_to_quiz_auto"
+            app:destination="@id/fragment_quiz_auto" />
     </fragment>
     <fragment
         android:id="@+id/fragment_quiz_spelling_meaning"
         android:name="com.talkable.presentation.quiz.QuizSpellingMeaningFragment"
         android:label="QuizSpellingMeaningFragment"
         tools:layout="@layout/fragment_quiz_spelling_meaning"/>
+    <fragment
+        android:id="@+id/fragment_quiz_flash"
+        android:name="com.talkable.presentation.quiz.QuizFlashFragment"
+        android:label="QuizFlashFragment"
+        tools:layout="@layout/fragment_quiz_flash"/>
+    <fragment
+        android:id="@+id/fragment_quiz_auto"
+        android:name="com.talkable.presentation.quiz.QuizAutoFragment"
+        android:label="QuizAutoFragment"
+        tools:layout="@layout/fragment_quiz_auto"/>
 </navigation>

@@ -13,6 +13,8 @@ class QuizCategoryDialog :
     override fun initView() {
         initSpellingClickListener()
         initMeaningClickListener()
+        initFlashClickListener()
+        initAutoClickListener()
     }
 
     override fun onResume() {
@@ -34,9 +36,29 @@ class QuizCategoryDialog :
         }
     }
 
+    private fun initFlashClickListener() {
+        binding.layoutQuizCategoryFlash.layoutQuizDialog.setOnClickListener {
+            dismiss()
+            navigateToFlashFragment()
+        }
+    }
+
+    private fun initAutoClickListener() {
+        binding.layoutQuizCategoryAuto.layoutQuizDialog.setOnClickListener {
+            dismiss()
+            navigateToAutoFragment()
+        }
+    }
+
     private fun navigateToSpellingMeaningFragment(type: Int) = findNavController().navigate(
         R.id.action_saved_to_quiz_spelling_meaning, bundleOf(Key.QUIZ_KEY to type)
     )
+
+    private fun navigateToFlashFragment() =
+        findNavController().navigate(R.id.action_saved_to_quiz_flash)
+
+    private fun navigateToAutoFragment() =
+        findNavController().navigate(R.id.action_saved_to_quiz_auto)
 
     companion object {
         fun createNewInstance() = QuizCategoryDialog()
