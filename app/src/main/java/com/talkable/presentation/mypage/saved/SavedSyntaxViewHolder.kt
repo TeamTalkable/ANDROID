@@ -34,11 +34,15 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
 
     private fun initItemViewClickListener() {
         itemView.setOnClickListener {
-            with(binding) {
-                itemView.isSelected = !itemView.isSelected
-                tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
-                btnSavedWordTag.visibility = if (itemView.isSelected) View.GONE else View.VISIBLE
-            }
+            initSyntaxTranslation()
+        }
+    }
+
+    fun initSyntaxTranslation() {
+        itemView.isSelected = !itemView.isSelected
+        with(binding) {
+            tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
+            btnSavedWordTag.visibility = if (itemView.isSelected) View.GONE else View.VISIBLE
         }
     }
 }
