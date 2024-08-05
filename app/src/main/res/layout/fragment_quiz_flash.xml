@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/layout_quiz_flash_appbar"
+            layout="@layout/view_quiz_app_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/layout_quiz_flash_card"
+            layout="@layout/view_quiz_flash_auto_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="69dp"
+            app:iconVisible="@{true}"
+            app:layout_constraintBottom_toTopOf="@id/tv_quiz_flash_memorized"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_quiz_flash_appbar" />
+
+        <TextView
+            android:id="@+id/tv_quiz_flash_memorized"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="84dp"
+            android:background="@drawable/shape_main1_fill_circle"
+            android:backgroundTint="@color/gray"
+            android:gravity="center"
+            android:paddingVertical="30dp"
+            android:text="@string/tv_saved_memorized"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/tv_quiz_flash_difficult"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_quiz_flash_difficult"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/shape_main1_fill_circle"
+            android:backgroundTint="@color/main"
+            android:gravity="center"
+            android:paddingVertical="30dp"
+            android:text="@string/tv_saved_difficult"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_flash_memorized"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_quiz_flash_memorized" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
