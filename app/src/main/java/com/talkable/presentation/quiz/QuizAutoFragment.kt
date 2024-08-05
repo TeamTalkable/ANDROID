@@ -7,12 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.BottomSheetKey.QUIZ_AUTO_SPEED
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.setOnDuplicateBlockClick
 import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentQuizAutoBinding
 import com.talkable.presentation.quiz.QuizFlashFragment.Companion.mock
 
+//TODO:나중에 REFATOR
 class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragment_quiz_auto) {
 
     private val quizViewModel: QuizViewModel by viewModels()
@@ -26,11 +28,12 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
             getString(R.string.label_quiz_app_bar_count, 1, mock.size)
         initBackPressCallback()
         setRunnable()
-        setFirstFlashAuto()
+        setFlashAutoPlay()
         initBackNavigationIconClickListener()
         initStopFlashAutoBtnClickListener()
         initNextFlashBtnClickListener()
         observeQuestionIndex()
+        initSetTimeBtnClickListener()
     }
 
     override fun onPause() {
@@ -63,7 +66,7 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
         }
     }
 
-    private fun setFirstFlashAuto() {
+    private fun setFlashAutoPlay() {
         binding.ivQuizAutoStop.isSelected = false
         handler.postDelayed({
             handleAnswerViewVisible(true)
@@ -87,7 +90,7 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
             val isSelected = ivQuizAutoStop.isSelected
             if (isSelected) {
                 isAuto = true
-                setFirstFlashAuto()
+                setFlashAutoPlay()
             } else {
                 isAuto = false
                 handler.removeCallbacks(runnable)
@@ -103,7 +106,7 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
                 quizViewModel.setNextQuestion()
             } else {
                 isAuto = true
-                setFirstFlashAuto()
+                setFlashAutoPlay()
             }
         }
     }
@@ -137,4 +140,15 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
     }
 
     private fun navigateToBack() = findNavController().popBackStack()
+
+    private fun initSetTimeBtnClickListener() {
+        binding.ivQuizAutoTime.setOnClickListener {
+            blockFlashAutoHandleCallback()
+            initSetTimeBottomSheet()
+        }
+    }
+
+    private fun initSetTimeBottomSheet() {
+        QuizAutoSpeedBottomSheet().show(childFragmentManager, QUIZ_AUTO_SPEED)
+    }
 }
