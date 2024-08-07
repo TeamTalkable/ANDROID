@@ -34,7 +34,6 @@ class SavedWordFragment :
 
     private fun initSavedWordAdapter() {
         with(binding.rvSavedWord) {
-            layoutManager = LinearLayoutManager(context)
             adapter = SavedWordAdapter(mockData.savedWordList)
         }
     }

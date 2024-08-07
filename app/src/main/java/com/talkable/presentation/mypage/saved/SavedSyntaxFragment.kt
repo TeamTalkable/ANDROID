@@ -34,7 +34,6 @@ class SavedSyntaxFragment :
 
     private fun initSavedSyntaxAdapter() {
         with(binding.rvSavedWord) {
-            layoutManager = LinearLayoutManager(context)
             adapter = SavedSyntaxAdapter(mockData.savedWordList)
         }
     }
