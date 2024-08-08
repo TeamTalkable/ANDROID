@@ -1,5 +1,6 @@
 package com.talkable.presentation.mypage.saved
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
@@ -53,6 +54,16 @@ class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fra
                 else -> emptyList()
             }
             savedWordAdapter.submitList(newData)
+        }
+    }
+
+    companion object {
+        fun newInstance(category: SavedCategory): SavedWordFragment {
+            return SavedWordFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(Constants.KEY_CATEGORY, category)
+                }
+            }
         }
     }
 
