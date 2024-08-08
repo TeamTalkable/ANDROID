@@ -9,122 +9,122 @@
     </style>
 
     <style name="TextAppearance.Talkable.main_b_20">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_m_14">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_m_16">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_m_10">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">10sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_r_12">
-        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:fontFamily">@font/font_pretendard_regular</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_r_14">
-        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:fontFamily">@font/font_pretendard_regular</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_r_16">
-        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:fontFamily">@font/font_pretendard_regular</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.main_sm_20">
-        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:fontFamily">@font/font_pretendard_semibold</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.main_sm_24">
-        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:fontFamily">@font/font_pretendard_semibold</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.main_sm_30">
-        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:fontFamily">@font/font_pretendard_semibold</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.button_b_18">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_m_12">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_b_14">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sub_b_15">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">15sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sb_16">
-        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:fontFamily">@font/font_pretendard_semibold</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.b_16">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.sm_18">
-        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:fontFamily">@font/font_pretendard_semibold</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.b_24">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.b_12">
-        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.m_10">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">10sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.m_16">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.m_20">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.m_32">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">32sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.m_64">
-        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">64sp</item>
     </style>
 </resources>
