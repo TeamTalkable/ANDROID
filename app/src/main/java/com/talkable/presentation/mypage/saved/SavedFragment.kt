@@ -6,8 +6,8 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.databinding.FragmentSavedBinding
 
-class SavedFragment :
-    BindingFragment<FragmentSavedBinding>(R.layout.fragment_saved) {
+class SavedFragment : BindingFragment<FragmentSavedBinding>(R.layout.fragment_saved) {
+
     override fun initView() {
         initBackBtnClickListener()
         initMyFeedbackViewPagerAdapter()
@@ -22,20 +22,9 @@ class SavedFragment :
     private fun navigateToBack() = findNavController().popBackStack()
 
     private fun initMyFeedbackViewPagerAdapter() {
-        binding.vpMyPageSaved.adapter = SavedViewPagerAdapter(this)
-
+        binding.vpMyPageSaved.adapter = SavedViewPagerAdapter(this, SavedCategory.values())
         TabLayoutMediator(binding.tlMyPageSaved, binding.vpMyPageSaved) { tab, position ->
-            tab.text = when (position) {
-                CATEGORY_WORD -> getString(R.string.tv_my_feedback_category_word)
-                CATEGORY_SYNTAX -> getString(R.string.tv_saved_syntax)
-                else -> null
-            }
+            tab.text = SavedCategory.values()[position].label
         }.attach()
-    }
-
-    companion object {
-        const val CATEGORY_WORD = 0
-        const val CATEGORY_SYNTAX = 1
-        const val NO_CHIP_SELECTED = -1
     }
 }
