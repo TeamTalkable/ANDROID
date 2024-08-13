@@ -49,13 +49,13 @@
             android:id="@+id/action_my_page_to_my_page_feedback"
             app:destination="@id/fragment_my_page_feedback" />
         <action
+            android:id="@+id/action_fragment_my_page_to_saved"
+            app:destination="@id/savedFragment"/>
+        <action
             android:id="@+id/action_my_page_to_login"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/fragment_home"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_fragment_my_page_to_saved"
-            app:destination="@id/savedFragment"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
@@ -196,5 +196,30 @@
         android:id="@+id/savedFragment"
         android:name="com.talkable.presentation.mypage.saved.SavedFragment"
         android:label="SavedFragment"
-        tools:layout="@layout/fragment_saved"/>
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_saved_to_quiz_spelling_meaning"
+            app:destination="@id/fragment_quiz_spelling_meaning" />
+        <action
+            android:id="@+id/action_saved_to_quiz_flash"
+            app:destination="@id/fragment_quiz_flash" />
+        <action
+            android:id="@+id/action_saved_to_quiz_auto"
+            app:destination="@id/fragment_quiz_auto" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_quiz_spelling_meaning"
+        android:name="com.talkable.presentation.quiz.QuizSpellingMeaningFragment"
+        android:label="QuizSpellingMeaningFragment"
+        tools:layout="@layout/fragment_quiz_spelling_meaning"/>
+    <fragment
+        android:id="@+id/fragment_quiz_flash"
+        android:name="com.talkable.presentation.quiz.QuizFlashFragment"
+        android:label="QuizFlashFragment"
+        tools:layout="@layout/fragment_quiz_flash"/>
+    <fragment
+        android:id="@+id/fragment_quiz_auto"
+        android:name="com.talkable.presentation.quiz.QuizAutoFragment"
+        android:label="QuizAutoFragment"
+        tools:layout="@layout/fragment_quiz_auto"/>
 </navigation>

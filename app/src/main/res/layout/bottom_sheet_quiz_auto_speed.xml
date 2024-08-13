@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_fill_top_20_rec"
+        android:paddingHorizontal="30dp"
+        android:paddingBottom="17dp">
+
+        <TextView
+            android:id="@+id/tv_quiz_auto_speed_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="읽은 후 넘기기 속도"
+            android:textAppearance="@style/TextAppearance.Talkable.main_sm_20"
+            android:textColor="@color/main"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_quiz_auto_speed_skip_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="바로 넘기기"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_title" />
+
+        <CheckBox
+            android:id="@+id/cb_quiz_auto_speed_skip_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_auto_speed_skip_now"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_quiz_auto_speed_skip_now" />
+
+        <TextView
+            android:id="@+id/tv_quiz_auto_speed_skip_second_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="1초 후 넘기기"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_skip_now" />
+
+        <CheckBox
+            android:id="@+id/cb_quiz_auto_speed_skip_second_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_auto_speed_skip_second_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_quiz_auto_speed_skip_second_1" />
+
+        <TextView
+            android:id="@+id/tv_quiz_auto_speed_skip_second_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="2초 후 넘기기"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_skip_second_1" />
+
+        <CheckBox
+            android:id="@+id/cb_quiz_auto_speed_skip_second_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_auto_speed_skip_second_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_quiz_auto_speed_skip_second_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quiz_auto_speed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:backgroundTint="@color/main"
+            android:paddingVertical="19dp"
+            android:text="완료"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+            android:textColor="@color/main_3"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_skip_second_2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
