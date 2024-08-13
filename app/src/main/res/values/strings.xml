@@ -156,4 +156,10 @@
     <string name="description_quiz_auto">단어 뜻과 발음\n들으며 외우기</string>
     <string name="tv_spelling_meaning_error">오답입니다!</string>
     <string name="label_quiz_app_bar_count">%1$d/%2$d</string>
+    <string name="btn_today_quiz_retry">다시 풀어보기</string>
+    <string name="tv_today_quiz_retry">다시 한번 도전해보세요!</string>
+    <string name="tv_today_quiz_label_bad">오답입니다ㅠㅠ</string>
+    <string name="tv_today_quiz_label_good">정답입니다!</string>
+    <string name="tv_today_quiz_title">오늘의 퀴즈</string>
+    <string name="label_today_quiz_question">%1$s의 뜻이 아닌 것은?</string>
 </resources>
