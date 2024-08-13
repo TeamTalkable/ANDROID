@@ -45,4 +45,5 @@
     <color name="challenge_date">#717171</color>
     <color name="listen_word">#ABABAB</color>
     <color name="indicator">#EDEDED</color>
+    <color name="today_tab_tv">#1D1B20</color>
 </resources>
