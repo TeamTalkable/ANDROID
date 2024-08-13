@@ -92,6 +92,12 @@
     <string name="tv_saved_memorized">외웠어요</string>
     <string name="tv_saved_memorizing">암기 중</string>
 
+    <!--today-->
+    <string name="tv_today_saved_list">오늘 저장한 목록</string>
+    <string name="tv_today_received_feedback">오늘 받은 피드백</string>
+    <string name="tv_today_saved_verb">v. %1$s</string>
+    <string name="tv_today_saved_noun">n. %1$s</string>
+
     <!--feedback-->
     <string name="tv_my_feedback_title">피드백</string>
     <string name="tv_my_feedback_pronunciation">6개의 피드백이 있어요!</string>
