@@ -1,6 +1,8 @@
 package com.talkable.presentation.mypage.saved
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.R
@@ -43,6 +45,18 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
         with(binding) {
             tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
             btnSavedWordTag.visibility = if (itemView.isSelected) View.GONE else View.VISIBLE
+        }
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): SavedSyntaxViewHolder {
+            val binding =
+                ItemSavedSyntaxBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            return SavedSyntaxViewHolder(binding)
         }
     }
 }
