@@ -12,7 +12,7 @@
     <string name="tv_talk_feedback_learned_after_sentence_label">교정된 문장</string>
 
     <!--login-->
-    <string name="login_intro">HAI 대화를 통한\n맞춤형 영어 회화 학습,</string>
+    <string name="login_intro">AI 대화를 통한\n맞춤형 영어 회화 학습,</string>
     <string name="login_sign_up"><u>카카오계정으로 회원가입</u></string>
     <string name="agreement_title">약관을 확인해주세요</string>
     <string name="agreement_all">전체 약관 동의</string>
@@ -86,8 +86,14 @@
     <string name="btn_withdraw_yes">탈퇴</string>
     <string name="btn_withdraw_no">취소</string>
 
+    <!--saved-->
+    <string name="tv_saved_syntax">구문</string>
+    <string name="tv_saved_difficult">어려워요</string>
+    <string name="tv_saved_memorized">외웠어요</string>
+    <string name="tv_saved_memorizing">암기 중</string>
+
     <!--feedback-->
-    <string name="ty_my_feedback_title">피드백</string>
+    <string name="tv_my_feedback_title">피드백</string>
     <string name="tv_my_feedback_pronunciation">6개의 피드백이 있어요!</string>
     <string name="tv_my_feedback_sort_latest">최신 순</string>
     <string name="tv_my_feedback_sort_alphabetical">알파벳 순</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,19 +16,19 @@
         android:background="@color/white">
 
         <include
-            android:id="@+id/layout_my_feedback_app_bar"
+            android:id="@+id/layout_my_page_saved_app_bar"
             layout="@layout/view_my_page_app_bar"
-            app:title="@{`피드백`}" />
+            app:title="@{`저장목록`}" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_my_page_feedback"
+            android:id="@+id/tl_my_page_saved"
             style="@style/Widget.Material3.TabLayout.Secondary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_my_feedback_app_bar"
+            app:layout_constraintTop_toBottomOf="@id/layout_my_page_saved_app_bar"
             app:tabIndicatorFullWidth="true"
             app:tabSelectedTextAppearance="@style/TextAppearance.Talkable.sub_b_14"
             app:tabSelectedTextColor="@color/main"
@@ -37,36 +38,22 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_my_page_chart_label_pronunciation" />
+                tools:text="@string/tv_my_feedback_category_word" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_my_page_chart_label_grammar" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_my_page_feedback_expression" />
+                tools:text="@string/tv_saved_syntax" />
         </com.google.android.material.tabs.TabLayout>
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider_my_feed_back"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            app:dividerColor="@color/tab_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tl_my_page_feedback" />
-
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_my_page_feedback"
+            android:id="@+id/vp_my_page_saved"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="21dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_my_feed_back" />
+            app:layout_constraintTop_toBottomOf="@id/tl_my_page_saved" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

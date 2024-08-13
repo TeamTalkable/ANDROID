@@ -53,6 +53,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/fragment_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_my_page_to_saved"
+            app:destination="@id/savedFragment"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
@@ -189,4 +192,9 @@
             app:popUpTo="@id/alarmSettingFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.talkable.presentation.mypage.saved.SavedFragment"
+        android:label="SavedFragment"
+        tools:layout="@layout/fragment_saved"/>
 </navigation>
