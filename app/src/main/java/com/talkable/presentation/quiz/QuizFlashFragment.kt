@@ -16,7 +16,7 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
     override fun initView() {
         statusBarColorOf(R.color.white)
         binding.layoutQuizFlashAppbar.count =
-            getString(R.string.label_quiz_app_bar_count, 1, mock.size)
+            getString(R.string.label_quiz_app_bar_count, 1, mockLong.size)
         initBackNavigationIconClickListener()
         initKoreanShowBtnClickEvent()
         initFlashLearnStatusLabelClickListener()
@@ -49,10 +49,10 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
 
     private fun observeQuestionIndex() {
         quizViewModel.currentQuestionIndex.observe(this) { index ->
-            if (index < mock.size) {
-                updateNextFlashCard(mock[index])
+            if (index < mockLong.size) {
+                updateNextFlashCard(mockLong[index])
                 binding.layoutQuizFlashAppbar.count =
-                    getString(R.string.label_quiz_app_bar_count, index + 1, mock.size)
+                    getString(R.string.label_quiz_app_bar_count, index + 1, mockLong.size)
             } else {
                 navigateToBack()
             }
@@ -67,7 +67,7 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
     private fun navigateToBack() = findNavController().popBackStack()
 
     companion object {
-        val mock = listOf(
+        val mockLong = listOf(
             Pair("School", "n. 학교\nv. 훈련시키다, 교육시키다"),
             Pair("Book", "n. 책\nv. 예약하다"),
             Pair("Play", "n. 연극\nv. 놀다, 연주하다"),

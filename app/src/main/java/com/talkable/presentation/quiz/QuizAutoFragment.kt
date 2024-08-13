@@ -12,7 +12,7 @@ import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.setOnDuplicateBlockClick
 import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentQuizAutoBinding
-import com.talkable.presentation.quiz.QuizFlashFragment.Companion.mock
+import com.talkable.presentation.quiz.QuizFlashFragment.Companion.mockLong
 
 //TODO:나중에 REFATOR
 class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragment_quiz_auto) {
@@ -25,7 +25,7 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
     override fun initView() {
         statusBarColorOf(R.color.white)
         binding.layoutQuizAutoAppbar.count =
-            getString(R.string.label_quiz_app_bar_count, 1, mock.size)
+            getString(R.string.label_quiz_app_bar_count, 1, mockLong.size)
         initBackPressCallback()
         setRunnable()
         setFlashAutoPlay()
@@ -113,11 +113,11 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
 
     private fun observeQuestionIndex() {
         quizViewModel.currentQuestionIndex.observe(this) { index ->
-            if (index < mock.size) {
-                updateNextFlashCard(mock[index])
+            if (index < mockLong.size) {
+                updateNextFlashCard(mockLong[index])
                 handleAnswerViewVisible(false)
                 binding.layoutQuizAutoAppbar.count =
-                    getString(R.string.label_quiz_app_bar_count, index + 1, mock.size)
+                    getString(R.string.label_quiz_app_bar_count, index + 1, mockLong.size)
             } else {
                 blockFlashAutoHandleCallback()
                 binding.ivQuizAutoStop.isEnabled = false
