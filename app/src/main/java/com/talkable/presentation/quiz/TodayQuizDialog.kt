@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import android.widget.Space
 import androidx.fragment.app.FragmentManager
+import coil.load
 import com.talkable.R
 import com.talkable.core.base.BindingDialogFragment
 import com.talkable.core.util.Key.TODAY_QUIZ_COUNT
@@ -87,6 +88,7 @@ class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.d
                 if (allOptions[index] == otherOptions[0]) {
                     tvTodayQuizEnglish.text = mock[tag].first
                     tvTodayQuizKorean.text = mock[tag].third
+                    binding.ivTodayQuiz.load("https://github.com/user-attachments/assets/b070adad-2b6e-4b0e-81ad-56c63c72f8da")
                     groupTodayQuizGood.visible(true)
                 } else {
                     layoutCard.setBackgroundResource(R.drawable.shape_font5_fill_12_rect)

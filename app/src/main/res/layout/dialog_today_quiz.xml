@@ -165,6 +165,7 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/main"
+                android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="1.5:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
