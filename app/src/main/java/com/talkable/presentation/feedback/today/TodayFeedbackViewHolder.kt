@@ -10,6 +10,10 @@ import com.talkable.presentation.feedback.today.model.TodayFeedback
 
 class FeedbackExpressionViewHolder(private val binding: ItemTodayFeedbackExpressionBinding) :
     RecyclerView.ViewHolder(binding.root) {
+    init {
+        initItemViewClickListener()
+    }
+
     fun onBind(feedbackData: TodayFeedback.Expression, isLastItem: Boolean, isOnlyItem: Boolean) {
         binding.run {
             layoutTodayFeedbackExpression.tvTalkFeedbackLearnedExpressionEnglish.text = feedbackData.english
@@ -21,10 +25,24 @@ class FeedbackExpressionViewHolder(private val binding: ItemTodayFeedbackExpress
             dividerTodayFeedbackExpression.visibility = if (isOnlyItem || isLastItem) View.GONE else View.VISIBLE
         }
     }
+
+    private fun initItemViewClickListener(){
+        with(binding){
+            itemView.setOnClickListener {
+                spaceTodayFeedback.visibility = if (spaceTodayFeedback.visibility == android.view.View.GONE) android.view.View.VISIBLE else android.view.View.GONE
+                layoutTodayFeedback.layoutTodayFeedback.visibility = if (layoutTodayFeedback.layoutTodayFeedback.visibility == android.view.View.GONE) android.view.View.VISIBLE else android.view.View.GONE
+            }
+        }
+    }
 }
+
 
 class FeedbackGrammarViewHolder(private val binding: ItemTodayFeedbackGrammarBinding) :
     RecyclerView.ViewHolder(binding.root) {
+    init {
+        initItemViewClickListener()
+    }
+
     fun onBind(feedbackData: TodayFeedback.Grammar, isLastItem: Boolean, isOnlyItem: Boolean) {
         binding.run {
             layoutTodayFeedbackGrammar.tvMyFeedbackGrammarWrong.text = feedbackData.wrong
@@ -37,10 +55,23 @@ class FeedbackGrammarViewHolder(private val binding: ItemTodayFeedbackGrammarBin
             dividerTodayFeedbackGrammar.visibility = if (isOnlyItem || isLastItem) View.GONE else View.VISIBLE
         }
     }
+
+    private fun initItemViewClickListener(){
+        with(binding){
+            itemView.setOnClickListener {
+                spaceTodayFeedback.visibility = if (spaceTodayFeedback.visibility == View.GONE) View.VISIBLE else View.GONE
+                layoutTodayFeedback.layoutTodayFeedback.visibility = if (layoutTodayFeedback.layoutTodayFeedback.visibility == View.GONE) View.VISIBLE else View.GONE
+            }
+        }
+    }
 }
 
 class FeedbackPronunciationViewHolder(private val binding: ItemTodayFeedbackPronunciationBinding) :
     RecyclerView.ViewHolder(binding.root) {
+    init {
+        initItemViewClickListener()
+    }
+
     fun onBind(feedbackData: TodayFeedback.Pronunciation, isLastItem: Boolean, isOnlyItem: Boolean) {
         val context = binding.root.context
 
@@ -53,6 +84,14 @@ class FeedbackPronunciationViewHolder(private val binding: ItemTodayFeedbackPron
 
             viewTodayFeedbackCircle.visibility = if (isOnlyItem) View.GONE else View.VISIBLE
             dividerTodayFeedbackPronunciation.visibility = if (isOnlyItem || isLastItem) View.GONE else View.VISIBLE
+        }
+    }
+
+    private fun initItemViewClickListener(){
+        with(binding){
+            itemView.setOnClickListener {
+                layoutTodayFeedbackPronunciation.groupTodayFeedbackPronunciation.visibility = if (layoutTodayFeedbackPronunciation.groupTodayFeedbackPronunciation.visibility == View.GONE) View.VISIBLE else View.GONE
+            }
         }
     }
 }
