@@ -154,4 +154,16 @@
     <string name="label_alarm_day_thu">목</string>
     <string name="label_alarm_day_fri">금</string>
     <string name="label_alarm_day_sat">토</string>
+
+    <!--quiz-->
+    <string name="label_quiz_spelling">스펠링</string>
+    <string name="description_quiz_spelling">단어의 철자를\n입력하세요</string>
+    <string name="label_quiz_meaning">뜻맞추기</string>
+    <string name="description_quiz_meaning">문제를 읽고\n정답을 선택하세요</string>
+    <string name="label_quiz_flash">플래시카드</string>
+    <string name="description_quiz_flash">단어 카드를 좌우로\n스와이프 하세요</string>
+    <string name="label_quiz_auto">AUTO</string>
+    <string name="description_quiz_auto">단어 뜻과 발음\n들으며 외우기</string>
+    <string name="tv_spelling_meaning_error">오답입니다!</string>
+    <string name="label_quiz_app_bar_count">%1$d/%2$d</string>
 </resources>

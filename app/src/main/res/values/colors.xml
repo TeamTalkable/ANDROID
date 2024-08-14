@@ -48,4 +48,5 @@
     <color name="today_tab_tv">#1D1B20</color>
     <color name="chip_grammar_bg">#CCD2FA</color>
     <color name="chip_pronunciation_bg">#E0F3B6</color>
+    <color name="listen_word">#ABABAB</color>
 </resources>

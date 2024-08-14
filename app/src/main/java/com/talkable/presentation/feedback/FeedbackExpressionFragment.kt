@@ -37,7 +37,7 @@ class FeedbackExpressionFragment :
         bottomSheetBehavior.expandedOffset = requireContext().pxToDp(80)
         val displayMetrics = Resources.getSystem().displayMetrics
         val screenHeight = displayMetrics.heightPixels
-        val halfScreenHeight = screenHeight / 2
+        val halfScreenHeight = screenHeight / 3
 
         bottomSheetBehavior.peekHeight = halfScreenHeight
     }

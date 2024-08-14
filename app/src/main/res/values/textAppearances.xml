@@ -48,6 +48,16 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="TextAppearance.Talkable.main_sm_24">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.main_sm_30">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <style name="TextAppearance.Talkable.button_b_18">
         <item name="fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">18sp</item>
