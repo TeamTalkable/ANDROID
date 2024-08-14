@@ -15,7 +15,7 @@ class TodaySavedPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (categories[position]) {
             TodaySavedCategory.SAVED -> TodaySavedListFragment.newInstance(categories[position])
-            else -> TodayReceivedFeedbackFragment.newInstance(categories[position])
+            else -> TodayFeedbackFragment.newInstance(categories[position])
         }
     }
 }
