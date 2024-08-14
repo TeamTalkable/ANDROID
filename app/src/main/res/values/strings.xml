@@ -100,6 +100,7 @@
     <string name="tv_today_feedback_corrected">교정된 문장</string>
     <string name="tv_today_saved_pronunciation">[%1$s]</string>
     <string name="tv_today_saved_pronunciation_accuracy">%1$d%%</string>
+    <string name="tv_today_feedback_pronunciation_accuracy">정확도</string>
 
     <!--feedback-->
     <string name="tv_my_feedback_title">피드백</string>
