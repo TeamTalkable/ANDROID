@@ -97,10 +97,13 @@
     <string name="tv_today_received_feedback">오늘 받은 피드백</string>
     <string name="tv_today_saved_verb">v. %1$s</string>
     <string name="tv_today_saved_noun">n. %1$s</string>
+    <string name="tv_today_feedback_corrected">교정된 문장</string>
+    <string name="tv_today_saved_pronunciation">[%1$s]</string>
+    <string name="tv_today_saved_pronunciation_accuracy">%1$d%%</string>
 
     <!--feedback-->
     <string name="tv_my_feedback_title">피드백</string>
-    <string name="tv_my_feedback_pronunciation">6개의 피드백이 있어요!</string>
+    <string name="tv_my_feedback_pronunciation">피드백 6개</string>
     <string name="tv_my_feedback_sort_latest">최신 순</string>
     <string name="tv_my_feedback_sort_alphabetical">알파벳 순</string>
     <string name="tv_my_feedback_category_word">단어</string>
