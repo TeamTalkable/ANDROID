@@ -12,6 +12,7 @@ import com.talkable.core.util.DialogKey.LOGOUT_DIALOG
 import com.talkable.core.util.DialogKey.WITHDRAW_DIALOG
 import com.talkable.core.util.Key.CHART_KEY
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentMyPageBinding
 import com.talkable.presentation.mypage.model.BarChart
 import com.talkable.presentation.mypage.model.CalendarModel
@@ -22,6 +23,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
+import java.util.Random
 
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun initView() {
@@ -99,7 +101,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                         setCalendarVisible(false)
                         setBarChartVisible(true)
                         initMyPageBarChartAdapter(mockWeekBarData)
-                        setChartData(mockWeekChartData)
+                        updateMyPageCalendarChart(true, mockWeekChartData)
                         setMyPageChartLabel(
                             getString(R.string.tv_my_page_chart_recent_week),
                             getString(
@@ -112,7 +114,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                         setCalendarVisible(false)
                         setBarChartVisible(true)
                         initMyPageBarChartAdapter(mockMonthBarData)
-                        binding.model = mockData.copy(chartData = Chart())
+                        updateMyPageCalendarChart(true, mockWeekChartData)
                         setMyPageChartLabel(
                             getString(R.string.tv_my_page_chart_recent_month),
                             getString(
@@ -159,6 +161,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
                         calendar = item[position]
+                        updateMyPageCalendarChart(item[position].isStudy, mockData.chartData)
                     }
 
                     override fun onPageScrolled(
@@ -169,6 +172,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             }
         }
         setDeviceOffset()
+    }
+
+    private fun updateMyPageCalendarChart(isStudy: Boolean, data: Chart) {
+        if (isStudy) binding.model = mockData.copy(chartData = data) else binding.model =
+            mockData.copy(isTodayTalk = false, chartData = Chart())
+        binding.groupMyPageChartLabel.visible(isStudy)
     }
 
     private fun findTodayIndex(data: List<CalendarModel>): Int = data.indexOfFirst {
@@ -209,12 +218,23 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
         val dayOfWeekFormat = SimpleDateFormat("E", Locale.KOREAN)
 
+        val random = Random()
+        val todayCalendar = Calendar.getInstance()
+        val todayYear = todayCalendar.get(Calendar.YEAR)
+        val todayMonth = todayCalendar.get(Calendar.MONTH)
+        val todayDay = todayCalendar.get(Calendar.DAY_OF_MONTH)
+
         for (day in 1..daysInMonth) {
             calendar.set(Calendar.DAY_OF_MONTH, day)
             val weekDay = dayOfWeekFormat.format(calendar.time)
-            listOfDays.add(CalendarModel(weekDay, day))
-        }
 
+            val isStudy = random.nextBoolean()
+            if (year == todayYear && month - 1 == todayMonth && day == todayDay) {
+                listOfDays.add(CalendarModel(weekDay, day, isStudy, true))
+            } else {
+                listOfDays.add(CalendarModel(weekDay, day, isStudy))
+            }
+        }
         return listOfDays
     }
 
@@ -269,7 +289,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             "매일",
             Chart(10, 20, 30, 40, 20, 40, 60, 90, false),
             2024,
-            4
+            8
         )
 
         val mockWeekChartData = Chart(50, 70, 40, 50, 30, 80, 40, 70, false)

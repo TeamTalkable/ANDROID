@@ -18,10 +18,16 @@
 
         <TextView
             android:id="@+id/tv_my_page_calendar_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="23dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_main_fill_8_circle"
+            android:backgroundTint="@{model.isToday ? @color/gray: @color/white}"
+            android:gravity="center"
+            android:includeFontPadding="false"
             android:text="@{model.week}"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            android:textColor="@{model.isToday ? @color/white: @color/gray}"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
