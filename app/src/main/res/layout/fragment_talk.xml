@@ -90,24 +90,24 @@
                 app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble" />
 
             <ImageButton
-                android:id="@+id/btn_talk_translate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/sel_talk_translate_selected"
-                app:layout_constraintBottom_toBottomOf="@id/btn_talk_listen"
-                app:layout_constraintStart_toEndOf="@id/btn_talk_listen"
-                app:layout_constraintTop_toTopOf="@id/btn_talk_listen" />
-
-            <ImageButton
                 android:id="@+id/btn_talk_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/sel_talk_show_selected"
-                app:layout_constraintBottom_toBottomOf="@id/btn_talk_translate"
-                app:layout_constraintStart_toEndOf="@id/btn_talk_translate"
-                app:layout_constraintTop_toTopOf="@id/btn_talk_translate" />
+                app:layout_constraintBottom_toBottomOf="@id/btn_talk_listen"
+                app:layout_constraintStart_toEndOf="@id/btn_talk_listen"
+                app:layout_constraintTop_toTopOf="@id/btn_talk_listen" />
+
+            <ImageButton
+                android:id="@+id/btn_talk_translate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/sel_talk_translate_selected"
+                app:layout_constraintBottom_toBottomOf="@id/btn_talk_show"
+                app:layout_constraintStart_toEndOf="@id/btn_talk_show"
+                app:layout_constraintTop_toTopOf="@id/btn_talk_show" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.Toolbar
