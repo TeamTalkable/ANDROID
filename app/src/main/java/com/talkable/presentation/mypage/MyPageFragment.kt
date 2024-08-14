@@ -188,13 +188,16 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
             page.translationX = position * -offset
             val absPos = Math.abs(position)
-            var alphaByPosition = 1 - absPos
-            if (alphaByPosition < 0.5) {
-                alphaByPosition = 0.5f
+            var alphaByPosition: Float
+            if (absPos <= 3) {
+                alphaByPosition = 0.8f
+            } else {
+                alphaByPosition = 0.3f
             }
             page.alpha = alphaByPosition
             setCalendarCenterDayVisible((position % 1) == 0.0f)
         }
+        vpMyPageCalendar.offscreenPageLimit = 5
     }
 
     private fun getMonthDays(year: Int, month: Int): List<CalendarModel> {
