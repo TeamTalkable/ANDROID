@@ -1,30 +1,44 @@
 package com.talkable.presentation.quiz
 
-import android.content.Context
+import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import android.widget.Space
 import androidx.fragment.app.FragmentManager
 import com.talkable.R
 import com.talkable.core.base.BindingDialogFragment
+import com.talkable.core.util.Key.TODAY_QUIZ_COUNT
 import com.talkable.core.util.context.dialogFragmentResize
+import com.talkable.core.util.fragment.dpToPx
 import com.talkable.core.view.visible
 import com.talkable.databinding.DialogTodayQuizBinding
-import timber.log.Timber
 
 class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.dialog_today_quiz) {
 
     override fun initView() {
-        Timber.d(tag)
         initCancelBtnClickListener()
         initRetryBtnClickListener()
         val count = tag?.toInt() ?: 0
-        addSpaces(count)
         setQuestion(count)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        context?.dialogFragmentResize(this, 30f)
+    }
+
+    //TODO : 다이얼로그 여러개일 때
+    private fun handleMultipleDialog() {
+        val count = arguments?.getInt(TODAY_QUIZ_COUNT, 0) ?: 0
+        if (count > 0) {
+            addSpaces(3 - (tag?.toInt() ?: 0))
+            binding.tvTodayQuizPage.visible(true)
+            binding.tvTodayQuizPage.text = getString(R.string.label_quiz_app_bar_count, 1, count)
+        }
     }
 
     private fun addSpaces(spaces: Int) {
         val parentLayout = binding.layoutRoot
-        for (i in 0 until spaces) {
+        repeat(spaces) {
             val space = Space(parentLayout.context)
             val layoutParams = LayoutParams(
                 LayoutParams.MATCH_PARENT,
@@ -35,15 +49,6 @@ class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.d
         }
     }
 
-    private fun Int.dpToPx(context: Context): Int {
-        return (this * context.resources.displayMetrics.density).toInt()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        context?.dialogFragmentResize(this, 30f)
-    }
-
     private fun initCancelBtnClickListener() {
         binding.ivTodayQuizCancel.setOnClickListener {
             dismiss()
@@ -52,7 +57,7 @@ class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.d
 
     private fun initRetryBtnClickListener() = with(binding) {
         btnTodayQuizRetry.setOnClickListener {
-            root.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
+            layoutCard.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
             groupTodayQuizBad.visible(false)
             groupTodayQuizQuestion.visible(true)
         }
@@ -69,7 +74,7 @@ class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.d
             }
         }
 
-        val allOptions = (selectedList + otherOptions).shuffled()
+        val allOptions = (selectedList + otherOptions[0]).shuffled()
 
         val chips = listOf(
             cgQuizMeaningAnswer1, cgQuizMeaningAnswer2, cgQuizMeaningAnswer3, cgQuizMeaningAnswer4
@@ -84,7 +89,7 @@ class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.d
                     tvTodayQuizKorean.text = mock[tag].third
                     groupTodayQuizGood.visible(true)
                 } else {
-                    root.setBackgroundResource(R.drawable.shape_font5_fill_12_rect)
+                    layoutCard.setBackgroundResource(R.drawable.shape_font5_fill_12_rect)
                     groupTodayQuizBad.visible(true)
                 }
             }
@@ -93,7 +98,11 @@ class TodayQuizDialog : BindingDialogFragment<DialogTodayQuizBinding>(R.layout.d
 
     companion object {
         fun createNewInstance(count: Int, childFragmentManager: FragmentManager) = repeat(count) {
-            TodayQuizDialog().show(childFragmentManager, it.toString())
+            TodayQuizDialog().apply {
+                arguments = Bundle().apply {
+                    putInt(TODAY_QUIZ_COUNT, count)
+                }
+            }.show(childFragmentManager, it.toString())
         }
 
         val mock = listOf(
