@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingHorizontal="22dp">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_today_feedback_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:chipSpacingHorizontal="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_today_expression"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_my_page_feedback_expression"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                app:chipBackgroundColor="@color/sel_today_expression_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_today_grammar"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_my_page_chart_label_grammar"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                app:chipBackgroundColor="@color/sel_today_grammar_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_today_pronunciation"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_my_page_chart_label_pronunciation"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+                app:chipBackgroundColor="@color/sel_today_pronunciation_chip_bg"
+                app:chipCornerRadius="40dp"
+                app:chipStrokeWidth="0dp"
+                app:textEndPadding="21dp"
+                app:textStartPadding="21dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_saved_word"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="42dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cg_today_feedback_list"
+            tools:listitem="@layout/item_today_feedback_expression" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
