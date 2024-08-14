@@ -3,6 +3,7 @@ package com.talkable.presentation.quiz
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
@@ -15,6 +16,7 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
 
     override fun initView() {
         statusBarColorOf(R.color.white)
+        binding.layoutQuizFlashCard.ivQuizAuto.load("https://github.com/user-attachments/assets/b070adad-2b6e-4b0e-81ad-56c63c72f8da")
         binding.layoutQuizFlashAppbar.count =
             getString(R.string.label_quiz_app_bar_count, 1, mockLong.size)
         initBackNavigationIconClickListener()

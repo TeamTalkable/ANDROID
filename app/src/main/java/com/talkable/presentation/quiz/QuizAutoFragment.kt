@@ -5,6 +5,7 @@ import android.os.Looper
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.BottomSheetKey.QUIZ_AUTO_SPEED
@@ -24,6 +25,7 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
 
     override fun initView() {
         statusBarColorOf(R.color.white)
+        binding.layoutQuizAutoCard.ivQuizAuto.load("https://github.com/user-attachments/assets/b070adad-2b6e-4b0e-81ad-56c63c72f8da")
         binding.layoutQuizAutoAppbar.count =
             getString(R.string.label_quiz_app_bar_count, 1, mockLong.size)
         initBackPressCallback()
