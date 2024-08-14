@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_today_feedback_circle"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/shape_font4_fill_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_today_feedback_expression" />
+
+        <TextView
+            android:id="@+id/tv_today_feedback_expression"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:background="@drawable/shape_main1_fill_12_rect"
+            android:paddingHorizontal="21dp"
+            android:paddingVertical="6dp"
+            android:text="@string/tv_my_page_feedback_expression"
+            android:textAppearance="@style/TextAppearance.Talkable.m_10"
+            app:layout_constraintStart_toEndOf="@id/view_today_feedback_circle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_today_feedback_expression"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/font_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/view_today_feedback_circle"
+            app:layout_constraintStart_toStartOf="@id/view_today_feedback_circle"
+            app:layout_constraintTop_toTopOf="@id/view_today_feedback_circle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/shape_gray2_line_rect"
+            android:paddingHorizontal="19dp"
+            android:paddingVertical="23dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_today_feedback_circle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_today_feedback_expression">
+
+            <LinearLayout
+                android:id="@+id/layout_today_feedback_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include
+                    android:id="@+id/layout_today_feedback_expression"
+                    layout="@layout/item_my_feedback_expression" />
+
+                <Space
+                    android:id="@+id/space_today_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/layout_today_feedback"
+                    layout="@layout/item_today_feedback"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
