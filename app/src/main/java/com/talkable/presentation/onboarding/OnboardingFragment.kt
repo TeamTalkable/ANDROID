@@ -1,7 +1,6 @@
 package com.talkable.presentation.onboarding
 
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayoutMediator
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
@@ -18,11 +17,7 @@ class OnboardingFragment() :
 
     private fun initOnboardingAdapter() {
         binding.vpOnboarding.adapter = OnboardingAdapter(this, Onboarding.values())
-        TabLayoutMediator(
-            binding.tlOnboardingIndicator, binding.vpOnboarding
-        ) { tab, position ->
-
-        }.attach()
+        binding.tlOnboardingIndicator.attachTo(binding.vpOnboarding)
     }
 
     private fun initStartBtnClickListener() {
