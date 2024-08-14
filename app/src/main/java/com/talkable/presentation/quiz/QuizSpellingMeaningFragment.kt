@@ -97,10 +97,8 @@ class QuizSpellingMeaningFragment :
 
     private fun initCompleteBtnClickListener() {
         binding.btnQuizSpellingMeaningCompelte.setOnDuplicateBlockClick {
-            if (binding.etQuizSpellingUserAnswer.text.toString().lowercase() == mock.get(
-                    spellingIndex
-                ).first.lowercase()
-            ) {
+            if (binding.etQuizSpellingUserAnswer.text.toString().equals(mock[spellingIndex].first, ignoreCase = true))
+            {
                 binding.tvQuizSpellingAnswer.visible(false)
                 quizViewModel.setNextQuestion()
             } else {
