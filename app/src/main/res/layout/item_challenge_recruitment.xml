@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/font_5"
-            app:cardElevation="0dp"
             app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -42,8 +42,8 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="27dp"
                     android:text="@string/tv_challenge_participation_date"
-                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-                    android:textColor="@color/gray"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+                    android:textColor="@color/challenge_date"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_challenge_recruitment_item" />
 
