@@ -159,15 +159,16 @@
             app:layout_constraintTop_toBottomOf="@id/btn_agreement_privacy" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="27dp"
             android:text="@string/agreement_marketing"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
             android:textColor="@color/gray"
-            app:layout_constraintStart_toEndOf="@+id/btn_agreement_marketing"
-            app:layout_constraintTop_toTopOf="@+id/btn_agreement_marketing" />
+            app:layout_constraintEnd_toEndOf="@id/divider_agreement"
+            app:layout_constraintStart_toEndOf="@id/btn_agreement_marketing"
+            app:layout_constraintTop_toTopOf="@id/btn_agreement_marketing" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_agreement_start"
