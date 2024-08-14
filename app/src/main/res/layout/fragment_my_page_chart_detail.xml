@@ -54,6 +54,13 @@
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_detail_title"
             app:layout_goneMarginTop="40dp" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_my_page_chart_detail_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{chart.isEmpty ? View.INVISIBLE : View.VISIBLE }"
+            app:constraint_referenced_ids="tv_my_page_chart_label_grammar, tv_my_page_chart_label_pronunciation, tv_my_page_chart_label_Listening, tv_my_page_chart_label_Listening" />
+
         <TextView
             android:id="@+id/tv_my_page_chart_label_grammar"
             android:layout_width="wrap_content"
