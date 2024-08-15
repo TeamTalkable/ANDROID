@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_today_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_today_feedback_before"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_gray_fill_12_rect"
+            android:backgroundTint="@color/font_5"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="14dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/dummy" />
+
+        <ImageView
+            android:id="@+id/iv_today_feedback_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:src="@drawable/ic_feedback_arrow_down"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_today_feedback_before" />
+
+        <TextView
+            android:id="@+id/tv_today_feedback_after"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_gray_fill_12_rect"
+            android:backgroundTint="@color/main_3"
+            android:paddingHorizontal="35dp"
+            android:paddingVertical="27dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_b_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_today_feedback_arrow"
+            tools:text="@string/dummy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_font4_fill_40_rect"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="2dp"
+            android:text="@string/tv_today_feedback_corrected"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
+            android:textColor="@color/gray_2_56"
+            app:layout_constraintStart_toStartOf="@id/tv_today_feedback_after"
+            app:layout_constraintTop_toBottomOf="@id/iv_today_feedback_arrow" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

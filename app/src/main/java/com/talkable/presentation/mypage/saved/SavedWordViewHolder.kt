@@ -1,6 +1,8 @@
 package com.talkable.presentation.mypage.saved
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.R
@@ -48,6 +50,16 @@ class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
         private const val TYPE_DIFFICULT = 0
         private const val TYPE_MEMORIZED = 1
         private const val TYPE_MEMORIZING = 2
+
+        fun from(parent: ViewGroup): SavedWordViewHolder {
+            val binding =
+                ItemSavedWordBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            return SavedWordViewHolder(binding)
+        }
 
         val backgroundColors = mapOf(
             TYPE_DIFFICULT to R.drawable.shape_main_fill_12_rect,

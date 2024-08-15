@@ -1,16 +1,18 @@
 package com.talkable.presentation.mypage.saved
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentSavedWordBinding
-import com.talkable.presentation.mypage.saved.SavedFragment.Companion.NO_CHIP_SELECTED
 import com.talkable.presentation.mypage.saved.model.SavedListModel
 import com.talkable.presentation.mypage.saved.model.SavedWord
 
-class SavedWordFragment :
-    BindingFragment<FragmentSavedWordBinding>(R.layout.fragment_saved_word) {
+class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fragment_saved_word) {
+
+    private lateinit var savedWordAdapter: SavedWordAdapter
+
     override fun initView() {
         statusBarColorOf(R.color.main_3)
         initSavedWordAdapter()
@@ -33,44 +35,39 @@ class SavedWordFragment :
     }
 
     private fun initSavedWordAdapter() {
+        savedWordAdapter = SavedWordAdapter()
         with(binding.rvSavedWord) {
+            adapter = savedWordAdapter
             layoutManager = LinearLayoutManager(context)
-            adapter = SavedWordAdapter(mockData.savedWordList)
         }
+        // Set initial data
+        savedWordAdapter.submitList(mockData.savedWordList)
     }
 
     private fun initSavedWordChipClickListener() {
-        binding.layoutSavedSort.cgSavedList.setOnCheckedStateChangeListener { chipGroup, ints ->
-            when (chipGroup.checkedChipId) {
-                NO_CHIP_SELECTED -> {
-                    initSavedWordAdapter()
-                }
+        binding.layoutSavedSort.cgSavedList.setOnCheckedStateChangeListener { chipGroup, _ ->
+            val newData = when (chipGroup.checkedChipId) {
+                Constants.NO_CHIP_SELECTED -> mockData.savedWordList
+                R.id.chip_saved_difficult -> difficultWord.savedWordList
+                R.id.chip_saved_memorizing -> memorizingWord.savedWordList
+                R.id.chip_saved_memorized -> memorizedWord.savedWordList
+                else -> emptyList()
+            }
+            savedWordAdapter.submitList(newData)
+        }
+    }
 
-                R.id.chip_saved_difficult -> {
-                    with(binding.rvSavedWord) {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = SavedWordAdapter(difficultWord.savedWordList)
-                    }
-                }
-
-                R.id.chip_saved_memorizing -> {
-                    with(binding.rvSavedWord) {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = SavedWordAdapter(memorizingWord.savedWordList)
-                    }
-                }
-
-                R.id.chip_saved_memorized -> {
-                    with(binding.rvSavedWord) {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = SavedWordAdapter(memorizedWord.savedWordList)
-                    }
+    companion object {
+        fun newInstance(category: SavedCategory): SavedWordFragment {
+            return SavedWordFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(Constants.KEY_CATEGORY, category)
                 }
             }
         }
     }
 
-    val mockData = SavedListModel(
+    private val mockData = SavedListModel(
         savedWordId = 1,
         savedWordList = listOf(
             SavedWord(
@@ -94,7 +91,7 @@ class SavedWordFragment :
         )
     )
 
-    val difficultWord = SavedListModel(
+    private val difficultWord = SavedListModel(
         savedWordId = 2,
         savedWordList = listOf(
             SavedWord(
@@ -118,7 +115,7 @@ class SavedWordFragment :
         )
     )
 
-    val memorizingWord = SavedListModel(
+    private val memorizingWord = SavedListModel(
         savedWordId = 3,
         savedWordList = listOf(
             SavedWord(
@@ -142,7 +139,7 @@ class SavedWordFragment :
         )
     )
 
-    val memorizedWord = SavedListModel(
+    private val memorizedWord = SavedListModel(
         savedWordId = 4,
         savedWordList = listOf(
             SavedWord(

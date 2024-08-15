@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_today_saved_circle"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/shape_font4_fill_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/layout_today_saved" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_today_saved"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/font_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/view_today_saved_circle"
+            app:layout_constraintStart_toStartOf="@id/view_today_saved_circle"
+            app:layout_constraintTop_toTopOf="@id/view_today_saved_circle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_today_saved"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/shape_gray2_line_rect"
+            android:paddingBottom="29dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_today_saved_circle"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_today_saved_word"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginVertical="35dp"
+                android:layout_marginTop="23dp"
+                android:textAppearance="@style/TextAppearance.Talkable.b_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/tv_talk_english" />
+
+            <TextView
+                android:id="@+id/tv_today_saved_verb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                app:layout_constraintEnd_toEndOf="@id/tv_today_saved_word"
+                app:layout_constraintStart_toStartOf="@id/tv_today_saved_word"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_saved_word"
+                tools:text="@string/tv_today_saved_verb" />
+
+            <TextView
+                android:id="@+id/tv_today_saved_noun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                app:layout_constraintEnd_toEndOf="@id/tv_today_saved_verb"
+                app:layout_constraintStart_toStartOf="@id/tv_today_saved_verb"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_saved_verb"
+                tools:text="@string/tv_today_saved_noun" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
