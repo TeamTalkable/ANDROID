@@ -299,6 +299,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_before" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_my_page_chart_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{model.chartData.isEmpty ? View.INVISIBLE : View.VISIBLE }"
+                app:constraint_referenced_ids="tv_my_page_chart_label_grammar, tv_my_page_chart_label_expression, tv_my_page_chart_label_Listening, tv_my_page_chart_label_pronunciation" />
+
             <TextView
                 android:id="@+id/tv_my_page_chart_label_grammar"
                 android:layout_width="wrap_content"

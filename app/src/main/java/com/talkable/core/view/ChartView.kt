@@ -22,6 +22,8 @@ class ChartView @JvmOverloads constructor(
     private val path = Path()
     private val paintAfterFill = Paint(Paint.ANTI_ALIAS_FLAG)
     private val paintBeforeFill = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val paintSelectFill = Paint(Paint.ANTI_ALIAS_FLAG)
+    private var selectedSector = com.talkable.core.view.Chart.EMPTY
 
     private lateinit var userChartPercentage: Chart
 
@@ -29,10 +31,16 @@ class ChartView @JvmOverloads constructor(
         setCircleStyle()
         setFillCircleStyle(R.color.main_2, paintAfterFill)
         setFillCircleStyle(R.color.chart_before, paintBeforeFill)
+        setFillCircleStyle(R.color.main_1, paintSelectFill)
     }
 
     fun setChartPercentage(percentage: Chart) {
         userChartPercentage = percentage
+        invalidate()
+    }
+
+    fun updateChartSelected(sector: com.talkable.core.view.Chart) {
+        selectedSector = sector
         invalidate()
     }
 
@@ -133,25 +141,25 @@ class ChartView @JvmOverloads constructor(
             setRectF(cx, cy, expressionPercentage * radius),
             FIRST_PIECE_ANGLE,
             canvas,
-            paint
+            if (selectedSector == com.talkable.core.view.Chart.EXPRESSION && paint != paintBeforeFill) paintSelectFill else paint
         )
         drawArc(
             setRectF(cx, cy, grammarPercentage * radius),
             SECOND_PIECE_ANGLE,
             canvas,
-            paint
+            if (selectedSector == com.talkable.core.view.Chart.GRAMMAR && paint != paintBeforeFill) paintSelectFill else paint
         )
         drawArc(
             setRectF(cx, cy, pronunciationPercentage * radius),
             THIRD_PIECE_ANGLE,
             canvas,
-            paint
+            if (selectedSector == com.talkable.core.view.Chart.PRONUNCIATION && paint != paintBeforeFill) paintSelectFill else paint
         )
         drawArc(
-            setRectF(cx, cy, (listeningPercentage * radius).toFloat()),
+            setRectF(cx, cy, (listeningPercentage * radius)),
             FOURTH_PIECE_ANGLE,
             canvas,
-            paint
+            if (selectedSector == com.talkable.core.view.Chart.LISTENING && paint != paintBeforeFill) paintSelectFill else paint
         )
     }
 
@@ -173,4 +181,12 @@ class ChartView @JvmOverloads constructor(
         const val THIRD_PIECE_ANGLE = 90f
         const val FOURTH_PIECE_ANGLE = 0f
     }
+}
+
+enum class Chart {
+    EXPRESSION,
+    GRAMMAR,
+    PRONUNCIATION,
+    LISTENING,
+    EMPTY
 }

@@ -1,5 +1,6 @@
 package com.talkable.core.util.fragment
 
+import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -40,4 +41,8 @@ fun Fragment.statusBarColorOf(
     @ColorRes resId: Int
 ) {
     requireActivity().statusBarColorOf(resId)
+}
+
+fun Int.dpToPx(context: Context): Int {
+    return (this * context.resources.displayMetrics.density).toInt()
 }

@@ -34,6 +34,7 @@ material = "1.12.0"
 # Third Party
 retrofit2 = "2.9.0"
 lottie = "6.1.0"
+dot-indicator = "5.0"
 
 # Test
 junit = "4.13.2"
@@ -72,6 +73,7 @@ coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+dot-indicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dot-indicator" }
 
 # Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }

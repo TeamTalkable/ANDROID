@@ -49,4 +49,5 @@ data class CalendarModel(
     val week: String,
     val date: Int,
     val isStudy: Boolean = false,
+    val isToday: Boolean = false
 )

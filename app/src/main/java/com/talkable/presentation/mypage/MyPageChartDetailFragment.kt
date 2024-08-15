@@ -35,14 +35,29 @@ class MyPageChartDetailFragment :
     }
 
     private fun initFeedbackDetailChipClickListener() {
+        binding.cvMyPageChart.updateChartSelected(com.talkable.core.view.Chart.GRAMMAR)
         binding.cgMyPageChartDetail.setOnCheckedStateChangeListener { chipGroup, ints ->
             with(binding.tvMyPageChartDetailDescription) {
                 when (chipGroup.checkedChipId) {
-                    R.id.chip_my_page_chart_detail_grammar -> text = mockData.grammarDetail
-                    R.id.chip_my_page_chart_detail_expression -> text = mockData.expressionDetail
-                    R.id.chip_my_page_chart_detail_listening -> text = mockData.listeningDetail
-                    R.id.chip_my_page_chart_detail_pronunciation -> text =
-                        mockData.pronunciationDetail
+                    R.id.chip_my_page_chart_detail_grammar -> {
+                        binding.cvMyPageChart.updateChartSelected(com.talkable.core.view.Chart.GRAMMAR)
+                        text = mockData.grammarDetail
+                    }
+
+                    R.id.chip_my_page_chart_detail_expression -> {
+                        binding.cvMyPageChart.updateChartSelected(com.talkable.core.view.Chart.EXPRESSION)
+                        text = mockData.expressionDetail
+                    }
+
+                    R.id.chip_my_page_chart_detail_listening -> {
+                        binding.cvMyPageChart.updateChartSelected(com.talkable.core.view.Chart.LISTENING)
+                        text = mockData.listeningDetail
+                    }
+
+                    R.id.chip_my_page_chart_detail_pronunciation -> {
+                        binding.cvMyPageChart.updateChartSelected(com.talkable.core.view.Chart.PRONUNCIATION)
+                        text = mockData.pronunciationDetail
+                    }
                 }
             }
         }
