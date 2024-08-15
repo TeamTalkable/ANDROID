@@ -36,6 +36,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/img_home_logo" />
 
+            <TextView
+                android:id="@+id/tv_home_quiz_label"
+                android:layout_width="18dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="-7dp"
+                android:layout_marginEnd="-5dp"
+                android:background="@drawable/shape_main_fill_8_circle"
+                android:backgroundTint="@color/main_5"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="1"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                android:textColor="@color/white"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="@id/ic_home_quiz"
+                app:layout_constraintTop_toTopOf="@id/ic_home_quiz" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_home_main"
                 android:layout_width="0dp"

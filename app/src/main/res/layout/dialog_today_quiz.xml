@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_white_fill_12_rect"
+            android:paddingBottom="37dp">
+
+            <ImageView
+                android:id="@+id/iv_today_quiz_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_my_page_cancel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="@string/tv_today_quiz_title"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_today_quiz_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_today_quiz_question, cg_today_quiz_answer" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_question"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="60dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_title"
+                tools:text="school의 뜻이 아닌 것은?" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_today_quiz_answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="24dp"
+                app:chipSpacingVertical="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_question"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cg_quiz_meaning_answer_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                    android:textColor="@color/sel_pronunciation_word_text"
+                    app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                    app:chipCornerRadius="12dp"
+                    app:chipMinTouchTargetSize="0dp"
+                    app:chipStrokeWidth="0dp"
+                    app:rippleColor="@null"
+                    tools:text="학교" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cg_quiz_meaning_answer_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                    android:textColor="@color/sel_pronunciation_word_text"
+                    app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                    app:chipCornerRadius="12dp"
+                    app:chipMinTouchTargetSize="0dp"
+                    app:chipStrokeWidth="0dp"
+                    tools:text="학교" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cg_quiz_meaning_answer_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                    android:textColor="@color/sel_pronunciation_word_text"
+                    app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                    app:chipCornerRadius="12dp"
+                    app:chipMinTouchTargetSize="0dp"
+                    app:chipStrokeWidth="0dp"
+                    tools:text="학교" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cg_quiz_meaning_answer_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                    android:textColor="@color/sel_pronunciation_word_text"
+                    app:chipBackgroundColor="@color/sel_quiz_word_chip"
+                    app:chipCornerRadius="12dp"
+                    app:chipMinTouchTargetSize="0dp"
+                    app:chipStrokeWidth="0dp"
+                    tools:text="학교" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_today_quiz_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="iv_today_quiz_good, iv_today_quiz, tv_today_quiz_english, tv_today_quiz_korean, tv_today_quiz_label_good" />
+
+            <ImageView
+                android:id="@+id/iv_today_quiz_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/ic_today_quiz_good"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_title" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_label_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tv_today_quiz_label_good"
+                android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_today_quiz_good" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_today_quiz"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_2_56"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1.5:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_label_good"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_english"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="13dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.main_sm_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_today_quiz"
+                tools:text="school" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_korean"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="12dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_english"
+                tools:text="n. 학교" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_today_quiz_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="iv_today_quiz_bad, tv_today_quiz_label_bad, tv_today_quiz_retry, btn_today_quiz_retry" />
+
+            <ImageView
+                android:id="@+id/iv_today_quiz_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/ic_today_quiz_bad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_title" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_label_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tv_today_quiz_label_bad"
+                android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_today_quiz_bad" />
+
+            <TextView
+                android:id="@+id/tv_today_quiz_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="63dp"
+                android:text="@string/tv_today_quiz_retry"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_label_bad" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_today_quiz_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="@color/white"
+                android:paddingHorizontal="23dp"
+                android:paddingVertical="15dp"
+                android:text="@string/btn_today_quiz_retry"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+                android:textColor="@color/main"
+                app:cornerRadius="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_quiz_retry" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tv_today_quiz_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="42dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:text="1/3" />
+    </LinearLayout>
+</layout>

@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlin.coroutines)
+    implementation(libs.dot.indicator)
 
     // Coil
     implementation(libs.coil)

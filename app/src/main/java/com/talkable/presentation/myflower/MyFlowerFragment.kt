@@ -1,7 +1,6 @@
 package com.talkable.presentation.myflower
 
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayoutMediator
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
@@ -17,7 +16,7 @@ class MyFlowerFragment : BindingFragment<FragmentMyFlowerBinding>(R.layout.fragm
 
     private fun initMyFlowerAdapter() = with(binding) {
         vpMyFlower.adapter = MyFlowerAdapter(this@MyFlowerFragment)
-        TabLayoutMediator(tlMyFlowerIndicator, vpMyFlower) { tab, position -> }.attach()
+        binding.tlMyFlowerIndicator.attachTo(binding.vpMyFlower)
     }
 
     private fun navigateToBack() {

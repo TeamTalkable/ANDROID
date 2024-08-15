@@ -4,14 +4,24 @@ import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentHomeBinding
+import com.talkable.presentation.quiz.TodayQuizDialog
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun initView() {
         statusBarColorOf(R.color.white)
+        initQuizBtnClickListener()
         initViewPagerAdapter()
         initStartBtnClickListener()
         setLearningTextView()
+    }
+
+    private fun initQuizBtnClickListener() {
+        binding.icHomeQuiz.setOnClickListener {
+            binding.tvHomeQuizLabel.visible(false)
+            TodayQuizDialog.createNewInstance(1, childFragmentManager)
+        }
     }
 
     private fun setLearningTextView() {

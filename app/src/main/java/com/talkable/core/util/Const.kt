@@ -4,6 +4,7 @@ object Key {
     const val CHART_KEY = "chart"
     const val QUIZ_KEY = "quiz"
     const val ONBOARDING_KEY = "onboarding"
+    const val TODAY_QUIZ_COUNT = "today_quiz_count"
 }
 
 object DialogKey {
