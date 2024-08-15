@@ -154,21 +154,24 @@
             android:text="@string/tv_home_learning_feedback"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/gray"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_home_learning_storage"
+            app:layout_constraintBottom_toBottomOf="@id/tv_home_learning_storage"
+            app:layout_constraintEnd_toStartOf="@id/btn_home_learning_review"
             app:layout_constraintStart_toEndOf="@id/tv_home_learning_storage"
             app:layout_constraintTop_toTopOf="@id/tv_home_learning_storage" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_home_learning_review"
             style="@style/AppButtonOnPrimary"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="34dp"
+            android:layout_marginEnd="35dp"
             android:background="@drawable/shape_main1_fill_12_rect"
             android:text="@string/tv_home_learning_review"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_home_learning_feedback"
             app:layout_constraintTop_toTopOf="@id/tv_home_learning_time" />
 
         <androidx.constraintlayout.widget.Group
