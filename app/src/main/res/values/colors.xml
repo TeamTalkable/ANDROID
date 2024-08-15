@@ -43,6 +43,9 @@
     <color name="speech_bg">#EFEFEF</color>
     <color name="brown">#E1C19E</color>
     <color name="challenge_date">#717171</color>
-    <color name="indicator">#EDEDED</color>
     <color name="listen_word">#ABABAB</color>
+    <color name="indicator">#EDEDED</color>
+    <color name="today_tab_tv">#1D1B20</color>
+    <color name="chip_grammar_bg">#CCD2FA</color>
+    <color name="chip_pronunciation_bg">#E0F3B6</color>
 </resources>

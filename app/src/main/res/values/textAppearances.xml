@@ -93,14 +93,19 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="TextAppearance.Talkable.b_24">
+    <style name="TextAppearance.Talkable.b_12">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Talkable.b_21">
         <item name="fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="TextAppearance.Talkable.b_12">
+    <style name="TextAppearance.Talkable.b_24">
         <item name="fontFamily">@font/font_pretendard_bold</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.Talkable.m_10">
