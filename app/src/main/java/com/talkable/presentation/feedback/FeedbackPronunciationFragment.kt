@@ -1,6 +1,8 @@
 package com.talkable.presentation.feedback
 
+import android.media.MediaPlayer
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
@@ -10,11 +12,16 @@ import com.talkable.databinding.FragmentFeedbackPronunciationBinding
 import com.talkable.presentation.FeedbackTextColor
 import com.talkable.presentation.feedback.model.FeedbackPronunciationModel
 import com.talkable.presentation.talk.feedback.model.Learned
+import timber.log.Timber
 
 class FeedbackPronunciationFragment :
     BindingFragment<FragmentFeedbackPronunciationBinding>(R.layout.fragment_feedback_pronunciation) {
+
+    private var englishWord: String? = null
+
     override fun initView() {
         statusBarColorOf(R.color.white)
+        binding.bnvFeedbackPronunciation.itemIconTintList = null
         binding.model = mockData
         setAfterAnswerTextColor(mockData.fullAnswer, mockData.answerParts)
         initPronunciationWordAdapter()
@@ -35,14 +42,14 @@ class FeedbackPronunciationFragment :
     private fun navigateToTalkFragment() = findNavController().navigate(R.id.fragment_talk)
 
     private fun initPronunciationWordAdapter() {
-        binding.rvFeedbackPronunciation.adapter =
-            FeedbackPronunciationWordAdapter(
-                requireContext(),
-                onClickWordItem = { data, isSelected ->
-                    handleWordItemClick(data, isSelected)
-                }).apply {
-                submitList(mockData.learnedPronunciation)
-            }
+        binding.rvFeedbackPronunciation.adapter = FeedbackPronunciationWordAdapter(requireContext(),
+            onClickWordItem = { data, isSelected ->
+                handleWordItemClick(data, isSelected)
+                englishWord = if (!isSelected) data.englishWord else null
+                Timber.e(englishWord.toString())
+            }).apply {
+            submitList(mockData.learnedPronunciation)
+        }
     }
 
     private fun handleWordItemClick(data: Learned.Pronunciation, isSelected: Boolean) =
@@ -80,12 +87,51 @@ class FeedbackPronunciationFragment :
     }
 
     private fun initBottomNavigationItemClickListener() {
+        val mediaScienceUserPlayer = MediaPlayer.create(binding.root.context, R.raw.science_user)
+        val mediaTodayUserPlayer = MediaPlayer.create(binding.root.context, R.raw.today_user)
+        val mediaSciencePlayer = MediaPlayer.create(binding.root.context, R.raw.science)
+        val mediaTodayPlayer = MediaPlayer.create(binding.root.context, R.raw.today)
+
         binding.bnvFeedbackPronunciation.setOnItemSelectedListener {
-            when (it.itemId) {
+            if (englishWord != null) when (it.itemId) {
                 R.id.mick -> handleMickItemEvent(true)
+                R.id.ai_voice -> {
+                    binding.bnvFeedbackPronunciation.itemIconTintList =
+                        ContextCompat.getColorStateList(
+                            binding.root.context, R.color.sel_quiz_flash_icon
+                        )
+                    initVoiceBtnClickListener(mediaSciencePlayer, mediaTodayPlayer)
+                }
+
+                R.id.user_voice -> {
+                    binding.bnvFeedbackPronunciation.itemIconTintList =
+                        ContextCompat.getColorStateList(
+                            binding.root.context, R.color.sel_quiz_flash_icon
+                        )
+                    initVoiceBtnClickListener(
+                        mediaScienceUserPlayer, mediaTodayUserPlayer
+                    )
+                }
+
                 else -> Unit
             }
             true
+        }
+
+    }
+
+    private fun initVoiceBtnClickListener(
+        playerScience: MediaPlayer, playerToday: MediaPlayer
+    ) {
+        val mediaPlayer = if (englishWord == "science") {
+            playerScience
+        } else {
+            playerToday
+        }
+
+        mediaPlayer.start()
+        mediaPlayer.setOnCompletionListener {
+            binding.bnvFeedbackPronunciation.itemIconTintList = null
         }
     }
 
@@ -105,12 +151,14 @@ class FeedbackPronunciationFragment :
 
     private fun initRecordCancelClickListener() {
         binding.ivFeedbackPronunciatoinTrash.setOnClickListener {
+
             handleMickItemEvent(false)
         }
     }
 
     private fun initRecordCheckClickListener() {
         binding.ivFeedbackPronunciationCheck.setOnClickListener {
+
             handleMickItemEvent(false)
             FeedbackPronunciationCompleteDialog().show(childFragmentManager, PRONUNCIATION_DIALOG)
         }
@@ -135,8 +183,7 @@ class FeedbackPronunciationFragment :
                     pronunciationEnglish = "[ ˈsaɪəns ]",
                     koreanWord = "과학",
                     wordAccuracy = "70"
-                ),
-                Learned.Pronunciation(
+                ), Learned.Pronunciation(
                     type = "발음",
                     englishWord = "today",
                     pronunciationEnglish = "[ ˈtodai ]",
