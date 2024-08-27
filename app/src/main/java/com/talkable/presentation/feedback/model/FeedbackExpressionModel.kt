@@ -5,6 +5,7 @@ import com.talkable.presentation.talk.feedback.model.Learned
 data class FeedbackExpressionModel(
     val feedbackId: Int,
     val question: String,
+    val korean: String,
     val beforeAnswer: String,
     val afterFullAnswer: String,
     val afterAnswerParts: List<String>,
