@@ -43,11 +43,11 @@
                     android:id="@+id/tv_challenge_participation_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="23dp"
                     android:text="@string/tv_challenge_participation_title"
-                    android:textAppearance="@style/TextAppearance.Talkable.main_sm_20"
+                    android:textAppearance="@style/TextAppearance.Talkable.sm_19"
                     app:layout_constraintBottom_toBottomOf="@id/iv_challenge_participation_item"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_challenge_participation_item"
                     app:layout_constraintTop_toTopOf="@id/iv_challenge_participation_item" />
 
                 <ImageView
@@ -95,9 +95,9 @@
                     android:text="@string/tv_challenge_participation_progress"
                     android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
                     android:textColor="@color/font_4"
-                    app:layout_constraintBottom_toBottomOf="@+id/progressbar_challenge_participation"
-                    app:layout_constraintEnd_toEndOf="@+id/progressbar_challenge_participation"
-                    app:layout_constraintTop_toTopOf="@+id/progressbar_challenge_participation" />
+                    app:layout_constraintBottom_toBottomOf="@id/progressbar_challenge_participation"
+                    app:layout_constraintEnd_toEndOf="@id/progressbar_challenge_participation"
+                    app:layout_constraintTop_toTopOf="@id/progressbar_challenge_participation" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
