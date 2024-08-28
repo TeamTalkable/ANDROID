@@ -17,13 +17,16 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.context.pxToDp
 import com.talkable.databinding.FragmentTalkBinding
+import com.talkable.presentation.firstTalk
 import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
 
-    var clickCount = FIRST_CLICK
+    private var clickCount = FIRST_CLICK
 
     override fun initView() {
+        initGuideLayoutVisible()
+        initTalkFeedbackVisible()
         initAppbarCancelClickListener()
         initGuideLayoutClickListener()
         setRandomVideo()
@@ -35,6 +38,42 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initHintTextViewClickListener()
         initTalkAdapter()
         initSpeakCompleteBtnClickListener()
+        initTalkStackBtnClickListener()
+    }
+
+    private fun initGuideLayoutVisible() {
+        with(binding.includeLayoutTalkGuide) {
+            if (firstTalk) {
+                layoutTalkGuide.visibility = VISIBLE
+            } else {
+                layoutTalkGuide.visibility = GONE
+            }
+        }
+    }
+
+    private fun initTalkFeedbackVisible() {
+        if (!firstTalk) {
+            showFeedbackRetryDialog()
+            delayedTalkFeedbackDialog()
+        }
+    }
+
+    private fun showFeedbackRetryDialog() {
+        FeedbackRetryDialog().show(
+            childFragmentManager, TALK_DIALOG
+        )
+    }
+
+    private fun delayedTalkFeedbackDialog() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            showTalkFeedbackDialog()
+        }, 3000)
+    }
+
+    private fun showTalkFeedbackDialog() {
+        TalkFeedbackDialog().show(
+            childFragmentManager, TALK_DIALOG
+        )
     }
 
     private fun initAppbarCancelClickListener() {
@@ -49,6 +88,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initSpeakCompleteBtnClickListener() {
         binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
             navigateToFeedbackLoadingFragment()
+        }
+    }
+
+    private fun navigateToSavedFeedback() =
+        findNavController().navigate(R.id.action_talk_to_today_saved)
+
+    private fun initTalkStackBtnClickListener() {
+        binding.btnTalkStack.setOnClickListener {
+            navigateToSavedFeedback()
         }
     }
 
@@ -67,9 +115,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 코치 마크 레이아웃
     private fun initGuideLayoutClickListener() {
-        val layoutGuide = binding.includeLayoutTalkGuide.layoutTalkGuide
-        layoutGuide.setOnClickListener {
-            layoutGuide.visibility = GONE
+        with(binding.includeLayoutTalkGuide) {
+            layoutTalkGuide.setOnClickListener {
+                if (firstTalk) {
+                    layoutTalkGuide.visibility = GONE
+                    firstTalk = false
+                }
+            }
         }
     }
 
@@ -107,7 +159,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initListenBtnClickListener() {
         with(binding) {
             btnTalkListen.setOnClickListener {
-                binding.videoViewTalkBackground.start()
+                btnTalkListen.isSelected = !btnTalkListen.isSelected
+                videoViewTalkBackground.start()
             }
         }
     }
@@ -124,19 +177,21 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         val videoPath = "android.resource://${requireContext().packageName}/$randomVideoResource"
         val videoUri = Uri.parse(videoPath)
 
-        binding.videoViewTalkBackground.setVideoURI(videoUri)
-        binding.videoViewTalkBackground.start()
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.videoViewTalkBackground.pause()
-        }, 500)
+        with(binding){
+            videoViewTalkBackground.setVideoURI(videoUri)
+            videoViewTalkBackground.start()
+            Handler(Looper.getMainLooper()).postDelayed({
+                videoViewTalkBackground.pause()
+            }, 500)
+        }
     }
 
     // 번역 버튼 클릭
     private fun initTranslateBtnClickListener() {
         with(binding) {
             btnTalkTranslate.setOnClickListener {
-                btnTalkTranslate.isSelected = !binding.btnTalkTranslate.isSelected
-                tvTalkTranslate.isVisible = !binding.tvTalkTranslate.isVisible
+                btnTalkTranslate.isSelected = !btnTalkTranslate.isSelected
+                tvTalkTranslate.isVisible = !tvTalkTranslate.isVisible
                 initShowListenTextView()
             }
         }
@@ -146,8 +201,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initShowBtnClickListener() {
         with(binding) {
             btnTalkShow.setOnClickListener {
-                btnTalkShow.isSelected = !binding.btnTalkShow.isSelected
-                tvTalkText.isVisible = !binding.tvTalkText.isVisible
+                btnTalkShow.isSelected = !btnTalkShow.isSelected
+                tvTalkText.isVisible = !tvTalkText.isVisible
                 initShowListenTextView()
             }
         }
@@ -167,6 +222,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 btnTalkSpeak.visibility = GONE
                 includeBottomSheetTalk.visibility = GONE
+                tvTalkHint.visibility = GONE
             }
         }
     }
@@ -199,7 +255,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         Handler(Looper.getMainLooper()).postDelayed({
             with(binding) {
                 tvTalkHint.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄
-                binding.tvTalkHint.text = getString(R.string.hint_talk_example)
+                tvTalkHint.text = getString(R.string.hint_talk_example)
             }
         }, 3000)
     }
@@ -224,5 +280,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             TalkData(type = "ai", message = "What did you learn today?"),
             TalkData(type = "user", message = "I learn about photosynthesis."),
         )
+
+        const val TALK_DIALOG = "talkDialog"
     }
 }

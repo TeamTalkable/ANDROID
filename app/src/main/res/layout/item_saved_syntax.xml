@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_saved_word"
+                android:id="@+id/tv_saved_syntax"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="35dp"
@@ -29,7 +29,7 @@
                 android:layout_marginEnd="18dp"
                 android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_saved_word_tag"
+                app:layout_constraintEnd_toStartOf="@id/btn_saved_syntax_tag"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="school" />
@@ -44,13 +44,13 @@
                 android:textColor="@color/font_2"
                 android:layout_marginEnd="37dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_saved_word_sound"
-                app:layout_constraintStart_toStartOf="@id/tv_saved_word"
-                app:layout_constraintTop_toBottomOf="@id/tv_saved_word"
+                app:layout_constraintEnd_toStartOf="@id/btn_saved_syntax_listen"
+                app:layout_constraintStart_toStartOf="@id/tv_saved_syntax"
+                app:layout_constraintTop_toBottomOf="@id/tv_saved_syntax"
                 tools:text="학교" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_saved_word_tag"
+                android:id="@+id/btn_saved_syntax_tag"
                 style="@style/SavedWordTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,13 +66,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/btn_saved_word_sound"
+                android:id="@+id/btn_saved_syntax_listen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="4dp"
-                android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/ic_talk_listen"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="11dp"
+                android:background="@drawable/sel_saved_listen_selected"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:tint="@color/listen_word" />

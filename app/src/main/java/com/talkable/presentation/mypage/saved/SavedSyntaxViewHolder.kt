@@ -16,6 +16,7 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
 
     init {
         initItemViewClickListener()
+        initListenBtnClickListener()
     }
 
     fun onBind(item: SavedWord) {
@@ -23,12 +24,12 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
         val textColor = textColors[item.type] ?: R.color.white
 
         binding.run {
-            tvSavedWord.text = item.word
-            btnSavedWordTag.text = item.tag
+            tvSavedSyntax.text = item.word
+            btnSavedSyntaxTag.text = item.tag
             tvSavedTranslation.text = item.translation
-            btnSavedWordTag.background =
-                ContextCompat.getDrawable(btnSavedWordTag.context, backgroundColor)
-            btnSavedWordTag.setTextColor(ContextCompat.getColor(btnSavedWordTag.context, textColor))
+            btnSavedSyntaxTag.background =
+                ContextCompat.getDrawable(btnSavedSyntaxTag.context, backgroundColor)
+            btnSavedSyntaxTag.setTextColor(ContextCompat.getColor(btnSavedSyntaxTag.context, textColor))
 
             tvSavedTranslation.visibility = View.GONE
         }
@@ -44,7 +45,14 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
         itemView.isSelected = !itemView.isSelected
         with(binding) {
             tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
-            btnSavedWordTag.visibility = if (itemView.isSelected) View.GONE else View.VISIBLE
+        }
+    }
+
+    private fun initListenBtnClickListener() {
+        with(binding){
+            btnSavedSyntaxListen.setOnClickListener {
+                btnSavedSyntaxListen.isSelected = !btnSavedSyntaxListen.isSelected
+            }
         }
     }
 

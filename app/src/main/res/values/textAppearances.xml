@@ -93,6 +93,11 @@
         <item name="android:textSize">18dp</item>
     </style>
 
+    <style name="TextAppearance.Talkable.sm_19">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">19dp</item>
+    </style>
+
     <style name="TextAppearance.Talkable.b_21">
         <item name="fontFamily">@font/font_pretendard_bold</item>
         <item name="android:textSize">21dp</item>

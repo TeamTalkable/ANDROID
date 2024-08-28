@@ -47,7 +47,8 @@
             android:layout_marginBottom="42dp"
             android:background="@drawable/shape_gray2_line_rect"
             android:paddingHorizontal="19dp"
-            android:paddingVertical="23dp"
+            android:paddingTop="23dp"
+            android:paddingBottom="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/view_today_feedback_circle"
@@ -74,7 +75,7 @@
                 <include
                     android:id="@+id/layout_today_feedback"
                     layout="@layout/item_today_feedback"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
