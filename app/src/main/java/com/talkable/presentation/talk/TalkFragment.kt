@@ -107,6 +107,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initListenBtnClickListener() {
         with(binding) {
             btnTalkListen.setOnClickListener {
+                btnTalkListen.isSelected = !binding.btnTalkListen.isSelected
                 binding.videoViewTalkBackground.start()
             }
         }
@@ -167,6 +168,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 btnTalkSpeak.visibility = GONE
                 includeBottomSheetTalk.visibility = GONE
+                tvTalkHint.visibility = GONE
             }
         }
     }

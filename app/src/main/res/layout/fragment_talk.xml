@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="34dp"
-                android:background="@drawable/ic_talk_listen"
+                android:background="@drawable/sel_talk_listen_selected"
                 app:layout_constraintBottom_toBottomOf="@id/bg_talk_speech_bubble"
                 app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble" />
 
@@ -202,6 +202,7 @@
             layout="@layout/fragment_talk_guide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
