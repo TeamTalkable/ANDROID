@@ -26,6 +26,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     override fun initView() {
         initGuideLayoutVisible()
+        initTalkFeedbackVisible()
         initAppbarCancelClickListener()
         initGuideLayoutClickListener()
         setRandomVideo()
@@ -48,6 +49,31 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 layoutTalkGuide.visibility = GONE
             }
         }
+    }
+
+    private fun initTalkFeedbackVisible() {
+        if (!firstTalk) {
+            showFeedbackRetryDialog()
+            delayedTalkFeedbackDialog()
+        }
+    }
+
+    private fun showFeedbackRetryDialog() {
+        FeedbackRetryDialog().show(
+            childFragmentManager, TALK_DIALOG
+        )
+    }
+
+    private fun delayedTalkFeedbackDialog() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            showTalkFeedbackDialog()
+        }, 3000)
+    }
+
+    private fun showTalkFeedbackDialog() {
+        TalkFeedbackDialog().show(
+            childFragmentManager, TALK_DIALOG
+        )
     }
 
     private fun initAppbarCancelClickListener() {
@@ -252,5 +278,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             TalkData(type = "ai", message = "What did you learn today?"),
             TalkData(type = "user", message = "I learn about photosynthesis."),
         )
+
+        const val TALK_DIALOG = "talkDialog"
     }
 }
