@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_talk_user_speech"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -51,6 +51,7 @@
             android:layout_marginStart="21dp"
             android:textAppearance="@style/TextAppearance.Talkable.m_20"
             android:layout_marginEnd="70dp"
+            android:background="@null"
             android:text="I take a since class today."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
