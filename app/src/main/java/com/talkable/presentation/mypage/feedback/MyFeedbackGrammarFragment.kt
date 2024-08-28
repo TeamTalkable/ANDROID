@@ -39,6 +39,7 @@ class MyFeedbackGrammarFragment :
         with(binding.rvMyFeedbackGrammar) {
             layoutManager = LinearLayoutManager(context)
             adapter = MyGrammarAdapter(mockDataList)
+            addItemDecoration(MyFeedbackDecorator(requireContext()))
         }
     }
 

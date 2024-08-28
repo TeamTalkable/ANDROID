@@ -40,6 +40,7 @@ class MyFeedbackExpressionFragment :
         with(binding.rvMyFeedbackExpression) {
             layoutManager = LinearLayoutManager(context)
             adapter = MyExpressionAdapter(mockDataList)
+            addItemDecoration(MyFeedbackDecorator(requireContext()))
         }
     }
 
