@@ -17,13 +17,15 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.context.pxToDp
 import com.talkable.databinding.FragmentTalkBinding
+import com.talkable.presentation.firstTalk
 import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
 
-    var clickCount = FIRST_CLICK
+    private var clickCount = FIRST_CLICK
 
     override fun initView() {
+        initGuideLayoutVisible()
         initAppbarCancelClickListener()
         initGuideLayoutClickListener()
         setRandomVideo()
@@ -36,6 +38,16 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initTalkAdapter()
         initSpeakCompleteBtnClickListener()
         initTalkStackBtnClickListener()
+    }
+
+    private fun initGuideLayoutVisible() {
+        with(binding.includeLayoutTalkGuide) {
+            if (firstTalk) {
+                layoutTalkGuide.visibility = VISIBLE
+            } else {
+                layoutTalkGuide.visibility = GONE
+            }
+        }
     }
 
     private fun initAppbarCancelClickListener() {
@@ -77,9 +89,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 코치 마크 레이아웃
     private fun initGuideLayoutClickListener() {
-        val layoutGuide = binding.includeLayoutTalkGuide.layoutTalkGuide
-        layoutGuide.setOnClickListener {
-            layoutGuide.visibility = GONE
+        with(binding.includeLayoutTalkGuide) {
+            layoutTalkGuide.setOnClickListener {
+                if (firstTalk) {
+                    layoutTalkGuide.visibility = GONE
+                    firstTalk = false
+                }
+            }
         }
     }
 

@@ -9,6 +9,8 @@ import com.talkable.R
 import com.talkable.core.base.BindingActivity
 import com.talkable.databinding.ActivityMainBinding
 
+var firstTalk = true
+
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initView() {
