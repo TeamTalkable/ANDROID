@@ -50,7 +50,7 @@
             app:destination="@id/fragment_my_page_feedback" />
         <action
             android:id="@+id/action_fragment_my_page_to_saved"
-            app:destination="@id/savedFragment"/>
+            app:destination="@id/savedFragment" />
         <action
             android:id="@+id/action_my_page_to_login"
             app:destination="@id/loginFragment"
@@ -113,13 +113,13 @@
         android:label="TalkFeedbackFragment"
         tools:layout="@layout/fragment_talk_feedback">
         <action
-            android:id="@+id/action_talk_feedback_to_my_page"
-            app:destination="@id/fragment_my_page"
-            app:popUpTo="@id/fragment_my_page"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_talk_feedback_to_home"
             app:destination="@id/fragment_home"
+            app:popUpTo="@id/fragment_home"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragment_talk_feedback_to_fragment_my_page_chart_detail"
+            app:destination="@id/fragment_my_page_chart_detail"
             app:popUpTo="@id/fragment_home"
             app:popUpToInclusive="true" />
     </fragment>
@@ -214,12 +214,12 @@
         android:id="@+id/fragment_quiz_spelling_meaning"
         android:name="com.talkable.presentation.quiz.QuizSpellingMeaningFragment"
         android:label="QuizSpellingMeaningFragment"
-        tools:layout="@layout/fragment_quiz_spelling_meaning"/>
+        tools:layout="@layout/fragment_quiz_spelling_meaning" />
     <fragment
         android:id="@+id/fragment_quiz_flash"
         android:name="com.talkable.presentation.quiz.QuizFlashFragment"
         android:label="QuizFlashFragment"
-        tools:layout="@layout/fragment_quiz_flash"/>
+        tools:layout="@layout/fragment_quiz_flash" />
     <fragment
         android:id="@+id/fragment_quiz_auto"
         android:name="com.talkable.presentation.quiz.QuizAutoFragment"
@@ -229,4 +229,5 @@
         android:id="@+id/fragment_today_saved"
         android:name="com.talkable.presentation.feedback.today.TodaySavedFragment"
         android:label="TodaySavedFragment" />
+        tools:layout="@layout/fragment_quiz_auto" />
 </navigation>

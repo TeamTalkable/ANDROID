@@ -2,6 +2,7 @@ package com.talkable.presentation.quiz
 
 import android.view.View
 import android.widget.CheckBox
+import android.widget.RadioButton
 import com.talkable.R
 import com.talkable.core.base.BindingBottomSheetFragment
 import com.talkable.databinding.BottomSheetQuizAutoSpeedBinding
@@ -9,7 +10,7 @@ import com.talkable.databinding.BottomSheetQuizAutoSpeedBinding
 class QuizAutoSpeedBottomSheet :
     BindingBottomSheetFragment<BottomSheetQuizAutoSpeedBinding>(R.layout.bottom_sheet_quiz_auto_speed) {
 
-    private var lastCheckedCheckBox: CheckBox? = null
+    private var lastCheckedCheckBox: RadioButton? = null
 
     override fun initView() {
         lastCheckedCheckBox = binding.cbQuizAutoSpeedSkipNow
@@ -25,7 +26,7 @@ class QuizAutoSpeedBottomSheet :
 
     private fun setCheckBox() {
         val checkBoxListener = View.OnClickListener { view ->
-            val checkBox = view as CheckBox
+            val checkBox = view as RadioButton
 
             if (checkBox.isChecked) {
                 lastCheckedCheckBox?.isChecked = false
