@@ -16,6 +16,7 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
 
     init {
         initItemViewClickListener()
+        initListenBtnClickListener()
     }
 
     fun onBind(item: SavedWord) {
@@ -44,6 +45,14 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
         itemView.isSelected = !itemView.isSelected
         with(binding) {
             tvSavedTranslation.visibility = if (itemView.isSelected) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun initListenBtnClickListener() {
+        with(binding){
+            btnSavedSyntaxListen.setOnClickListener {
+                btnSavedSyntaxListen.isSelected = !btnSavedSyntaxListen.isSelected
+            }
         }
     }
 
