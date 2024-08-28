@@ -159,8 +159,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initListenBtnClickListener() {
         with(binding) {
             btnTalkListen.setOnClickListener {
-                btnTalkListen.isSelected = !binding.btnTalkListen.isSelected
-                binding.videoViewTalkBackground.start()
+                btnTalkListen.isSelected = !btnTalkListen.isSelected
+                videoViewTalkBackground.start()
             }
         }
     }
@@ -177,19 +177,21 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         val videoPath = "android.resource://${requireContext().packageName}/$randomVideoResource"
         val videoUri = Uri.parse(videoPath)
 
-        binding.videoViewTalkBackground.setVideoURI(videoUri)
-        binding.videoViewTalkBackground.start()
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.videoViewTalkBackground.pause()
-        }, 500)
+        with(binding){
+            videoViewTalkBackground.setVideoURI(videoUri)
+            videoViewTalkBackground.start()
+            Handler(Looper.getMainLooper()).postDelayed({
+                videoViewTalkBackground.pause()
+            }, 500)
+        }
     }
 
     // 번역 버튼 클릭
     private fun initTranslateBtnClickListener() {
         with(binding) {
             btnTalkTranslate.setOnClickListener {
-                btnTalkTranslate.isSelected = !binding.btnTalkTranslate.isSelected
-                tvTalkTranslate.isVisible = !binding.tvTalkTranslate.isVisible
+                btnTalkTranslate.isSelected = !btnTalkTranslate.isSelected
+                tvTalkTranslate.isVisible = !tvTalkTranslate.isVisible
                 initShowListenTextView()
             }
         }
@@ -199,8 +201,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initShowBtnClickListener() {
         with(binding) {
             btnTalkShow.setOnClickListener {
-                btnTalkShow.isSelected = !binding.btnTalkShow.isSelected
-                tvTalkText.isVisible = !binding.tvTalkText.isVisible
+                btnTalkShow.isSelected = !btnTalkShow.isSelected
+                tvTalkText.isVisible = !tvTalkText.isVisible
                 initShowListenTextView()
             }
         }
@@ -253,7 +255,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         Handler(Looper.getMainLooper()).postDelayed({
             with(binding) {
                 tvTalkHint.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄
-                binding.tvTalkHint.text = getString(R.string.hint_talk_example)
+                tvTalkHint.text = getString(R.string.hint_talk_example)
             }
         }, 3000)
     }
