@@ -35,6 +35,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initHintTextViewClickListener()
         initTalkAdapter()
         initSpeakCompleteBtnClickListener()
+        initTalkStackBtnClickListener()
     }
 
     private fun initAppbarCancelClickListener() {
@@ -49,6 +50,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initSpeakCompleteBtnClickListener() {
         binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
             navigateToFeedbackLoadingFragment()
+        }
+    }
+
+    private fun navigateToSavedFeedback() =
+        findNavController().navigate(R.id.action_talk_to_today_saved)
+
+    private fun initTalkStackBtnClickListener() {
+        binding.btnTalkStack.setOnClickListener {
+            navigateToSavedFeedback()
         }
     }
 

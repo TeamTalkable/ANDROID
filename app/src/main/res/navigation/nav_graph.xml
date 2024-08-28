@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_talk_to_feedback_loading"
             app:destination="@id/fragment_feedback_loading" />
+        <action
+            android:id="@+id/action_talk_to_today_saved"
+            app:destination="@id/fragment_today_saved" />
     </fragment>
     <fragment
         android:id="@+id/fragment_talk_feedback"
@@ -222,4 +225,8 @@
         android:name="com.talkable.presentation.quiz.QuizAutoFragment"
         android:label="QuizAutoFragment"
         tools:layout="@layout/fragment_quiz_auto"/>
+    <fragment
+        android:id="@+id/fragment_today_saved"
+        android:name="com.talkable.presentation.feedback.today.TodaySavedFragment"
+        android:label="TodaySavedFragment" />
 </navigation>
