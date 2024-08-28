@@ -1,11 +1,14 @@
 package com.talkable.presentation.talk.feedback
 
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentTalkFeedbackBinding
+import com.talkable.presentation.mypage.MyPageFragment
 import com.talkable.presentation.talk.feedback.mapper.toLearnedList
 import com.talkable.presentation.talk.feedback.model.Learned
 import com.talkable.presentation.talk.feedback.model.TalkFeedbackModel
@@ -43,10 +46,14 @@ class TalkFeedbackFragment :
     }
 
     private fun navigateToMyPageFragment() {
-        findNavController().navigate(R.id.action_talk_feedback_to_my_page)
+        findNavController().navigate(
+            R.id.action_fragment_talk_feedback_to_fragment_my_page_chart_detail, bundleOf(
+                Key.CHART_KEY to MyPageFragment.mockData.chartData
+            )
+        )
     }
 
-    private fun navigateToHomeFragment(){
+    private fun navigateToHomeFragment() {
         findNavController().navigate(R.id.action_talk_feedback_to_home)
     }
 
@@ -94,13 +101,11 @@ class TalkFeedbackFragment :
                     type = "학습한 표현",
                     wordEnglish = "•  the proximity to Central Park",
                     wordKorean = "   중앙공원과의 가까운 거리’ 를 의미하는 표현"
-                ),
-                Learned.Expression(
+                ), Learned.Expression(
                     type = "학습한 표현",
                     wordEnglish = "•  which allows me to enjoy nature",
                     wordKorean = "   이로 인해 자연을 즐길 수 있다는 점을 강조하는 표현"
-                ),
-                Learned.Expression(
+                ), Learned.Expression(
                     type = "학습한 표현",
                     wordEnglish = "•  enjoy nature",
                     wordKorean = "   자연을 즐기다'라는 자연스러운 표현"
@@ -120,8 +125,7 @@ class TalkFeedbackFragment :
                     englishWord = "science",
                     pronunciationEnglish = "[ ˈsaɪəns ]",
                     koreanWord = "과학"
-                ),
-                Learned.Pronunciation(
+                ), Learned.Pronunciation(
                     type = "학습한 발음",
                     englishWord = "today",
                     pronunciationEnglish = "[ ˈtodai ]",

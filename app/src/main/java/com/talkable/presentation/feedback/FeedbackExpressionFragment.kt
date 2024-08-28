@@ -82,6 +82,7 @@ class FeedbackExpressionFragment :
         val mockExpressionData = FeedbackExpressionModel(
             feedbackId = 1,
             question = "What did you do today in school?",
+            korean = "너는 오늘 학교에서 무엇을 했어?",
             beforeAnswer = "Near my house, I have park so I can join the nature.",
             afterFullAnswer = "What I like most about living here is the proximity to park, which allows me to enjoy nature.",
             afterAnswerParts = listOf(

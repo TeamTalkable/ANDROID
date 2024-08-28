@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_title" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/cb_quiz_auto_speed_skip_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_skip_now" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/cb_quiz_auto_speed_skip_second_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_quiz_auto_speed_skip_second_1" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/cb_quiz_auto_speed_skip_second_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -18,7 +18,7 @@
         <include
             android:id="@+id/app_bar_talk_feedback_expression"
             layout="@layout/view_talk_feedback_app_bar"
-            app:title="@{`발음 피드백`}" />
+            app:title="@{`피드백`}" />
 
         <TextView
             android:id="@+id/tv_feedback_pronunciation_english"

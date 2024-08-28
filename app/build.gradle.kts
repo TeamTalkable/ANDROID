@@ -30,7 +30,7 @@ android {
         val appKey = properties["native.app.key"] as? String ?: ""
 
         manifestPlaceholders["appKey"] = properties["native.app.key"] as String
-        buildConfigField ("String", "NATIVE_APP_KEY", "\"${appKey}\"")
+        buildConfigField("String", "NATIVE_APP_KEY", "\"${appKey}\"")
     }
 
     buildTypes {
@@ -57,6 +57,7 @@ android {
 dependencies {
     // Google
     implementation(libs.material)
+    implementation(libs.firebase.messaging)
 
     // Test Dependency
     testImplementation(libs.junit)

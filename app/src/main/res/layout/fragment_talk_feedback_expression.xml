@@ -40,6 +40,19 @@
                 tools:text="@string/dummy" />
 
             <TextView
+                android:id="@+id/tv_talk_feedback_expression_korean"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@{model.korean}"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
+                android:textColor="@color/gray"
+                app:layout_constraintEnd_toEndOf="@id/tv_talk_feedback_expression_question"
+                app:layout_constraintStart_toStartOf="@id/tv_talk_feedback_expression_question"
+                app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_expression_question" />
+
+            <TextView
                 android:id="@+id/tv_talk_feedback_expression_before"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
