@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key.CHART_KEY
+import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.util.intent.parcelable
 import com.talkable.databinding.FragmentMyPageChartDetailBinding
 import com.talkable.presentation.mypage.model.Chart
@@ -13,6 +14,7 @@ import com.talkable.presentation.mypage.model.ChartDetail
 class MyPageChartDetailFragment :
     BindingFragment<FragmentMyPageChartDetailBinding>(R.layout.fragment_my_page_chart_detail) {
     override fun initView() {
+        statusBarColorOf(R.color.white)
         binding.chartDetail = mockData
         binding.chart = getChartData()
         setAppbarStatus()
