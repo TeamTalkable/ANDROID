@@ -30,6 +30,7 @@ kotlinx-coroutines = "1.7.3"
 
 # Google
 material = "1.12.0"
+firebase = "23.4.0"
 
 # Third Party
 retrofit2 = "2.9.0"
@@ -61,6 +62,7 @@ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version
 
 # Google
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebase" }
 
 # Third Party
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }

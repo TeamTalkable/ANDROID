@@ -1,5 +1,8 @@
 package com.talkable.presentation.mypage
 
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.annotation.Px
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -38,6 +41,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initMyPageCalendarAdapter(getMonthDays(mockData.calendarYear, mockData.calendarMonth))
         initLogoutBtnClickListener()
         initWithdrawBtnClickListener()
+        initAlarmSettingBtnClickListener()
     }
 
     private fun initNavigateFeedbackBtnClickListener() {
@@ -275,6 +279,19 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun showWithdrawDialog() = WithdrawDialog().show(childFragmentManager, WITHDRAW_DIALOG)
 
+    private fun initAlarmSettingBtnClickListener() {
+        binding.tvMyPageAlarmLabel.setOnClickListener {
+            navigateToAppSettings()
+        }
+    }
+
+    private fun navigateToAppSettings() {
+        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            val uri = Uri.fromParts("package", requireActivity().packageName, null)
+            this.data = uri
+            startActivity(this)
+        }
+    }
 
     companion object {
         val mockData = MyPageModel(
