@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_feedback_talk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_fill_12_rect"
+        android:backgroundTint="@color/speech_bg"
+        android:paddingVertical="10dp"
+        android:paddingBottom="40dp">
+
+        <ImageButton
+            android:id="@+id/btn_feedback_talk_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/ic_talk_close"
+            android:backgroundTint="@color/font_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_feedback_talk_sentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="I took a science class."
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintBottom_toTopOf="@id/tv_feedback_talk_translate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv_feedback_talk_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            android:layout_marginBottom="21dp"
+            android:text="나는 과학 수업을 들었어"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_feedback_talk_sentence" />
+
+        <ImageButton
+            android:id="@+id/btn_feedback_talk_listen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/sel_talk_listen_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_feedback_talk_sentence" />
+
+        <ImageButton
+            android:id="@+id/btn_feedback_talk_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/sel_talk_translate_selected"
+            app:layout_constraintBottom_toBottomOf="@id/btn_feedback_talk_listen"
+            app:layout_constraintStart_toEndOf="@id/btn_feedback_talk_listen"
+            app:layout_constraintTop_toTopOf="@id/btn_feedback_talk_listen" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

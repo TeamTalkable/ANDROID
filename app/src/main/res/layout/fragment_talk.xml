@@ -189,22 +189,6 @@
             app:layout_constraintStart_toEndOf="@id/video_view_talk_background"
             app:layout_constraintTop_toBottomOf="@+id/btn_talk_speak" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/include_bottom_sheet_talk"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/layout_bottom_sheet_talk"
-                style="@style/Widget.Material3.BottomSheet"
-                layout="@layout/bottom_sheet_talk"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:behavior_hideable="false"
-                app:behavior_peekHeight="50dp"
-                app:layout_behavior="@string/bottom_sheet_behavior" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
         <include
             android:id="@+id/include_layout_talk_guide"
             layout="@layout/fragment_talk_guide"
@@ -224,5 +208,33 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <include
+            android:id="@+id/include_layout_talk_feedback"
+            layout="@layout/view_talk_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginBottom="13dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_talk_speak"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/include_bottom_sheet_talk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/layout_bottom_sheet_talk"
+                style="@style/Widget.Material3.BottomSheet"
+                layout="@layout/bottom_sheet_talk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:behavior_hideable="false"
+                app:behavior_peekHeight="50dp"
+                app:layout_behavior="@string/bottom_sheet_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

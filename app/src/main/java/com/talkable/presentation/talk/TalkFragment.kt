@@ -74,9 +74,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun showTalkFeedbackDialog() {
-        TalkFeedbackDialog().show(
-            childFragmentManager, TALK_DIALOG
-        )
+        binding.includeLayoutTalkFeedback.layoutFeedbackTalk.visibility = VISIBLE
     }
 
     private fun initFeedbackListenBtnClickListener() {
@@ -97,7 +95,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun initFeedbackCloseBtnClickListener() {
-        with(binding.includeLayoutTalkFeedback){
+        with(binding.includeLayoutTalkFeedback) {
             btnFeedbackTalkClose.setOnClickListener {
                 layoutFeedbackTalk.visibility = GONE
             }
@@ -205,7 +203,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         val videoPath = "android.resource://${requireContext().packageName}/$randomVideoResource"
         val videoUri = Uri.parse(videoPath)
 
-        with(binding){
+        with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
             videoViewTalkBackground.start()
             Handler(Looper.getMainLooper()).postDelayed({
