@@ -44,6 +44,17 @@
             app:layout_constraintTop_toTopOf="@id/iv_my_feedback_grammar_arrow"
             tools:text="took" />
 
+        <ImageButton
+            android:id="@+id/btn_talk_feedback"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/sel_talk_feedback"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_feedback_grammar_correct"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_my_feedback_grammar_correct" />
+
         <TextView
             android:id="@+id/tv_my_feedback_grammar_reason"
             android:layout_width="0dp"
