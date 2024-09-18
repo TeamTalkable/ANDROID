@@ -39,6 +39,9 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initTalkAdapter()
         initSpeakCompleteBtnClickListener()
         initTalkStackBtnClickListener()
+        initFeedbackListenBtnClickListener()
+        initFeedbackTranslateBtnClickListener()
+        initFeedbackCloseBtnClickListener()
     }
 
     private fun initGuideLayoutVisible() {
@@ -76,6 +79,31 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         )
     }
 
+    private fun initFeedbackListenBtnClickListener() {
+        with(binding.includeLayoutTalkFeedback) {
+            btnFeedbackTalkListen.setOnClickListener {
+                btnFeedbackTalkListen.isSelected = !btnFeedbackTalkListen.isSelected
+            }
+        }
+    }
+
+    private fun initFeedbackTranslateBtnClickListener() {
+        with(binding.includeLayoutTalkFeedback) {
+            btnFeedbackTalkTranslate.setOnClickListener {
+                btnFeedbackTalkTranslate.isSelected = !btnFeedbackTalkTranslate.isSelected
+                tvFeedbackTalkTranslate.isVisible = !tvFeedbackTalkTranslate.isVisible
+            }
+        }
+    }
+
+    private fun initFeedbackCloseBtnClickListener() {
+        with(binding.includeLayoutTalkFeedback){
+            btnFeedbackTalkClose.setOnClickListener {
+                layoutFeedbackTalk.visibility = GONE
+            }
+        }
+    }
+
     private fun initAppbarCancelClickListener() {
         binding.btnTalkClose.setOnClickListener {
             navigateToTotalTalkFeedback()
@@ -95,7 +123,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         findNavController().navigate(R.id.action_talk_to_today_saved)
 
     private fun initTalkStackBtnClickListener() {
-        binding.btnTalkStack.setOnClickListener {
+        binding.btnTalkFolder.setOnClickListener {
             navigateToSavedFeedback()
         }
     }
