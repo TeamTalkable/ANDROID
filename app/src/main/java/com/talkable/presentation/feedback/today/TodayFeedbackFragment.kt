@@ -32,16 +32,21 @@ class TodayFeedbackFragment :
     }
 
     private fun initFeedbackChipClickListener() {
+        updateFeedbackData(binding.cgTodayFeedbackList.checkedChipId)
+
         binding.cgTodayFeedbackList.setOnCheckedStateChangeListener { chipGroup, _ ->
-            val newData = when (chipGroup.checkedChipId) {
-                Constants.NO_CHIP_SELECTED -> combineAllFeedbackData()
-                R.id.chip_today_expression -> todayFeedbackMockData.todayExpression
-                R.id.chip_today_grammar -> todayFeedbackMockData.todayGrammar
-                R.id.chip_today_pronunciation -> todayFeedbackMockData.todayPronunciation
-                else -> emptyList()
-            }
-            todaySavedAdapter.submitList(newData)
+            updateFeedbackData(chipGroup.checkedChipId)
         }
+    }
+
+    private fun updateFeedbackData(checkedChipId: Int) {
+        val newData = when (checkedChipId) {
+            R.id.chip_today_expression -> todayFeedbackMockData.todayExpression
+            R.id.chip_today_grammar -> todayFeedbackMockData.todayGrammar
+            R.id.chip_today_pronunciation -> todayFeedbackMockData.todayPronunciation
+            else -> combineAllFeedbackData()
+        }
+        todaySavedAdapter.submitList(newData)
     }
 
     private fun combineAllFeedbackData(): List<TodayFeedback> {
