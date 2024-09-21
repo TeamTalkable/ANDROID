@@ -214,20 +214,36 @@
         android:id="@+id/fragment_quiz_spelling_meaning"
         android:name="com.talkable.presentation.quiz.QuizSpellingMeaningFragment"
         android:label="QuizSpellingMeaningFragment"
-        tools:layout="@layout/fragment_quiz_spelling_meaning" />
+        tools:layout="@layout/fragment_quiz_spelling_meaning" >
+        <action
+            android:id="@+id/action_quiz_spelling_meaning_to_quiz_result"
+            app:destination="@id/quizResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_quiz_flash"
         android:name="com.talkable.presentation.quiz.QuizFlashFragment"
         android:label="QuizFlashFragment"
-        tools:layout="@layout/fragment_quiz_flash" />
+        tools:layout="@layout/fragment_quiz_flash" >
+        <action
+            android:id="@+id/action_quiz_flash_to_quiz_result"
+            app:destination="@id/quizResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_quiz_auto"
         android:name="com.talkable.presentation.quiz.QuizAutoFragment"
         android:label="QuizAutoFragment"
-        tools:layout="@layout/fragment_quiz_auto"/>
+        tools:layout="@layout/fragment_quiz_auto" >
+        <action
+            android:id="@+id/action_quiz_auto_to_quiz_result"
+            app:destination="@id/quizResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_today_saved"
         android:name="com.talkable.presentation.feedback.today.TodaySavedFragment"
         android:label="TodaySavedFragment" />
-        tools:layout="@layout/fragment_quiz_auto" />
+    <fragment
+        android:id="@+id/quizResultFragment"
+        android:name="com.talkable.presentation.quiz.QuizResultFragment"
+        android:label="QuizResultFragment"
+        tools:layout="@layout/fragment_quiz_result" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.talkable.presentation.quiz
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
@@ -17,6 +18,8 @@ class QuizSpellingMeaningFragment :
 
     private val quizViewModel: QuizViewModel by viewModels()
     private var spellingIndex = 0
+    private var correctCount = 0
+    private var isFirstAttempt = true
 
     override fun initView() {
         val type = arguments?.getInt(Key.QUIZ_KEY)
@@ -33,7 +36,7 @@ class QuizSpellingMeaningFragment :
 
     private fun initBackNavigationIconClickListener() {
         binding.layoutQuizSpellingMeaningAppbar.toolbarQuiz.setNavigationOnClickListener {
-            navigateToBack()
+            findNavController().popBackStack()
         }
     }
 
@@ -62,10 +65,13 @@ class QuizSpellingMeaningFragment :
             chip.text = allOptions[index]
             chip.setOnClickListener {
                 if (allOptions[index] == answer) {
+                    if (isFirstAttempt) correctCount++
                     quizViewModel.setNextQuestion()
                 } else {
                     showQuizErrorDialog()
+                    isFirstAttempt = false
                 }
+                Timber.e(correctCount.toString())
             }
         }
     }
@@ -79,6 +85,7 @@ class QuizSpellingMeaningFragment :
     private fun observeQuestionIndex(type: Int?) {
         var question = ""
         quizViewModel.currentQuestionIndex.observe(this) { index ->
+            isFirstAttempt = true
             spellingIndex = index
             if (index < mock.size) {
                 question =
@@ -88,24 +95,37 @@ class QuizSpellingMeaningFragment :
                 binding.layoutQuizSpellingMeaningAppbar.count =
                     getString(R.string.label_quiz_app_bar_count, index + 1, mock.size)
             } else {
-                navigateToBack()
+                navigateToResult(type, mock.size)
             }
         }
     }
 
-    private fun navigateToBack() = findNavController().popBackStack()
+    private fun navigateToResult(type: Int?, totalCount: Int) {
+        if (type == null) return
+        findNavController().navigate(
+            R.id.action_quiz_spelling_meaning_to_quiz_result, bundleOf(
+                Key.QUIZ_KEY to type,
+                Key.QUIZ_RESULT_TOTAL to totalCount,
+                Key.QUIZ_RESULT_CORRECT to correctCount,
+            )
+        )
+    }
 
     private fun initCompleteBtnClickListener() {
         binding.btnQuizSpellingMeaningCompelte.setOnDuplicateBlockClick {
-            if (binding.etQuizSpellingUserAnswer.text.toString().equals(mock[spellingIndex].first, ignoreCase = true))
-            {
+            if (binding.etQuizSpellingUserAnswer.text.toString()
+                    .equals(mock[spellingIndex].first, ignoreCase = true)
+            ) {
                 binding.tvQuizSpellingAnswer.visible(false)
                 quizViewModel.setNextQuestion()
+                if (isFirstAttempt) correctCount++
+                binding.etQuizSpellingUserAnswer.text.clear()
             } else {
                 showQuizErrorDialog()
                 binding.tvQuizSpellingAnswer.text = mock[spellingIndex].first
                 binding.tvQuizSpellingMeaningCommand.text = "단어를 따라 적어보세요"
                 binding.tvQuizSpellingAnswer.visible(true)
+                isFirstAttempt = false
             }
         }
     }
