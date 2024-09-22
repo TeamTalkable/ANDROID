@@ -127,7 +127,7 @@
     <string name="btn_challenge_join_complete">참여 신청 완료!</string>
     <string name="et_challenge_request">챌린지 요청하기</string>
     <string name="tv_challenge_recruiting_count">👥 %1$d</string>
-    <string name="tv_challenge_recruitment_hint">챌린지에 성공하면 꽃을 키우기 위한 아이템을 받을 수 있어요!</string>
+    <string name="tv_challenge_recruiting_hint">챌린지에 성공하면 꽃을 키우기 위한 아이템을 받을 수 있어요!</string>
     <string name="hint_challenge_search">참여하고 싶은 챌린지를 검색해보세요</string>
 
     <!--my flower-->
