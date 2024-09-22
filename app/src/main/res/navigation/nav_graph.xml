@@ -60,7 +60,16 @@
     <fragment
         android:id="@+id/fragment_challenge"
         android:name="com.talkable.presentation.challenge.ChallengeFragment"
-        android:label="ChallengeFragment" />
+        android:label="ChallengeFragment">
+        <action
+            android:id="@+id/action_challenge_to_challenge_recruitment"
+            app:destination="@id/fragment_challenge_recruitment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_challenge_recruitment"
+        android:name="com.talkable.presentation.challenge.ChallengeRecruitingFragment"
+        android:label="ChallengeRecruitmentFragment"
+        tools:layout="@layout/fragment_challenge_recruiting" />
     <fragment
         android:id="@+id/fragment_my_flower"
         android:name="com.talkable.presentation.myflower.MyFlowerFragment"
@@ -224,10 +233,10 @@
         android:id="@+id/fragment_quiz_auto"
         android:name="com.talkable.presentation.quiz.QuizAutoFragment"
         android:label="QuizAutoFragment"
-        tools:layout="@layout/fragment_quiz_auto"/>
+        tools:layout="@layout/fragment_quiz_auto" />
     <fragment
         android:id="@+id/fragment_today_saved"
         android:name="com.talkable.presentation.feedback.today.TodaySavedFragment"
-        android:label="TodaySavedFragment" />
-        tools:layout="@layout/fragment_quiz_auto" />
+        android:label="TodaySavedFragment"
+        tools:layout="@layout/fragment_today_saved" />
 </navigation>

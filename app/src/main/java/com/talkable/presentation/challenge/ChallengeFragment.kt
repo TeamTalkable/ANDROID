@@ -1,5 +1,6 @@
 package com.talkable.presentation.challenge
 
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
@@ -13,7 +14,18 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
         initRankingAdapter()
         initParticipationAdapter()
         initRecruitmentAdapter()
+        initNavigateChallengeRecruitment()
     }
+
+    private fun initNavigateChallengeRecruitment() {
+        binding.btnChallengeRecruitment.setOnClickListener {
+            navigateToChallengeRecruitment()
+        }
+    }
+
+    private fun navigateToChallengeRecruitment() =
+        findNavController().navigate(R.id.action_challenge_to_challenge_recruitment)
+
 
     private fun setChallengeTextView() {
         with(binding) {
