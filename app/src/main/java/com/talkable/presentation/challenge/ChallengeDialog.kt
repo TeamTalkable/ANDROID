@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.Window
+import com.talkable.R
 import com.talkable.databinding.DialogChallengeBinding
 
 class ChallengeDialog(
@@ -40,7 +41,8 @@ class ChallengeDialog(
     private fun initJoinBtnClickListener() {
         with(binding) {
             btnChallengeJoin.setOnClickListener {
-                dismiss()
+                btnChallengeJoin.isEnabled = false
+                btnChallengeJoin.text = context.getString(R.string.btn_challenge_join_complete)
             }
         }
     }
