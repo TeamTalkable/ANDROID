@@ -1,11 +1,12 @@
 package com.talkable.presentation.quiz
 
-import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentQuizFlashBinding
@@ -13,6 +14,7 @@ import com.talkable.databinding.FragmentQuizFlashBinding
 class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fragment_quiz_flash) {
 
     private val quizViewModel: QuizViewModel by viewModels()
+    private var correctCount = 0
 
     override fun initView() {
         statusBarColorOf(R.color.white)
@@ -40,13 +42,20 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
     }
 
     private fun initFlashLearnStatusLabelClickListener() = with(binding) {
-        val clickListener = View.OnClickListener {
+        fun onFlashCardClick() {
             layoutQuizFlashCard.tvQuizAutoKorean.visible(false)
             layoutQuizFlashCard.ivQuizFlashShow.isSelected = false
             quizViewModel.setNextQuestion()
         }
-        tvQuizFlashMemorized.setOnClickListener(clickListener)
-        tvQuizFlashDifficult.setOnClickListener(clickListener)
+
+        tvQuizFlashMemorized.setOnClickListener {
+            correctCount++;
+            onFlashCardClick()
+        }
+
+        tvQuizFlashDifficult.setOnClickListener {
+            onFlashCardClick()
+        }
     }
 
     private fun observeQuestionIndex() {
@@ -56,10 +65,20 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
                 binding.layoutQuizFlashAppbar.count =
                     getString(R.string.label_quiz_app_bar_count, index + 1, mockLong.size)
             } else {
-                navigateToBack()
+                navigateToResult(mockLong.size)
             }
         }
     }
+
+    private fun navigateToResult(totalCount: Int) =
+        findNavController().navigate(
+            R.id.action_quiz_flash_to_quiz_result,
+            bundleOf(
+                Key.QUIZ_KEY to Quiz.FLASH.title,
+                Key.QUIZ_RESULT_TOTAL to totalCount,
+                Key.QUIZ_RESULT_CORRECT to correctCount,
+            )
+        )
 
     private fun updateNextFlashCard(data: Pair<String, String>) = with(binding) {
         layoutQuizFlashCard.tvQuizAutoEnglish.text = data.first

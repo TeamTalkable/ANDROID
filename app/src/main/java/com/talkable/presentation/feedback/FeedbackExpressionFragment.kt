@@ -1,12 +1,8 @@
 package com.talkable.presentation.feedback
 
-import android.content.res.Resources
-import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.context.pxToDp
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentTalkFeedbackExpressionBinding
 import com.talkable.presentation.FeedbackTextColor
@@ -17,29 +13,16 @@ import com.talkable.presentation.talk.feedback.model.Learned
 class FeedbackExpressionFragment :
     BindingFragment<FragmentTalkFeedbackExpressionBinding>(R.layout.fragment_talk_feedback_expression) {
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     override fun initView() {
         statusBarColorOf(R.color.white)
-        initCommentBottomSheet()
         initFeedbackAdapter()
         setAfterAnswerTextColor(
             mockExpressionData.afterFullAnswer,
             mockExpressionData.afterAnswerParts
         )
         binding.model = mockExpressionData
-        setAppBar()
+        initBackBtnClickListener()
         initAppbarNextClickListener()
-    }
-
-    private fun initCommentBottomSheet() {
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheet.root)
-        bottomSheetBehavior.isFitToContents = false
-        bottomSheetBehavior.expandedOffset = requireContext().pxToDp(80)
-        val displayMetrics = Resources.getSystem().displayMetrics
-        val screenHeight = displayMetrics.heightPixels
-        val halfScreenHeight = screenHeight / 3
-
-        bottomSheetBehavior.peekHeight = halfScreenHeight
     }
 
     private fun initFeedbackAdapter() {
@@ -64,13 +47,14 @@ class FeedbackExpressionFragment :
         binding.tvTalkFeedbackAfter.text = spannableString
     }
 
-    private fun setAppBar() {
-        binding.appBarTalkFeedbackExpression.leftBackIsVisible = false
-        binding.appBarTalkFeedbackExpression.rightBackIsVisible = true
+    private fun initBackBtnClickListener() {
+        binding.btnFeedbackExpressionBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initAppbarNextClickListener() {
-        binding.appBarTalkFeedbackExpression.ivAppBarNext.setOnClickListener {
+        binding.btnFeedbackExpressionNext.setOnClickListener {
             navigateToPronunciationFeedbackFragment()
         }
     }

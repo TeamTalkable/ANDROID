@@ -28,13 +28,12 @@ class FeedbackPronunciationFragment :
         initBottomNavigationItemClickListener()
         initRecordCancelClickListener()
         initRecordCheckClickListener()
-        setAppBar()
         initAppbarBackClickListener()
         initNavigateToTalkBtnClickListener()
     }
 
     private fun initNavigateToTalkBtnClickListener() {
-        binding.tvFeedbackPronunciationBack.setOnClickListener {
+        binding.btnFeedbackPronunciationToTalk.setOnClickListener {
             navigateToTalkFragment()
         }
     }
@@ -136,7 +135,7 @@ class FeedbackPronunciationFragment :
     }
 
     private fun initAppbarBackClickListener() {
-        binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
+        binding.btnFeedbackPronunciationBack.setOnClickListener {
             navigateToBack()
         }
     }
@@ -162,11 +161,6 @@ class FeedbackPronunciationFragment :
             handleMickItemEvent(false)
             FeedbackPronunciationCompleteDialog().show(childFragmentManager, PRONUNCIATION_DIALOG)
         }
-    }
-
-    private fun setAppBar() {
-        binding.appBarTalkFeedbackExpression.leftBackIsVisible = true
-        binding.appBarTalkFeedbackExpression.rightBackIsVisible = false
     }
 
     companion object {

@@ -5,6 +5,8 @@ object Key {
     const val QUIZ_KEY = "quiz"
     const val ONBOARDING_KEY = "onboarding"
     const val TODAY_QUIZ_COUNT = "today_quiz_count"
+    const val QUIZ_RESULT_TOTAL = "quizTotal"
+    const val QUIZ_RESULT_CORRECT = "quizCorrect"
 }
 
 object DialogKey {

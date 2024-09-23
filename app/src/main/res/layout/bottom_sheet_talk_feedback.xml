@@ -10,41 +10,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_gray2_fill_top_12_rec"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <View
-            android:id="@+id/bottom_sheet_talk_feedback_bar"
-            android:layout_width="48dp"
-            android:layout_height="4dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/shape_fill_main3_8_rec"
-            android:backgroundTint="@color/bottom_sheet_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/gray_2_f4">
 
         <TextView
             android:id="@+id/tv_bottom_sheet_talk_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="22dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="32dp"
             android:text="@string/tv_bottom_sheet_talk_title"
             android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
             android:textColor="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_talk_feedback_bar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_bottom_sheet_talk_feedback"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingHorizontal="22dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_bottom_sheet_talk_title"

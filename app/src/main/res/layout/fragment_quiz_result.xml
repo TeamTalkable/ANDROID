@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_3">
+
+        <TextView
+            android:id="@+id/tv_quiz_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="99dp"
+            android:text="@string/tv_quiz_result_title"
+            android:textAppearance="@style/TextAppearance.Talkable.b_28"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_quiz_clap"
+            android:layout_width="143dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="63dp"
+            android:src="@drawable/img_quiz_clap"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_result_title" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_quiz_result_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_quiz_result_auto_count, tv_quiz_result_auto_label, view_quiz_result_auto_bg" />
+
+        <View
+            android:id="@+id/view_quiz_result_auto_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="53dp"
+            android:background="@drawable/shape_white_fill_20_rec"
+            android:backgroundTint="#4DFF6B6B"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_result_auto_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_quiz_result_auto_label" />
+
+        <TextView
+            android:id="@+id/tv_quiz_result_auto_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
+            android:paddingTop="33dp"
+            android:text="@string/tv_quiz_result_auto_label"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/font_3"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_result_auto_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_result_auto_bg"
+            app:layout_constraintTop_toBottomOf="@id/iv_quiz_clap" />
+
+        <TextView
+            android:id="@+id/tv_quiz_result_auto_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingBottom="33dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sm_22"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_result_auto_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_result_auto_bg"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_result_auto_label"
+            tools:text="5개" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_quiz_result_etc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_quiz_result_difficult_count,tv_quiz_result_difficult_label,view_quiz_result_difficult_bg,tv_quiz_result_correct_count,tv_quiz_result_correct_label,view_quiz_result_correct_bg" />
+
+        <View
+            android:id="@+id/view_quiz_result_difficult_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_white_fill_20_rec"
+            android:backgroundTint="#4D646464"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_result_correct_count"
+            app:layout_constraintEnd_toStartOf="@id/view_quiz_result_correct_bg"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_quiz_result_correct_label" />
+
+        <TextView
+            android:id="@+id/tv_quiz_result_difficult_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
+            android:paddingTop="33dp"
+            android:text="맞췄어요"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/font_3"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_result_difficult_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_result_difficult_bg"
+            app:layout_constraintTop_toBottomOf="@id/iv_quiz_clap" />
+
+        <TextView
+            android:id="@+id/tv_quiz_result_difficult_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingBottom="33dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sm_22"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_result_difficult_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_result_difficult_bg"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_result_difficult_label"
+            tools:text="5개" />
+
+        <View
+            android:id="@+id/view_quiz_result_correct_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/shape_white_fill_20_rec"
+            android:backgroundTint="#4DFF6B6B"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quiz_result_correct_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_quiz_result_difficult_bg"
+            app:layout_constraintTop_toTopOf="@id/tv_quiz_result_correct_label" />
+
+        <TextView
+            android:id="@+id/tv_quiz_result_correct_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
+            android:paddingHorizontal="36dp"
+            android:paddingTop="33dp"
+            android:text="틀렸어요"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/font_3"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_result_correct_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_result_correct_bg"
+            app:layout_constraintTop_toBottomOf="@id/iv_quiz_clap" />
+
+        <TextView
+            android:id="@+id/tv_quiz_result_correct_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingBottom="33dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sm_22"
+            app:layout_constraintEnd_toEndOf="@id/view_quiz_result_correct_bg"
+            app:layout_constraintStart_toStartOf="@id/view_quiz_result_correct_bg"
+            app:layout_constraintTop_toBottomOf="@id/tv_quiz_result_correct_label"
+            tools:text="5개" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quiz_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:paddingVertical="18dp"
+            android:text="@string/btn_quiz_back"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
+            android:textColor="@color/gray"
+            app:cornerRadius="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_quiz_continue"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quiz_continue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/main"
+            android:paddingVertical="18dp"
+            android:text="@string/btn_quiz_continue"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
+            app:cornerRadius="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_quiz_back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
