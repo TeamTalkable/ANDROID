@@ -29,6 +29,7 @@
                 style="@style/Widget.Material3.Chip.Suggestion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/tv_my_page_feedback_expression"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
                 app:chipBackgroundColor="@color/sel_today_expression_chip_bg"
@@ -71,9 +72,9 @@
             android:layout_marginTop="42dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cg_today_feedback_list"
             tools:listitem="@layout/item_today_feedback_expression" />
     </androidx.constraintlayout.widget.ConstraintLayout>

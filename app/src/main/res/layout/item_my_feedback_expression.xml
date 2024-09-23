@@ -10,26 +10,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_font4_fill_12_rect"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_font4_fill_12_rect"
         android:backgroundTint="@color/white">
 
         <TextView
             android:id="@+id/tv_talk_feedback_learned_expression_english"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintEnd_toStartOf="@id/btn_talk_feedback"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="school" />
+
+        <ImageButton
+            android:id="@+id/btn_talk_feedback"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/sel_talk_feedback"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_talk_feedback_learned_expression_english"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_talk_feedback_learned_expression_english" />
 
         <TextView
             android:id="@+id/tv_talk_feedback_learned_expression_korean"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_talk_feedback_learned_expression_english"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_learned_expression_english"
             tools:text="@string/dummy" />
