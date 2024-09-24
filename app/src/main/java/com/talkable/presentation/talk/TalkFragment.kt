@@ -1,6 +1,8 @@
 package com.talkable.presentation.talk
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +14,8 @@ import android.speech.SpeechRecognizer
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +25,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.context.pxToDp
+import com.talkable.core.util.fragment.toast
 import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.firstTalk
+import timber.log.Timber
 import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
@@ -48,34 +54,38 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackListenBtnClickListener()
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
-        initSTT()
+        initializeSpeechRecognizer()
     }
 
-    // STT 초기화 및 리스너 설정
-    private fun initSTT() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext())
-        speechRecognizer.setRecognitionListener(object : RecognitionListener {
-            override fun onReadyForSpeech(params: Bundle?) {}
-            override fun onBeginningOfSpeech() {}
-            override fun onRmsChanged(rmsdB: Float) {}
-            override fun onBufferReceived(buffer: ByteArray?) {}
-            // 음성 입력 종료
-            override fun onEndOfSpeech() {
-                binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
-            }
-            override fun onError(error: Int) {
-                binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(R.string.error_talk_retry)
-            }
-            // STT 결과 화면에 표시
-            override fun onResults(results: Bundle?) {
-                val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                if (!matches.isNullOrEmpty()) {
-                    binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(matches[0])
+    // STT 초기화
+    private fun initializeSpeechRecognizer() {
+        try {
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext())
+            speechRecognizer.setRecognitionListener(object : RecognitionListener {
+                override fun onReadyForSpeech(params: Bundle?) {}
+                override fun onBeginningOfSpeech() {}
+                override fun onRmsChanged(rmsdB: Float) {}
+                override fun onBufferReceived(buffer: ByteArray?) {}
+                // 음성 입력 종료
+                override fun onEndOfSpeech() {
+                    binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 }
-            }
-            override fun onPartialResults(partialResults: Bundle?) {}
-            override fun onEvent(eventType: Int, params: Bundle?) {}
-        })
+                override fun onError(error: Int) {
+                    binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(R.string.error_talk_retry)
+                }
+                // STT 결과 화면에 표시
+                override fun onResults(results: Bundle?) {
+                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                    if (!matches.isNullOrEmpty()) {
+                        binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(matches[0])
+                    }
+                }
+                override fun onPartialResults(partialResults: Bundle?) {}
+                override fun onEvent(eventType: Int, params: Bundle?) {}
+            })
+        } catch (e: Exception) {
+            Timber.d("STT 초기화 중 오류 발생: ${e.message}")
+        }
     }
 
     private fun initGuideLayoutVisible() {
@@ -279,27 +289,65 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initSpeakBtnClickListener() {
         with(binding) {
             btnTalkSpeak.setOnClickListener {
-                btnTalkSpeak.visibility = GONE
-                includeBottomSheetTalk.visibility = GONE
-                tvTalkHint.visibility = GONE
+                requestAudioPermission() // 권한 요청
 
-                startSpeechRecognition()
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.RECORD_AUDIO
+                    )
+                    == PackageManager.PERMISSION_GRANTED
+                ) {
+                    btnTalkSpeak.visibility = GONE
+                    includeBottomSheetTalk.visibility = GONE
+                    tvTalkHint.visibility = GONE
+
+                    startSpeechRecognition()
+                }
             }
+        }
+    }
+
+    // 권한 요청 후 처리
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RECORD_AUDIO_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startSpeechRecognition() // 권한 승인 후 음성 인식 바로 실행
+        } else {
+            toast(getString(R.string.error_talk_permission))
+        }
+    }
+
+    // 권한 요청
+    private fun requestAudioPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                RECORD_AUDIO_PERMISSION_CODE
+            )
         }
     }
 
     // 음성 인식
     private fun startSpeechRecognition() {
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "en-US")
-            putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, "en-US")
+        if (this::speechRecognizer.isInitialized) {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            }
+            speechRecognizer.startListening(intent)
+        } else {
+            toast(getString(R.string.error_talk_permission))
         }
-        speechRecognizer.startListening(intent)
     }
 
     // 힌트 클릭
@@ -337,6 +385,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     companion object {
         const val FIRST_CLICK = 0
+        const val RECORD_AUDIO_PERMISSION_CODE = 100
+        const val TALK_DIALOG = "talkDialog"
 
         // 더미 데이터
         val talkMockData = listOf(
@@ -355,6 +405,5 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             TalkData(type = "ai", message = "What did you learn today?"),
             TalkData(type = "user", message = "I learn about photosynthesis."),
         )
-        const val TALK_DIALOG = "talkDialog"
     }
 }
