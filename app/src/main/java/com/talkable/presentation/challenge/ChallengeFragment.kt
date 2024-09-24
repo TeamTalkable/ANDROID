@@ -51,9 +51,9 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
 
     // 모집중인 챌린지
     private fun initRecruitmentAdapter() {
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.recruitment_margin) // 페이지끼리 간격
-        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.recruitment_width) // 페이지 보이는 정도
-        val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 가로 길이
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.recruitment_margin)
+        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.recruitment_width)
+        val screenWidth = resources.displayMetrics.widthPixels
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
         with(binding.viewpagerChallengeRecruitment) {
@@ -61,7 +61,10 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
                 page.translationX = position * -offsetPx
             }
             offscreenPageLimit = 2
-            adapter = ChallengeRecruitmentAdapter(challengeList)
+
+            adapter = ChallengeRecruitmentAdapter(challengeList) { recruitment ->
+                ChallengeDialog(requireContext(), recruitment).show()
+            }
         }
     }
 
