@@ -104,7 +104,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun delayedTalkFeedbackDialog() {
         Handler(Looper.getMainLooper()).postDelayed({
             showTalkFeedbackDialog()
-        }, 3000)
+        }, 2000)
     }
 
     private fun showTalkFeedbackDialog() {
@@ -325,14 +325,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    //3초 뒤 텍스트 변경
+    //2초 뒤 텍스트 변경
     private fun changeHintText() {
         Handler(Looper.getMainLooper()).postDelayed({
             with(binding) {
                 tvTalkHint.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄
                 tvTalkHint.text = getString(R.string.hint_talk_example)
             }
-        }, 3000)
+        }, 2000)
     }
 
     companion object {

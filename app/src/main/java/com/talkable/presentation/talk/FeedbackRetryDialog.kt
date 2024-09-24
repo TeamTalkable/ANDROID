@@ -23,6 +23,6 @@ class FeedbackRetryDialog() :
     private fun setDismiss() {
         Handler(Looper.getMainLooper()).postDelayed({
             dismiss()
-        }, 3000)
+        }, 2000)
     }
 }
