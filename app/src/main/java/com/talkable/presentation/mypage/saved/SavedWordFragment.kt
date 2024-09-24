@@ -47,11 +47,10 @@ class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fra
     private fun initSavedWordChipClickListener() {
         binding.layoutSavedSort.cgSavedList.setOnCheckedStateChangeListener { chipGroup, _ ->
             val newData = when (chipGroup.checkedChipId) {
-                Constants.NO_CHIP_SELECTED -> mockData.savedWordList
                 R.id.chip_saved_difficult -> difficultWord.savedWordList
                 R.id.chip_saved_memorizing -> memorizingWord.savedWordList
                 R.id.chip_saved_memorized -> memorizedWord.savedWordList
-                else -> emptyList()
+                else -> mockData.savedWordList
             }
             savedWordAdapter.submitList(newData)
         }
@@ -122,19 +121,19 @@ class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fra
                 type = 1,
                 word = "understand",
                 translation = "이해하다",
-                tag = "외웠어요"
+                tag = "암기 중"
             ),
             SavedWord(
                 type = 1,
                 word = "comprehend",
                 translation = "이해하다, 파악하다",
-                tag = "외웠어요"
+                tag = "암기 중"
             ),
             SavedWord(
                 type = 1,
                 word = "grasp",
                 translation = "1. 꽉 잡다 \n2. 이해하다",
-                tag = "외웠어요"
+                tag = "암기 중"
             )
         )
     )
@@ -146,19 +145,19 @@ class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fra
                 type = 2,
                 word = "honest",
                 translation = "정직한",
-                tag = "암기 중"
+                tag = "외웠어요"
             ),
             SavedWord(
                 type = 2,
                 word = "frank",
                 translation = "솔직한",
-                tag = "암기 중"
+                tag = "외웠어요"
             ),
             SavedWord(
                 type = 2,
                 word = "sincere",
                 translation = "진실한",
-                tag = "암기 중"
+                tag = "외웠어요"
             )
         )
     )

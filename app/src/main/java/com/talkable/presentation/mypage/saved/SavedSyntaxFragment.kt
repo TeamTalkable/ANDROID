@@ -5,7 +5,6 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentSavedSyntaxBinding
-import com.talkable.presentation.mypage.saved.Constants.NO_CHIP_SELECTED
 import com.talkable.presentation.mypage.saved.model.SavedListModel
 import com.talkable.presentation.mypage.saved.model.SavedWord
 
@@ -46,11 +45,10 @@ class SavedSyntaxFragment :
     private fun initSavedSyntaxChipClickListener() {
         binding.layoutSavedSort.cgSavedList.setOnCheckedStateChangeListener { chipGroup, _ ->
             val newData = when (chipGroup.checkedChipId) {
-                NO_CHIP_SELECTED -> mockData.savedWordList
                 R.id.chip_saved_difficult -> difficultSyntax.savedWordList
                 R.id.chip_saved_memorizing -> memorizingSyntax.savedWordList
                 R.id.chip_saved_memorized -> memorizedSyntax.savedWordList
-                else -> emptyList()
+                else -> mockData.savedWordList
             }
             savedSyntaxAdapter.submitList(newData)
         }
@@ -111,14 +109,17 @@ class SavedSyntaxFragment :
                 type = 1,
                 word = "I'm trying to remember this.",
                 translation = "이걸 기억하려고 노력 중이야.",
-                tag = "외웠어요"
+                tag = "암기 중"
             ), SavedWord(
                 type = 1,
                 word = "I've been studying hard.",
                 translation = "열심히 공부하고 있어.",
-                tag = "외웠어요"
+                tag = "암기 중"
             ), SavedWord(
-                type = 1, word = "I need to practice more.", translation = "더 연습해야 돼.", tag = "외웠어요"
+                type = 1,
+                word = "I need to practice more.",
+                translation = "더 연습해야 돼.",
+                tag = "암기 중"
             )
         )
     )
@@ -129,14 +130,14 @@ class SavedSyntaxFragment :
                 type = 2,
                 word = "I remember this perfectly.",
                 translation = "이걸 완벽하게 기억해.",
-                tag = "암기 중"
+                tag = "외웠어요"
             ), SavedWord(
                 type = 2,
                 word = "This is easy for me now.",
                 translation = "이제 이건 나에게 쉬워.",
-                tag = "암기 중"
+                tag = "외웠어요"
             ), SavedWord(
-                type = 2, word = "I have mastered this.", translation = "이걸 완전히 익혔어.", tag = "암기 중"
+                type = 2, word = "I have mastered this.", translation = "이걸 완전히 익혔어.", tag = "외웠어요"
             )
         )
     )

@@ -39,6 +39,9 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initTalkAdapter()
         initSpeakCompleteBtnClickListener()
         initTalkStackBtnClickListener()
+        initFeedbackListenBtnClickListener()
+        initFeedbackTranslateBtnClickListener()
+        initFeedbackCloseBtnClickListener()
     }
 
     private fun initGuideLayoutVisible() {
@@ -71,9 +74,32 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun showTalkFeedbackDialog() {
-        TalkFeedbackDialog().show(
-            childFragmentManager, TALK_DIALOG
-        )
+        binding.includeLayoutTalkFeedback.layoutFeedbackTalk.visibility = VISIBLE
+    }
+
+    private fun initFeedbackListenBtnClickListener() {
+        with(binding.includeLayoutTalkFeedback) {
+            btnFeedbackTalkListen.setOnClickListener {
+                btnFeedbackTalkListen.isSelected = !btnFeedbackTalkListen.isSelected
+            }
+        }
+    }
+
+    private fun initFeedbackTranslateBtnClickListener() {
+        with(binding.includeLayoutTalkFeedback) {
+            btnFeedbackTalkTranslate.setOnClickListener {
+                btnFeedbackTalkTranslate.isSelected = !btnFeedbackTalkTranslate.isSelected
+                tvFeedbackTalkTranslate.isVisible = !tvFeedbackTalkTranslate.isVisible
+            }
+        }
+    }
+
+    private fun initFeedbackCloseBtnClickListener() {
+        with(binding.includeLayoutTalkFeedback) {
+            btnFeedbackTalkClose.setOnClickListener {
+                layoutFeedbackTalk.visibility = GONE
+            }
+        }
     }
 
     private fun initAppbarCancelClickListener() {
@@ -95,7 +121,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         findNavController().navigate(R.id.action_talk_to_today_saved)
 
     private fun initTalkStackBtnClickListener() {
-        binding.btnTalkStack.setOnClickListener {
+        binding.btnTalkFolder.setOnClickListener {
             navigateToSavedFeedback()
         }
     }
@@ -177,7 +203,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         val videoPath = "android.resource://${requireContext().packageName}/$randomVideoResource"
         val videoUri = Uri.parse(videoPath)
 
-        with(binding){
+        with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
             videoViewTalkBackground.start()
             Handler(Looper.getMainLooper()).postDelayed({

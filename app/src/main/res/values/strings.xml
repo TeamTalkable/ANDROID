@@ -113,6 +113,9 @@
     <string name="tv_my_page_feedback_expression">표현</string>
     <string name="tv_my_page_feedback_sort">정렬</string>
     <string name="tv_my_page_feedback_category">카테고리</string>
+    <string name="label_feedback_back">이전</string>
+    <string name="label_feedback_to_talk">대화로 돌아가기</string>
+    <string name="label_feedback_next">다음</string>
 
     <!--challenge-->
     <string name="tv_challenge_participation">🔥 참여중인 챌린지</string>
@@ -180,4 +183,8 @@
     <string name="tv_today_quiz_label_good">정답입니다!</string>
     <string name="tv_today_quiz_title">오늘의 퀴즈</string>
     <string name="label_today_quiz_question">%1$s의 뜻이 아닌 것은?</string>
+    <string name="tv_quiz_result_title">AUTO 완료!</string>
+    <string name="btn_quiz_back">그만하기</string>
+    <string name="btn_quiz_continue">계속하기</string>
+    <string name="tv_quiz_result_auto_label">단어 카드</string>
 </resources>

@@ -3,12 +3,14 @@ package com.talkable.presentation.quiz
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.addCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.BottomSheetKey.QUIZ_AUTO_SPEED
+import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.setOnDuplicateBlockClick
 import com.talkable.core.view.visible
@@ -124,11 +126,16 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
                 blockFlashAutoHandleCallback()
                 binding.ivQuizAutoStop.isEnabled = false
                 binding.ivQuizAutoNext.setOnClickListener {
-                    navigateToBack()
+                    navigateToResult(mockLong.size)
                 }
             }
         }
     }
+
+    private fun navigateToResult(totalCount: Int) = findNavController().navigate(
+        R.id.action_quiz_auto_to_quiz_result,
+        bundleOf(Key.QUIZ_KEY to Quiz.AUTO.title, Key.QUIZ_RESULT_TOTAL to totalCount)
+    )
 
     private fun blockFlashAutoHandleCallback() {
         binding.ivQuizAutoStop.isSelected = true

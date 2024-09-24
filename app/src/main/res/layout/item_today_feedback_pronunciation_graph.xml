@@ -21,6 +21,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="science" />
 
+        <ImageButton
+            android:id="@+id/btn_talk_feedback"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/sel_talk_feedback"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_today_feedback_pronunciation_word"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_today_feedback_pronunciation_word" />
+
         <TextView
             android:id="@+id/tv_today_feedback_pronunciation_word_pronun"
             android:layout_width="wrap_content"
@@ -39,7 +50,7 @@
             android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
             android:textColor="@color/font_2"
             app:layout_constraintBottom_toBottomOf="@id/tv_today_feedback_pronunciation_word_pronun"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_talk_feedback"
             app:layout_constraintStart_toEndOf="@id/tv_today_feedback_pronunciation_word"
             app:layout_constraintTop_toTopOf="@id/tv_today_feedback_pronunciation_word"
             tools:text="과학" />
