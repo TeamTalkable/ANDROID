@@ -1,9 +1,14 @@
 package com.talkable.presentation.talk
 
+import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -23,6 +28,7 @@ import kotlin.random.Random
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
 
     private var clickCount = FIRST_CLICK
+    private lateinit var speechRecognizer: SpeechRecognizer
 
     override fun initView() {
         initGuideLayoutVisible()
@@ -42,6 +48,34 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackListenBtnClickListener()
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
+        initSTT()
+    }
+
+    // STT 초기화 및 리스너 설정
+    private fun initSTT() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext())
+        speechRecognizer.setRecognitionListener(object : RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {}
+            override fun onBeginningOfSpeech() {}
+            override fun onRmsChanged(rmsdB: Float) {}
+            override fun onBufferReceived(buffer: ByteArray?) {}
+            // 음성 입력 종료
+            override fun onEndOfSpeech() {
+                binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
+            }
+            override fun onError(error: Int) {
+                binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(R.string.error_talk_retry)
+            }
+            // STT 결과 화면에 표시
+            override fun onResults(results: Bundle?) {
+                val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                if (!matches.isNullOrEmpty()) {
+                    binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(matches[0])
+                }
+            }
+            override fun onPartialResults(partialResults: Bundle?) {}
+            override fun onEvent(eventType: Int, params: Bundle?) {}
+        })
     }
 
     private fun initGuideLayoutVisible() {
@@ -245,12 +279,27 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initSpeakBtnClickListener() {
         with(binding) {
             btnTalkSpeak.setOnClickListener {
-                includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 btnTalkSpeak.visibility = GONE
                 includeBottomSheetTalk.visibility = GONE
                 tvTalkHint.visibility = GONE
+
+                startSpeechRecognition()
             }
         }
+    }
+
+    // 음성 인식
+    private fun startSpeechRecognition() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "en-US")
+            putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, "en-US")
+        }
+        speechRecognizer.startListening(intent)
     }
 
     // 힌트 클릭
@@ -306,7 +355,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             TalkData(type = "ai", message = "What did you learn today?"),
             TalkData(type = "user", message = "I learn about photosynthesis."),
         )
-
         const val TALK_DIALOG = "talkDialog"
     }
 }
