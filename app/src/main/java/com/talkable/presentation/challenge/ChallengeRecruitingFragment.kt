@@ -1,5 +1,6 @@
 package com.talkable.presentation.challenge
 
+import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
@@ -12,8 +13,17 @@ class ChallengeRecruitingFragment :
 
     override fun initView() {
         statusBarColorOf(R.color.white)
+        initBackBtnClickListener()
         initChallengeRecruitingAdapter()
     }
+
+    private fun initBackBtnClickListener() {
+        binding.ivChallengeBack.setOnClickListener {
+            navigateToBack()
+        }
+    }
+
+    private fun navigateToBack() = findNavController().popBackStack()
 
     private fun initChallengeRecruitingAdapter() {
         challengeRecruitingAdapter = ChallengeRecruitingAdapter()
