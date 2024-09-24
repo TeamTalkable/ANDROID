@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:background="@drawable/shape_main1_fill_12_rect"
+        android:backgroundTint="@color/main_3"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/bg_challenge_recruiting"
+            android:layout_width="105dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="43dp"
+            android:background="@color/white"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.RoundedImage" />
+
+        <ImageView
+            android:id="@+id/iv_challenge_recruiting"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_my_flower_item_sun"
+            app:layout_constraintBottom_toBottomOf="@id/bg_challenge_recruiting"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/bg_challenge_recruiting"
+            app:layout_constraintStart_toStartOf="@id/bg_challenge_recruiting"
+            app:layout_constraintTop_toTopOf="@id/bg_challenge_recruiting" />
+
+        <TextView
+            android:id="@+id/tv_challenge_recruiting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            tools:text="하루에 15분 이상 매일 학습하기"
+            android:layout_marginHorizontal="56dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sb_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bg_challenge_recruiting" />
+
+        <TextView
+            android:id="@+id/tv_challenge_recruiting_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@string/tv_challenge_participation_date"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/challenge_date"
+            app:layout_constraintStart_toStartOf="@id/tv_challenge_recruiting_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_challenge_recruiting_title" />
+
+        <TextView
+            android:id="@+id/tv_challenge_recruiting_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@string/tv_challenge_recruiting_count"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/challenge_date"
+            app:layout_constraintEnd_toEndOf="@id/tv_challenge_recruiting_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_challenge_recruiting_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_challenge_recruiting_join"
+            style="@style/ChallengeJoinButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="37dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/btn_challenge_join"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_recruiting_date" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
