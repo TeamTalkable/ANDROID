@@ -6,12 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.Window
+import com.talkable.R
 import com.talkable.databinding.DialogChallengeBinding
 
 class ChallengeDialog(
     context: Context,
-    challengeDate: String,
-    challengeTitle: String
+    private val challenge: Recruitment
 ) : Dialog(context) {
     private val binding: DialogChallengeBinding =
         DialogChallengeBinding.inflate(layoutInflater)
@@ -23,16 +23,17 @@ class ChallengeDialog(
             setGravity(Gravity.CENTER) // 다이얼로그 위치
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 테두리 없애기
         }
-        initSetText(challengeDate, challengeTitle)
+        initSetTextAndImage()
         initJoinBtnClickListener()
         initCloseBtnClickListener()
     }
 
-    // 텍스트 적용
-    private fun initSetText(challengeDate: String, challengeTitle: String) {
+    // 텍스트와 이미지 적용
+    private fun initSetTextAndImage() {
         with(binding) {
-            tvChallengeDate.text = challengeDate
-            tvChallengeTitle.text = challengeTitle
+            tvChallengeDate.text = challenge.date
+            tvChallengeTitle.text = challenge.title
+            ivChallengeImage.setImageResource(challenge.image)
         }
     }
 
@@ -40,7 +41,8 @@ class ChallengeDialog(
     private fun initJoinBtnClickListener() {
         with(binding) {
             btnChallengeJoin.setOnClickListener {
-                dismiss()
+                btnChallengeJoin.isEnabled = false
+                btnChallengeJoin.text = context.getString(R.string.btn_challenge_join_complete)
             }
         }
     }

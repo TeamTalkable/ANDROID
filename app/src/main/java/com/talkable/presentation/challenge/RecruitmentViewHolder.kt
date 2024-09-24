@@ -9,13 +9,15 @@ class RecruitmentViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(data: Recruitment) {
         with(binding) {
+            // 이미지 로딩
             ivChallengeRecruitmentItem.load(data.image)
             tvChallengeRecruitmentDate.text = data.date
             tvChallengeRecruitmentTitle.text = data.title
 
+            // 클릭 시 다이얼로그 호출 (전체 data 전달)
             root.setOnClickListener {
                 val context = it.context
-                val dialog = ChallengeDialog(context, data.date, data.title)
+                val dialog = ChallengeDialog(context, data) // Recruitment 전체 전달
                 dialog.show()
             }
         }

@@ -1,5 +1,6 @@
 package com.talkable.presentation.challenge
 
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
@@ -13,7 +14,18 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
         initRankingAdapter()
         initParticipationAdapter()
         initRecruitmentAdapter()
+        initNavigateChallengeRecruitment()
     }
+
+    private fun initNavigateChallengeRecruitment() {
+        binding.btnChallengeRecruitment.setOnClickListener {
+            navigateToChallengeRecruitment()
+        }
+    }
+
+    private fun navigateToChallengeRecruitment() =
+        findNavController().navigate(R.id.action_challenge_to_challenge_recruitment)
+
 
     private fun setChallengeTextView() {
         with(binding) {
@@ -39,9 +51,9 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
 
     // 모집중인 챌린지
     private fun initRecruitmentAdapter() {
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.recruitment_margin) // 페이지끼리 간격
-        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.recruitment_width) // 페이지 보이는 정도
-        val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 가로 길이
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.recruitment_margin)
+        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.recruitment_width)
+        val screenWidth = resources.displayMetrics.widthPixels
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
         with(binding.viewpagerChallengeRecruitment) {
@@ -49,7 +61,10 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
                 page.translationX = position * -offsetPx
             }
             offscreenPageLimit = 2
-            adapter = ChallengeRecruitmentAdapter(challengeList)
+
+            adapter = ChallengeRecruitmentAdapter(challengeList) { recruitment ->
+                ChallengeDialog(requireContext(), recruitment).show()
+            }
         }
     }
 

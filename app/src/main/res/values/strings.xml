@@ -126,6 +126,13 @@
     <string name="tv_challenge_participation_title">10일동안 15분 이상\n매일 학습하기</string>
     <string name="tv_challenge_participation_date">04.20 ~ 04.30</string>
     <string name="tv_challenge_participation_progress">4/10일</string>
+    <string name="tv_challenge_hint">성공 시 아이템을 획득해요!</string>
+    <string name="btn_challenge_join">참여하기</string>
+    <string name="btn_challenge_join_complete">참여 신청 완료!</string>
+    <string name="et_challenge_request">챌린지 요청하기</string>
+    <string name="tv_challenge_recruiting_count">👥 %1$d</string>
+    <string name="tv_challenge_recruiting_hint">챌린지에 성공하면 꽃을 키우기 위한 아이템을 받을 수 있어요!</string>
+    <string name="hint_challenge_search">참여하고 싶은 챌린지를 검색해보세요</string>
 
     <!--my flower-->
     <string name="tv_my_flower_progress_first">0분</string>
