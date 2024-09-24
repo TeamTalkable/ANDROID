@@ -234,15 +234,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         )
 
         val randomVideoResource = videoResources[Random.nextInt(videoResources.size)]
-        val videoPath = "android.resource://${requireContext().packageName}/$randomVideoResource"
-        val videoUri = Uri.parse(videoPath)
+        val videoUri = Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
 
         with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
-            videoViewTalkBackground.start()
-            Handler(Looper.getMainLooper()).postDelayed({
-                videoViewTalkBackground.pause()
-            }, 500)
+            videoViewTalkBackground.setOnPreparedListener { mediaPlayer ->
+                mediaPlayer.isLooping = true  // 비디오 반복 재생
+                mediaPlayer.setVolume(0f, 0f)  // 비디오 음소거
+                mediaPlayer.seekTo(1)  // 첫 프레임에서 정지
+            }
         }
     }
 
