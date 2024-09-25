@@ -7,6 +7,11 @@ object Key {
     const val TODAY_QUIZ_COUNT = "today_quiz_count"
     const val QUIZ_RESULT_TOTAL = "quizTotal"
     const val QUIZ_RESULT_CORRECT = "quizCorrect"
+    const val FEEDBACK_BEFORE = "feedbackBefore"
+    const val FEEDBACK_QUESTION_EN = "feedbackQuestionEn"
+    const val FEEDBACK_QUESTION_KO = "feedbackQuestionKo"
+    const val FEEDBACK_NEXT_QUESTION_EN = "feedbackNextQuestionEn"
+    const val FEEDBACK_NEXT_QUESTION_KO = "feedbackNextQuestionKo"
 }
 
 object DialogKey {
