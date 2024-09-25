@@ -40,12 +40,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/shape_speech_fill_12_top_rect"
-            app:layout_constraintTop_toTopOf="@id/tv_talk_user_speech"
-            app:layout_constraintBottom_toBottomOf="@id/tv_talk_user_speech"
+            app:layout_constraintTop_toTopOf="@id/et_talk_user_speech"
+            app:layout_constraintBottom_toBottomOf="@id/et_talk_user_speech"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/tv_talk_user_speech"
+            android:id="@+id/et_talk_user_speech"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
@@ -65,8 +65,8 @@
             android:layout_marginEnd="15dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_talk_speech_check"
-            app:layout_constraintBottom_toBottomOf="@id/tv_talk_user_speech"
+            app:layout_constraintBottom_toBottomOf="@id/et_talk_user_speech"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_talk_user_speech" />
+            app:layout_constraintTop_toTopOf="@id/et_talk_user_speech" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

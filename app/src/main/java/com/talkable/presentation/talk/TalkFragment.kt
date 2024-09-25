@@ -18,6 +18,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +27,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key
+import com.talkable.core.util.Key.FEEDBACK_BEFORE
+import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
+import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
 import com.talkable.core.util.context.pxToDp
+import com.talkable.core.util.fragment.stringOf
 import com.talkable.core.util.fragment.toast
 import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.firstTalk
@@ -40,6 +46,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private var clickCount = FIRST_CLICK
     private lateinit var speechRecognizer: SpeechRecognizer
     private var tts: TextToSpeech? = null
+    private lateinit var nextQuestionEn: String
+    private lateinit var nextQuestionKo: String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        nextQuestionEn = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_EN)?:stringOf(R.string.tv_talk_english)
+        nextQuestionKo = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_KO)?:stringOf(R.string.tv_talk_korean)
+    }
 
     override fun initView() {
         initGuideLayoutVisible()
@@ -77,13 +90,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 }
                 override fun onError(error: Int) {
-                    binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(R.string.error_talk_retry)
+                    binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(R.string.error_talk_retry)
                 }
                 // STT 결과 화면에 표시
                 override fun onResults(results: Bundle?) {
                     val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     if (!matches.isNullOrEmpty()) {
-                        binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(matches[0])
+                        binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(matches[0])
                     }
                 }
                 override fun onPartialResults(partialResults: Bundle?) {}
@@ -266,7 +279,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun navigateToFeedbackLoadingFragment() =
-        findNavController().navigate(R.id.action_talk_to_feedback_loading)
+        findNavController().navigate(R.id.action_talk_to_feedback_loading,
+            bundleOf(
+                FEEDBACK_QUESTION_EN to nextQuestionEn,
+                FEEDBACK_QUESTION_KO to nextQuestionKo,
+                FEEDBACK_BEFORE to binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+            ))
 
     // 어댑터 연결
     private fun initTalkAdapter() {
