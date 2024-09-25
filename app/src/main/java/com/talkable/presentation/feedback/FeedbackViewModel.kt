@@ -40,6 +40,7 @@ class FeedbackViewModel : ViewModel() {
     fun patchGptFeedbacks(answer: String) {
         viewModelScope.launch {
             runCatching {
+                _uiState.value = FeedbackUiState.Loading
                 ServicePool.gptService.getGptAnswers(
                     RequestGptDto(
                         model = "gpt-3.5-turbo",
