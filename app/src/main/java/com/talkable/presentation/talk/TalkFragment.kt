@@ -1,12 +1,21 @@
 package com.talkable.presentation.talk
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Paint
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,13 +25,16 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.context.pxToDp
+import com.talkable.core.util.fragment.toast
 import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.firstTalk
+import timber.log.Timber
 import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
 
     private var clickCount = FIRST_CLICK
+    private lateinit var speechRecognizer: SpeechRecognizer
 
     override fun initView() {
         initGuideLayoutVisible()
@@ -42,6 +54,38 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackListenBtnClickListener()
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
+        initializeSpeechRecognizer()
+    }
+
+    // STT 초기화
+    private fun initializeSpeechRecognizer() {
+        try {
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext())
+            speechRecognizer.setRecognitionListener(object : RecognitionListener {
+                override fun onReadyForSpeech(params: Bundle?) {}
+                override fun onBeginningOfSpeech() {}
+                override fun onRmsChanged(rmsdB: Float) {}
+                override fun onBufferReceived(buffer: ByteArray?) {}
+                // 음성 입력 종료
+                override fun onEndOfSpeech() {
+                    binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
+                }
+                override fun onError(error: Int) {
+                    binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(R.string.error_talk_retry)
+                }
+                // STT 결과 화면에 표시
+                override fun onResults(results: Bundle?) {
+                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                    if (!matches.isNullOrEmpty()) {
+                        binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(matches[0])
+                    }
+                }
+                override fun onPartialResults(partialResults: Bundle?) {}
+                override fun onEvent(eventType: Int, params: Bundle?) {}
+            })
+        } catch (e: Exception) {
+            Timber.d("STT 초기화 중 오류 발생: ${e.message}")
+        }
     }
 
     private fun initGuideLayoutVisible() {
@@ -70,7 +114,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun delayedTalkFeedbackDialog() {
         Handler(Looper.getMainLooper()).postDelayed({
             showTalkFeedbackDialog()
-        }, 3000)
+        }, 2000)
     }
 
     private fun showTalkFeedbackDialog() {
@@ -200,15 +244,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         )
 
         val randomVideoResource = videoResources[Random.nextInt(videoResources.size)]
-        val videoPath = "android.resource://${requireContext().packageName}/$randomVideoResource"
-        val videoUri = Uri.parse(videoPath)
+        val videoUri = Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
 
         with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
-            videoViewTalkBackground.start()
-            Handler(Looper.getMainLooper()).postDelayed({
-                videoViewTalkBackground.pause()
-            }, 500)
+            videoViewTalkBackground.setOnPreparedListener { mediaPlayer ->
+                mediaPlayer.isLooping = true  // 비디오 반복 재생
+                mediaPlayer.setVolume(0f, 0f)  // 비디오 음소거
+                mediaPlayer.seekTo(1)  // 첫 프레임에서 정지
+            }
         }
     }
 
@@ -245,11 +289,64 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initSpeakBtnClickListener() {
         with(binding) {
             btnTalkSpeak.setOnClickListener {
-                includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
-                btnTalkSpeak.visibility = GONE
-                includeBottomSheetTalk.visibility = GONE
-                tvTalkHint.visibility = GONE
+                requestAudioPermission() // 권한 요청
+
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.RECORD_AUDIO
+                    )
+                    == PackageManager.PERMISSION_GRANTED
+                ) {
+                    btnTalkSpeak.visibility = GONE
+                    includeBottomSheetTalk.visibility = GONE
+                    tvTalkHint.visibility = GONE
+
+                    startSpeechRecognition()
+                }
             }
+        }
+    }
+
+    // 권한 요청 후 처리
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RECORD_AUDIO_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startSpeechRecognition() // 권한 승인 후 음성 인식 바로 실행
+        } else {
+            toast(getString(R.string.error_talk_permission))
+        }
+    }
+
+    // 권한 요청
+    private fun requestAudioPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                RECORD_AUDIO_PERMISSION_CODE
+            )
+        }
+    }
+
+    // 음성 인식
+    private fun startSpeechRecognition() {
+        if (this::speechRecognizer.isInitialized) {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            }
+            speechRecognizer.startListening(intent)
+        } else {
+            toast(getString(R.string.error_talk_permission))
         }
     }
 
@@ -276,18 +373,20 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    //3초 뒤 텍스트 변경
+    //2초 뒤 텍스트 변경
     private fun changeHintText() {
         Handler(Looper.getMainLooper()).postDelayed({
             with(binding) {
                 tvTalkHint.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄
                 tvTalkHint.text = getString(R.string.hint_talk_example)
             }
-        }, 3000)
+        }, 2000)
     }
 
     companion object {
         const val FIRST_CLICK = 0
+        const val RECORD_AUDIO_PERMISSION_CODE = 100
+        const val TALK_DIALOG = "talkDialog"
 
         // 더미 데이터
         val talkMockData = listOf(
@@ -306,7 +405,5 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             TalkData(type = "ai", message = "What did you learn today?"),
             TalkData(type = "user", message = "I learn about photosynthesis."),
         )
-
-        const val TALK_DIALOG = "talkDialog"
     }
 }
