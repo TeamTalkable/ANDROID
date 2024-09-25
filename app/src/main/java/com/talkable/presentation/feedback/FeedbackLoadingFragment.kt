@@ -27,10 +27,9 @@ class FeedbackLoadingFragment :
     private lateinit var beforeAnswer: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nextQuestionEn = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_EN).orEmpty()
-        nextQuestionKo = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_KO).orEmpty()
+        nextQuestionEn = arguments?.getString(Key.FEEDBACK_QUESTION_EN).orEmpty()
+        nextQuestionKo = arguments?.getString(Key.FEEDBACK_QUESTION_KO).orEmpty()
         beforeAnswer = arguments?.getString(Key.FEEDBACK_BEFORE).orEmpty()
-        Timber.d(nextQuestionEn)
     }
 
     override fun initView() {

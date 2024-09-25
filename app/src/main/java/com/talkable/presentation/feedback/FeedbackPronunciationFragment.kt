@@ -26,8 +26,8 @@ class FeedbackPronunciationFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nextQuestionEn = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_EN).orEmpty()
-        nextQuestionKo = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_KO).orEmpty()
+        nextQuestionEn = arguments?.getString(Key.FEEDBACK_QUESTION_EN).orEmpty()
+        nextQuestionKo = arguments?.getString(Key.FEEDBACK_QUESTION_KO).orEmpty()
     }
 
     override fun initView() {
@@ -51,8 +51,8 @@ class FeedbackPronunciationFragment :
 
     private fun navigateToTalkFragment() = findNavController().navigate(
         R.id.fragment_talk, bundleOf(
-            Key.FEEDBACK_NEXT_QUESTION_EN to nextQuestionEn,
-            Key.FEEDBACK_NEXT_QUESTION_KO to nextQuestionKo,
+            Key.FEEDBACK_QUESTION_EN to nextQuestionEn,
+            Key.FEEDBACK_QUESTION_KO to nextQuestionKo,
         )
     )
 

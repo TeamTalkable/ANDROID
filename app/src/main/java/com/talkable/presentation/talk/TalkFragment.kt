@@ -8,10 +8,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.speech.tts.TextToSpeech
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.view.View
 import android.view.View.GONE
@@ -50,11 +50,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private lateinit var nextQuestionKo: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nextQuestionEn = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_EN)?:stringOf(R.string.tv_talk_english)
-        nextQuestionKo = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_KO)?:stringOf(R.string.tv_talk_korean)
+        nextQuestionEn =
+            arguments?.getString(Key.FEEDBACK_QUESTION_EN) ?: stringOf(R.string.tv_talk_english)
+        nextQuestionKo =
+            arguments?.getString(Key.FEEDBACK_QUESTION_KO) ?: stringOf(R.string.tv_talk_korean)
     }
 
     override fun initView() {
+        setQuestionLayout()
         initGuideLayoutVisible()
         initTalkFeedbackVisible()
         initAppbarCancelClickListener()
@@ -76,6 +79,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
     }
 
+    private fun setQuestionLayout() = with(binding) {
+        tvTalkText.text = nextQuestionEn
+        tvTalkTranslate.text = nextQuestionKo
+    }
+
     // STT 초기화
     private fun initializeSpeechRecognizer() {
         try {
@@ -85,13 +93,16 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 override fun onBeginningOfSpeech() {}
                 override fun onRmsChanged(rmsdB: Float) {}
                 override fun onBufferReceived(buffer: ByteArray?) {}
+
                 // 음성 입력 종료
                 override fun onEndOfSpeech() {
                     binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 }
+
                 override fun onError(error: Int) {
                     binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(R.string.error_talk_retry)
                 }
+
                 // STT 결과 화면에 표시
                 override fun onResults(results: Bundle?) {
                     val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
@@ -99,6 +110,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(matches[0])
                     }
                 }
+
                 override fun onPartialResults(partialResults: Bundle?) {}
                 override fun onEvent(eventType: Int, params: Bundle?) {}
             })
@@ -130,10 +142,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
                     }
                     tts?.speak(
-                        binding.tvTalkText.text.toString(),
-                        TextToSpeech.QUEUE_FLUSH,
-                        params,
-                        "tts1"
+                        binding.tvTalkText.text.toString(), TextToSpeech.QUEUE_FLUSH, params, "tts1"
                     )
                 } else {
                     // 비디오 중지
@@ -214,7 +223,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     val params = Bundle().apply {
                         putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "feedback_tts")
                     }
-                    tts?.speak(tvFeedbackTalkSentence.text, TextToSpeech.QUEUE_FLUSH, params, "feedback_tts")
+                    tts?.speak(
+                        tvFeedbackTalkSentence.text,
+                        TextToSpeech.QUEUE_FLUSH,
+                        params,
+                        "feedback_tts"
+                    )
                     tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                         override fun onStart(utteranceId: String) {}
                         override fun onDone(utteranceId: String) {
@@ -224,6 +238,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                                 }
                             }
                         }
+
                         override fun onError(utteranceId: String) {
                             requireActivity().runOnUiThread {
                                 Timber.d("피드백 TTS 오류 발생")
@@ -278,13 +293,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    private fun navigateToFeedbackLoadingFragment() =
-        findNavController().navigate(R.id.action_talk_to_feedback_loading,
-            bundleOf(
-                FEEDBACK_QUESTION_EN to nextQuestionEn,
-                FEEDBACK_QUESTION_KO to nextQuestionKo,
-                FEEDBACK_BEFORE to binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
-            ))
+    private fun navigateToFeedbackLoadingFragment() = findNavController().navigate(
+        R.id.action_talk_to_feedback_loading, bundleOf(
+            FEEDBACK_QUESTION_EN to nextQuestionEn,
+            FEEDBACK_QUESTION_KO to nextQuestionKo,
+            FEEDBACK_BEFORE to binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+        )
+    )
 
     // 어댑터 연결
     private fun initTalkAdapter() {
@@ -331,16 +346,16 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
     }
+
     // 비디오 랜덤 적용
     private fun setRandomVideo() {
         val videoResources = arrayOf(
-            R.raw.bg_talk_school,
-            R.raw.bg_talk_classroom,
-            R.raw.bg_talk_library
+            R.raw.bg_talk_school, R.raw.bg_talk_classroom, R.raw.bg_talk_library
         )
 
         val randomVideoResource = videoResources[Random.nextInt(videoResources.size)]
-        val videoUri = Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
+        val videoUri =
+            Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
 
         with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
@@ -388,10 +403,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 requestAudioPermission() // 권한 요청
 
                 if (ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.RECORD_AUDIO
-                    )
-                    == PackageManager.PERMISSION_GRANTED
+                        requireContext(), Manifest.permission.RECORD_AUDIO
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     btnTalkSpeak.visibility = GONE
                     includeBottomSheetTalk.visibility = GONE
@@ -405,9 +418,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 권한 요청 후 처리
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RECORD_AUDIO_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -419,8 +430,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 권한 요청
     private fun requestAudioPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -435,8 +448,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         if (this::speechRecognizer.isInitialized) {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
                 )
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
             }
