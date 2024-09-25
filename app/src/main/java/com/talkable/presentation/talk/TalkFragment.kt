@@ -153,6 +153,30 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding.includeLayoutTalkFeedback) {
             btnFeedbackTalkListen.setOnClickListener {
                 btnFeedbackTalkListen.isSelected = !btnFeedbackTalkListen.isSelected
+
+                if (btnFeedbackTalkListen.isSelected) {
+                    val params = Bundle().apply {
+                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "feedback_tts")
+                    }
+                    tts?.speak(tvFeedbackTalkSentence.text, TextToSpeech.QUEUE_FLUSH, params, "feedback_tts")
+                    tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                        override fun onStart(utteranceId: String) {}
+                        override fun onDone(utteranceId: String) {
+                            if (utteranceId == "feedback_tts") {
+                                requireActivity().runOnUiThread {
+                                    btnFeedbackTalkListen.isSelected = false
+                                }
+                            }
+                        }
+                        override fun onError(utteranceId: String) {
+                            requireActivity().runOnUiThread {
+                                Timber.d("피드백 TTS 오류 발생")
+                            }
+                        }
+                    })
+                } else {
+                    tts?.stop()
+                }
             }
         }
     }
