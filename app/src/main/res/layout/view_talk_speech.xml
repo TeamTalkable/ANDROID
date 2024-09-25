@@ -38,26 +38,25 @@
         <ImageView
             android:id="@+id/iv_talk_speech_bg"
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="0dp"
             android:background="@drawable/shape_speech_fill_12_top_rect"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_talk_user_speech"
+            app:layout_constraintBottom_toBottomOf="@id/tv_talk_user_speech"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/tv_talk_user_speech"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="35dp"
             android:layout_marginStart="21dp"
             android:textAppearance="@style/TextAppearance.Talkable.m_20"
-            android:layout_marginEnd="70dp"
+            android:layout_marginEnd="0dp"
+            android:paddingVertical="20dp"
             android:background="@null"
-            tools:text="I take a since class today."
+            tools:text="I take a since class today.I take a since class today.I take a since class today."
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_talk_speech_bg" />
+            app:layout_constraintEnd_toStartOf="@id/iv_talk_speech"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageButton
             android:id="@+id/iv_talk_speech"

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -31,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            tools:text="I took a science class."
+            android:text="I took a science class."
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintBottom_toTopOf="@id/tv_feedback_talk_translate"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +45,7 @@
             android:layout_marginTop="4dp"
             android:visibility="gone"
             android:layout_marginBottom="21dp"
-            tools:text="나는 과학 수업을 들었어"
+            android:text="나는 과학 수업을 들었어"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
