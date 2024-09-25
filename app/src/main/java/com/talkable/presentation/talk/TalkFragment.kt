@@ -11,11 +11,14 @@ import android.os.Looper
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,19 +27,37 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key
+import com.talkable.core.util.Key.FEEDBACK_BEFORE
+import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
+import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
 import com.talkable.core.util.context.pxToDp
+import com.talkable.core.util.fragment.stringOf
 import com.talkable.core.util.fragment.toast
 import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.firstTalk
 import timber.log.Timber
+import java.util.Locale
 import kotlin.random.Random
 
-class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk) {
+class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk),
+    TextToSpeech.OnInitListener {
 
     private var clickCount = FIRST_CLICK
     private lateinit var speechRecognizer: SpeechRecognizer
+    private var tts: TextToSpeech? = null
+    private lateinit var nextQuestionEn: String
+    private lateinit var nextQuestionKo: String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        nextQuestionEn =
+            arguments?.getString(Key.FEEDBACK_QUESTION_EN) ?: stringOf(R.string.tv_talk_english)
+        nextQuestionKo =
+            arguments?.getString(Key.FEEDBACK_QUESTION_KO) ?: stringOf(R.string.tv_talk_korean)
+    }
 
     override fun initView() {
+        setQuestionLayout()
         initGuideLayoutVisible()
         initTalkFeedbackVisible()
         initAppbarCancelClickListener()
@@ -55,6 +76,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
         initializeSpeechRecognizer()
+        tts = TextToSpeech(requireContext(), this) // TTS 초기화
+    }
+
+    private fun setQuestionLayout() = with(binding) {
+        tvTalkText.text = nextQuestionEn
+        tvTalkTranslate.text = nextQuestionKo
     }
 
     // STT 초기화
@@ -66,26 +93,92 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 override fun onBeginningOfSpeech() {}
                 override fun onRmsChanged(rmsdB: Float) {}
                 override fun onBufferReceived(buffer: ByteArray?) {}
+
                 // 음성 입력 종료
                 override fun onEndOfSpeech() {
                     binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
                 }
+
                 override fun onError(error: Int) {
-                    binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(R.string.error_talk_retry)
+                    binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(R.string.error_talk_retry)
                 }
+
                 // STT 결과 화면에 표시
                 override fun onResults(results: Bundle?) {
                     val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     if (!matches.isNullOrEmpty()) {
-                        binding.includeLayoutTalkSpeech.tvTalkUserSpeech.setText(matches[0])
+                        binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(matches[0])
                     }
                 }
+
                 override fun onPartialResults(partialResults: Bundle?) {}
                 override fun onEvent(eventType: Int, params: Bundle?) {}
             })
         } catch (e: Exception) {
             Timber.d("STT 초기화 중 오류 발생: ${e.message}")
         }
+        tts = TextToSpeech(requireContext(), this) // TTS 초기화
+    }
+
+    // TTS 초기화 완료 시 호출
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            tts?.language = Locale.US
+        } else {
+            Timber.d("TTS 초기화 실패")
+        }
+    }
+
+    private fun initListenBtnClickListener() {
+        with(binding) {
+            btnTalkListen.setOnClickListener {
+                btnTalkListen.isSelected = !btnTalkListen.isSelected
+
+                if (btnTalkListen.isSelected) {
+                    videoViewTalkBackground.start()
+
+                    // TTS 시작
+                    val params = Bundle().apply {
+                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
+                    }
+                    tts?.speak(
+                        binding.tvTalkText.text.toString(), TextToSpeech.QUEUE_FLUSH, params, "tts1"
+                    )
+                } else {
+                    // 비디오 중지
+                    videoViewTalkBackground.pause()
+                    videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아감
+                }
+
+                // TTS 진행 상태 추적
+                tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                    override fun onStart(utteranceId: String) {}
+                    override fun onDone(utteranceId: String) {
+                        if (utteranceId == "tts1") {
+                            requireActivity().runOnUiThread {
+                                videoViewTalkBackground.pause()  // 비디오 일시정지
+                                videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
+                                btnTalkListen.isSelected = false  // 버튼 상태 초기화
+                            }
+                        }
+                    }
+
+                    override fun onError(utteranceId: String) {
+                        requireActivity().runOnUiThread {
+                            Timber.d("TTS 오류 발생")
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    // TTS 리소스 해제
+    override fun onDestroyView() {
+        super.onDestroyView()
+        tts?.stop()
+        tts?.shutdown()
+        tts = null
     }
 
     private fun initGuideLayoutVisible() {
@@ -125,6 +218,36 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding.includeLayoutTalkFeedback) {
             btnFeedbackTalkListen.setOnClickListener {
                 btnFeedbackTalkListen.isSelected = !btnFeedbackTalkListen.isSelected
+
+                if (btnFeedbackTalkListen.isSelected) {
+                    val params = Bundle().apply {
+                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "feedback_tts")
+                    }
+                    tts?.speak(
+                        tvFeedbackTalkSentence.text,
+                        TextToSpeech.QUEUE_FLUSH,
+                        params,
+                        "feedback_tts"
+                    )
+                    tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                        override fun onStart(utteranceId: String) {}
+                        override fun onDone(utteranceId: String) {
+                            if (utteranceId == "feedback_tts") {
+                                requireActivity().runOnUiThread {
+                                    btnFeedbackTalkListen.isSelected = false
+                                }
+                            }
+                        }
+
+                        override fun onError(utteranceId: String) {
+                            requireActivity().runOnUiThread {
+                                Timber.d("피드백 TTS 오류 발생")
+                            }
+                        }
+                    })
+                } else {
+                    tts?.stop()
+                }
             }
         }
     }
@@ -170,8 +293,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    private fun navigateToFeedbackLoadingFragment() =
-        findNavController().navigate(R.id.action_talk_to_feedback_loading)
+    private fun navigateToFeedbackLoadingFragment() = findNavController().navigate(
+        R.id.action_talk_to_feedback_loading, bundleOf(
+            FEEDBACK_QUESTION_EN to nextQuestionEn,
+            FEEDBACK_QUESTION_KO to nextQuestionKo,
+            FEEDBACK_BEFORE to binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+        )
+    )
 
     // 어댑터 연결
     private fun initTalkAdapter() {
@@ -206,45 +334,28 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 when (newState) {
                     // 하단 상태일 때 버튼 숨김
                     STATE_COLLAPSED -> {
-                        val customColor =
-                            with(binding.layoutBottomSheetTalk) {
-                                btnBottomSheetSelectArea.visibility = GONE
-                            }
+                        binding.layoutBottomSheetTalk.btnBottomSheetSelectArea.visibility = GONE
                     }
                     // 바텀 시트가 완전히 펼쳐졌을 때 버튼 보이게
                     STATE_EXPANDED -> {
-                        with(binding.layoutBottomSheetTalk) {
-                            btnBottomSheetSelectArea.visibility = VISIBLE
-                        }
+                        binding.layoutBottomSheetTalk.btnBottomSheetSelectArea.visibility = VISIBLE
                     }
                 }
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
-    }
-
-    // 듣기 버튼 클릭
-    private fun initListenBtnClickListener() {
-        with(binding) {
-            btnTalkListen.setOnClickListener {
-                btnTalkListen.isSelected = !btnTalkListen.isSelected
-                videoViewTalkBackground.start()
-            }
-        }
     }
 
     // 비디오 랜덤 적용
     private fun setRandomVideo() {
         val videoResources = arrayOf(
-            R.raw.bg_talk_school,
-            R.raw.bg_talk_classroom,
-            R.raw.bg_talk_library
+            R.raw.bg_talk_school, R.raw.bg_talk_classroom, R.raw.bg_talk_library
         )
 
         val randomVideoResource = videoResources[Random.nextInt(videoResources.size)]
-        val videoUri = Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
+        val videoUri =
+            Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
 
         with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
@@ -292,10 +403,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 requestAudioPermission() // 권한 요청
 
                 if (ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.RECORD_AUDIO
-                    )
-                    == PackageManager.PERMISSION_GRANTED
+                        requireContext(), Manifest.permission.RECORD_AUDIO
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     btnTalkSpeak.visibility = GONE
                     includeBottomSheetTalk.visibility = GONE
@@ -309,9 +418,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 권한 요청 후 처리
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RECORD_AUDIO_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -323,8 +430,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 권한 요청
     private fun requestAudioPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -339,8 +448,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         if (this::speechRecognizer.isInitialized) {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
                 )
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
             }

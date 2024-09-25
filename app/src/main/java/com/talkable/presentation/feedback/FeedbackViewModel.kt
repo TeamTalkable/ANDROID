@@ -71,7 +71,7 @@ class FeedbackViewModel : ViewModel() {
     2. Provide two or more key parts of the corrected sentence.
     3. For each part, indicate which part was changed from the original sentence. There may be more than two parts if necessary.
     4. Give feedback on the expressions used in the corrected sentence. 
-    5. Give feedback on grammar. 
+    5. Give feedback on grammar and include reason in Korean.
     6. For expressions, include both English and Korean translations.
     7. Limit your entire response to within 1000 tokens.
     8. Structure your response as follows:

@@ -1,11 +1,13 @@
 package com.talkable.presentation.feedback
 
+import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
@@ -14,15 +16,25 @@ import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentFeedbackLoadingBinding
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class FeedbackLoadingFragment :
     BindingFragment<FragmentFeedbackLoadingBinding>(R.layout.fragment_feedback_loading) {
 
     private val viewModel: FeedbackViewModel by activityViewModels()
+    private lateinit var nextQuestionEn: String
+    private lateinit var nextQuestionKo: String
+    private lateinit var beforeAnswer: String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        nextQuestionEn = arguments?.getString(Key.FEEDBACK_QUESTION_EN).orEmpty()
+        nextQuestionKo = arguments?.getString(Key.FEEDBACK_QUESTION_KO).orEmpty()
+        beforeAnswer = arguments?.getString(Key.FEEDBACK_BEFORE).orEmpty()
+    }
 
     override fun initView() {
         statusBarColorOf(R.color.white)
-        viewModel.patchGptFeedbacks( "I went class in the morning and study in the library.")
+        viewModel.patchGptFeedbacks(beforeAnswer)
         collect()
     }
 
@@ -43,9 +55,9 @@ class FeedbackLoadingFragment :
     private fun navigateToExpressionFeedbackFragment() {
         findNavController().navigate(
             R.id.action_feedback_loading_to_feedback_expression, bundleOf(
-                FEEDBACK_QUESTION_EN to "What did you do at school today?",
-                FEEDBACK_QUESTION_KO to "학교에서 오늘 뭐했어?",
-                FEEDBACK_BEFORE to "I went class in the morning and study in the library."
+                FEEDBACK_QUESTION_EN to nextQuestionEn,
+                FEEDBACK_QUESTION_KO to nextQuestionKo,
+                FEEDBACK_BEFORE to beforeAnswer
             )
         )
     }

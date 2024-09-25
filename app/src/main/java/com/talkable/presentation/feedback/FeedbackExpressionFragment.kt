@@ -126,8 +126,8 @@ class FeedbackExpressionFragment :
     private fun navigateToPronunciationFeedbackFragment() =
         findNavController().navigate(
             R.id.action_feedback_expression_to_feedback_pronunciation, bundleOf(
-                Key.FEEDBACK_NEXT_QUESTION_EN to nextQuestionEn,
-                Key.FEEDBACK_NEXT_QUESTION_KO to nextQuestionKo,
+                Key.FEEDBACK_QUESTION_EN to nextQuestionEn,
+                Key.FEEDBACK_QUESTION_KO to nextQuestionKo,
             )
         )
 }
