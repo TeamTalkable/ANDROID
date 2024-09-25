@@ -1,6 +1,16 @@
 package com.talkable.presentation.feedback.model
 
 import com.talkable.presentation.talk.feedback.model.Learned
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class FeedbackContainer(
+    val afterFullAnswer: String,
+    val afterAnswerParts: List<String>,
+    val feedback: Map<String, List<Learned>>,
+    val nextQuestionEn: String,
+    val nextQuestionKo: String,
+)
 
 data class FeedbackExpressionModel(
     val feedbackId: Int,

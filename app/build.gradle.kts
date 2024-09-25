@@ -31,6 +31,9 @@ android {
 
         manifestPlaceholders["appKey"] = properties["native.app.key"] as String
         buildConfigField("String", "NATIVE_APP_KEY", "\"${appKey}\"")
+
+        val gptApiKey = properties["gpt.api.key"] as? String ?: ""
+        buildConfigField("String", "GPT_API_KEY", "\"${gptApiKey}\"")
     }
 
     buildTypes {
