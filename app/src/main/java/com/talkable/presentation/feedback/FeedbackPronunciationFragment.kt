@@ -1,12 +1,15 @@
 package com.talkable.presentation.feedback
 
 import android.media.MediaPlayer
+import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentFeedbackPronunciationBinding
 import com.talkable.presentation.FeedbackTextColor
@@ -18,6 +21,14 @@ class FeedbackPronunciationFragment :
     BindingFragment<FragmentFeedbackPronunciationBinding>(R.layout.fragment_feedback_pronunciation) {
 
     private var englishWord: String? = null
+    private lateinit var nextQuestionEn: String
+    private lateinit var nextQuestionKo: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        nextQuestionEn = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_EN).orEmpty()
+        nextQuestionKo = arguments?.getString(Key.FEEDBACK_NEXT_QUESTION_KO).orEmpty()
+    }
 
     override fun initView() {
         statusBarColorOf(R.color.white)
@@ -38,10 +49,16 @@ class FeedbackPronunciationFragment :
         }
     }
 
-    private fun navigateToTalkFragment() = findNavController().navigate(R.id.fragment_talk)
+    private fun navigateToTalkFragment() = findNavController().navigate(
+        R.id.fragment_talk, bundleOf(
+            Key.FEEDBACK_NEXT_QUESTION_EN to nextQuestionEn,
+            Key.FEEDBACK_NEXT_QUESTION_KO to nextQuestionKo,
+        )
+    )
 
     private fun initPronunciationWordAdapter() {
-        binding.rvFeedbackPronunciation.adapter = FeedbackPronunciationWordAdapter(requireContext(),
+        binding.rvFeedbackPronunciation.adapter = FeedbackPronunciationWordAdapter(
+            requireContext(),
             onClickWordItem = { data, isSelected ->
                 handleWordItemClick(data, isSelected)
                 englishWord = if (!isSelected) data.englishWord else null
