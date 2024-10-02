@@ -268,5 +268,12 @@
                 app:behavior_peekHeight="50dp"
                 app:layout_behavior="@string/bottom_sheet_behavior" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_talk_speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="btn_talk_speak, tv_talk_hint, include_bottom_sheet_talk" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

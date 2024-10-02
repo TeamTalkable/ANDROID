@@ -96,7 +96,9 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         tvTalkTranslate.text = getString(koreanGuideTextArray[textIndex])
                         textIndex = (textIndex + 1) % englishGuideTextArray.size
                         guideClickCount++
+
                     } else {
+                        groupTalkSpeak.isVisible = true
                         btnTalkSpeak.isEnabled = true
                         tvTalkEnglish.isVisible = false
                         tvTalkTranslate.isVisible = false
