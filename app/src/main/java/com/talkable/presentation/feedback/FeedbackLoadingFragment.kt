@@ -7,7 +7,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.Key
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
@@ -16,7 +15,6 @@ import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentFeedbackLoadingBinding
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class FeedbackLoadingFragment :
     BindingFragment<FragmentFeedbackLoadingBinding>(R.layout.fragment_feedback_loading) {
@@ -27,9 +25,9 @@ class FeedbackLoadingFragment :
     private lateinit var beforeAnswer: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nextQuestionEn = arguments?.getString(Key.FEEDBACK_QUESTION_EN).orEmpty()
-        nextQuestionKo = arguments?.getString(Key.FEEDBACK_QUESTION_KO).orEmpty()
-        beforeAnswer = arguments?.getString(Key.FEEDBACK_BEFORE).orEmpty()
+        nextQuestionEn = arguments?.getString(FEEDBACK_QUESTION_EN).orEmpty()
+        nextQuestionKo = arguments?.getString(FEEDBACK_QUESTION_KO).orEmpty()
+        beforeAnswer = arguments?.getString(FEEDBACK_BEFORE).orEmpty()
     }
 
     override fun initView() {
@@ -57,7 +55,7 @@ class FeedbackLoadingFragment :
             R.id.action_feedback_loading_to_feedback_expression, bundleOf(
                 FEEDBACK_QUESTION_EN to nextQuestionEn,
                 FEEDBACK_QUESTION_KO to nextQuestionKo,
-                FEEDBACK_BEFORE to beforeAnswer
+                FEEDBACK_BEFORE to beforeAnswer,
             )
         )
     }
