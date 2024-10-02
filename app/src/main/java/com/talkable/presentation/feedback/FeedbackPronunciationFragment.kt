@@ -23,11 +23,13 @@ class FeedbackPronunciationFragment :
     private var englishWord: String? = null
     private lateinit var nextQuestionEn: String
     private lateinit var nextQuestionKo: String
+    private lateinit var feedbackAfter: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nextQuestionEn = arguments?.getString(Key.FEEDBACK_QUESTION_EN).orEmpty()
         nextQuestionKo = arguments?.getString(Key.FEEDBACK_QUESTION_KO).orEmpty()
+        feedbackAfter = arguments?.getString(Key.FEEDBACK_AFTER).orEmpty()
     }
 
     override fun initView() {
@@ -53,6 +55,7 @@ class FeedbackPronunciationFragment :
         R.id.fragment_talk, bundleOf(
             Key.FEEDBACK_QUESTION_EN to nextQuestionEn,
             Key.FEEDBACK_QUESTION_KO to nextQuestionKo,
+            Key.FEEDBACK_AFTER to feedbackAfter
         )
     )
 

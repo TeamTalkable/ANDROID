@@ -27,7 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.Key
+import com.talkable.core.util.Key.FEEDBACK_AFTER
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
@@ -48,12 +48,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private var tts: TextToSpeech? = null
     private lateinit var nextQuestionEn: String
     private lateinit var nextQuestionKo: String
+    private lateinit var feedbackAfter: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nextQuestionEn =
-            arguments?.getString(Key.FEEDBACK_QUESTION_EN) ?: stringOf(R.string.tv_talk_english)
+            arguments?.getString(FEEDBACK_QUESTION_EN) ?: stringOf(R.string.tv_talk_english)
         nextQuestionKo =
-            arguments?.getString(Key.FEEDBACK_QUESTION_KO) ?: stringOf(R.string.tv_talk_korean)
+            arguments?.getString(FEEDBACK_QUESTION_KO) ?: stringOf(R.string.tv_talk_korean)
+        feedbackAfter =
+            arguments?.getString(FEEDBACK_AFTER).orEmpty()
     }
 
     override fun initView() {
@@ -82,6 +85,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun setQuestionLayout() = with(binding) {
         tvTalkText.text = nextQuestionEn
         tvTalkTranslate.text = nextQuestionKo
+        includeLayoutTalkFeedback.tvFeedbackTalkSentence.text = feedbackAfter
     }
 
     // STT 초기화
