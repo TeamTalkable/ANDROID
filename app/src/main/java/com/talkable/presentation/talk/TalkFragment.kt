@@ -191,7 +191,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아감
                 }
 
-                // TTS 진행 상태 추적
+                // TTS 종료
                 tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                     override fun onStart(utteranceId: String) {}
                     override fun onDone(utteranceId: String) {
@@ -200,6 +200,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                                 videoViewTalkBackground.pause()  // 비디오 일시정지
                                 videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
                                 btnTalkListen.isSelected = false  // 버튼 상태 초기화
+                                initSpeakGuide()
                             }
                         }
                     }
@@ -220,6 +221,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts?.stop()
         tts?.shutdown()
         tts = null
+    }
+
+    private fun initSpeakGuide() {
+        binding.tvTalkGuide.apply {
+            visibility = VISIBLE
+            postDelayed({
+                visibility = GONE
+            }, 3000)
+        }
     }
 
     private fun initTalkFeedbackVisible() {
