@@ -38,7 +38,6 @@ import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.firstTalk
 import timber.log.Timber
 import java.util.Locale
-import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk),
     TextToSpeech.OnInitListener {
@@ -330,15 +329,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         })
     }
 
-    // 비디오 랜덤 적용
+    // 비디오 적용
     private fun setRandomVideo() {
-        val videoResources = arrayOf(
-            R.raw.bg_talk_school, R.raw.bg_talk_classroom, R.raw.bg_talk_library
-        )
-
-        val randomVideoResource = videoResources[Random.nextInt(videoResources.size)]
+        val videoResource = R.raw.bg_talk_ai
         val videoUri =
-            Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
+            Uri.parse("android.resource://${requireContext().packageName}/$videoResource")
 
         with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
