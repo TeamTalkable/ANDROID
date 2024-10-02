@@ -48,6 +48,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private lateinit var nextQuestionEn: String
     private lateinit var nextQuestionKo: String
     private lateinit var feedbackAfter: String
+
+    private var guideClickCount = FIRST_CLICK
+    private var textIndex = 0
+    private val englishGuideTextArray =
+        arrayOf(R.string.tv_talk_second_en, R.string.tv_talk_third_en)
+    private val koreanGuideTextArray =
+        arrayOf(R.string.tv_talk_second_kr, R.string.tv_talk_third_kr)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nextQuestionEn =
@@ -59,7 +67,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     override fun initView() {
-        setQuestionLayout()
+        initTalkGuide()
         initTalkFeedbackVisible()
         initAppbarCancelClickListener()
         setRandomVideo()
@@ -79,10 +87,32 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
     }
 
+    private fun initTalkGuide() {
+        if (guideClickCount == FIRST_CLICK) {
+            with(binding) {
+                root.setOnClickListener {
+                    if (guideClickCount < MAX_GUIDE_CLICK) {
+                        tvTalkEnglish.text = getString(englishGuideTextArray[textIndex])
+                        tvTalkTranslate.text = getString(koreanGuideTextArray[textIndex])
+                        textIndex = (textIndex + 1) % englishGuideTextArray.size
+                        guideClickCount++
+                    } else {
+                        btnTalkSpeak.isEnabled = true
+                        tvTalkEnglish.isVisible = false
+                        tvTalkTranslate.isVisible = false
+                        tvTalkListen.isVisible = true
+                        setQuestionLayout()
+                    }
+                }
+            }
+        }
+    }
+
     private fun setQuestionLayout() = with(binding) {
         tvTalkEnglish.text = nextQuestionEn
         tvTalkTranslate.text = nextQuestionKo
         includeLayoutTalkFeedback.tvFeedbackTalkSentence.text = feedbackAfter
+        groupTalkBtn.isVisible = true
     }
 
     // STT 초기화
@@ -97,7 +127,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
                 // 음성 입력 종료
                 override fun onEndOfSpeech() {
-                    binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
+                    with(binding) {
+                        includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+                        btnTalkSpeak.isVisible = false
+                        tvTalkHint.isVisible = false
+                        includeBottomSheetTalk.isVisible = false
+                    }
                 }
 
                 override fun onError(error: Int) {
@@ -379,7 +414,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding) {
             btnTalkSpeak.setOnClickListener {
                 requestAudioPermission() // 권한 요청
-
                 if (ContextCompat.checkSelfPermission(
                         requireContext(), Manifest.permission.RECORD_AUDIO
                     ) == PackageManager.PERMISSION_GRANTED
@@ -472,6 +506,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         const val FIRST_CLICK = 0
         const val RECORD_AUDIO_PERMISSION_CODE = 100
         const val TALK_DIALOG = "talkDialog"
+        const val MAX_GUIDE_CLICK = 2
 
         // 더미 데이터
         val talkMockData = listOf(
