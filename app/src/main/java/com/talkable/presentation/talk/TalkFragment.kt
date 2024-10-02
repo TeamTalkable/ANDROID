@@ -38,7 +38,6 @@ import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.firstTalk
 import timber.log.Timber
 import java.util.Locale
-import kotlin.random.Random
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk),
     TextToSpeech.OnInitListener {
@@ -49,6 +48,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private lateinit var nextQuestionEn: String
     private lateinit var nextQuestionKo: String
     private lateinit var feedbackAfter: String
+
+    private var guideClickCount = FIRST_CLICK
+    private var textIndex = 0
+    private val englishGuideTextArray =
+        arrayOf(R.string.tv_talk_second_en, R.string.tv_talk_third_en)
+    private val koreanGuideTextArray =
+        arrayOf(R.string.tv_talk_second_kr, R.string.tv_talk_third_kr)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nextQuestionEn =
@@ -60,11 +67,9 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     override fun initView() {
-        setQuestionLayout()
-        initGuideLayoutVisible()
+        initTalkGuide()
         initTalkFeedbackVisible()
         initAppbarCancelClickListener()
-        initGuideLayoutClickListener()
         setRandomVideo()
         initBottomSheet()
         initListenBtnClickListener()
@@ -82,10 +87,34 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
     }
 
+    private fun initTalkGuide() {
+        if (guideClickCount == FIRST_CLICK) {
+            with(binding) {
+                root.setOnClickListener {
+                    if (guideClickCount < MAX_GUIDE_CLICK) {
+                        tvTalkEnglish.text = getString(englishGuideTextArray[textIndex])
+                        tvTalkTranslate.text = getString(koreanGuideTextArray[textIndex])
+                        textIndex = (textIndex + 1) % englishGuideTextArray.size
+                        guideClickCount++
+
+                    } else {
+                        groupTalkSpeak.isVisible = true
+                        btnTalkSpeak.isEnabled = true
+                        tvTalkEnglish.isVisible = false
+                        tvTalkTranslate.isVisible = false
+                        tvTalkListen.isVisible = true
+                        setQuestionLayout()
+                    }
+                }
+            }
+        }
+    }
+
     private fun setQuestionLayout() = with(binding) {
-        tvTalkText.text = nextQuestionEn
+        tvTalkEnglish.text = nextQuestionEn
         tvTalkTranslate.text = nextQuestionKo
         includeLayoutTalkFeedback.tvFeedbackTalkSentence.text = feedbackAfter
+        groupTalkBtn.isVisible = true
     }
 
     // STT 초기화
@@ -100,7 +129,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
                 // 음성 입력 종료
                 override fun onEndOfSpeech() {
-                    binding.includeLayoutTalkSpeech.layoutTalkSpeech.visibility = VISIBLE
+                    with(binding) {
+                        includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+                        btnTalkSpeak.isVisible = false
+                        tvTalkHint.isVisible = false
+                        includeBottomSheetTalk.isVisible = false
+                    }
                 }
 
                 override fun onError(error: Int) {
@@ -146,7 +180,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
                     }
                     tts?.speak(
-                        binding.tvTalkText.text.toString(), TextToSpeech.QUEUE_FLUSH, params, "tts1"
+                        binding.tvTalkEnglish.text.toString(),
+                        TextToSpeech.QUEUE_FLUSH,
+                        params,
+                        "tts1"
                     )
                 } else {
                     // 비디오 중지
@@ -154,7 +191,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아감
                 }
 
-                // TTS 진행 상태 추적
+                // TTS 종료
                 tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                     override fun onStart(utteranceId: String) {}
                     override fun onDone(utteranceId: String) {
@@ -163,6 +200,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                                 videoViewTalkBackground.pause()  // 비디오 일시정지
                                 videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
                                 btnTalkListen.isSelected = false  // 버튼 상태 초기화
+                                initSpeakGuide()
                             }
                         }
                     }
@@ -185,13 +223,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts = null
     }
 
-    private fun initGuideLayoutVisible() {
-        with(binding.includeLayoutTalkGuide) {
-            if (firstTalk) {
-                layoutTalkGuide.visibility = VISIBLE
-            } else {
-                layoutTalkGuide.visibility = GONE
-            }
+    private fun initSpeakGuide() {
+        binding.tvTalkGuide.apply {
+            visibility = VISIBLE
+            postDelayed({
+                visibility = GONE
+            }, 3000)
         }
     }
 
@@ -315,18 +352,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    // 코치 마크 레이아웃
-    private fun initGuideLayoutClickListener() {
-        with(binding.includeLayoutTalkGuide) {
-            layoutTalkGuide.setOnClickListener {
-                if (firstTalk) {
-                    layoutTalkGuide.visibility = GONE
-                    firstTalk = false
-                }
-            }
-        }
-    }
-
     // 바텀 시트
     private fun initBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheetTalk.root)
@@ -351,15 +376,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         })
     }
 
-    // 비디오 랜덤 적용
+    // 비디오 적용
     private fun setRandomVideo() {
-        val videoResources = arrayOf(
-            R.raw.bg_talk_school, R.raw.bg_talk_classroom, R.raw.bg_talk_library
-        )
-
-        val randomVideoResource = videoResources[Random.nextInt(videoResources.size)]
+        val videoResource = R.raw.bg_talk_ai
         val videoUri =
-            Uri.parse("android.resource://${requireContext().packageName}/$randomVideoResource")
+            Uri.parse("android.resource://${requireContext().packageName}/$videoResource")
 
         with(binding) {
             videoViewTalkBackground.setVideoURI(videoUri)
@@ -387,7 +408,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding) {
             btnTalkShow.setOnClickListener {
                 btnTalkShow.isSelected = !btnTalkShow.isSelected
-                tvTalkText.isVisible = !tvTalkText.isVisible
+                tvTalkEnglish.isVisible = !tvTalkEnglish.isVisible
                 initShowListenTextView()
             }
         }
@@ -405,16 +426,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding) {
             btnTalkSpeak.setOnClickListener {
                 requestAudioPermission() // 권한 요청
-
                 if (ContextCompat.checkSelfPermission(
                         requireContext(), Manifest.permission.RECORD_AUDIO
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    btnTalkSpeak.visibility = GONE
-                    includeBottomSheetTalk.visibility = GONE
-                    tvTalkHint.visibility = GONE
-
                     startSpeechRecognition()
+                    btnTalkSpeak.backgroundTintList =
+                        ContextCompat.getColorStateList(requireContext(), R.color.main)
+                    lottiTalkSpeak.isVisible = true
                 }
             }
         }
@@ -499,6 +518,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         const val FIRST_CLICK = 0
         const val RECORD_AUDIO_PERMISSION_CODE = 100
         const val TALK_DIALOG = "talkDialog"
+        const val MAX_GUIDE_CLICK = 2
 
         // 더미 데이터
         val talkMockData = listOf(
