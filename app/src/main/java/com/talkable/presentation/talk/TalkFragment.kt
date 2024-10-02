@@ -61,10 +61,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     override fun initView() {
         setQuestionLayout()
-        initGuideLayoutVisible()
         initTalkFeedbackVisible()
         initAppbarCancelClickListener()
-        initGuideLayoutClickListener()
         setRandomVideo()
         initBottomSheet()
         initListenBtnClickListener()
@@ -83,7 +81,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun setQuestionLayout() = with(binding) {
-        tvTalkText.text = nextQuestionEn
+        tvTalkEnglish.text = nextQuestionEn
         tvTalkTranslate.text = nextQuestionKo
         includeLayoutTalkFeedback.tvFeedbackTalkSentence.text = feedbackAfter
     }
@@ -146,7 +144,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
                     }
                     tts?.speak(
-                        binding.tvTalkText.text.toString(), TextToSpeech.QUEUE_FLUSH, params, "tts1"
+                        binding.tvTalkEnglish.text.toString(),
+                        TextToSpeech.QUEUE_FLUSH,
+                        params,
+                        "tts1"
                     )
                 } else {
                     // 비디오 중지
@@ -183,16 +184,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts?.stop()
         tts?.shutdown()
         tts = null
-    }
-
-    private fun initGuideLayoutVisible() {
-        with(binding.includeLayoutTalkGuide) {
-            if (firstTalk) {
-                layoutTalkGuide.visibility = VISIBLE
-            } else {
-                layoutTalkGuide.visibility = GONE
-            }
-        }
     }
 
     private fun initTalkFeedbackVisible() {
@@ -315,18 +306,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    // 코치 마크 레이아웃
-    private fun initGuideLayoutClickListener() {
-        with(binding.includeLayoutTalkGuide) {
-            layoutTalkGuide.setOnClickListener {
-                if (firstTalk) {
-                    layoutTalkGuide.visibility = GONE
-                    firstTalk = false
-                }
-            }
-        }
-    }
-
     // 바텀 시트
     private fun initBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheetTalk.root)
@@ -387,7 +366,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding) {
             btnTalkShow.setOnClickListener {
                 btnTalkShow.isSelected = !btnTalkShow.isSelected
-                tvTalkText.isVisible = !tvTalkText.isVisible
+                tvTalkEnglish.isVisible = !tvTalkEnglish.isVisible
                 initShowListenTextView()
             }
         }
