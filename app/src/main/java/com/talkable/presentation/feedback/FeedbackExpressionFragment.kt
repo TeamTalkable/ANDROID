@@ -13,11 +13,9 @@ import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentTalkFeedbackExpressionBinding
 import com.talkable.presentation.FeedbackTextColor
-import com.talkable.presentation.feedback.model.FeedbackExpressionModel
 import com.talkable.presentation.talk.feedback.TalkFeedbackLearnedAdapter
 import com.talkable.presentation.talk.feedback.model.Learned
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class FeedbackExpressionFragment :
     BindingFragment<FragmentTalkFeedbackExpressionBinding>(R.layout.fragment_talk_feedback_expression) {
@@ -128,6 +126,7 @@ class FeedbackExpressionFragment :
             R.id.action_feedback_expression_to_feedback_pronunciation, bundleOf(
                 Key.FEEDBACK_QUESTION_EN to nextQuestionEn,
                 Key.FEEDBACK_QUESTION_KO to nextQuestionKo,
+                Key.FEEDBACK_AFTER to binding.tvTalkFeedbackAfter.text.toString()
             )
         )
 }
