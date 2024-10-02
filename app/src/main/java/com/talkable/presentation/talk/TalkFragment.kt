@@ -384,11 +384,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         requireContext(), Manifest.permission.RECORD_AUDIO
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    btnTalkSpeak.visibility = GONE
-                    includeBottomSheetTalk.visibility = GONE
-                    tvTalkHint.visibility = GONE
-
                     startSpeechRecognition()
+                    btnTalkSpeak.backgroundTintList =
+                        ContextCompat.getColorStateList(requireContext(), R.color.main)
+                    lottiTalkSpeak.isVisible = true
                 }
             }
         }
