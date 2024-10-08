@@ -125,6 +125,12 @@
                 app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
                 app:layout_constraintTop_toBottomOf="@id/tv_talk_english" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_talk_ai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_talk_english, tv_talk_translate" />
+
             <ImageButton
                 android:id="@+id/btn_talk_listen"
                 android:layout_width="wrap_content"
@@ -275,5 +281,92 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:constraint_referenced_ids="btn_talk_speak, tv_talk_hint, include_bottom_sheet_talk" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_talk_feedback_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="lottie_feedback_loading, tv_feedback_loading_title" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_feedback_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_feedback_loading_title"
+            app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintTop_toTopOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_feedback_loading" />
+
+        <TextView
+            android:id="@+id/tv_feedback_loading_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/tv_feedback_loading_title"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+            app:layout_constraintBottom_toBottomOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintTop_toBottomOf="@id/lottie_feedback_loading" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_talk_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_talk_user_answer, tv_talk_feedback" />
+
+        <TextView
+            android:id="@+id/tv_talk_user_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="22dp"
+            android:background="@drawable/shape_white_fill_12_rect"
+            android:backgroundTint="@color/main_3"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+            app:drawableStartCompat="@drawable/ic_saved_listen_unselected"
+            app:drawableTint="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/tv_talk_feedback"
+            app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintTop_toTopOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_talk_feedback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            app:layout_constraintBottom_toTopOf="@id/tv_talk_feedback_detail"
+            app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintTop_toBottomOf="@id/tv_talk_user_answer" />
+
+        <TextView
+            android:id="@+id/tv_talk_feedback_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:paddingVertical="8dp"
+            android:text="@string/tv_talk_feedback_detail"
+            android:textAppearance="@style/TextAppearance.Talkable.b_12"
+            android:textColor="@color/main_4"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
+            app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

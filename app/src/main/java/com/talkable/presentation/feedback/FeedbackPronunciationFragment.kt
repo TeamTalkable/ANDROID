@@ -1,7 +1,6 @@
 package com.talkable.presentation.feedback
 
 import android.media.MediaPlayer
-import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -21,16 +20,6 @@ class FeedbackPronunciationFragment :
     BindingFragment<FragmentFeedbackPronunciationBinding>(R.layout.fragment_feedback_pronunciation) {
 
     private var englishWord: String? = null
-    private lateinit var nextQuestionEn: String
-    private lateinit var nextQuestionKo: String
-    private lateinit var feedbackAfter: String
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        nextQuestionEn = arguments?.getString(Key.FEEDBACK_QUESTION_EN).orEmpty()
-        nextQuestionKo = arguments?.getString(Key.FEEDBACK_QUESTION_KO).orEmpty()
-        feedbackAfter = arguments?.getString(Key.FEEDBACK_AFTER).orEmpty()
-    }
 
     override fun initView() {
         statusBarColorOf(R.color.white)
@@ -41,23 +30,14 @@ class FeedbackPronunciationFragment :
         initBottomNavigationItemClickListener()
         initRecordCancelClickListener()
         initRecordCheckClickListener()
-        initAppbarBackClickListener()
-        initNavigateToTalkBtnClickListener()
+        initNavigateToBackClickListener()
     }
 
-    private fun initNavigateToTalkBtnClickListener() {
-        binding.btnFeedbackPronunciationToTalk.setOnClickListener {
-            navigateToTalkFragment()
+    private fun initNavigateToBackClickListener() {
+        binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
-
-    private fun navigateToTalkFragment() = findNavController().navigate(
-        R.id.fragment_talk, bundleOf(
-            Key.FEEDBACK_QUESTION_EN to nextQuestionEn,
-            Key.FEEDBACK_QUESTION_KO to nextQuestionKo,
-            Key.FEEDBACK_AFTER to feedbackAfter
-        )
-    )
 
     private fun initPronunciationWordAdapter() {
         binding.rvFeedbackPronunciation.adapter = FeedbackPronunciationWordAdapter(
@@ -153,14 +133,6 @@ class FeedbackPronunciationFragment :
             binding.bnvFeedbackPronunciation.itemIconTintList = null
         }
     }
-
-    private fun initAppbarBackClickListener() {
-        binding.btnFeedbackPronunciationBack.setOnClickListener {
-            navigateToBack()
-        }
-    }
-
-    private fun navigateToBack() = findNavController().popBackStack()
 
     private fun handleMickItemEvent(isSelected: Boolean) {
         binding.layoutFeedbackPronunciationMick.isVisible = isSelected

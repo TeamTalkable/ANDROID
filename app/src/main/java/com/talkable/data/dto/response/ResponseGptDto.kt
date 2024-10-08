@@ -18,7 +18,7 @@ data class ResponseGptDto(
     @SerialName("usage")
     val usage: Usage,
     @SerialName("system_fingerprint")
-    val systemFingerprint: String? = null
+    val systemFingerprint: String? = null,
 )
 
 @Serializable
@@ -30,7 +30,7 @@ data class Choice(
     @SerialName("finish_reason")
     val finishReason: String,
     @SerialName("logprobs")
-    val logprobs: Unit? = null
+    val logprobs: Unit? = null,
 )
 
 @Serializable
@@ -40,9 +40,9 @@ data class Message(
     @SerialName("content")
     val content: String,
     @SerialName("refusal")
-    val refusal: Unit? = null
+    val refusal: Unit? = null,
 
-)
+    )
 
 @Serializable
 data class Usage(
@@ -53,11 +53,19 @@ data class Usage(
     @SerialName("total_tokens")
     val totalTokens: Int,
     @SerialName("completion_tokens_details")
-    val tokenDetail: Token? = null
+    val tokenDetail: Token? = null,
+    @SerialName("prompt_tokens_details")
+    val promptToken: PromptToken? = null,
 )
 
 @Serializable
 data class Token(
     @SerialName("reasoning_tokens")
-    val totalTokens: Int? = null
+    val totalTokens: Int? = null,
+)
+
+@Serializable
+data class PromptToken(
+    @SerialName("cached_tokens")
+    val cachedTokens: Int? = null,
 )

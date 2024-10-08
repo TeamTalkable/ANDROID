@@ -39,7 +39,6 @@ class FeedbackExpressionFragment :
         statusBarColorOf(R.color.white)
 
         initBackBtnClickListener()
-        initAppbarNextClickListener()
     }
 
     private fun collect() {
@@ -109,24 +108,8 @@ class FeedbackExpressionFragment :
     }
 
     private fun initBackBtnClickListener() {
-        binding.btnFeedbackExpressionBack.setOnClickListener {
+        binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
             findNavController().popBackStack()
         }
     }
-
-    private fun initAppbarNextClickListener() {
-        binding.btnFeedbackExpressionNext.setOnClickListener {
-            navigateToPronunciationFeedbackFragment()
-        }
-    }
-
-
-    private fun navigateToPronunciationFeedbackFragment() =
-        findNavController().navigate(
-            R.id.action_feedback_expression_to_feedback_pronunciation, bundleOf(
-                Key.FEEDBACK_QUESTION_EN to nextQuestionEn,
-                Key.FEEDBACK_QUESTION_KO to nextQuestionKo,
-                Key.FEEDBACK_AFTER to binding.tvTalkFeedbackAfter.text.toString()
-            )
-        )
 }
