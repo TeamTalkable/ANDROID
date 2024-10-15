@@ -12,7 +12,8 @@
 
         <VideoView
             android:id="@+id/video_view_talk_background"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            app:layout_constraintDimensionRatio="545:973"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
