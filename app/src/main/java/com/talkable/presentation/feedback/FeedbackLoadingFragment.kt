@@ -36,6 +36,7 @@ class FeedbackLoadingFragment :
         collect()
     }
 
+
     private fun collect() {
         viewLifeCycleScope.launch {
             viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->

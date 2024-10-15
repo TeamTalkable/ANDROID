@@ -18,7 +18,7 @@
             <include
                 android:id="@+id/app_bar_talk_feedback_expression"
                 layout="@layout/view_talk_feedback_app_bar"
-                app:leftBackIsVisible="@{false}"
+                app:leftBackIsVisible="@{true}"
                 app:rightBackIsVisible="@{false}"
                 app:title="@{`피드백`}" />
 
@@ -110,47 +110,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@id/btn_feedback_expression_back"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_after" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_feedback_expression_back"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/white"
-                android:paddingVertical="18dp"
-                android:text="@string/label_feedback_back"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
-                android:textColor="@color/gray"
-                app:cornerRadius="26dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_feedback_expression_next"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:strokeColor="@color/font_4"
-                app:strokeWidth="1dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_feedback_expression_next"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="22dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/main"
-                android:paddingVertical="18dp"
-                android:text="@string/label_feedback_next"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
-                app:cornerRadius="26dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_feedback_expression_back" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

@@ -36,6 +36,7 @@
     <string name="tv_talk_feedback_retry">교정받은 문장으로 다시 말해보세요!</string>
     <string name="error_talk_retry">음성 인식을 처리할 수 없습니다.\n다시 시도해 주세요.</string>
     <string name="error_talk_permission">음성 인식을 위해 마이크 권한이 필요합니다.</string>
+    <string name="tv_talk_feedback_detail"><u>자세한 피드백 보기</u></string>
 
     <!--guide-->
     <string name="tv_talk_first_en">Hi! My name is Amy. I want to be a friends with you.</string>
@@ -45,6 +46,7 @@
     <string name="tv_talk_third_en">And from now on, only audio will be provided. If you find it difficult to understand, try using the three buttons somewhere.</string>
     <string name="tv_talk_third_kr">그리고 이제부터는 음성만 나올건데,\n이해가 어렵다면 아래의 3개 버튼을 활용해봐</string>
     <string name="tv_talk_guide">마이크를 누르고 대답을 해주세요</string>
+    <string name="tv_talk_guide_again">마이크를 누르고 다시 발음해보세요!</string>
     <string name="tv_guide_feedback">오늘 받은 AI 피드백과 \n저장한 표현을 확인해보아요</string>
     <string name="tv_guide_click">단어나 문장을 눌러\n원하는 표현을 저장하고\n모르는 단어의 뜻을 살펴봐요</string>
     <string name="tv_guide_speak">버튼을 누른 후 말해주세요</string>
@@ -149,7 +151,7 @@
     <string name="tv_my_flower_progress_fourth">70분</string>
     <string name="tv_my_flower_progress_fifth">100분</string>
     <string name="appbar_title_talk_feedback">대화 피드백</string>
-    <string name="tv_feedback_loading_title">AI가 문장을 분석하고 있어요\n잠시만 기다려주세요:)</string>
+    <string name="tv_feedback_loading_title">문장을 분석하고 있어요\n잠시만 기다려주세요:)</string>
     <string name="tv_feedback_pronunciation_back"><u>대화로 돌아가기</u></string>
     <string name="tv_talk_speech">텍스트를 눌러 수정해보세요.</string>
 

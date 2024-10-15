@@ -13,13 +13,17 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.activity.addCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -27,27 +31,36 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.Key.FEEDBACK_AFTER
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
 import com.talkable.core.util.context.pxToDp
 import com.talkable.core.util.fragment.stringOf
 import com.talkable.core.util.fragment.toast
+import com.talkable.core.util.fragment.viewLifeCycle
+import com.talkable.core.util.fragment.viewLifeCycleScope
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentTalkBinding
+import com.talkable.presentation.FeedbackTextColor
+import com.talkable.presentation.feedback.FeedbackUiState
+import com.talkable.presentation.feedback.FeedbackViewModel
+import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.Locale
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk),
     TextToSpeech.OnInitListener {
 
+    private val viewModel: FeedbackViewModel by activityViewModels()
+
     private var clickCount = FIRST_CLICK
     private lateinit var speechRecognizer: SpeechRecognizer
     private var tts: TextToSpeech? = null
     private lateinit var nextQuestionEn: String
     private lateinit var nextQuestionKo: String
-    private lateinit var feedbackAfter: String
 
     private var guideClickCount = FIRST_CLICK
     private var textIndex = 0
@@ -58,15 +71,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nextQuestionEn =
-            arguments?.getString(FEEDBACK_QUESTION_EN) ?: stringOf(R.string.tv_talk_english)
-        nextQuestionKo =
-            arguments?.getString(FEEDBACK_QUESTION_KO) ?: stringOf(R.string.tv_talk_korean)
-        feedbackAfter =
-            arguments?.getString(FEEDBACK_AFTER).orEmpty()
+        nextQuestionEn = stringOf(R.string.tv_talk_english)
+        nextQuestionKo = stringOf(R.string.tv_talk_korean)
     }
 
+
     override fun initView() {
+        blockNavigateToBack()
+        collect()
         initTalkGuide()
         initTalkFeedbackVisible()
         initAppbarCancelClickListener()
@@ -87,6 +99,59 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
     }
 
+    private fun blockNavigateToBack() =
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {}
+
+    //data collect
+    private fun collect() {
+        viewLifeCycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
+                when (uiState) {
+                    is FeedbackUiState.PatchGptFeedbacks -> {
+                        binding.groupTalkFeedbackLoading.visible(false)
+                        binding.groupTalkFeedback.visible(true)
+                        binding.tvTalkFeedbackDetail.visible(true)
+                        binding.groupTalkAi.visible(false)
+                        setNextQuestionText(uiState.data)
+                        setFeedbackLayout(
+                            uiState.data.afterFullAnswer,
+                            uiState.data.afterAnswerParts
+                        )
+                    }
+
+                    is FeedbackUiState.PatchPronunciationFeedbacks -> {
+                        binding.groupTalkAi.visible(true)
+                        binding.groupTalkFeedback.visible(false)
+                        //임시 데이터
+                        binding.tvTalkEnglish.text =
+                            "You did very well! Your pronunciation accuracy just now was 70%."
+                        binding.tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 70%였어."
+                        delay(3000)
+                        initNextQuestionLayout()
+                        viewModel.setEmptyState()
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
+    }
+
+    private fun setNextQuestionText(data: FeedbackContainer) {
+        nextQuestionEn = data.nextQuestionEn
+        nextQuestionKo = data.nextQuestionKo
+    }
+
+    private fun initNextQuestionLayout() = with(binding) {
+        tvTalkEnglish.text = nextQuestionEn
+        tvTalkTranslate.text = nextQuestionKo
+        setBtnTalkSpeakVisibility(isVisible = true)
+        groupTalkBtn.visible(true)
+        tvTalkFeedbackDetail.visible(false)
+        groupTalkAi.visible(false)
+        tvTalkListen.visible(true)
+    }
+
     private fun initTalkGuide() {
         if (guideClickCount == FIRST_CLICK) {
             with(binding) {
@@ -104,6 +169,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         tvTalkTranslate.isVisible = false
                         tvTalkListen.isVisible = true
                         setQuestionLayout()
+                        binding.root.setOnClickListener { }
                     }
                 }
             }
@@ -113,7 +179,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun setQuestionLayout() = with(binding) {
         tvTalkEnglish.text = nextQuestionEn
         tvTalkTranslate.text = nextQuestionKo
-        includeLayoutTalkFeedback.tvFeedbackTalkSentence.text = feedbackAfter
         groupTalkBtn.isVisible = true
     }
 
@@ -130,10 +195,20 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 // 음성 입력 종료
                 override fun onEndOfSpeech() {
                     with(binding) {
-                        includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
-                        btnTalkSpeak.isVisible = false
-                        tvTalkHint.isVisible = false
-                        includeBottomSheetTalk.isVisible = false
+                        when (viewModel.uiState.value) {
+                            is FeedbackUiState.Empty -> {
+                                includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+                                includeBottomSheetTalk.isVisible = false
+                            }
+
+                            is FeedbackUiState.PatchGptFeedbacks -> viewModel.setPronunciationState()
+
+                            else -> Unit
+                        }
+
+                        setBtnTalkSpeakVisibility(isVisible = false)
+
+                        setSpeakBtnState(isSpeaking = false)
                     }
                 }
 
@@ -200,7 +275,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                                 videoViewTalkBackground.pause()  // 비디오 일시정지
                                 videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
                                 btnTalkListen.isSelected = false  // 버튼 상태 초기화
-                                initSpeakGuide()
+                                initSpeakGuide(isFirstAnswer = true)
                             }
                         }
                     }
@@ -223,11 +298,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tts = null
     }
 
-    private fun initSpeakGuide() {
+    private fun initSpeakGuide(isFirstAnswer: Boolean) {
         binding.tvTalkGuide.apply {
-            visibility = VISIBLE
+            text =
+                if (isFirstAnswer) getString(R.string.tv_talk_guide) else getString(R.string.tv_talk_guide_again)
+            visible(true)
             postDelayed({
-                visibility = GONE
+                visible(false)
             }, 3000)
         }
     }
@@ -312,17 +389,44 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     private fun initAppbarCancelClickListener() {
         binding.btnTalkClose.setOnClickListener {
+            viewModel.setEmptyState()
             navigateToTotalTalkFeedback()
         }
     }
 
-    private fun navigateToTotalTalkFeedback() =
+    private fun navigateToTotalTalkFeedback() {
+        viewModel.setEmptyState()
         findNavController().navigate(R.id.action_talk_to_talk_feedback)
+    }
 
     private fun initSpeakCompleteBtnClickListener() {
         binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
-            navigateToFeedbackLoadingFragment()
+            viewModel.patchGptFeedbacks(binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString())
+            setVisibleFeedbackLoading(true)
         }
+    }
+
+    private fun setVisibleFeedbackLoading(isVisible: Boolean) = with(binding) {
+        setBtnIconSelect()
+        includeBottomSheetTalk.visible(true)
+        groupTalkFeedbackLoading.visible(isVisible)
+        groupTalkBtn.visible(!isVisible)
+        groupTalkAi.visible(!isVisible)
+        groupTalkFeedback.visible(!isVisible)
+        tvTalkListen.visible(!isVisible)
+        tvTalkGuide.visible(!isVisible)
+        binding.includeLayoutTalkSpeech.layoutTalkSpeech.visible(!isVisible)
+    }
+
+    private fun setBtnIconSelect() = with(binding) {
+        btnTalkListen.isSelected = false
+        btnTalkTranslate.isSelected = false
+        btnTalkShow.isSelected = false
+    }
+
+    private fun setBtnTalkSpeakVisibility(isVisible: Boolean) = with(binding) {
+        btnTalkSpeak.isVisible = isVisible
+        tvTalkHint.isVisible = isVisible
     }
 
     private fun navigateToSavedFeedback() =
@@ -334,13 +438,50 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    private fun navigateToFeedbackLoadingFragment() = findNavController().navigate(
-        R.id.action_talk_to_feedback_loading, bundleOf(
+    //set feedback layout
+    private fun setFeedbackLayout(fullText: String, partsText: List<String>) = with(binding) {
+        tvTalkUserAnswer.text = binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+        setFeedbackTextColor(fullText, partsText)
+        initFeedbackDetailTvClickListener()
+        initSpeakGuide(isFirstAnswer = true)
+        setBtnTalkSpeakVisibility(isVisible = true)
+    }
+
+    //set feedback text parts color
+    private fun setFeedbackTextColor(fullText: String, partsText: List<String>) {
+        val spannableString =
+            FeedbackTextColor(requireContext()).setAfterAnswerTextColor(fullText, partsText)
+
+        val spannableStringBuilder = SpannableStringBuilder()
+        spannableStringBuilder.append("너가 말한 문장은 \"")
+        spannableStringBuilder.append(spannableString)
+        spannableStringBuilder.append("\"라고 말하는 것이\n")
+        spannableStringBuilder.append("문법적으로 올바르고 더 자연스러운 문장이야.\n")
+        spannableStringBuilder.append("수정된 문장으로 다시 말해볼래?")
+
+        binding.tvTalkFeedback.text = spannableStringBuilder
+    }
+
+    private fun initFeedbackDetailTvClickListener() {
+        binding.tvTalkFeedbackDetail.setOnClickListener {
+            when (viewModel.uiState.value) {
+                is FeedbackUiState.PatchGptFeedbacks -> navigateToFeedbackFragment()
+                is FeedbackUiState.PatchPronunciationFeedbacks -> navigateToFeedbackPronunciationFragment()
+                else -> Unit
+            }
+        }
+    }
+
+    private fun navigateToFeedbackFragment() = findNavController().navigate(
+        R.id.action_talk_to_feedback_expression, bundleOf(
             FEEDBACK_QUESTION_EN to nextQuestionEn,
             FEEDBACK_QUESTION_KO to nextQuestionKo,
             FEEDBACK_BEFORE to binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
         )
     )
+
+    private fun navigateToFeedbackPronunciationFragment() =
+        findNavController().navigate(R.id.action_talk_to_feedback_pronunciation)
 
     // 어댑터 연결
     private fun initTalkAdapter() {
@@ -431,17 +572,24 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     startSpeechRecognition()
-                    btnTalkSpeak.backgroundTintList =
-                        ContextCompat.getColorStateList(requireContext(), R.color.main)
-                    lottiTalkSpeak.isVisible = true
+                    setSpeakBtnState(isSpeaking = true)
                 }
             }
         }
     }
 
+    private fun setSpeakBtnState(isSpeaking: Boolean) = with(binding) {
+        lottiTalkSpeak.visible(isSpeaking)
+        binding.btnTalkSpeak.backgroundTintList =
+            if (isSpeaking) ContextCompat.getColorStateList(
+                requireContext(),
+                R.color.main
+            ) else null
+    }
+
     // 권한 요청 후 처리
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RECORD_AUDIO_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

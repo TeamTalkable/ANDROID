@@ -16,7 +16,7 @@ import kotlinx.serialization.modules.polymorphic
 import timber.log.Timber
 
 class FeedbackViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow<FeedbackUiState>(FeedbackUiState.Loading)
+    private val _uiState = MutableStateFlow<FeedbackUiState>(FeedbackUiState.Empty)
     val uiState = _uiState.asStateFlow()
 
     private val messages = mutableListOf<Message>()
@@ -51,9 +51,9 @@ class FeedbackViewModel : ViewModel() {
             }.onSuccess {
                 messages.add(Message("user", answer))
                 val response = it.choices.first().message
-                _uiState.value = FeedbackUiState.PatchGptFeedbacks(
+                runCatching {
                     json.decodeFromString<FeedbackContainer>(response.content)
-                )
+                }.onSuccess { data -> _uiState.value = FeedbackUiState.PatchGptFeedbacks(data) }
                 messages.add(Message(response.role, response.content))
                 Timber.w(messages.toString())
             }.onFailure {
@@ -92,6 +92,14 @@ class FeedbackViewModel : ViewModel() {
     }
     """
     }
+
+    fun setEmptyState() {
+        _uiState.value = FeedbackUiState.Empty
+    }
+
+    fun setPronunciationState() {
+        _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks
+    }
 }
 
 sealed interface FeedbackUiState {
@@ -99,7 +107,11 @@ sealed interface FeedbackUiState {
 
     data object Success : FeedbackUiState
 
+    data object Empty : FeedbackUiState
+
     data class Error(val errorMessage: String) : FeedbackUiState
 
     data class PatchGptFeedbacks(val data: FeedbackContainer) : FeedbackUiState
+
+    data object PatchPronunciationFeedbacks : FeedbackUiState
 }
