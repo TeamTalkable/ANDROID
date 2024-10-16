@@ -31,6 +31,16 @@ kotlinx-coroutines = "1.7.3"
 # Google
 material = "1.12.0"
 firebase = "23.4.0"
+google-cloud-speech = "1.29.1"
+google-auth = "0.26.0"
+google-gax = "1.58.0"
+google-protobuf = "3.19.4"
+
+# gRPC
+grpc-okhttp = "1.38.1"
+grpc-stub = "1.38.1"
+grpc-core = "1.38.1"
+grpc-protobuf = "1.38.1"
 
 # Third Party
 retrofit2 = "2.9.0"
@@ -64,6 +74,16 @@ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version
 # Google
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebase" }
+google-cloud-speech = { group = "com.google.cloud", name = "google-cloud-speech", version.ref = "google-cloud-speech" }
+google-auth = { group = "com.google.auth", name = "google-auth-library-oauth2-http", version.ref = "google-auth" }
+google-gax = { group = "com.google.api", name = "gax", version.ref = "google-gax" }
+google-protobuf = { group = "com.google.protobuf", name = "protobuf-java", version.ref = "google-protobuf" }
+
+# gRPC
+grpc-okhttp = { group = "io.grpc", name = "grpc-okhttp", version.ref = "grpc-okhttp" }
+grpc-stub = { group = "io.grpc", name = "grpc-stub", version.ref = "grpc-stub" }
+grpc-core = { group = "io.grpc", name = "grpc-core", version.ref = "grpc-core" }
+grpc-protobuf = { group = "io.grpc", name = "grpc-protobuf", version.ref = "grpc-protobuf" }
 
 # Third Party
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }

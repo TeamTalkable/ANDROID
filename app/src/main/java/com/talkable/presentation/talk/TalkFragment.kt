@@ -1,19 +1,17 @@
 package com.talkable.presentation.talk
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.text.SpannableStringBuilder
+import android.util.Base64
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -29,6 +27,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.api.gax.core.FixedCredentialsProvider
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.speech.v1.RecognitionAudio
+import com.google.cloud.speech.v1.RecognitionConfig
+import com.google.cloud.speech.v1.RecognizeRequest
+import com.google.cloud.speech.v1.SpeechClient
+import com.google.cloud.speech.v1.SpeechRecognitionAlternative
+import com.google.cloud.speech.v1.SpeechRecognitionResult
+import com.google.cloud.speech.v1.SpeechSettings
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
@@ -46,9 +53,11 @@ import com.talkable.presentation.feedback.FeedbackUiState
 import com.talkable.presentation.feedback.FeedbackViewModel
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.IOException
 import java.util.Locale
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk),
@@ -68,6 +77,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         arrayOf(R.string.tv_talk_second_en, R.string.tv_talk_third_en)
     private val koreanGuideTextArray =
         arrayOf(R.string.tv_talk_second_kr, R.string.tv_talk_third_kr)
+
+    private lateinit var speechClient: SpeechClient
+    private var voiceRecorder: VoiceRecorder? = null
+    private var byteArray: ByteArray = byteArrayOf()
+    private var isRecording = false
+    private var base64AudioData: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +110,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackListenBtnClickListener()
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
-        initializeSpeechRecognizer()
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
     }
 
@@ -182,55 +196,33 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         groupTalkBtn.isVisible = true
     }
 
-    // STT 초기화
-    private fun initializeSpeechRecognizer() {
-        try {
-            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext())
-            speechRecognizer.setRecognitionListener(object : RecognitionListener {
-                override fun onReadyForSpeech(params: Bundle?) {}
-                override fun onBeginningOfSpeech() {}
-                override fun onRmsChanged(rmsdB: Float) {}
-                override fun onBufferReceived(buffer: ByteArray?) {}
+    private val voiceCallBack: VoiceRecorder.Callback = object : VoiceRecorder.Callback() {
+        override fun onVoiceStart() {}
 
-                // 음성 입력 종료
-                override fun onEndOfSpeech() {
-                    with(binding) {
-                        when (viewModel.uiState.value) {
-                            is FeedbackUiState.Empty -> {
-                                includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
-                                includeBottomSheetTalk.isVisible = false
-                            }
-
-                            is FeedbackUiState.PatchGptFeedbacks -> viewModel.setPronunciationState()
-
-                            else -> Unit
-                        }
-
-                        setBtnTalkSpeakVisibility(isVisible = false)
-
-                        setSpeakBtnState(isSpeaking = false)
-                    }
-                }
-
-                override fun onError(error: Int) {
-                    binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(R.string.error_talk_retry)
-                }
-
-                // STT 결과 화면에 표시
-                override fun onResults(results: Bundle?) {
-                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                    if (!matches.isNullOrEmpty()) {
-                        binding.includeLayoutTalkSpeech.etTalkUserSpeech.setText(matches[0])
-                    }
-                }
-
-                override fun onPartialResults(partialResults: Bundle?) {}
-                override fun onEvent(eventType: Int, params: Bundle?) {}
-            })
-        } catch (e: Exception) {
-            Timber.d("STT 초기화 중 오류 발생: ${e.message}")
+        override fun onVoice(data: ByteArray?, size: Int) {
+            byteArray = data?.let { byteArray.plus(it) }!!
         }
-        tts = TextToSpeech(requireContext(), this) // TTS 초기화
+
+        override fun onVoiceEnd() {
+            initializeSpeechClient()
+            if (::speechClient.isInitialized && byteArray.isNotEmpty()) {
+                transcribeRecording(byteArray)
+            }
+        }
+    }
+
+    private fun initializeSpeechClient() {
+        try {
+            val credentials =
+                GoogleCredentials.fromStream(resources.openRawResource(R.raw.google_cloud_speech))
+            val settings = SpeechSettings.newBuilder()
+                .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
+                .build()
+
+            speechClient = SpeechClient.create(settings)
+        } catch (e: Exception) {
+            Timber.e("SpeechClient 초기화 실패: ${e.message}")
+        }
     }
 
     // TTS 초기화 완료 시 호출
@@ -239,6 +231,59 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             tts?.language = Locale.US
         } else {
             Timber.d("TTS 초기화 실패")
+        }
+    }
+
+    // 음성 녹음 시작
+    private fun startVoiceRecorder() {
+        if (voiceRecorder != null) {
+            voiceRecorder!!.stop()
+        }
+        voiceRecorder = VoiceRecorder(requireContext(), voiceCallBack)
+        voiceRecorder!!.start()
+    }
+
+    // 음성 녹음 종료
+    private fun stopVoiceRecorder() {
+        voiceRecorder?.let {
+            it.stop()
+            voiceRecorder = null
+        }
+    }
+
+    // 음성 인식 처리
+    private fun transcribeRecording(data: ByteArray) {
+        viewLifeCycleScope.launch(Dispatchers.IO) {
+            try {
+                // 음성 데이터를 Base64로 인코딩
+                base64AudioData = Base64.encodeToString(data, Base64.NO_WRAP)
+                Timber.d("Base64 Encoded Audio: $base64AudioData")
+
+                val inputStream = data.inputStream()
+                if (inputStream != null) {
+                    val response = speechClient.recognize(createRecognizeRequestFromVoice(data))
+                    val results = response.resultsList
+                    val transcription = processTranscriptionResults(results)
+                    displayTranscription(transcription)
+                } else {
+                    Timber.e("InputStream is null")
+                }
+            } catch (e: Exception) {
+                Timber.e("transcribeRecording 중 오류 발생: ${e.message}")
+            }
+        }
+    }
+
+    private fun displayTranscription(transcription: String) {
+        requireActivity().runOnUiThread {
+            with(binding) {
+                includeLayoutTalkSpeech.etTalkUserSpeech.setText(transcription)
+                includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+                includeBottomSheetTalk.isVisible = false
+                setBtnTalkSpeakVisibility(isVisible = false)
+                setSpeakBtnState(isSpeaking = false)
+            }
+            stopVoiceRecorder()
         }
     }
 
@@ -290,12 +335,56 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    // TTS 리소스 해제
+    private fun processTranscriptionResults(results: List<SpeechRecognitionResult>): String {
+        val stringBuilder = StringBuilder()
+        for (result in results) {
+            val recData: SpeechRecognitionAlternative = result.alternativesList[0]
+            stringBuilder.append(recData.transcript)
+        }
+        return stringBuilder.toString()
+    }
+
+    private fun createRecognizeRequestFromVoice(audioData: ByteArray): RecognizeRequest {
+        val inputStream = audioData.inputStream()
+        if (inputStream != null) {
+            val audioBytes = RecognitionAudio.newBuilder()
+                .setContent(com.google.protobuf.ByteString.copyFrom(audioData))
+                .build()
+
+            val config = RecognitionConfig.newBuilder()
+                .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+                .setSampleRateHertz(16000)
+                .setLanguageCode("en-US")
+                .build()
+
+            return RecognizeRequest.newBuilder()
+                .setConfig(config)
+                .setAudio(audioBytes)
+                .build()
+        } else {
+            throw IOException("InputStream is null, 음성 데이터를 처리할 수 없습니다.")
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        tts?.stop()
-        tts?.shutdown()
+        tts?.apply {
+            stop()
+            shutdown()
+        }
         tts = null
+
+        if (this::speechRecognizer.isInitialized) {
+            speechRecognizer.destroy()
+        }
+        stopVoiceRecorder()
+        releaseSpeechClient()
+    }
+
+    private fun releaseSpeechClient() {
+        if (this::speechClient.isInitialized) {
+            transcribeRecording(byteArray)
+        }
     }
 
     private fun initSpeakGuide(isFirstAnswer: Boolean) {
@@ -571,8 +660,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         requireContext(), Manifest.permission.RECORD_AUDIO
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    startSpeechRecognition()
-                    setSpeakBtnState(isSpeaking = true)
+                    if (isRecording) {
+                        stopVoiceRecorder()
+                        setSpeakBtnState(isSpeaking = false)
+                        isRecording = false
+                    } else {
+                        startVoiceRecorder()
+                        setSpeakBtnState(isSpeaking = true)
+                        isRecording = true
+                    }
                 }
             }
         }
@@ -593,7 +689,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RECORD_AUDIO_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startSpeechRecognition() // 권한 승인 후 음성 인식 바로 실행
+            startVoiceRecorder() // 권한 승인 후 음성 인식 바로 실행
         } else {
             toast(getString(R.string.error_talk_permission))
         }
@@ -611,21 +707,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 arrayOf(Manifest.permission.RECORD_AUDIO),
                 RECORD_AUDIO_PERMISSION_CODE
             )
-        }
-    }
-
-    // 음성 인식
-    private fun startSpeechRecognition() {
-        if (this::speechRecognizer.isInitialized) {
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-                )
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
-            }
-            speechRecognizer.startListening(intent)
-        } else {
-            toast(getString(R.string.error_talk_permission))
         }
     }
 
