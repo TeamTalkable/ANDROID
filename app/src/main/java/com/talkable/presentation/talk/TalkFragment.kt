@@ -26,7 +26,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.api.gax.core.FixedCredentialsProvider
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.speech.v1.RecognitionAudio
+import com.google.cloud.speech.v1.RecognitionConfig
+import com.google.cloud.speech.v1.RecognizeRequest
 import com.google.cloud.speech.v1.SpeechClient
+import com.google.cloud.speech.v1.SpeechRecognitionAlternative
+import com.google.cloud.speech.v1.SpeechRecognitionResult
+import com.google.cloud.speech.v1.SpeechSettings
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
@@ -44,9 +52,11 @@ import com.talkable.presentation.feedback.FeedbackUiState
 import com.talkable.presentation.feedback.FeedbackViewModel
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.IOException
 import java.util.Locale
 
 class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk),
@@ -67,6 +77,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private val koreanGuideTextArray =
         arrayOf(R.string.tv_talk_second_kr, R.string.tv_talk_third_kr)
 
+    private lateinit var speechClient: SpeechClient
     private var voiceRecorder: VoiceRecorder? = null
     private var byteArray: ByteArray = byteArrayOf()
     private var isRecording = false
@@ -190,7 +201,26 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             byteArray = data?.let { byteArray.plus(it) }!!
         }
 
-        override fun onVoiceEnd() {}
+        override fun onVoiceEnd() {
+            initializeSpeechClient()
+            if (::speechClient.isInitialized && byteArray.isNotEmpty()) {
+                transcribeRecording(byteArray)
+            }
+        }
+    }
+
+    private fun initializeSpeechClient() {
+        try {
+            val credentials =
+                GoogleCredentials.fromStream(resources.openRawResource(R.raw.credentials))
+            val settings = SpeechSettings.newBuilder()
+                .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
+                .build()
+
+            speechClient = SpeechClient.create(settings)
+        } catch (e: Exception) {
+            Timber.e("SpeechClient 초기화 실패: ${e.message}")
+        }
     }
 
     // TTS 초기화 완료 시 호출
@@ -216,6 +246,38 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         voiceRecorder?.let {
             it.stop()
             voiceRecorder = null
+        }
+    }
+
+    // 음성 인식 처리
+    private fun transcribeRecording(data: ByteArray) {
+        viewLifeCycleScope.launch(Dispatchers.IO) {
+            try {
+                val inputStream = data.inputStream()
+                if (inputStream != null) {
+                    val response = speechClient.recognize(createRecognizeRequestFromVoice(data))
+                    val results = response.resultsList
+                    val transcription = processTranscriptionResults(results)
+                    displayTranscription(transcription)
+                } else {
+                    Timber.e("InputStream is null")
+                }
+            } catch (e: Exception) {
+                Timber.e("transcribeRecording 중 오류 발생: ${e.message}")
+            }
+        }
+    }
+
+    private fun displayTranscription(transcription: String) {
+        requireActivity().runOnUiThread {
+            with(binding) {
+                includeLayoutTalkSpeech.etTalkUserSpeech.setText(transcription)
+                includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+                includeBottomSheetTalk.isVisible = false
+                setBtnTalkSpeakVisibility(isVisible = false)
+                setSpeakBtnState(isSpeaking = false)
+            }
+            stopVoiceRecorder()
         }
     }
 
@@ -267,6 +329,37 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
+    private fun processTranscriptionResults(results: List<SpeechRecognitionResult>): String {
+        val stringBuilder = StringBuilder()
+        for (result in results) {
+            val recData: SpeechRecognitionAlternative = result.alternativesList[0]
+            stringBuilder.append(recData.transcript)
+        }
+        return stringBuilder.toString()
+    }
+
+    private fun createRecognizeRequestFromVoice(audioData: ByteArray): RecognizeRequest {
+        val inputStream = audioData.inputStream()
+        if (inputStream != null) {
+            val audioBytes = RecognitionAudio.newBuilder()
+                .setContent(com.google.protobuf.ByteString.copyFrom(audioData))
+                .build()
+
+            val config = RecognitionConfig.newBuilder()
+                .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+                .setSampleRateHertz(16000)
+                .setLanguageCode("en-US")
+                .build()
+
+            return RecognizeRequest.newBuilder()
+                .setConfig(config)
+                .setAudio(audioBytes)
+                .build()
+        } else {
+            throw IOException("InputStream is null, 음성 데이터를 처리할 수 없습니다.")
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         tts?.apply {
@@ -279,6 +372,13 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             speechRecognizer.destroy()
         }
         stopVoiceRecorder()
+        releaseSpeechClient()
+    }
+
+    private fun releaseSpeechClient() {
+        if (this::speechClient.isInitialized) {
+            transcribeRecording(byteArray)
+        }
     }
 
     private fun initSpeakGuide(isFirstAnswer: Boolean) {
