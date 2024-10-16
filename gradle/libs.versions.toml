@@ -36,6 +36,12 @@ google-auth = "0.26.0"
 google-gax = "1.58.0"
 google-protobuf = "3.19.4"
 
+# gRPC
+grpc-okhttp = "1.38.1"
+grpc-stub = "1.38.1"
+grpc-core = "1.38.1"
+grpc-protobuf = "1.38.1"
+
 # Third Party
 retrofit2 = "2.9.0"
 lottie = "6.1.0"
@@ -71,6 +77,12 @@ google-cloud-speech = { group = "com.google.cloud", name = "google-cloud-speech"
 google-auth = { group = "com.google.auth", name = "google-auth-library-oauth2-http", version.ref = "google-auth" }
 google-gax = { group = "com.google.api", name = "gax", version.ref = "google-gax" }
 google-protobuf = { group = "com.google.protobuf", name = "protobuf-java", version.ref = "google-protobuf" }
+
+# gRPC
+grpc-okhttp = { group = "io.grpc", name = "grpc-okhttp", version.ref = "grpc-okhttp" }
+grpc-stub = { group = "io.grpc", name = "grpc-stub", version.ref = "grpc-stub" }
+grpc-core = { group = "io.grpc", name = "grpc-core", version.ref = "grpc-core" }
+grpc-protobuf = { group = "io.grpc", name = "grpc-protobuf", version.ref = "grpc-protobuf" }
 
 # Third Party
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }

@@ -104,4 +104,10 @@ dependencies {
     implementation(libs.google.auth)
     implementation(libs.google.gax)
     implementation(libs.google.protobuf)
+
+    // gRPC
+    implementation(libs.grpc.okhttp)
+    implementation(libs.grpc.stub)
+    implementation(libs.grpc.core)
+    implementation(libs.grpc.protobuf)
 }
