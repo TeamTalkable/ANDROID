@@ -1,7 +1,6 @@
 package com.talkable.presentation.feedback
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
@@ -37,7 +36,6 @@ class FeedbackExpressionFragment :
     override fun initView() {
         collect()
         statusBarColorOf(R.color.white)
-
         initBackBtnClickListener()
     }
 
@@ -72,16 +70,15 @@ class FeedbackExpressionFragment :
     private fun createLearnedListWithLabels(feedbackMap: Map<String, List<Learned>>): List<Learned> {
         val resultList = mutableListOf<Learned>()
 
-        if (feedbackMap.containsKey("Expression")) {
+        if (feedbackMap.containsKey("Expression") && !feedbackMap["Expression"].isNullOrEmpty()) {
             resultList.add(Learned.Label(type = "표현 피드백"))
             resultList.addAll(feedbackMap["Expression"] ?: emptyList())
         }
 
-        if (feedbackMap.containsKey("Grammar")) {
+        if (feedbackMap.containsKey("Grammar") && !feedbackMap["Grammar"].isNullOrEmpty()) {
             resultList.add(Learned.Label(type = "문법 피드백"))
             resultList.addAll(feedbackMap["Grammar"] ?: emptyList())
         }
-
         return resultList
     }
 

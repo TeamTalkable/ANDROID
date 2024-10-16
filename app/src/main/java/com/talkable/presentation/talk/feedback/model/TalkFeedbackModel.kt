@@ -4,15 +4,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 data class TalkFeedbackModel(
-    val talkFeedbackId: Int,
-    val talkTime: String,
-    val flowerImage: String,
-    val remainTime: String,
-    val learnedExpression: List<Learned.Expression>,
-    val learnedGrammar: List<Learned.Grammar>,
-    val learnedPronunciation: List<Learned.Pronunciation>,
-    val learnedAfterAnswer: List<Learned.AfterAnswer>,
-    val isGraphChanged: Boolean,
+    val talkFeedbackId: Int = 0,
+    val talkTime: String = "",
+    val flowerImage: String = "",
+    val remainTime: String = "",
+    val learnedExpression: MutableList<Learned.Expression> = mutableListOf(),
+    val learnedGrammar: MutableList<Learned.Grammar> = mutableListOf(),
+    val learnedPronunciation: MutableList<Learned.Pronunciation> = mutableListOf(),
+    val learnedAfterAnswer: MutableList<Learned.AfterAnswer> = mutableListOf(),
+    val isGraphChanged: Boolean = false,
 )
 
 @Serializable
@@ -24,41 +24,45 @@ sealed class Learned {
     @SerialName("Label")
     data class Label(
         @SerialName("category")
-        override val type: String,
+        override val type: String = "",
     ) : Learned()
 
     @Serializable
     @SerialName("Expression")
     data class Expression(
         @SerialName("category")
-        override val type: String,
+        override val type: String = "",
         @SerialName("wordEnglish")
-        val wordEnglish: String,
+        val wordEnglish: String = "",
         @SerialName("wordKorean")
-        val wordKorean: String,
+        val wordKorean: String = "",
+        @SerialName("expressionAfterAnswer")
+        val expressionAfterAnswer: AfterAnswer = AfterAnswer(),
     ) : Learned()
 
     @Serializable
     @SerialName("Grammar")
     data class Grammar(
         @SerialName("category")
-        override val type: String,
+        override val type: String = "",
         @SerialName("wrongGrammar")
-        val wrongGrammar: String,
+        val wrongGrammar: String = "",
         @SerialName("correctGrammar")
-        val correctGrammar: String,
+        val correctGrammar: String = "",
         @SerialName("reason")
-        val reason: String,
+        val reason: String = "",
+        @SerialName("grammarAfterAnswer")
+        val grammarAfterAnswer: AfterAnswer = AfterAnswer(),
     ) : Learned()
 
     @Serializable
     @SerialName("Pronunciation")
     data class Pronunciation(
         @SerialName("category")
-        override val type: String,
-        val englishWord: String,
-        val koreanWord: String,
-        val pronunciationEnglish: String,
+        override val type: String = "",
+        val englishWord: String = "",
+        val koreanWord: String = "",
+        val pronunciationEnglish: String = "",
         val wordAccuracy: String? = null,
         var isSelected: Boolean = false,
     ) : Learned()
@@ -67,10 +71,8 @@ sealed class Learned {
     @SerialName("AfterAnswer")
     data class AfterAnswer(
         @SerialName("category")
-        override val type: String,
-        val afterFullAnswer: String,
-        val afterAnswerParts: List<String>,
+        override val type: String = "",
+        val afterFullAnswer: String = "",
+        val afterAnswerParts: List<String> = emptyList(),
     ) : Learned()
 }
-
-
