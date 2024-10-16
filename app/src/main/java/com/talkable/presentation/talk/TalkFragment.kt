@@ -214,7 +214,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initializeSpeechClient() {
         try {
             val credentials =
-                GoogleCredentials.fromStream(resources.openRawResource(R.raw.credentials))
+                GoogleCredentials.fromStream(resources.openRawResource(R.raw.google_cloud_speech))
             val settings = SpeechSettings.newBuilder()
                 .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
                 .build()
