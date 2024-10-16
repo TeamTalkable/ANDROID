@@ -126,6 +126,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         binding.groupTalkFeedback.visible(true)
                         binding.tvTalkFeedbackDetail.visible(true)
                         binding.groupTalkAi.visible(false)
+                        binding.includeBottomSheetTalk.isVisible = true
                         setNextQuestionText(uiState.data)
                         setFeedbackLayout(
                             uiState.data.afterFullAnswer,
@@ -134,16 +135,19 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     }
 
                     is FeedbackUiState.PatchPronunciationFeedbacks -> {
+                        binding.groupTalkFeedbackLoading.visible(false)
                         binding.groupTalkAi.visible(true)
                         binding.groupTalkFeedback.visible(false)
-                        //임시 데이터
+                        binding.tvTalkFeedbackDetail.visible(true)
                         binding.tvTalkEnglish.text =
-                            "You did very well! Your pronunciation accuracy just now was 70%."
-                        binding.tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 70%였어."
+                            "You did very well! Your pronunciation accuracy just now was ${uiState.score}%."
+                        binding.tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 ${uiState.score}%였어."
                         delay(3000)
                         initNextQuestionLayout()
                         viewModel.setEmptyState()
                     }
+
+                    is FeedbackUiState.Loading -> setVisibleFeedbackLoading(true)
 
                     else -> Unit
                 }
@@ -236,6 +240,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     // 음성 녹음 시작
     private fun startVoiceRecorder() {
+        byteArray = byteArrayOf()
         if (voiceRecorder != null) {
             voiceRecorder!!.stop()
         }
@@ -265,6 +270,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     val results = response.resultsList
                     val transcription = processTranscriptionResults(results)
                     displayTranscription(transcription)
+
+                    if (viewModel.uiState.value is FeedbackUiState.PatchGptFeedbacks) viewModel.patchPronunciationEvaluation(
+                        script = transcription,
+                        audio = base64AudioData
+                    )
                 } else {
                     Timber.e("InputStream is null")
                 }
@@ -278,8 +288,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         requireActivity().runOnUiThread {
             with(binding) {
                 includeLayoutTalkSpeech.etTalkUserSpeech.setText(transcription)
-                includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
-                includeBottomSheetTalk.isVisible = false
                 setBtnTalkSpeakVisibility(isVisible = false)
                 setSpeakBtnState(isSpeaking = false)
             }
@@ -491,7 +499,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initSpeakCompleteBtnClickListener() {
         binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
             viewModel.patchGptFeedbacks(binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString())
-            setVisibleFeedbackLoading(true)
         }
     }
 
@@ -505,6 +512,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tvTalkListen.visible(!isVisible)
         tvTalkGuide.visible(!isVisible)
         binding.includeLayoutTalkSpeech.layoutTalkSpeech.visible(!isVisible)
+        tvTalkFeedbackDetail.visible(false)
     }
 
     private fun setBtnIconSelect() = with(binding) {
@@ -532,7 +540,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tvTalkUserAnswer.text = binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
         setFeedbackTextColor(fullText, partsText)
         initFeedbackDetailTvClickListener()
-        initSpeakGuide(isFirstAnswer = true)
+        initSpeakGuide(isFirstAnswer = false)
         setBtnTalkSpeakVisibility(isVisible = true)
     }
 
@@ -664,6 +672,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         stopVoiceRecorder()
                         setSpeakBtnState(isSpeaking = false)
                         isRecording = false
+                        test()
                     } else {
                         startVoiceRecorder()
                         setSpeakBtnState(isSpeaking = true)
@@ -672,6 +681,19 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 }
             }
         }
+    }
+
+    private fun test() = with(binding) {
+        when (viewModel.uiState.value) {
+            is FeedbackUiState.Empty -> {
+                includeBottomSheetTalk.isVisible = false
+                includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+            }
+
+            else -> Unit
+        }
+        setBtnTalkSpeakVisibility(isVisible = false)
+        setSpeakBtnState(isSpeaking = false)
     }
 
     private fun setSpeakBtnState(isSpeaking: Boolean) = with(binding) {

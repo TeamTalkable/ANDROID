@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponsePronunciationDto(
-    @SerialName("request_id")
-    val languageCode: String = "english",
+    @SerialName("return_type")
+    val returnType: String,
     @SerialName("result")
-    val script: String,
+    val result: Int,
     @SerialName("return_object")
     val audio: PronunciationReturn,
 )

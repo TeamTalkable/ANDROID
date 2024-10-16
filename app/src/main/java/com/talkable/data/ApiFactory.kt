@@ -29,7 +29,7 @@ object ApiFactory {
                 .newBuilder()
                 .addHeader(
                     "Authorization",
-                    "Bearer $key"
+                    key
                 )
                 .build()
             chain.proceed(request)
@@ -44,7 +44,7 @@ object ApiFactory {
     val retrofitGpt: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl("https://api.openai.com/")
-            .client(okHttpClient(GPT_API_KEY))
+            .client(okHttpClient("Bearer $GPT_API_KEY"))
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }

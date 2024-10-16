@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.talkable.data.FirebaseFactory
 import com.talkable.data.ServicePool
+import com.talkable.data.dto.request.Argument
 import com.talkable.data.dto.request.Message
 import com.talkable.data.dto.request.RequestGptDto
 import com.talkable.data.dto.request.RequestPronunciationDto
@@ -17,6 +18,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import timber.log.Timber
+import kotlin.math.round
 
 class FeedbackViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<FeedbackUiState>(FeedbackUiState.Empty)
@@ -102,12 +104,12 @@ class FeedbackViewModel : ViewModel() {
         if (feedbackMap.containsKey(key)) {
             when (key) {
                 "Expression" -> {
-                    resultList.addAll((feedbackMap[key] as? Collection<Learned.Expression>
-                        ?: emptyList()).map {
-                        it.copy(
-                            type = "표현된"
-                        )
-                    })
+                    resultList.addAll(
+                        (feedbackMap[key] as? Collection<Learned.Expression> ?: emptyList()).map {
+                            it.copy(
+                                type = "표현된"
+                            )
+                        })
                 }
 
                 else -> {
@@ -156,20 +158,19 @@ class FeedbackViewModel : ViewModel() {
         _uiState.value = FeedbackUiState.Empty
     }
 
-    fun setPronunciationState() {
-        _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks
-    }
-
     fun patchPronunciationEvaluation(script: String, audio: String) {
         viewModelScope.launch {
+            _uiState.value = FeedbackUiState.Loading
             runCatching {
-                _uiState.value = FeedbackUiState.Loading
                 ServicePool.pronunciationService.getPronunciationResult(
-                    RequestPronunciationDto(script = script, audio = audio)
+                    RequestPronunciationDto(
+                        Argument(
+                            languageCode = "english", script = script, audio = audio
+                        )
+                    )
                 )
             }.onSuccess {
-                _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks
-                Timber.e(it.toString())
+                _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks(round(it.audio.score.toDouble()) * 100)
             }.onFailure { _uiState.value = FeedbackUiState.Error(it.message.toString()) }
         }
     }
@@ -186,5 +187,5 @@ sealed interface FeedbackUiState {
 
     data class PatchGptFeedbacks(val data: FeedbackContainer) : FeedbackUiState
 
-    data object PatchPronunciationFeedbacks : FeedbackUiState
+    data class PatchPronunciationFeedbacks(val score: Double) : FeedbackUiState
 }
