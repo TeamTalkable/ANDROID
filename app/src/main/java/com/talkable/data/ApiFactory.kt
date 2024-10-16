@@ -3,6 +3,7 @@ package com.talkable.data
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.talkable.BuildConfig.GPT_API_KEY
+import com.talkable.BuildConfig.PRO_API_KEY
 import com.talkable.data.api.GptApiService
 import com.talkable.data.api.PronunciationApiService
 import kotlinx.serialization.json.Json
@@ -52,7 +53,7 @@ object ApiFactory {
     val retrofitPronunciation: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl("http://aiopen.etri.re.kr:8000/")
-            .client(okHttpClient("9d133d53-aa52-4b45-b0ae-28376e63bab1"))
+            .client(okHttpClient(PRO_API_KEY))
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }

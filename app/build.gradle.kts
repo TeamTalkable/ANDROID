@@ -41,6 +41,9 @@ android {
 
         val gptApiKey = properties["gpt.api.key"] as? String ?: ""
         buildConfigField("String", "GPT_API_KEY", "\"${gptApiKey}\"")
+
+        val proApiKey = properties["pro.api.key"] as? String ?: ""
+        buildConfigField("String", "PRO_API_KEY", "\"${proApiKey}\"")
     }
 
     buildTypes {
