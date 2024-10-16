@@ -98,4 +98,10 @@ dependencies {
 
     // Jetpack navi
     implementation(libs.bundles.jetpack.navi)
+
+    // Google Cloud Speech
+    implementation(libs.google.cloud.speech)
+    implementation(libs.google.auth)
+    implementation(libs.google.gax)
+    implementation(libs.google.protobuf)
 }
