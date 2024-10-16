@@ -170,7 +170,11 @@ class FeedbackViewModel : ViewModel() {
                     )
                 )
             }.onSuccess {
-                _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks(round((it.audio.score.toDouble() / 5 )* 100))
+                _uiState.value =
+                    FeedbackUiState.PatchPronunciationFeedbacks(
+                        round((it.audio.score.toDouble() / 5) * 100),
+                        it.audio.recognized
+                    )
             }.onFailure { _uiState.value = FeedbackUiState.Error(it.message.toString()) }
         }
     }
@@ -187,5 +191,5 @@ sealed interface FeedbackUiState {
 
     data class PatchGptFeedbacks(val data: FeedbackContainer) : FeedbackUiState
 
-    data class PatchPronunciationFeedbacks(val score: Double) : FeedbackUiState
+    data class PatchPronunciationFeedbacks(val score: Double, val answer: String) : FeedbackUiState
 }

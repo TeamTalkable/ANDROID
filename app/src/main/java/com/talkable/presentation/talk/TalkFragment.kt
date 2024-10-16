@@ -126,16 +126,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         binding.tvTalkFeedbackDetail.visible(true)
                         binding.groupTalkAi.visible(false)
                         binding.includeBottomSheetTalk.isVisible = true
-                        setNextQuestionText(uiState.data)
                         setFeedbackLayout(
                             uiState.data.afterFullAnswer,
                             uiState.data.afterAnswerParts
                         )
                     }
 
-                    is FeedbackUiState.PatchPronunciationFeedbacks -> setPronunciationFeedbackLayout(
-                        uiState.score
-                    )
+                    is FeedbackUiState.PatchPronunciationFeedbacks -> {
+                        setPronunciationFeedbackLayout(
+                            uiState.score
+                        )
+                    }
 
                     is FeedbackUiState.Loading -> setVisibleFeedbackLoading(true)
 
@@ -145,17 +146,18 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    private fun setPronunciationFeedbackLayout(score: Double) {
-        binding.groupTalkFeedbackLoading.visible(false)
-        binding.groupTalkAi.visible(true)
-        binding.groupTalkFeedback.visible(false)
-        binding.tvTalkFeedbackDetail.visible(true)
-        binding.tvTalkEnglish.text =
+    private fun setPronunciationFeedbackLayout(score: Double) = with(binding) {
+        groupTalkFeedbackLoading.visible(false)
+        groupTalkAi.visible(true)
+        groupTalkFeedback.visible(false)
+        tvTalkFeedbackDetail.visible(true)
+        tvTalkEnglish.text =
             "You did very well! Your pronunciation accuracy just now was ${score}%."
-        binding.tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 ${score}%였어."
-        binding.btnTalkNext.visible(true)
+        tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 ${score}%였어."
+        btnTalkNext.visible(true)
         initTalkNextBtnClickListener()
-        binding.layoutBottomSheetTalk.layoutBottomSheetTalk.visible(true)
+        includeBottomSheetTalk.visible(true)
+        tvTalkHint.visibility = View.INVISIBLE
     }
 
     private fun initTalkNextBtnClickListener() {
@@ -303,12 +305,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun handleUserPronunciation(script: String) = with(binding) {
-        if (viewModel.uiState.value is FeedbackUiState.PatchGptFeedbacks) {
-            tvTalkHint.visibility = View.INVISIBLE
-            btnTalkSpeak.visible(true)
-            tvTalkPronunciation.visible(true)
-            tvTalkPronunciation.text = script
-            initCheckPronunciationBtnClickListener(script)
+        when (viewModel.uiState.value) {
+            is FeedbackUiState.PatchGptFeedbacks -> {
+                setNextQuestionText((viewModel.uiState.value as FeedbackUiState.PatchGptFeedbacks).data)
+                tvTalkHint.visibility = View.INVISIBLE
+                btnTalkSpeak.visible(true)
+                tvTalkPronunciation.visible(true)
+                tvTalkPronunciation.text = script
+                initCheckPronunciationBtnClickListener(script)
+            }
+
+            else -> Unit
         }
     }
 
@@ -699,7 +706,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         stopVoiceRecorder()
                         setSpeakBtnState(isSpeaking = false)
                         isRecording = false
-                        test()
+                        handleRecordingUiState()
                     } else {
                         startVoiceRecorder()
                         setSpeakBtnState(isSpeaking = true)
@@ -711,7 +718,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    private fun test() = with(binding) {
+    private fun handleRecordingUiState() = with(binding) {
         when (viewModel.uiState.value) {
             is FeedbackUiState.Empty -> {
                 includeBottomSheetTalk.isVisible = false

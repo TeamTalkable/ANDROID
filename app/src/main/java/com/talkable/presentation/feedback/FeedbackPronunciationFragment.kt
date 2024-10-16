@@ -3,86 +3,53 @@ package com.talkable.presentation.feedback
 import android.media.MediaPlayer
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.viewLifeCycle
+import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentFeedbackPronunciationBinding
-import com.talkable.presentation.FeedbackTextColor
-import com.talkable.presentation.feedback.model.FeedbackPronunciationModel
-import com.talkable.presentation.talk.feedback.model.Learned
-import timber.log.Timber
+import kotlinx.coroutines.launch
 
 class FeedbackPronunciationFragment :
     BindingFragment<FragmentFeedbackPronunciationBinding>(R.layout.fragment_feedback_pronunciation) {
 
     private var englishWord: String? = null
+    private val viewModel: FeedbackViewModel by activityViewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.white)
+        collect()
         binding.bnvFeedbackPronunciation.itemIconTintList = null
-        binding.model = mockData
-        setAfterAnswerTextColor(mockData.fullAnswer, mockData.answerParts)
-        initPronunciationWordAdapter()
         initBottomNavigationItemClickListener()
         initRecordCancelClickListener()
         initRecordCheckClickListener()
         initNavigateToBackClickListener()
     }
 
+    private fun collect() {
+        viewLifeCycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
+                when (uiState) {
+                    is FeedbackUiState.PatchPronunciationFeedbacks -> {
+                        binding.tvFeedbackPronunciationEnglish.text = uiState.answer
+                        binding.tvFeedbackPronunciationAccuracy.text = "${uiState.score}%"
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
+    }
+
     private fun initNavigateToBackClickListener() {
         binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
             findNavController().popBackStack()
         }
-    }
-
-    private fun initPronunciationWordAdapter() {
-        binding.rvFeedbackPronunciation.adapter = FeedbackPronunciationWordAdapter(
-            requireContext(),
-            onClickWordItem = { data, isSelected ->
-                handleWordItemClick(data, isSelected)
-                englishWord = if (!isSelected) data.englishWord else null
-                Timber.e(englishWord.toString())
-            }).apply {
-            submitList(mockData.learnedPronunciation)
-        }
-    }
-
-    private fun handleWordItemClick(data: Learned.Pronunciation, isSelected: Boolean) =
-        with(binding) {
-            tvFeedbackPronunciationEnglishWord.text = data.englishWord
-            tvFeedbackPronunciationEnglishWordPronun.text = data.pronunciationEnglish
-            tvFeedbackPronunciationWordKorean.text = data.koreanWord
-            tvFeedbackPronunciationAccuracy.text = "${data.wordAccuracy}%"
-            pbFeedbackPronunciation.progress = data.wordAccuracy.orEmpty().toInt()
-            handleViewVisibility(isSelected)
-        }
-
-    private fun handleViewVisibility(isSelected: Boolean) = with(binding) {
-        val invisibleIfSelected = if (!isSelected) View.VISIBLE else View.INVISIBLE
-
-        tvFeedbackPronunciationEnglish.isVisible = isSelected
-        tvFeedbackPronunciationKorean.isVisible = isSelected
-        tvFeedbackPronunciationEnglishSmall.visibility = invisibleIfSelected
-        tvFeedbackPronunciationEnglishWord.visibility = invisibleIfSelected
-        tvFeedbackPronunciationWordKorean.isVisible = !isSelected
-        tvFeedbackPronunciationEnglishWordPronun.visibility = invisibleIfSelected
-
-        if (isSelected) {
-            tvFeedbackPronunciationAccuracy.text = mockData.accuracy + "%"
-            pbFeedbackPronunciation.progress = mockData.accuracy.toInt()
-        }
-    }
-
-    private fun setAfterAnswerTextColor(fullText: String, partsText: List<String>) {
-        val spannableString =
-            FeedbackTextColor(requireContext()).setAfterAnswerTextColor(fullText, partsText)
-
-        binding.tvFeedbackPronunciationEnglish.text = spannableString
-        binding.tvFeedbackPronunciationEnglishSmall.text = spannableString
     }
 
     private fun initBottomNavigationItemClickListener() {
@@ -120,7 +87,7 @@ class FeedbackPronunciationFragment :
     }
 
     private fun initVoiceBtnClickListener(
-        playerScience: MediaPlayer, playerToday: MediaPlayer
+        playerScience: MediaPlayer, playerToday: MediaPlayer,
     ) {
         val mediaPlayer = if (englishWord == "science") {
             playerScience
@@ -156,29 +123,6 @@ class FeedbackPronunciationFragment :
     }
 
     companion object {
-        val mockData = FeedbackPronunciationModel(
-            feedbackId = 3,
-            fullAnswer = "I took a science class today. And I  took a math class too.\nI took a science class today.",
-            answerParts = listOf("took", "science", "math", "too", "today"),
-            accuracy = "80",
-            korean = "나는 오늘 과학 수업을 들었다. 그리고 수학 수업도 들었다.",
-            learnedPronunciation = listOf(
-                Learned.Pronunciation(
-                    type = "발음",
-                    englishWord = "science",
-                    pronunciationEnglish = "[ ˈsaɪəns ]",
-                    koreanWord = "과학",
-                    wordAccuracy = "70"
-                ), Learned.Pronunciation(
-                    type = "발음",
-                    englishWord = "today",
-                    pronunciationEnglish = "[ ˈtodai ]",
-                    koreanWord = "오늘",
-                    wordAccuracy = "50"
-                )
-            ),
-        )
-
         const val PRONUNCIATION_DIALOG = "pronunciationDialog"
     }
 }
