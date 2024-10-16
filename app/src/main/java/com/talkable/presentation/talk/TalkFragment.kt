@@ -11,6 +11,7 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.text.SpannableStringBuilder
+import android.util.Base64
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -81,6 +82,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private var voiceRecorder: VoiceRecorder? = null
     private var byteArray: ByteArray = byteArrayOf()
     private var isRecording = false
+    private var base64AudioData: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -253,6 +255,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun transcribeRecording(data: ByteArray) {
         viewLifeCycleScope.launch(Dispatchers.IO) {
             try {
+                // 음성 데이터를 Base64로 인코딩
+                base64AudioData = Base64.encodeToString(data, Base64.NO_WRAP)
+                Timber.d("Base64 Encoded Audio: $base64AudioData")
+
                 val inputStream = data.inputStream()
                 if (inputStream != null) {
                     val response = speechClient.recognize(createRecognizeRequestFromVoice(data))
