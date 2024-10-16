@@ -54,7 +54,6 @@ import com.talkable.presentation.feedback.FeedbackViewModel
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
@@ -134,24 +133,36 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         )
                     }
 
-                    is FeedbackUiState.PatchPronunciationFeedbacks -> {
-                        binding.groupTalkFeedbackLoading.visible(false)
-                        binding.groupTalkAi.visible(true)
-                        binding.groupTalkFeedback.visible(false)
-                        binding.tvTalkFeedbackDetail.visible(true)
-                        binding.tvTalkEnglish.text =
-                            "You did very well! Your pronunciation accuracy just now was ${uiState.score}%."
-                        binding.tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 ${uiState.score}%였어."
-                        delay(3000)
-                        initNextQuestionLayout()
-                        viewModel.setEmptyState()
-                    }
+                    is FeedbackUiState.PatchPronunciationFeedbacks -> setPronunciationFeedbackLayout(
+                        uiState.score
+                    )
 
                     is FeedbackUiState.Loading -> setVisibleFeedbackLoading(true)
 
                     else -> Unit
                 }
             }
+        }
+    }
+
+    private fun setPronunciationFeedbackLayout(score: Double) {
+        binding.groupTalkFeedbackLoading.visible(false)
+        binding.groupTalkAi.visible(true)
+        binding.groupTalkFeedback.visible(false)
+        binding.tvTalkFeedbackDetail.visible(true)
+        binding.tvTalkEnglish.text =
+            "You did very well! Your pronunciation accuracy just now was ${score}%."
+        binding.tvTalkTranslate.text = "아주 잘했어! 방금 너의 발음 정확도는 ${score}%였어."
+        binding.btnTalkNext.visible(true)
+        initTalkNextBtnClickListener()
+        binding.layoutBottomSheetTalk.layoutBottomSheetTalk.visible(true)
+    }
+
+    private fun initTalkNextBtnClickListener() {
+        binding.btnTalkNext.setOnClickListener {
+            initNextQuestionLayout()
+            viewModel.setEmptyState()
+            binding.btnTalkNext.visible(false)
         }
     }
 
@@ -270,11 +281,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     val results = response.resultsList
                     val transcription = processTranscriptionResults(results)
                     displayTranscription(transcription)
-
-                    if (viewModel.uiState.value is FeedbackUiState.PatchGptFeedbacks) viewModel.patchPronunciationEvaluation(
-                        script = transcription,
-                        audio = base64AudioData
-                    )
                 } else {
                     Timber.e("InputStream is null")
                 }
@@ -292,6 +298,27 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 setSpeakBtnState(isSpeaking = false)
             }
             stopVoiceRecorder()
+            handleUserPronunciation(transcription)
+        }
+    }
+
+    private fun handleUserPronunciation(script: String) = with(binding) {
+        if (viewModel.uiState.value is FeedbackUiState.PatchGptFeedbacks) {
+            tvTalkHint.visibility = View.INVISIBLE
+            btnTalkSpeak.visible(true)
+            tvTalkPronunciation.visible(true)
+            tvTalkPronunciation.text = script
+            initCheckPronunciationBtnClickListener(script)
+        }
+    }
+
+    private fun initCheckPronunciationBtnClickListener(script: String) {
+        binding.tvTalkPronunciation.setOnClickListener {
+            viewModel.patchPronunciationEvaluation(
+                script = script,
+                audio = base64AudioData
+            )
+            binding.tvTalkPronunciation.visible(false)
         }
     }
 
@@ -496,9 +523,9 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         findNavController().navigate(R.id.action_talk_to_talk_feedback)
     }
 
-    private fun initSpeakCompleteBtnClickListener() {
-        binding.includeLayoutTalkSpeech.ivTalkSpeech.setOnClickListener {
-            viewModel.patchGptFeedbacks(binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString())
+    private fun initSpeakCompleteBtnClickListener() = with(binding.includeLayoutTalkSpeech) {
+        ivTalkSpeech.setOnClickListener {
+            viewModel.patchGptFeedbacks(etTalkUserSpeech.text.toString())
         }
     }
 
@@ -676,6 +703,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                     } else {
                         startVoiceRecorder()
                         setSpeakBtnState(isSpeaking = true)
+                        includeLayoutTalkSpeech.etTalkUserSpeech.text.clear()
                         isRecording = true
                     }
                 }
@@ -697,6 +725,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun setSpeakBtnState(isSpeaking: Boolean) = with(binding) {
+        tvTalkPronunciation.visible(false)
         lottiTalkSpeak.visible(isSpeaking)
         binding.btnTalkSpeak.backgroundTintList =
             if (isSpeaking) ContextCompat.getColorStateList(

@@ -170,7 +170,7 @@ class FeedbackViewModel : ViewModel() {
                     )
                 )
             }.onSuccess {
-                _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks(round(it.audio.score.toDouble()) * 100)
+                _uiState.value = FeedbackUiState.PatchPronunciationFeedbacks(round((it.audio.score.toDouble() / 5 )* 100))
             }.onFailure { _uiState.value = FeedbackUiState.Error(it.message.toString()) }
         }
     }

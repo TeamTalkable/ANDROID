@@ -13,8 +13,8 @@
         <VideoView
             android:id="@+id/video_view_talk_background"
             android:layout_width="0dp"
-            app:layout_constraintDimensionRatio="545:973"
             android:layout_height="match_parent"
+            app:layout_constraintDimensionRatio="545:973"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -198,6 +198,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btn_talk_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_talk_next_arrow"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_talk_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lotti_talk_speak"
             android:layout_width="0dp"
@@ -369,5 +379,23 @@
             app:layout_constraintBottom_toBottomOf="@id/bg_talk_speech_bubble"
             app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
             app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble" />
+
+        <TextView
+            android:id="@+id/tv_talk_pronunciation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginBottom="19dp"
+            android:background="@drawable/shape_white_fill_12_rect"
+            android:backgroundTint="#B3EFEFEF"
+            android:paddingHorizontal="19dp"
+            android:paddingVertical="14dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Talkable.m_16"
+            android:visibility="gone"
+            app:drawableEndCompat="@drawable/ic_talk_speech_check"
+            app:layout_constraintBottom_toTopOf="@id/btn_talk_speak"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
