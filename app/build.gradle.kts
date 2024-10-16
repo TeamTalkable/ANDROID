@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     kotlin("kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("com.google.gms.google-services")
 }
 
 val properties = Properties().apply {
@@ -61,6 +62,9 @@ dependencies {
     // Google
     implementation(libs.material)
     implementation(libs.firebase.messaging)
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.firebase.database.ktx)
 
     // Test Dependency
     testImplementation(libs.junit)
