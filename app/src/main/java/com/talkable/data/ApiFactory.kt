@@ -3,7 +3,9 @@ package com.talkable.data
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.talkable.BuildConfig.GPT_API_KEY
+import com.talkable.BuildConfig.PRO_API_KEY
 import com.talkable.data.api.GptApiService
+import com.talkable.data.api.PronunciationApiService
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -22,45 +24,46 @@ object ApiFactory {
         return loggingInterceptor
     }
 
-    private fun getAuthInterceptor(): Interceptor {
+    private fun getAuthInterceptor(key: String): Interceptor {
         return Interceptor { chain ->
             val request: Request = chain.request()
                 .newBuilder()
                 .addHeader(
                     "Authorization",
-                    "Bearer $GPT_API_KEY"
+                    key
                 )
                 .build()
             chain.proceed(request)
         }
     }
 
-    private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(getAuthInterceptor())
+    private fun okHttpClient(key: String) = OkHttpClient.Builder()
+        .addInterceptor(getAuthInterceptor(key))
         .addInterceptor(getLogOkHttpClient())
         .build()
-
-    val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl("")
-            .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-            .build()
-    }
 
     val retrofitGpt: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl("https://api.openai.com/")
-            .client(okHttpClient)
+            .client(okHttpClient("Bearer $GPT_API_KEY"))
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
-    inline fun <reified T> create(): T = retrofit.create<T>(T::class.java)
+    val retrofitPronunciation: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl("http://aiopen.etri.re.kr:8000/")
+            .client(okHttpClient(PRO_API_KEY))
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .build()
+    }
 
     inline fun <reified T> createGpt(): T = retrofitGpt.create(T::class.java)
+
+    inline fun <reified T> createPronunciation(): T = retrofitPronunciation.create(T::class.java)
 }
 
 object ServicePool {
     val gptService = ApiFactory.createGpt<GptApiService>()
+    val pronunciationService = ApiFactory.createPronunciation<PronunciationApiService>()
 }

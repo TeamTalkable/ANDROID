@@ -22,22 +22,12 @@
             app:rightBackIsVisible="@{false}"
             app:title="@{`피드백`}" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/font_5"
-            app:layout_constraintBottom_toTopOf="@id/rv_feedback_pronunciation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_talk_feedback_expression" />
-
         <TextView
             android:id="@+id/tv_feedback_pronunciation_english"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="31dp"
             android:layout_marginTop="26dp"
-            android:text="@{model.fullAnswer}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sm_18"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +43,6 @@
             android:paddingHorizontal="21dp"
             android:paddingTop="4dp"
             android:paddingBottom="11dp"
-            android:text="@{model.fullAnswer}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
             android:textColor="@color/gray"
@@ -69,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="23dp"
-            android:text="@{model.korean}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
             android:textColor="@color/font_2"
@@ -124,13 +112,13 @@
             android:id="@+id/pb_feedback_pronunciation"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="94dp"
+            android:layout_marginHorizontal="60dp"
             android:layout_marginBottom="40dp"
             android:progress="80"
             android:scaleX="1.2"
             android:scaleY="1.2"
             app:indicatorTrackGapSize="0dp"
-            app:layout_constraintBottom_toTopOf="@id/rv_feedback_pronunciation"
+            app:layout_constraintBottom_toTopOf="@id/bnv_feedback_pronunciation"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -155,28 +143,12 @@
             android:id="@+id/tv_feedback_pronunciation_accuracy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.accuracy + `%`}"
             android:textAppearance="@style/TextAppearance.Talkable.b_24"
             app:layout_constraintBottom_toBottomOf="@id/pb_feedback_pronunciation"
             app:layout_constraintEnd_toEndOf="@id/pb_feedback_pronunciation"
             app:layout_constraintStart_toStartOf="@id/pb_feedback_pronunciation"
             app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_accuracy_label"
             tools:text="80%" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_feedback_pronunciation"
-            android:layout_width="0dp"
-            android:layout_height="177dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:paddingHorizontal="8dp"
-            android:paddingTop="14dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/divider_feedback_pronunciation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:spanCount="3"
-            tools:listitem="@layout/item_pronunciation_word" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider_feedback_pronunciation"

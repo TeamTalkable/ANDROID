@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     kotlin("kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("com.google.gms.google-services")
 }
 
 val properties = Properties().apply {
@@ -40,6 +41,9 @@ android {
 
         val gptApiKey = properties["gpt.api.key"] as? String ?: ""
         buildConfigField("String", "GPT_API_KEY", "\"${gptApiKey}\"")
+
+        val proApiKey = properties["pro.api.key"] as? String ?: ""
+        buildConfigField("String", "PRO_API_KEY", "\"${proApiKey}\"")
     }
 
     buildTypes {
@@ -67,6 +71,9 @@ dependencies {
     // Google
     implementation(libs.material)
     implementation(libs.firebase.messaging)
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.firebase.database.ktx)
 
     // Test Dependency
     testImplementation(libs.junit)

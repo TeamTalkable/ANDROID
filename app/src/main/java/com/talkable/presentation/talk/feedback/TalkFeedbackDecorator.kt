@@ -21,11 +21,10 @@ class TalkFeedbackDecorator(val context: Context, private val grammarPosition: I
 
         if (position == 2) {
             view.setBackgroundResource(R.drawable.shape_gray2_fill_top_12_rec)
-            view.updatePadding(top = context.pxToDp(24))
         }
 
-        if (position == grammarPosition) {
-            view.setBackgroundResource(R.drawable.shape_gray2_fill_top_12_rec)
-        }
+//        if (position == grammarPosition) {
+//            view.setBackgroundResource(R.drawable.shape_gray2_fill_top_12_rec)
+//        }
     }
 }
