@@ -38,7 +38,11 @@
         android:id="@+id/fragment_review"
         android:name="com.talkable.presentation.review.ReviewFragment"
         android:label="Review"
-        tools:layout="@layout/fragment_review" >
+        tools:layout="@layout/fragment_review">
+        <action
+            android:id="@+id/action_review_to_quiz_spelling_meaning"
+            app:destination="@id/fragment_quiz_spelling_meaning"
+            tools:layout="@layout/fragment_quiz_spelling_meaning" />
     </fragment>
     <fragment
         android:id="@+id/fragment_my_page"
@@ -66,7 +70,7 @@
     <fragment
         android:id="@+id/fragment_challenge"
         android:name="com.talkable.presentation.challenge.ChallengeFragment"
-        android:label="ChallengeFragment" >
+        android:label="ChallengeFragment">
         <action
             android:id="@+id/action_challenge_to_challenge_recruitment"
             app:destination="@id/fragment_challenge_recruitment" />
@@ -93,13 +97,12 @@
         android:id="@+id/fragment_feedback_expression"
         android:name="com.talkable.presentation.feedback.FeedbackExpressionFragment"
         android:label="FeedbackExpressionFragment"
-        tools:layout="@layout/fragment_talk_feedback_expression">
-    </fragment>
+        tools:layout="@layout/fragment_talk_feedback_expression" />
     <fragment
         android:id="@+id/fragment_feedback_pronunciation"
         android:name="com.talkable.presentation.feedback.FeedbackPronunciationFragment"
         android:label="FeedbackPronunciationFragment"
-        tools:layout="@layout/fragment_feedback_pronunciation"/>
+        tools:layout="@layout/fragment_feedback_pronunciation" />
     <fragment
         android:id="@+id/fragment_talk"
         android:name="com.talkable.presentation.talk.TalkFragment"
@@ -225,7 +228,7 @@
         android:id="@+id/fragment_quiz_spelling_meaning"
         android:name="com.talkable.presentation.quiz.QuizSpellingMeaningFragment"
         android:label="QuizSpellingMeaningFragment"
-        tools:layout="@layout/fragment_quiz_spelling_meaning" >
+        tools:layout="@layout/fragment_quiz_spelling_meaning">
         <action
             android:id="@+id/action_quiz_spelling_meaning_to_quiz_result"
             app:destination="@id/quizResultFragment" />
@@ -234,7 +237,7 @@
         android:id="@+id/fragment_quiz_flash"
         android:name="com.talkable.presentation.quiz.QuizFlashFragment"
         android:label="QuizFlashFragment"
-        tools:layout="@layout/fragment_quiz_flash" >
+        tools:layout="@layout/fragment_quiz_flash">
         <action
             android:id="@+id/action_quiz_flash_to_quiz_result"
             app:destination="@id/quizResultFragment" />
@@ -243,7 +246,7 @@
         android:id="@+id/fragment_quiz_auto"
         android:name="com.talkable.presentation.quiz.QuizAutoFragment"
         android:label="QuizAutoFragment"
-        tools:layout="@layout/fragment_quiz_auto" >
+        tools:layout="@layout/fragment_quiz_auto">
         <action
             android:id="@+id/action_quiz_auto_to_quiz_result"
             app:destination="@id/quizResultFragment" />
