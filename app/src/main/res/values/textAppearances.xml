@@ -133,6 +133,11 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <style name="TextAppearance.Talkable.m_18">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
     <style name="TextAppearance.Talkable.m_20">
         <item name="fontFamily">@font/font_pretendard_medium</item>
         <item name="android:textSize">20dp</item>

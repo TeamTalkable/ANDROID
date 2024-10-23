@@ -160,7 +160,7 @@
     <string name="tv_start_setting_flower_title">코스모스 씨앗이\n심어졌어요!</string>
     <string name="tv_start_setting_flower_description">학습을 통해 예쁜 꽃을 피워보세요:)</string>
     <string name="tv_setting_alarm_title">영어 습관 만들기</string>
-    <string name="tv_setting_alarm_description">꾸준히 공부할 수 있는 시간을 알려주세요</string>
+    <string name="tv_setting_alarm_description">매일 꾸준히 학습할 수 있도록\n학습 알림 시간을 설정해보세요</string>
     <string name="tv_setting_alarm_cap">\'마이\'탭에서 언제든 변경할 수 있습니다.</string>
     <string name="btn_setting_alarm">이 시간으로 정할게요</string>
     <string name="tv_setting_alarm_colon">:</string>

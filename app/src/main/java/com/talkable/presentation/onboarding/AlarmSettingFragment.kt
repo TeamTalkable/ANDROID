@@ -2,6 +2,7 @@ package com.talkable.presentation.onboarding
 
 import android.Manifest
 import android.os.Build
+import android.widget.NumberPicker
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -17,12 +18,12 @@ import timber.log.Timber
 class AlarmSettingFragment :
     BindingFragment<FragmentSettingAlarmBinding>(R.layout.fragment_setting_alarm) {
 
-    private val onboardingViewModel by activityViewModels<OnboardingViewModel>()
     override fun initView() {
-        initAlarmSettingClickListener()
         initCompleteBtnClickListener()
-        observeDialogClosed()
         initPushAlarmPermissionAlert()
+        setPickerValue(binding.pickerSelectAlarmTime, 0, meridiemArr)
+        setPickerValue(binding.pickerSelectAlarmTimeHour, 1,hoursArr)
+        setPickerValue(binding.pickerSelectAlarmMinute, 0, minutesArr)
     }
 
     private val requestPermission = registerForActivityResult(
@@ -51,35 +52,6 @@ class AlarmSettingFragment :
         )
     }
 
-    private fun observeDialogClosed() {
-        onboardingViewModel.dialogClosed.observe(viewLifecycleOwner) { isClosed ->
-            if (isClosed) {
-                updateAlarmTimeTextView()
-                onboardingViewModel.resetDialogClose()
-            }
-        }
-    }
-
-    private fun updateAlarmTimeTextView() = with(binding) {
-        val hour = mockData.alarmTimeHour?.let {
-            if (mockData.alarmAmPm == 1) it + 12 else it
-        }
-        tvSettingAlarmHour.text =
-            getString(R.string.label_alarm_setting_hour_input, hour ?: 0)
-        binding.tvSettingAlarmMin.text =
-            getString(R.string.label_alarm_setting_minute_input, mockData.alarmTimeMin ?: 0)
-    }
-
-    private fun initAlarmSettingClickListener() {
-        binding.groupSettingAlarmTime.setOnClickListener {
-            showAlarmSettingDialog()
-        }
-    }
-
-    private fun showAlarmSettingDialog() = AlarmSettingDialog.createNewInstance().show(
-        childFragmentManager, DialogKey.ALARM_SETTING_DIALOG
-    )
-
     private fun initCompleteBtnClickListener() {
         binding.btnSettingAlarm.setOnClickListener {
             navigateToHomeFragment()
@@ -88,4 +60,18 @@ class AlarmSettingFragment :
 
     private fun navigateToHomeFragment() =
         findNavController().navigate(R.id.action_alarmSetting_to_home)
+
+    private fun setPickerValue(picker: NumberPicker, min: Int, array: Array<String>) =
+        with(picker) {
+            minValue = min
+            maxValue = if (array.contentEquals(hoursArr)) 12 else array.size - 1
+            displayedValues = array
+        }
+
+    companion object {
+        private val meridiemArr = arrayOf("오전", "오후")
+        private val hoursArr = Array(12) { (it + 1).toString() }
+        private val minutesArr =
+            Array(10) { i -> String.format("%02d", i) } + Array(50) { (it + 10).toString() }
+    }
 }
