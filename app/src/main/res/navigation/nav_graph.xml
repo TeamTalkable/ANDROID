@@ -51,6 +51,10 @@
             android:id="@+id/action_review_to_quiz_auto"
             app:destination="@id/fragment_quiz_auto"
             tools:layout="@layout/fragment_quiz_auto" />
+        <action
+            android:id="@+id/action_review_to_saved"
+            app:destination="@id/fragment_saved"
+            tools:layout="@layout/fragment_saved" />
     </fragment>
     <fragment
         android:id="@+id/fragment_my_page"
@@ -68,7 +72,7 @@
             app:destination="@id/fragment_my_page_feedback" />
         <action
             android:id="@+id/action_fragment_my_page_to_saved"
-            app:destination="@id/savedFragment" />
+            app:destination="@id/fragment_saved" />
         <action
             android:id="@+id/action_my_page_to_login"
             app:destination="@id/loginFragment"
@@ -218,7 +222,7 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/savedFragment"
+        android:id="@+id/fragment_saved"
         android:name="com.talkable.presentation.mypage.saved.SavedFragment"
         android:label="SavedFragment"
         tools:layout="@layout/fragment_saved">
