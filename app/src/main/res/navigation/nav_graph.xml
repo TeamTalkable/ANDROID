@@ -43,6 +43,10 @@
             android:id="@+id/action_review_to_quiz_spelling_meaning"
             app:destination="@id/fragment_quiz_spelling_meaning"
             tools:layout="@layout/fragment_quiz_spelling_meaning" />
+        <action
+            android:id="@+id/action_review_to_quiz_flash"
+            app:destination="@id/fragment_quiz_flash"
+            tools:layout="@layout/fragment_quiz_flash" />
     </fragment>
     <fragment
         android:id="@+id/fragment_my_page"
