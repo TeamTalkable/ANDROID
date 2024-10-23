@@ -12,6 +12,7 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
         statusBarColorOf(R.color.main_2)
         initNavigateMeaningBtnClickListener()
         initNavigateFlashcardsBtnClickListener()
+        initNavigateAutoBtnClickListener()
     }
 
     private fun initNavigateMeaningBtnClickListener() {
@@ -31,4 +32,13 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
 
     private fun navigateToFlashcards() =
         findNavController().navigate(R.id.action_review_to_quiz_flash)
+
+    private fun initNavigateAutoBtnClickListener() {
+        binding.btnReviewAuto.setOnClickListener {
+            navigateToAuto()
+        }
+    }
+
+    private fun navigateToAuto() =
+        findNavController().navigate(R.id.action_review_to_quiz_auto)
 }

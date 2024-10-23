@@ -47,6 +47,10 @@
             android:id="@+id/action_review_to_quiz_flash"
             app:destination="@id/fragment_quiz_flash"
             tools:layout="@layout/fragment_quiz_flash" />
+        <action
+            android:id="@+id/action_review_to_quiz_auto"
+            app:destination="@id/fragment_quiz_auto"
+            tools:layout="@layout/fragment_quiz_auto" />
     </fragment>
     <fragment
         android:id="@+id/fragment_my_page"
