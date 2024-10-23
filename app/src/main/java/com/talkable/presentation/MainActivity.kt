@@ -35,6 +35,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     listOf(
                         R.id.fragment_home,
                         R.id.fragment_challenge,
+                        R.id.fragment_review,
                         R.id.fragment_my_page
                     )
                 ) {

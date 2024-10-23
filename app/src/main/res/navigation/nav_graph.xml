@@ -35,6 +35,12 @@
             app:destination="@id/fragment_talk" />
     </fragment>
     <fragment
+        android:id="@+id/fragment_review"
+        android:name="com.talkable.presentation.review.ReviewFragment"
+        android:label="Review"
+        tools:layout="@layout/fragment_review" >
+    </fragment>
+    <fragment
         android:id="@+id/fragment_my_page"
         android:name="com.talkable.presentation.mypage.MyPageFragment"
         android:label="MyPageFragment"
