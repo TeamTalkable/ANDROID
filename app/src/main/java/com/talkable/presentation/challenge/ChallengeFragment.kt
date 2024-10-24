@@ -11,10 +11,12 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     override fun initView() {
         statusBarColorOf(R.color.white)
         setChallengeTextView()
-        initRankingAdapter()
         initParticipationAdapter()
         initRecruitmentAdapter()
         initNavigateChallengeRecruitment()
+        setChallengeUserRanking()
+        setChallengeRanking()
+        initRankingAdapter()
     }
 
     private fun initNavigateChallengeRecruitment() {
@@ -68,13 +70,42 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
         }
     }
 
+    private fun setChallengeRanking() {
+        with(binding.includeLayoutChallengeRanking) {
+            val rankingViews = listOf(
+                Pair(tvRanking1UsreName, tvRanking1Time),
+                Pair(tvRanking2UsreName, tvRanking2Time),
+                Pair(tvRanking3UsreName, tvRanking3Time)
+            )
+
+            rankingViews.zip(rankingMockData).forEach { (views, ranking) ->
+                views.first.text = ranking.name
+                views.second.text = ranking.time
+            }
+        }
+    }
+
     private fun initRankingAdapter() {
         with(binding.rvChallengeRanking) {
             layoutManager = LinearLayoutManager(context)
             adapter = RankingAdapter().apply {
-                submitList(rankingMockData)
+                // 전체 리스트에서 하위 2개의 항목만 선택
+                val sublist = if (rankingMockData.size > 2) {
+                    rankingMockData.takeLast(2)
+                } else {
+                    rankingMockData
+                }
+                submitList(sublist)
             }
             addItemDecoration(RankingItemDecorator(requireActivity()))
+        }
+    }
+
+    private fun setChallengeUserRanking() {
+        with(binding) {
+            tvChallengeUserRanking.text = userRankingMockData.rank
+            tvChallengeUserName.text = userRankingMockData.name
+            tvChallengeUserTime.text = userRankingMockData.time
         }
     }
 
@@ -119,7 +150,14 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     )
 
     private val rankingMockData = listOf(
+        Ranking(rank = "1위", name = "김민지", time = "190분"),
+        Ranking(rank = "2위", name = "최우지", time = "164분"),
+        Ranking(rank = "3위", name = "박가은", time = "70분"),
         Ranking(rank = "4위", name = "김은서", time = "50분"),
         Ranking(rank = "5위", name = "박혜림", time = "40분"),
+    )
+
+    private val userRankingMockData = Ranking(
+        rank = "115위", name = "김지은", time = "15분"
     )
 }
