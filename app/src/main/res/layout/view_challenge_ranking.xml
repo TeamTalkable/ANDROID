@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -17,23 +18,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="최우지"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintBottom_toTopOf="@id/tv_ranking_2_time"
             app:layout_constraintEnd_toEndOf="@id/iv_ranking_2"
-            app:layout_constraintStart_toStartOf="@id/iv_ranking_2" />
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_2"
+            tools:text="최우지" />
 
         <TextView
             android:id="@+id/tv_ranking_2_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="164분"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toTopOf="@id/iv_ranking_2"
             app:layout_constraintEnd_toEndOf="@id/tv_ranking_2_usre_name"
-            app:layout_constraintStart_toStartOf="@id/tv_ranking_2_usre_name" />
+            app:layout_constraintStart_toStartOf="@id/tv_ranking_2_usre_name"
+            tools:text="164분" />
 
         <ImageView
             android:id="@+id/iv_ranking_2"
@@ -61,23 +62,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="김지은"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintBottom_toTopOf="@id/tv_ranking_1_time"
             app:layout_constraintEnd_toEndOf="@id/iv_ranking_1"
-            app:layout_constraintStart_toStartOf="@id/iv_ranking_1" />
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_1"
+            tools:text="김지은" />
 
         <TextView
             android:id="@+id/tv_ranking_1_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="190분"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toTopOf="@id/iv_ranking_1"
             app:layout_constraintEnd_toEndOf="@id/tv_ranking_1_usre_name"
-            app:layout_constraintStart_toStartOf="@id/tv_ranking_1_usre_name" />
+            app:layout_constraintStart_toStartOf="@id/tv_ranking_1_usre_name"
+            tools:text="190분" />
 
         <ImageView
             android:id="@+id/iv_ranking_1"
@@ -107,23 +108,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="박가은"
             android:textAppearance="@style/TextAppearance.Talkable.sb_16"
             app:layout_constraintBottom_toTopOf="@id/tv_ranking_3_time"
             app:layout_constraintEnd_toEndOf="@id/iv_ranking_3"
-            app:layout_constraintStart_toStartOf="@id/iv_ranking_3" />
+            app:layout_constraintStart_toStartOf="@id/iv_ranking_3"
+            tools:text="박가은" />
 
         <TextView
             android:id="@+id/tv_ranking_3_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="70분"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toTopOf="@id/iv_ranking_3"
             app:layout_constraintEnd_toEndOf="@id/tv_ranking_3_usre_name"
-            app:layout_constraintStart_toStartOf="@id/tv_ranking_3_usre_name" />
+            app:layout_constraintStart_toStartOf="@id/tv_ranking_3_usre_name"
+            tools:text="70분" />
 
         <ImageView
             android:id="@+id/iv_ranking_3"

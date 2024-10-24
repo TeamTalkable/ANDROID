@@ -6,12 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.Window
-import com.talkable.R
 import com.talkable.databinding.DialogChallengeBinding
 
 class ChallengeDialog(
     context: Context,
-    private val challenge: Recruitment
+    private val challenge: Recruitment,
+    private val listener: OnJoinCompleteListener
 ) : Dialog(context) {
     private val binding: DialogChallengeBinding =
         DialogChallengeBinding.inflate(layoutInflater)
@@ -41,8 +41,8 @@ class ChallengeDialog(
     private fun initJoinBtnClickListener() {
         with(binding) {
             btnChallengeJoin.setOnClickListener {
-                btnChallengeJoin.isEnabled = false
-                btnChallengeJoin.text = context.getString(R.string.btn_challenge_join_complete)
+                listener.onJoinComplete()
+                dismiss()
             }
         }
     }
@@ -54,5 +54,9 @@ class ChallengeDialog(
                 dismiss()
             }
         }
+    }
+
+    interface OnJoinCompleteListener {
+        fun onJoinComplete()
     }
 }
