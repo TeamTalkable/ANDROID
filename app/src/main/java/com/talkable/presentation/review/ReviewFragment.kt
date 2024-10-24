@@ -14,6 +14,7 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
         initNavigateFlashcardsBtnClickListener()
         initNavigateAutoBtnClickListener()
         initNavigateSavedBtnClickListener()
+        initNavigateFeedbackBtnClickListener()
     }
 
     private fun initNavigateMeaningBtnClickListener() {
@@ -51,4 +52,13 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
 
     private fun navigateToSaved() =
         findNavController().navigate(R.id.action_review_to_saved)
+
+    private fun initNavigateFeedbackBtnClickListener() {
+        binding.includeReviewFeedback.layoutReviewSaved.setOnClickListener {
+            navigateToFeedback()
+        }
+    }
+
+    private fun navigateToFeedback() =
+        findNavController().navigate(R.id.action_review_to_feedback)
 }

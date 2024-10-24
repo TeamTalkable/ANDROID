@@ -55,6 +55,10 @@
             android:id="@+id/action_review_to_saved"
             app:destination="@id/fragment_saved"
             tools:layout="@layout/fragment_saved" />
+        <action
+            android:id="@+id/action_review_to_feedback"
+            app:destination="@id/fragment_my_page_feedback"
+            tools:layout="@layout/fragment_my_page_feedback" />
     </fragment>
     <fragment
         android:id="@+id/fragment_my_page"
