@@ -18,19 +18,23 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="213dp"
             android:text="@string/login_intro"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
+            android:textAppearance="@style/TextAppearance.Talkable.main_sm_20"
             android:textColor="@color/main"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_login_logo"
-            android:layout_width="199dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
             android:src="@drawable/logo_talkable"
+            app:layout_constraintDimensionRatio="255:41"
+            app:layout_constraintEnd_toEndOf="@+id/btn_login_kakao"
             app:layout_constraintStart_toStartOf="@id/tv_login_intro"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_intro" />
+            app:layout_constraintTop_toBottomOf="@id/tv_login_intro"
+            app:layout_constraintWidth_default="spread" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login_kakao"
