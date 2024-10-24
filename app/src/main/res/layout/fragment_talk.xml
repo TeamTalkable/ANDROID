@@ -183,7 +183,7 @@
             android:id="@+id/btn_talk_speak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_talk_speak"
+            android:background="@drawable/sel_talk_speak_btn"
             android:enabled="false"
             app:layout_constraintBottom_toTopOf="@id/tv_talk_hint"
             app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +194,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_talk_next_arrow"
-            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/tv_talk_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -281,7 +280,7 @@
             android:id="@+id/group_talk_speak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:constraint_referenced_ids="btn_talk_speak, tv_talk_hint, include_bottom_sheet_talk" />
 
         <androidx.constraintlayout.widget.Group
