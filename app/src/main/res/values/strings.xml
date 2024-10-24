@@ -198,4 +198,11 @@
     <string name="btn_quiz_back">그만하기</string>
     <string name="btn_quiz_continue">계속하기</string>
     <string name="tv_quiz_result_auto_label">단어 카드</string>
+
+    <!--review-->
+    <string name="tv_review_title">리뷰</string>
+    <string name="btn_review_spelling">스펠링 테스트</string>
+    <string name="btn_review_meaning">뜻 맞추기</string>
+    <string name="btn_review_flashcards">플래시카드</string>
+    <string name="btn_review_auto">자동전환 단어카드</string>
 </resources>

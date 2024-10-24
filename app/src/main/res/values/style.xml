@@ -64,4 +64,10 @@
     <style name="ShapeAppearanceOverlay.App.RoundedImage" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <!--단어 퀴즈 버튼-->
+    <style name="ReviewButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/shape_white_fill_12_rect</item>
+        <item name="android:textAppearance">@style/TextAppearance.Talkable.m_16</item>
+    </style>
 </resources>
