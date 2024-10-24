@@ -13,6 +13,7 @@ class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fra
         navigateToBack()
         initStartBtnClickListener()
         initAgreementAllBtnClickListener()
+        initSetTextColor()
     }
 
     // 뒤로가기
@@ -68,6 +69,16 @@ class AgreementFragment : BindingFragment<FragmentAgreementBinding>(R.layout.fra
             btnAgreementStart.isEnabled = btnAgreementAge.isChecked &&
                     btnAgreementTerms.isChecked &&
                     btnAgreementPrivacy.isChecked
+        }
+    }
+
+    private fun initSetTextColor() {
+        with(binding) {
+            tvAgreementAll.isSelected = btnAgreementAll.isSelected
+            tvAgreementAge.isSelected = btnAgreementAge.isChecked
+            tvAgreementTerms.isSelected = btnAgreementTerms.isChecked
+            tvAgreementPrivacy.isSelected = btnAgreementPrivacy.isChecked
+            tvAgreementMarketing.isSelected = btnAgreementMarketing.isChecked
         }
     }
 }
