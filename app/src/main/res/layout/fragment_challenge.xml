@@ -70,8 +70,8 @@
                 android:id="@+id/btn_challenge_recruitment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
                 android:background="@android:color/transparent"
+                android:padding="20dp"
                 android:src="@drawable/ic_challenge_next"
                 app:layout_constraintBottom_toBottomOf="@id/tv_challenge_recruitment"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -118,12 +118,70 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="22dp"
                 android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/include_layout_challenge_ranking"
+                tools:listitem="@layout/item_challenge_ranking" />
+
+            <ImageView
+                android:id="@+id/iv_challenge_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:src="@drawable/ic_challenge_dot"
+                app:layout_constraintBottom_toTopOf="@id/layout_challenge_user_ranking"
+                app:layout_constraintEnd_toEndOf="@id/rv_challenge_ranking"
+                app:layout_constraintStart_toStartOf="@id/rv_challenge_ranking"
+                app:layout_constraintTop_toBottomOf="@id/rv_challenge_ranking" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_challenge_user_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
                 android:layout_marginBottom="74dp"
+                android:background="@drawable/shape_font5_line_2_rect"
+                android:paddingVertical="18dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="19dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include_layout_challenge_ranking"
-                tools:listitem="@layout/item_challenge_ranking" />
+                app:layout_constraintTop_toBottomOf="@id/iv_challenge_dot">
+
+                <TextView
+                    android:id="@+id/tv_challenge_user_ranking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                    android:textColor="@color/main_4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="4위" />
+
+                <TextView
+                    android:id="@+id/tv_challenge_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_challenge_user_ranking"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="이주은" />
+
+                <TextView
+                    android:id="@+id/tv_challenge_user_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_alarm_setting_minute_input"
+                    android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
