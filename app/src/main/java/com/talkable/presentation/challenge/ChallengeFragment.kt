@@ -1,5 +1,7 @@
 package com.talkable.presentation.challenge
 
+import android.os.Handler
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
@@ -7,7 +9,8 @@ import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentChallengeBinding
 
-class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fragment_challenge) {
+class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fragment_challenge), ChallengeDialog.OnJoinCompleteListener {
+
     override fun initView() {
         statusBarColorOf(R.color.white)
         setChallengeTextView()
@@ -64,10 +67,24 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
             }
             offscreenPageLimit = 2
 
-            adapter = ChallengeRecruitmentAdapter(challengeList) { recruitment ->
-                ChallengeDialog(requireContext(), recruitment).show()
-            }
+            adapter = ChallengeRecruitmentAdapter(challengeList, { recruitment ->
+                ChallengeDialog(requireContext(), recruitment, this@ChallengeFragment).show() // 콜백 전달
+            }, this@ChallengeFragment)
         }
+    }
+
+    // 참여 버튼 클릭 시 실행
+    override fun onJoinComplete() {
+        showJoinCompleteText()
+    }
+
+    fun showJoinCompleteText() {
+        binding.tvChallengeJoinComplete.visibility = View.VISIBLE
+
+        // 5초 후에 숨김
+        Handler().postDelayed({
+            binding.tvChallengeJoinComplete.visibility = View.GONE
+        }, 5000)
     }
 
     private fun setChallengeRanking() {
