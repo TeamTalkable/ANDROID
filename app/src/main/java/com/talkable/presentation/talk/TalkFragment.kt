@@ -735,11 +735,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun setSpeakBtnState(isSpeaking: Boolean) = with(binding) {
         tvTalkPronunciation.visible(false)
         lottiTalkSpeak.visible(isSpeaking)
-        binding.btnTalkSpeak.backgroundTintList =
-            if (isSpeaking) ContextCompat.getColorStateList(
-                requireContext(),
-                R.color.main
-            ) else null
+        btnTalkSpeak.isSelected = !btnTalkSpeak.isSelected
     }
 
     // 권한 요청 후 처리
