@@ -186,7 +186,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initTalkGuide() {
         if (guideClickCount == FIRST_CLICK) {
             with(binding) {
-                root.setOnClickListener {
+                btnTalkNext.setOnClickListener {
                     if (guideClickCount < MAX_GUIDE_CLICK) {
                         tvTalkEnglish.text = getString(englishGuideTextArray[textIndex])
                         tvTalkTranslate.text = getString(koreanGuideTextArray[textIndex])
@@ -194,13 +194,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         guideClickCount++
 
                     } else {
+                        btnTalkNext.isVisible = false
                         groupTalkSpeak.isVisible = true
                         btnTalkSpeak.isEnabled = true
                         tvTalkEnglish.isVisible = false
                         tvTalkTranslate.isVisible = false
                         tvTalkListen.isVisible = true
                         setQuestionLayout()
-                        binding.root.setOnClickListener { }
+                        binding.btnTalkNext.setOnClickListener { }
                     }
                 }
             }
@@ -734,11 +735,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun setSpeakBtnState(isSpeaking: Boolean) = with(binding) {
         tvTalkPronunciation.visible(false)
         lottiTalkSpeak.visible(isSpeaking)
-        binding.btnTalkSpeak.backgroundTintList =
-            if (isSpeaking) ContextCompat.getColorStateList(
-                requireContext(),
-                R.color.main
-            ) else null
+        btnTalkSpeak.isSelected = !btnTalkSpeak.isSelected
     }
 
     // 권한 요청 후 처리
