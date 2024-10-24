@@ -182,6 +182,24 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_challenge_join_complete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="27dp"
+                android:background="@drawable/shape_white_fill_20_rec"
+                android:backgroundTint="@color/main"
+                android:gravity="center"
+                android:paddingVertical="22dp"
+                android:text="@string/tv_challenge_join_complete"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_b_14"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
