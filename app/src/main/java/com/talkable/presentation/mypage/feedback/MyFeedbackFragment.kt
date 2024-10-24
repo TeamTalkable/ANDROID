@@ -1,5 +1,6 @@
 package com.talkable.presentation.mypage.feedback
 
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
@@ -11,7 +12,16 @@ class MyFeedbackFragment :
     override fun initView() {
         statusBarColorOf(R.color.white)
         initMyFeedbackViewPagerAdapter()
+        initBackBtnClickListener()
     }
+
+    private fun initBackBtnClickListener() {
+        binding.layoutMyFeedbackAppBar.ibMyPageBack.setOnClickListener {
+            navigateToBack()
+        }
+    }
+
+    private fun navigateToBack() = findNavController().popBackStack()
 
     private fun initMyFeedbackViewPagerAdapter() {
         binding.vpMyPageFeedback.adapter = MyFeedbackViewPagerAdapter(this)

@@ -12,6 +12,12 @@
         android:icon="@drawable/sel_nav_selected_challenge"
         android:title="챌린지" />
 
+    <!-- Review -->
+    <item
+        android:id="@+id/fragment_review"
+        android:icon="@drawable/sel_nav_selected_review"
+        android:title="리뷰" />
+
     <!-- MyPage -->
     <item
         android:id="@+id/fragment_my_page"
