@@ -69,7 +69,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bg_talk_speech_bubble"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="283dp"
             android:layout_marginHorizontal="14dp"
             android:layout_marginTop="27dp"
             android:background="@drawable/bg_talk_speech_bubble"
@@ -86,7 +86,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/tv_talk_first_en"
-                android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+                android:textAppearance="@style/TextAppearance.Talkable.sm_18"
                 app:layout_constraintBottom_toTopOf="@+id/tv_talk_translate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
