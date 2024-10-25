@@ -19,15 +19,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_talk_gradient"
-            app:layout_constraintBottom_toBottomOf="@id/toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -56,18 +47,29 @@
                     android:id="@+id/btn_talk_folder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_talk_folder"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_talk_help"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_talk_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="13dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_talk_help"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btn_talk_folder" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bg_talk_speech_bubble"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="283dp"
             android:layout_marginHorizontal="14dp"
             android:layout_marginTop="27dp"
             android:background="@drawable/bg_talk_speech_bubble"
@@ -84,7 +86,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/tv_talk_first_en"
-                android:textAppearance="@style/TextAppearance.Talkable.main_b_20"
+                android:textAppearance="@style/TextAppearance.Talkable.sm_18"
                 app:layout_constraintBottom_toTopOf="@+id/tv_talk_translate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -188,11 +190,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lotti_talk_speak"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="58dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/btn_talk_speak"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_talk_speak"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_pronunciation" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btn_talk_speak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_talk_speak"
+            android:background="@drawable/sel_talk_speak_btn"
             android:enabled="false"
             app:layout_constraintBottom_toTopOf="@id/tv_talk_hint"
             app:layout_constraintEnd_toEndOf="parent"
@@ -203,24 +219,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_talk_next_arrow"
-            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/tv_talk_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lotti_talk_speak"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/btn_talk_speak"
-            app:layout_constraintEnd_toEndOf="@id/btn_talk_speak"
-            app:layout_constraintStart_toStartOf="@id/btn_talk_speak"
-            app:layout_constraintTop_toTopOf="@id/btn_talk_speak"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/lottie_talk_speak" />
 
         <TextView
             android:id="@+id/tv_talk_hint"
@@ -290,7 +291,7 @@
             android:id="@+id/group_talk_speak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:constraint_referenced_ids="btn_talk_speak, tv_talk_hint, include_bottom_sheet_talk" />
 
         <androidx.constraintlayout.widget.Group

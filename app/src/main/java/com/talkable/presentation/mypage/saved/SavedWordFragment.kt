@@ -1,6 +1,8 @@
 package com.talkable.presentation.mypage.saved
 
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
@@ -8,16 +10,25 @@ import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentSavedWordBinding
 import com.talkable.presentation.mypage.saved.model.SavedListModel
 import com.talkable.presentation.mypage.saved.model.SavedWord
+import com.talkable.presentation.mypage.saved.model.SavedWordViewModel
 
 class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fragment_saved_word) {
 
     private lateinit var savedWordAdapter: SavedWordAdapter
+    private val viewModel: SavedWordViewModel by activityViewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.main_3)
+        initSetSavedWordAdapter()
         initSavedWordAdapter()
         initSavedWordChipClickListener()
         initTranslationBtnClickListener()
+    }
+
+    private fun initSetSavedWordAdapter() {
+        viewModel.savedWords.observe(viewLifecycleOwner, Observer { savedListModel ->
+            savedWordAdapter.submitList(savedListModel.savedWordList)
+        })
     }
 
     private fun initTranslationBtnClickListener() {
@@ -40,8 +51,6 @@ class SavedWordFragment : BindingFragment<FragmentSavedWordBinding>(R.layout.fra
             adapter = savedWordAdapter
             layoutManager = LinearLayoutManager(context)
         }
-        // Set initial data
-        savedWordAdapter.submitList(mockData.savedWordList)
     }
 
     private fun initSavedWordChipClickListener() {

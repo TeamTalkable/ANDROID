@@ -7,7 +7,8 @@ import com.talkable.databinding.ItemChallengeRecruitmentBinding
 
 class ChallengeRecruitmentAdapter(
     private val imgList: List<Recruitment>,
-    private val onItemClicked: (Recruitment) -> Unit
+    private val onItemClicked: (Recruitment) -> Unit,
+    private val listener: ChallengeDialog.OnJoinCompleteListener
 ) : RecyclerView.Adapter<RecruitmentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecruitmentViewHolder {
@@ -16,7 +17,7 @@ class ChallengeRecruitmentAdapter(
             parent,
             false
         )
-        return RecruitmentViewHolder(binding)
+        return RecruitmentViewHolder(binding, listener)
     }
 
     override fun getItemCount() = imgList.size
