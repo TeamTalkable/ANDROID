@@ -13,11 +13,14 @@
         <VideoView
             android:id="@+id/video_view_talk_background"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:scaleX="1.3"
+            android:scaleY="1.3"
             app:layout_constraintDimensionRatio="545:973"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -83,12 +86,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/tv_talk_first_en"
                 android:textAppearance="@style/TextAppearance.Talkable.sm_18"
                 app:layout_constraintBottom_toTopOf="@+id/tv_talk_translate"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
@@ -101,9 +104,10 @@
                 android:layout_marginTop="42dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/shape_font4_fill_12_rect"
+                android:backgroundTint="@color/gray_2_f4"
                 android:gravity="center"
                 android:paddingHorizontal="55dp"
-                android:paddingVertical="18dp"
+                android:paddingVertical="35dp"
                 android:text="@string/tv_talk_listen"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
                 android:textColor="@color/main_4"
@@ -119,7 +123,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="36dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="25dp"
                 android:gravity="center"
                 android:text="@string/tv_talk_first_kr"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
@@ -138,8 +141,8 @@
                 android:id="@+id/btn_talk_listen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginBottom="25dp"
                 android:background="@drawable/sel_talk_listen_selected"
                 app:layout_constraintBottom_toBottomOf="@id/bg_talk_speech_bubble"
                 app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble" />
@@ -271,22 +274,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/include_bottom_sheet_talk"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/layout_bottom_sheet_talk"
-                style="@style/Widget.Material3.BottomSheet"
-                layout="@layout/bottom_sheet_talk"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:behavior_hideable="false"
-                app:behavior_peekHeight="50dp"
-                app:layout_behavior="@string/bottom_sheet_behavior" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_talk_speak"
             android:layout_width="wrap_content"
@@ -327,51 +314,25 @@
             app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
             app:layout_constraintTop_toBottomOf="@id/lottie_feedback_loading" />
 
-        <androidx.constraintlayout.widget.Group
+        <include
             android:id="@+id/group_talk_feedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            layout="@layout/view_talk_feedback_part"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
             android:visibility="gone"
-            app:constraint_referenced_ids="tv_talk_user_answer, tv_talk_feedback" />
-
-        <TextView
-            android:id="@+id/tv_talk_user_answer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="22dp"
-            android:background="@drawable/shape_white_fill_12_rect"
-            android:backgroundTint="@color/main_3"
-            android:drawablePadding="6dp"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-            app:drawableStartCompat="@drawable/ic_saved_listen_unselected"
-            app:drawableTint="@color/gray"
-            app:layout_constraintBottom_toTopOf="@id/tv_talk_feedback"
-            app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
-            app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
-            app:layout_constraintTop_toTopOf="@id/bg_talk_speech_bubble"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tv_talk_feedback"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="16dp"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            app:isFeedbackDetail="@{false}"
             app:layout_constraintBottom_toTopOf="@id/tv_talk_feedback_detail"
             app:layout_constraintEnd_toEndOf="@id/bg_talk_speech_bubble"
             app:layout_constraintStart_toStartOf="@id/bg_talk_speech_bubble"
-            app:layout_constraintTop_toBottomOf="@id/tv_talk_user_answer" />
+            app:layout_constraintTop_toTopOf="@id/bg_talk_speech_bubble" />
 
         <TextView
             android:id="@+id/tv_talk_feedback_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="35dp"
             android:paddingVertical="8dp"
             android:text="@string/tv_talk_feedback_detail"
             android:textAppearance="@style/TextAppearance.Talkable.b_12"
@@ -398,5 +359,21 @@
             app:layout_constraintBottom_toTopOf="@id/btn_talk_speak"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/include_bottom_sheet_talk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/layout_bottom_sheet_talk"
+                style="@style/Widget.Material3.BottomSheet"
+                layout="@layout/bottom_sheet_talk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:behavior_hideable="false"
+                app:behavior_peekHeight="50dp"
+                app:layout_behavior="@string/bottom_sheet_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

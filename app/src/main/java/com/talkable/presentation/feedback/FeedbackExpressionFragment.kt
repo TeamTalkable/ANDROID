@@ -59,8 +59,8 @@ class FeedbackExpressionFragment :
     private fun setLayout(afterFull: String, afterParts: List<String>) = with(binding) {
         tvTalkFeedbackExpressionQuestion.text = questionEn
         tvTalkFeedbackExpressionKorean.text = questionKo
-        tvTalkFeedbackExpressionBefore.text = beforeAnswer
-        tvTalkFeedbackAfter.text = afterFull
+        layoutTalkFeedbackAnswer.tvTalkFeedbackUserBeforeAnswer.text = beforeAnswer
+        layoutTalkFeedbackAnswer.tvTalkFeedbackUserAfterAnswer.text = afterFull
         setAfterAnswerTextColor(
             afterFull,
             afterParts
@@ -101,7 +101,7 @@ class FeedbackExpressionFragment :
         val spannableString =
             FeedbackTextColor(requireContext()).setAfterAnswerTextColor(fullText, partsText)
 
-        binding.tvTalkFeedbackAfter.text = spannableString
+        binding.layoutTalkFeedbackAnswer.tvTalkFeedbackUserAfterAnswer.text = spannableString
     }
 
     private fun initBackBtnClickListener() {
