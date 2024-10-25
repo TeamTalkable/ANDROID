@@ -60,12 +60,14 @@
             app:layout_constraintTop_toBottomOf="@id/tv_agreement_title" />
 
         <TextView
+            android:id="@+id/tv_agreement_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/agreement_all"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-            android:textColor="@color/gray"
+            android:textAppearance="@style/TextAppearance.Talkable.m_20"
+            android:textColor="@drawable/sel_agreement_txt_color"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_agreement_all"
             app:layout_constraintStart_toEndOf="@id/btn_agreement_all"
             app:layout_constraintTop_toTopOf="@id/btn_agreement_all" />
 
@@ -92,19 +94,20 @@
             android:id="@+id/btn_agreement_age"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="29dp"
             android:background="@drawable/sel_agreement_selected_agree"
             android:button="@null"
             app:layout_constraintStart_toStartOf="@id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@id/divider_agreement" />
 
         <TextView
+            android:id="@+id/tv_agreement_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/agreement_age"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-            android:textColor="@color/gray"
+            android:textColor="@drawable/sel_agreement_txt_color"
             app:layout_constraintStart_toEndOf="@id/btn_agreement_age"
             app:layout_constraintTop_toTopOf="@id/btn_agreement_age" />
 
@@ -112,19 +115,20 @@
             android:id="@+id/btn_agreement_terms"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/sel_agreement_selected_agree"
             android:button="@null"
             app:layout_constraintStart_toStartOf="@id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@id/btn_agreement_age" />
 
         <TextView
+            android:id="@+id/tv_agreement_terms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/agreement_terms"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-            android:textColor="@color/gray"
+            android:textColor="@drawable/sel_agreement_txt_color"
             app:layout_constraintStart_toEndOf="@id/btn_agreement_terms"
             app:layout_constraintTop_toTopOf="@id/btn_agreement_terms" />
 
@@ -132,19 +136,20 @@
             android:id="@+id/btn_agreement_privacy"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/sel_agreement_selected_agree"
             android:button="@null"
             app:layout_constraintStart_toStartOf="@id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@id/btn_agreement_terms" />
 
         <TextView
+            android:id="@+id/tv_agreement_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/agreement_privacy"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-            android:textColor="@color/gray"
+            android:textColor="@drawable/sel_agreement_txt_color"
             app:layout_constraintStart_toEndOf="@id/btn_agreement_privacy"
             app:layout_constraintTop_toTopOf="@id/btn_agreement_privacy" />
 
@@ -152,20 +157,21 @@
             android:id="@+id/btn_agreement_marketing"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/sel_agreement_selected_agree"
             android:button="@null"
             app:layout_constraintStart_toStartOf="@id/tv_agreement_title"
             app:layout_constraintTop_toBottomOf="@id/btn_agreement_privacy" />
 
         <TextView
+            android:id="@+id/tv_agreement_marketing"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="27dp"
             android:text="@string/agreement_marketing"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-            android:textColor="@color/gray"
+            android:textColor="@drawable/sel_agreement_txt_color"
             app:layout_constraintEnd_toEndOf="@id/divider_agreement"
             app:layout_constraintStart_toEndOf="@id/btn_agreement_marketing"
             app:layout_constraintTop_toTopOf="@id/btn_agreement_marketing" />
