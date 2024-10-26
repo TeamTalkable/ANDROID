@@ -135,7 +135,7 @@
             app:destination="@id/fragment_today_saved" />
         <action
             android:id="@+id/action_talk_to_feedback_pronunciation"
-            app:destination="@id/fragment_feedback_pronunciation" />
+            app:destination="@id/feedbackTabFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_talk_feedback"
@@ -277,4 +277,8 @@
         android:name="com.talkable.presentation.quiz.QuizResultFragment"
         android:label="QuizResultFragment"
         tools:layout="@layout/fragment_quiz_result" />
+    <fragment
+        android:id="@+id/feedbackTabFragment"
+        android:name="com.talkable.presentation.feedback.FeedbackTabFragment"
+        android:label="FeedbackTabFragment" />
 </navigation>

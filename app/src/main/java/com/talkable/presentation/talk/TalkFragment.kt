@@ -160,6 +160,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initTalkNextBtnClickListener()
         includeBottomSheetTalk.visible(true)
         tvTalkHint.visibility = View.INVISIBLE
+        initFeedbackDetailTvClickListener()
     }
 
     private fun initTalkNextBtnClickListener() {

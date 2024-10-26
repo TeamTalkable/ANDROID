@@ -127,7 +127,7 @@
     <string name="tv_my_page_feedback_sort">정렬</string>
     <string name="tv_my_page_feedback_category">카테고리</string>
     <string name="label_feedback_back">이전</string>
-    <string name="label_feedback_to_talk">대화로 돌아가기</string>
+    <string name="label_feedback_to_talk"><u>대화로 돌아가기</u></string>
     <string name="label_feedback_next">다음</string>
 
     <!--challenge-->

@@ -7,9 +7,11 @@ import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key
+import com.talkable.core.util.Key.FEEDBACK_TYPE_PRO
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentTalkFeedbackExpressionBinding
 import com.talkable.presentation.FeedbackTextColor
 import com.talkable.presentation.talk.feedback.TalkFeedbackLearnedAdapter
@@ -34,6 +36,9 @@ class FeedbackExpressionFragment :
     }
 
     override fun initView() {
+        if (arguments?.getString(FEEDBACK_TYPE_PRO) != null) binding.appBarTalkFeedbackExpression.layout.visible(
+            false
+        )
         collect()
         statusBarColorOf(R.color.white)
         initBackBtnClickListener()
@@ -107,6 +112,14 @@ class FeedbackExpressionFragment :
     private fun initBackBtnClickListener() {
         binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    companion object {
+        fun newInstance() = FeedbackExpressionFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(FEEDBACK_TYPE_PRO, FEEDBACK_TYPE_PRO)
+            }
         }
     }
 }

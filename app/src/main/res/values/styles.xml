@@ -13,4 +13,16 @@
         <item name="cornerSizeTopLeft">26dp</item>
         <item name="cornerSizeTopRight">26dp</item>
     </style>
+
+    <style name="Talkable.Icon.Button" parent="Widget.Material3.Button.IconButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="iconTint">@null</item>
+        <item name="rippleColor">@color/white</item>
+    </style>
 </resources>
