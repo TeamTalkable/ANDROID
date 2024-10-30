@@ -36,12 +36,22 @@ class FeedbackExpressionFragment :
     }
 
     override fun initView() {
-        if (arguments?.getString(FEEDBACK_TYPE_PRO) != null) binding.appBarTalkFeedbackExpression.layout.visible(
-            false
-        )
+        if (arguments?.getString(FEEDBACK_TYPE_PRO) != null) setLayoutWithPronunciation()
         collect()
         statusBarColorOf(R.color.white)
         initBackBtnClickListener()
+    }
+
+    private fun setLayoutWithPronunciation() = with(binding) {
+        appBarTalkFeedbackExpression.layout.visible(
+            false
+        )
+        val data = viewModel.expressionFeedback
+        setLayout(data.afterFullAnswer, data.afterAnswerParts)
+        initFeedbackAdapter(createLearnedListWithLabels(data.feedback))
+        tvTalkFeedbackExpressionQuestion.text = viewModel.script.first
+        tvTalkFeedbackExpressionKorean.text = viewModel.script.second
+        layoutTalkFeedbackAnswer.tvTalkFeedbackUserBeforeAnswer.text = viewModel.script.third
     }
 
     private fun collect() {

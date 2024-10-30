@@ -26,6 +26,9 @@ class FeedbackViewModel : ViewModel() {
 
     private val messages = mutableListOf<Message>()
     var feedback = TalkFeedbackModel()
+    var expressionFeedback = FeedbackContainer()
+    var script = Triple("", "", "")
+    var byteArray: ByteArray = byteArrayOf()
 
     private val learnedModule = SerializersModule {
         polymorphic(Learned::class) {
@@ -43,7 +46,7 @@ class FeedbackViewModel : ViewModel() {
         classDiscriminator = "type"
     }
 
-    fun patchGptFeedbacks(answer: String) {
+    fun patchGptFeedbacks(question: Pair<String, String>, answer: String) {
         viewModelScope.launch {
             runCatching {
                 _uiState.value = FeedbackUiState.Loading
@@ -51,7 +54,10 @@ class FeedbackViewModel : ViewModel() {
                     RequestGptDto(
                         model = "gpt-3.5-turbo",
                         maxTokens = 1000,
-                        messages = messages + Message("user", generateRequestContent(answer))
+                        messages = messages + Message(
+                            "user",
+                            generateRequestContent(question.first, answer)
+                        )
                     )
                 )
             }.onSuccess {
@@ -62,6 +68,8 @@ class FeedbackViewModel : ViewModel() {
                 }.onSuccess { data ->
                     updateFeedback(data)
                     _uiState.value = FeedbackUiState.PatchGptFeedbacks(data)
+                    expressionFeedback = data
+                    script = Triple(question.first, question.second, answer)
                 }
                 messages.add(Message(response.role, response.content))
                 Timber.w(messages.toString())
@@ -122,7 +130,7 @@ class FeedbackViewModel : ViewModel() {
         return resultList
     }
 
-    private fun generateRequestContent(userSentence: String): String {
+    private fun generateRequestContent(question: String, userSentence: String): String {
         return """
     Please correct the grammatical and expressive errors in the following sentence: 
     "$userSentence"
@@ -148,7 +156,7 @@ class FeedbackViewModel : ViewModel() {
           }
         ]
       },
-       "nextQuestionEn": "<Generate a follow-up question based on the corrected sentence in English>",
+       "nextQuestionEn": "<Generate a follow-up question based on the corrected sentence in English and before question : $question>",
       "nextQuestionKo": "<next question english in korean>"
     }
     """

@@ -15,6 +15,8 @@ import android.util.Base64
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewTreeObserver
+import android.widget.ImageButton
 import androidx.activity.addCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -111,6 +113,24 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
+        observeTvTalkEnglishTextChanges()
+    }
+
+    private fun observeTvTalkEnglishTextChanges() = with(binding) {
+        tvTalkEnglish.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            private var lastText: String = tvTalkEnglish.text.toString()
+
+            override fun onGlobalLayout() {
+                videoViewTalkBackground.pause()
+                val currentText = tvTalkEnglish.text.toString()
+                if (lastText != currentText) {
+                    lastText = currentText
+                    handleTTSStartState(currentText) // TTS 시작
+                    handleTTSEndState(btnTalkListen) // TTS 종료 상태 처리
+                }
+            }
+        })
     }
 
     private fun blockNavigateToBack() =
@@ -122,6 +142,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
                 when (uiState) {
                     is FeedbackUiState.PatchGptFeedbacks -> {
+                        binding.btnTalkNext.visible(false)
                         binding.groupTalkFeedbackLoading.visible(false)
                         binding.groupTalkFeedback.layout.visible(true)
                         binding.tvTalkFeedbackDetail.visible(true)
@@ -149,6 +170,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun setPronunciationFeedbackLayout(score: Double) = with(binding) {
+        btnTalkSpeak.visible(false)
         groupTalkFeedbackLoading.visible(false)
         groupTalkAi.visible(true)
         groupTalkFeedback.layout.visible(false)
@@ -161,6 +183,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         includeBottomSheetTalk.visible(true)
         tvTalkHint.visibility = View.INVISIBLE
         initFeedbackDetailTvClickListener()
+        videoViewTalkBackground.pause()
+        videoViewTalkBackground.seekTo(1)
     }
 
     private fun initTalkNextBtnClickListener() {
@@ -473,36 +497,50 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 btnFeedbackTalkListen.isSelected = !btnFeedbackTalkListen.isSelected
 
                 if (btnFeedbackTalkListen.isSelected) {
-                    val params = Bundle().apply {
-                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "feedback_tts")
-                    }
-                    tts?.speak(
-                        tvFeedbackTalkSentence.text,
-                        TextToSpeech.QUEUE_FLUSH,
-                        params,
-                        "feedback_tts"
-                    )
-                    tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                        override fun onStart(utteranceId: String) {}
-                        override fun onDone(utteranceId: String) {
-                            if (utteranceId == "feedback_tts") {
-                                requireActivity().runOnUiThread {
-                                    btnFeedbackTalkListen.isSelected = false
-                                }
-                            }
-                        }
-
-                        override fun onError(utteranceId: String) {
-                            requireActivity().runOnUiThread {
-                                Timber.d("피드백 TTS 오류 발생")
-                            }
-                        }
-                    })
+                    handleTTSStartState(binding.tvTalkEnglish.text.toString())
                 } else {
                     tts?.stop()
                 }
+                handleTTSEndState(btnFeedbackTalkListen)
             }
         }
+    }
+
+    private fun handleTTSStartState(text: String) = with(binding) {
+        videoViewTalkBackground.start()
+        val params = Bundle().apply {
+            putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
+        }
+        tts?.speak(
+            text,
+            TextToSpeech.QUEUE_FLUSH,
+            params,
+            "tts1"
+        )
+    }
+
+    private fun handleTTSEndState(button: ImageButton) = with(binding) {
+        // TTS 종료
+        tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+            override fun onStart(utteranceId: String) {}
+            override fun onDone(utteranceId: String) {
+                if (utteranceId == "tts1") {
+                    requireActivity().runOnUiThread {
+                        videoViewTalkBackground.pause()  // 비디오 일시정지
+                        videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
+                        button.isSelected = false  // 버튼 상태 초기화
+                        if (btnTalkSpeak.isVisible)
+                            initSpeakGuide(isFirstAnswer = true)
+                    }
+                }
+            }
+
+            override fun onError(utteranceId: String) {
+                requireActivity().runOnUiThread {
+                    Timber.d("TTS 오류 발생")
+                }
+            }
+        })
     }
 
     private fun initFeedbackTranslateBtnClickListener() {
@@ -547,7 +585,10 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initGetFeedbackBtnClickListener() = with(binding) {
         btnTalkNext.setOnClickListener {
             btnTalkNext.visible(false)
-            viewModel.patchGptFeedbacks(includeLayoutTalkSpeech.etTalkUserSpeech.text.toString())
+            viewModel.patchGptFeedbacks(
+                Pair(nextQuestionEn, nextQuestionKo),
+                includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+            )
         }
     }
 
@@ -591,6 +632,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackDetailTvClickListener()
         initSpeakGuide(isFirstAnswer = false)
         setBtnTalkSpeakVisibility(isVisible = true)
+        initFeedbackAnswerTTS()
+    }
+
+    private fun initFeedbackAnswerTTS() = with(binding.groupTalkFeedback) {
+        ivTalkFeedbackSound.setOnClickListener {
+            ivTalkFeedbackSound.isSelected = !ivTalkFeedbackSound.isSelected
+            handleTTSStartState(tvTalkFeedbackUserAfterAnswer.text.toString())
+            handleTTSEndState(ivTalkFeedbackSound)
+        }
     }
 
     //set feedback text parts color
@@ -607,7 +657,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         binding.tvTalkFeedbackDetail.setOnClickListener {
             when (viewModel.uiState.value) {
                 is FeedbackUiState.PatchGptFeedbacks -> navigateToFeedbackFragment()
-                is FeedbackUiState.PatchPronunciationFeedbacks -> navigateToFeedbackPronunciationFragment()
+                is FeedbackUiState.PatchPronunciationFeedbacks -> {
+                    viewModel.byteArray = byteArray
+                    navigateToFeedbackPronunciationFragment()
+                }
+
                 else -> Unit
             }
         }

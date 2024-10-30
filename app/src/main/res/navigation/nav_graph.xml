@@ -171,16 +171,6 @@
         android:id="@+id/dialog_my_page_feedback"
         android:name="com.talkable.presentation.mypage.feedback.MyFeedbackDialogFragment"
         android:label="MyPageFeedbackDialogFragment" />
-    <fragment
-        android:id="@+id/fragment_feedback_loading"
-        android:name="com.talkable.presentation.feedback.FeedbackLoadingFragment"
-        android:label="FeedbackLoadingFragment"
-        tools:layout="@layout/fragment_feedback_loading">
-        <action
-            android:id="@+id/action_feedback_loading_to_feedback_expression"
-            app:destination="@id/fragment_feedback_expression"
-            app:popUpTo="@id/fragment_talk" />
-    </fragment>
     <dialog
         android:id="@+id/feedbackPronunciationCompleteDialog"
         android:name="com.talkable.presentation.feedback.FeedbackPronunciationCompleteDialog"

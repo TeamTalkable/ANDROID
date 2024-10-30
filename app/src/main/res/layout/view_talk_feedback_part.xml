@@ -69,17 +69,16 @@
             app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_user_after_answer"
             tools:text="@string/dummy" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_talk_feedback_sound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/ic_saved_listen_unselected"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/sel_talk_listen_selected"
             android:visibility="@{isFeedbackDetail ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="@id/bg_talk_feedback_user_after_answer"
-            app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_user_after_answer"
-            app:tint="@color/gray" />
+            app:layout_constraintTop_toTopOf="@id/tv_talk_feedback_user_after_answer" />
 
         <TextView
             android:layout_width="wrap_content"

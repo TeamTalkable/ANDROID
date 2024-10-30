@@ -12,6 +12,7 @@ object Key {
     const val FEEDBACK_QUESTION_EN = "feedbackQuestionEn"
     const val FEEDBACK_QUESTION_KO = "feedbackQuestionKo"
     const val FEEDBACK_TYPE_PRO = "feedbackPro"
+    const val AUDIO = "recorded_audio"
 }
 
 object DialogKey {
