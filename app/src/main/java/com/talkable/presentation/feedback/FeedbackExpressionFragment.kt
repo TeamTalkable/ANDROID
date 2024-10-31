@@ -7,9 +7,11 @@ import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key
+import com.talkable.core.util.Key.FEEDBACK_TYPE_PRO
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentTalkFeedbackExpressionBinding
 import com.talkable.presentation.FeedbackTextColor
 import com.talkable.presentation.talk.feedback.TalkFeedbackLearnedAdapter
@@ -34,9 +36,22 @@ class FeedbackExpressionFragment :
     }
 
     override fun initView() {
+        if (arguments?.getString(FEEDBACK_TYPE_PRO) != null) setLayoutWithPronunciation()
         collect()
         statusBarColorOf(R.color.white)
         initBackBtnClickListener()
+    }
+
+    private fun setLayoutWithPronunciation() = with(binding) {
+        appBarTalkFeedbackExpression.layout.visible(
+            false
+        )
+        val data = viewModel.expressionFeedback
+        setLayout(data.afterFullAnswer, data.afterAnswerParts)
+        initFeedbackAdapter(createLearnedListWithLabels(data.feedback))
+        tvTalkFeedbackExpressionQuestion.text = viewModel.script.first
+        tvTalkFeedbackExpressionKorean.text = viewModel.script.second
+        layoutTalkFeedbackAnswer.tvTalkFeedbackUserBeforeAnswer.text = viewModel.script.third
     }
 
     private fun collect() {
@@ -59,8 +74,8 @@ class FeedbackExpressionFragment :
     private fun setLayout(afterFull: String, afterParts: List<String>) = with(binding) {
         tvTalkFeedbackExpressionQuestion.text = questionEn
         tvTalkFeedbackExpressionKorean.text = questionKo
-        tvTalkFeedbackExpressionBefore.text = beforeAnswer
-        tvTalkFeedbackAfter.text = afterFull
+        layoutTalkFeedbackAnswer.tvTalkFeedbackUserBeforeAnswer.text = beforeAnswer
+        layoutTalkFeedbackAnswer.tvTalkFeedbackUserAfterAnswer.text = afterFull
         setAfterAnswerTextColor(
             afterFull,
             afterParts
@@ -101,12 +116,20 @@ class FeedbackExpressionFragment :
         val spannableString =
             FeedbackTextColor(requireContext()).setAfterAnswerTextColor(fullText, partsText)
 
-        binding.tvTalkFeedbackAfter.text = spannableString
+        binding.layoutTalkFeedbackAnswer.tvTalkFeedbackUserAfterAnswer.text = spannableString
     }
 
     private fun initBackBtnClickListener() {
         binding.appBarTalkFeedbackExpression.ivAppBarBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    companion object {
+        fun newInstance() = FeedbackExpressionFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(FEEDBACK_TYPE_PRO, FEEDBACK_TYPE_PRO)
+            }
         }
     }
 }

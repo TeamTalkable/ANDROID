@@ -1,14 +1,17 @@
 package com.talkable.presentation.review
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key.QUIZ_KEY
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentReviewBinding
 import com.talkable.presentation.mypage.saved.SavedWordAdapter
 import com.talkable.presentation.mypage.saved.model.SavedWordViewModel
+import com.talkable.presentation.quiz.Quiz
 
 class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_review) {
     private lateinit var savedWordAdapter: SavedWordAdapter
@@ -16,6 +19,7 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
 
     override fun initView() {
         statusBarColorOf(R.color.main_2)
+        initNavigateSpellingBtnClickListener()
         initNavigateMeaningBtnClickListener()
         initNavigateFlashcardsBtnClickListener()
         initNavigateAutoBtnClickListener()
@@ -26,14 +30,23 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
         initGetFeedbackList()
     }
 
-    private fun initNavigateMeaningBtnClickListener() {
-        binding.btnReviewMeaning.setOnClickListener {
-            navigateToMeaning()
+    private fun initNavigateSpellingBtnClickListener() {
+        binding.btnReviewSpelling.setOnClickListener {
+            navigateToMeaning(Quiz.SPELLING.title)
         }
     }
 
-    private fun navigateToMeaning() =
-        findNavController().navigate(R.id.action_review_to_quiz_spelling_meaning)
+    private fun initNavigateMeaningBtnClickListener() {
+        binding.btnReviewMeaning.setOnClickListener {
+            navigateToMeaning(Quiz.MEANING.title)
+        }
+    }
+
+    private fun navigateToMeaning(type: Int) =
+        findNavController().navigate(
+            R.id.action_review_to_quiz_spelling_meaning,
+            bundleOf(QUIZ_KEY to type)
+        )
 
     private fun initNavigateFlashcardsBtnClickListener() {
         binding.btnReviewFlashcards.setOnClickListener {

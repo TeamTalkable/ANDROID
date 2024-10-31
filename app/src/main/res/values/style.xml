@@ -56,7 +56,7 @@
     <!--알림 시간 피커-->
     <style name="AlarmNumberPicker">
         <item name="android:textColorPrimary">@color/font</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

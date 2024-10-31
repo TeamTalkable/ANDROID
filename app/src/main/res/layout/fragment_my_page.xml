@@ -239,65 +239,59 @@
                     app:layout_constraintStart_toStartOf="@id/iv_my_page_calendar_guide" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tv_my_page_chart_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="35dp"
-                android:text="@string/tv_my_page_chart_label"
-                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_my_page_calendar" />
-
-            <ImageView
-                android:id="@+id/iv_my_page_navigate_chart_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:padding="20dp"
-                android:src="@drawable/ic_challenge_next"
-                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_chart_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_my_page_chart_label" />
-
-            <TextView
-                android:id="@+id/tv_my_page_chart_recent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="16dp"
-                android:drawablePadding="5dp"
-                android:text="@string/tv_my_page_chart_recent"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-                app:drawableStartCompat="@drawable/ic_my_page_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_label" />
-
-            <TextView
-                android:id="@+id/tv_my_page_chart_before"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:drawablePadding="5dp"
-                android:text="@string/tv_my_page_chart_before"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-                app:drawableStartCompat="@drawable/ic_my_page_indicator"
-                app:drawableTint="@color/gray"
-                app:layout_constraintStart_toStartOf="@id/tv_my_page_chart_recent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_recent" />
-
             <com.talkable.core.view.ChartView
                 android:id="@+id/cv_my_page_chart"
                 setChartPercentage="@{model.chartData}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="60dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_before" />
+                app:layout_constraintTop_toBottomOf="@id/layout_my_page_calendar" />
+
+            <TextView
+                android:id="@+id/iv_my_page_navigate_chart_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/tv_my_page_navigate_chart_detail"
+                android:textAppearance="@style/TextAppearance.Talkable.m_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_chart_recent" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:drawablePadding="5dp"
+                android:text="@string/tv_my_page_chart_recent"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                app:drawableStartCompat="@drawable/ic_my_page_indicator"
+                app:drawableTint="@color/main_1"
+                app:layout_constraintEnd_toStartOf="@id/tv_my_page_chart_before"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_my_page_chart" />
+
+            <TextView
+                android:id="@+id/tv_my_page_chart_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="5dp"
+                android:text="@string/tv_my_page_chart_before"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
+                app:drawableStartCompat="@drawable/ic_my_page_indicator"
+                app:drawableTint="@color/font_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_chart_recent"
+                app:layout_constraintTop_toBottomOf="@id/cv_my_page_chart" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/group_my_page_chart_label"
@@ -351,24 +345,6 @@
                 app:layout_constraintEnd_toEndOf="@id/cv_my_page_chart" />
 
             <TextView
-                android:id="@+id/tv_my_page_navigate_save"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/shape_gray_fill_12_rect"
-                android:backgroundTint="@color/font_5"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="16dp"
-                android:text="@string/tv_my_page_navigate_save"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
-                app:drawableTint="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cv_my_page_chart" />
-
-            <TextView
                 android:id="@+id/tv_my_page_chart_label_empty"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -387,55 +363,13 @@
                 app:layout_constraintStart_toStartOf="@id/cv_my_page_chart"
                 app:layout_constraintTop_toTopOf="@id/cv_my_page_chart" />
 
-            <TextView
-                android:id="@+id/tv_my_page_navigate_feedback"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_gray_fill_12_rect"
-                android:backgroundTint="@color/font_5"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="16dp"
-                android:text="@string/tv_my_page_navigate_feedback"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-                app:drawableEndCompat="@drawable/ic_my_page_my_flower_navigate"
-                app:drawableTint="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_navigate_save" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
-                android:text="@{model.saveCount + `개`}"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-                android:textColor="@color/main"
-                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_navigate_save"
-                app:layout_constraintEnd_toEndOf="@id/tv_my_page_navigate_save"
-                app:layout_constraintTop_toTopOf="@id/tv_my_page_navigate_save"
-                tools:text="17개" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
-                android:text="@{model.feedbackCount + `개`}"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_16"
-                android:textColor="@color/main"
-                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_navigate_feedback"
-                app:layout_constraintEnd_toEndOf="@id/tv_my_page_navigate_feedback"
-                app:layout_constraintTop_toTopOf="@id/tv_my_page_navigate_feedback"
-                tools:text="115개" />
-
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divier_my_page_2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="24dp"
                 app:dividerColor="@color/divide"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_navigate_feedback" />
+                app:layout_constraintTop_toBottomOf="@id/iv_my_page_navigate_chart_detail" />
 
             <TextView
                 android:id="@+id/tv_my_page_setting_label"
@@ -495,20 +429,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/tv_my_page_logout_label"
+                android:text="@string/tv_my_page_setting_tab_label"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_alarm_label" />
-
-            <TextView
-                android:id="@+id/tv_my_page_withdraw_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/tv_my_page_withdraw_label"
-                android:textAppearance="@style/TextAppearance.Talkable.sb_16"
-                app:layout_constraintStart_toStartOf="@id/tv_my_page_setting_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_my_page_logout_label" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

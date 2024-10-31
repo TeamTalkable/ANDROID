@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FeedbackContainer(
-    val afterFullAnswer: String,
-    val afterAnswerParts: List<String>,
-    val feedback: Map<String, List<Learned>>,
-    val nextQuestionEn: String,
-    val nextQuestionKo: String,
+    val afterFullAnswer: String = "",
+    val afterAnswerParts: List<String> = emptyList(),
+    val feedback: Map<String, List<Learned>> = emptyMap(),
+    val nextQuestionEn: String = "",
+    val nextQuestionKo: String = "",
 )
 
 data class FeedbackExpressionModel(

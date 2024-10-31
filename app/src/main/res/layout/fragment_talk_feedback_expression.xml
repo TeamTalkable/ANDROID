@@ -21,7 +21,7 @@
                 layout="@layout/view_talk_feedback_app_bar"
                 app:leftBackIsVisible="@{true}"
                 app:rightBackIsVisible="@{false}"
-                app:title="@{`피드백`}" />
+                app:title="@{`표현/문법 피드백`}" />
 
             <View
                 android:layout_width="0dp"
@@ -32,87 +32,96 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/app_bar_talk_feedback_expression" />
 
+            <View
+                android:id="@+id/bg_talk_feedback_question"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_white_fill_top_br_20_rec"
+                android:elevation="3dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_talk_feedback_expression_korean"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_bar_talk_feedback_expression" />
+
+            <TextView
+                android:id="@+id/tv_talk_feedback_question_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:elevation="3dp"
+                android:text="Q."
+                android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
+                android:textColor="@color/main"
+                app:layout_constraintStart_toStartOf="@id/bg_talk_feedback_question"
+                app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_question" />
+
             <TextView
                 android:id="@+id/tv_talk_feedback_expression_question"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="17dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
-                android:textColor="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/app_bar_talk_feedback_expression"
+                android:layout_marginHorizontal="9dp"
+                android:layout_marginTop="9dp"
+                android:elevation="3dp"
+                android:textAppearance="@style/TextAppearance.Talkable.m_14"
+                app:layout_constraintEnd_toEndOf="@id/bg_talk_feedback_question"
+                app:layout_constraintStart_toEndOf="@id/tv_talk_feedback_question_label"
+                app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_question"
                 tools:text="@string/dummy" />
 
             <TextView
                 android:id="@+id/tv_talk_feedback_expression_korean"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
-                android:textColor="@color/gray"
+                android:layout_marginTop="11dp"
+                android:elevation="3dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
                 app:layout_constraintEnd_toEndOf="@id/tv_talk_feedback_expression_question"
                 app:layout_constraintStart_toStartOf="@id/tv_talk_feedback_expression_question"
-                app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_expression_question" />
-
-            <TextView
-                android:id="@+id/tv_talk_feedback_expression_before"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="22dp"
-                android:layout_marginTop="37dp"
-                android:background="@drawable/shape_gray_fill_12_rect"
-                android:backgroundTint="@color/font_5"
-                android:paddingHorizontal="22dp"
-                android:paddingVertical="14dp"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_expression_question"
                 tools:text="@string/dummy" />
 
-            <ImageView
-                android:id="@+id/iv_talk_feedback_expression_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:src="@drawable/ic_feedback_arrow_down"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_expression_before" />
+            <View
+                android:id="@+id/bg_talk_feedback_answer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="-9dp"
+                android:background="@drawable/shape_white_fill_top_bl_20_rec"
+                android:backgroundTint="@color/white"
+                android:elevation="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/layout_talk_feedback_answer"
+                app:layout_constraintEnd_toEndOf="@id/bg_talk_feedback_question"
+                app:layout_constraintStart_toStartOf="@id/bg_talk_feedback_question"
+                app:layout_constraintTop_toBottomOf="@id/bg_talk_feedback_question" />
 
             <TextView
-                android:id="@+id/tv_talk_feedback_after"
+                android:id="@+id/tv_talk_feedback_answer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:elevation="5dp"
+                android:text="A."
+                android:textAppearance="@style/TextAppearance.Talkable.button_b_18"
+                android:textColor="@color/main"
+                app:layout_constraintStart_toStartOf="@id/bg_talk_feedback_answer"
+                app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_answer" />
+
+            <include
+                android:id="@+id/layout_talk_feedback_answer"
+                layout="@layout/view_talk_feedback_part"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="22dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/shape_gray_fill_12_rect"
-                android:backgroundTint="@color/main_3"
-                android:paddingHorizontal="35dp"
-                android:paddingVertical="27dp"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_b_15"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_talk_feedback_expression_arrow"
-                tools:text="@string/dummy" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/shape_font4_fill_40_rect"
-                android:paddingHorizontal="11dp"
-                android:paddingVertical="2dp"
-                android:text="교정된 문장"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_10"
-                android:textColor="@color/gray_2_56"
-                app:layout_constraintStart_toStartOf="@id/tv_talk_feedback_after"
-                app:layout_constraintTop_toBottomOf="@id/iv_talk_feedback_expression_arrow" />
+                android:layout_marginHorizontal="9dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@id/bg_talk_feedback_answer"
+                app:layout_constraintStart_toEndOf="@id/tv_talk_feedback_answer_label"
+                app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_answer"
+                app:isFeedbackDetail="@{true}" />
 
             <include
                 android:id="@+id/layout_bottom_sheet"
@@ -123,7 +132,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_talk_feedback_after" />
+                app:layout_constraintTop_toBottomOf="@id/bg_talk_feedback_answer" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

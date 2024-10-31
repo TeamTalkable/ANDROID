@@ -30,16 +30,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/dummy" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/iv_item_onboarding"
             imageDrawable="@{model.image}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="75dp"
-            android:elevation="20dp"
-            android:scaleType="centerCrop"
+            android:foregroundGravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1.8"
+            app:layout_constraintDimensionRatio="268:423"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/OnboardingImageCircle"

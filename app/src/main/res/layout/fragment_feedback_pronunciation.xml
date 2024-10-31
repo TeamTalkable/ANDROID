@@ -15,114 +15,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/app_bar_talk_feedback_expression"
-            layout="@layout/view_talk_feedback_app_bar"
-            app:leftBackIsVisible="@{true}"
-            app:rightBackIsVisible="@{false}"
-            app:title="@{`피드백`}" />
+        <View
+            android:id="@+id/bg_feedback_pronunciation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/shape_white_fill_top_bl_20_rec"
+            android:backgroundTint="@color/gray_2_f4"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_feedback_pronunciation_english"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_feedback_pronunciation_english"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="31dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="20dp"
+            android:elevation="8dp"
+            android:paddingBottom="20dp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Talkable.sm_18"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_talk_feedback_expression"
+            app:layout_constraintEnd_toEndOf="@id/bg_feedback_pronunciation"
+            app:layout_constraintStart_toStartOf="@id/bg_feedback_pronunciation"
+            app:layout_constraintTop_toTopOf="@id/bg_feedback_pronunciation"
             tools:text="@string/dummy" />
-
-        <TextView
-            android:id="@+id/tv_feedback_pronunciation_english_small"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingHorizontal="21dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="11dp"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_r_14"
-            android:textColor="@color/gray"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_talk_feedback_expression"
-            tools:text="@string/dummy" />
-
-        <TextView
-            android:id="@+id/tv_feedback_pronunciation_korean"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="23dp"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-            android:textColor="@color/font_2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_english"
-            tools:text="@string/dummy" />
-
-        <TextView
-            android:id="@+id/tv_feedback_pronunciation_english_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="41dp"
-            android:textAppearance="@style/TextAppearance.Talkable.b_24"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@id/tv_feedback_pronunciation_word_korean"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_english_small"
-            tools:text="science" />
-
-        <TextView
-            android:id="@+id/tv_feedback_pronunciation_english_word_pronun"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
-            android:textColor="@color/gray"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@id/tv_feedback_pronunciation_english_word"
-            app:layout_constraintStart_toStartOf="@id/tv_feedback_pronunciation_english_word"
-            app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_english_word"
-            tools:text="[ ˈsaɪəns ]" />
-
-        <TextView
-            android:id="@+id/tv_feedback_pronunciation_word_korean"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginEnd="85dp"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
-            android:textColor="@color/font_2"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/tv_feedback_pronunciation_english_word_pronun"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_feedback_pronunciation_english_word"
-            app:layout_constraintTop_toTopOf="@id/tv_feedback_pronunciation_english_word"
-            tools:text="과학" />
-
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/pb_feedback_pronunciation"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="36dp"
             android:layout_marginBottom="40dp"
             android:progress="80"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
             app:indicatorTrackGapSize="0dp"
-            app:layout_constraintBottom_toTopOf="@id/bnv_feedback_pronunciation"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_english_word_pronun"
+            app:layout_constraintTop_toBottomOf="@id/bg_feedback_pronunciation"
             app:trackColor="@color/eaeaea"
             app:trackCornerRadius="20dp"
             app:trackThickness="8dp" />
@@ -150,40 +84,87 @@
             app:layout_constraintTop_toBottomOf="@id/tv_feedback_pronunciation_accuracy_label"
             tools:text="80%" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider_feedback_pronunciation"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            app:dividerColor="@color/font_5"
-            app:layout_constraintBottom_toTopOf="@id/bnv_feedback_pronunciation" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv_feedback_pronunciation"
-            android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:background="@color/white"
-            app:itemActiveIndicatorStyle="@null"
-            app:itemIconSize="32dp"
-            app:itemRippleColor="@color/white"
-            app:itemTextAppearanceActive="@style/TextAppearance.Talkable.sub_m_12"
-            app:itemTextAppearanceInactive="@style/TextAppearance.Talkable.sub_m_12"
-            app:labelVisibilityMode="unlabeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/iv_feedback_pronunciation_ai"
+            style="@style/Talkable.Icon.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:icon="@drawable/ic_talk_ai_voice"
+            app:iconSize="28dp"
+            app:iconTint="@color/sel_icon"
+            app:layout_constraintEnd_toStartOf="@id/iv_feedback_pronunciation_user"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/menu_feedback" />
+            app:layout_constraintTop_toBottomOf="@id/pb_feedback_pronunciation" />
+
+        <TextView
+            android:id="@+id/tv_feedback_pronunciation_ai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="발음 듣기"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/iv_feedback_pronunciation_ai"
+            app:layout_constraintStart_toStartOf="@id/iv_feedback_pronunciation_ai"
+            app:layout_constraintTop_toBottomOf="@id/iv_feedback_pronunciation_ai" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/iv_feedback_pronunciation_user"
+            style="@style/Talkable.Icon.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_talk_user_voice"
+            app:iconSize="28dp"
+            app:iconTint="@color/sel_icon"
+            app:layout_constraintEnd_toStartOf="@id/iv_feedback_pronunciation_mick"
+            app:layout_constraintStart_toEndOf="@id/iv_feedback_pronunciation_ai"
+            app:layout_constraintTop_toTopOf="@id/iv_feedback_pronunciation_ai" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 발음 듣기"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/tv_feedback_pronunciation_ai"
+            app:layout_constraintEnd_toEndOf="@id/iv_feedback_pronunciation_user"
+            app:layout_constraintStart_toStartOf="@id/iv_feedback_pronunciation_user" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/iv_feedback_pronunciation_mick"
+            style="@style/Talkable.Icon.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_feedback_mick"
+            app:iconSize="28dp"
+            app:iconTint="@color/sel_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_feedback_pronunciation_user"
+            app:layout_constraintTop_toTopOf="@id/iv_feedback_pronunciation_ai" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="다시 해보기"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_12"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/tv_feedback_pronunciation_ai"
+            app:layout_constraintEnd_toEndOf="@id/iv_feedback_pronunciation_mick"
+            app:layout_constraintStart_toStartOf="@id/iv_feedback_pronunciation_mick" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_feedback_pronunciation_mick"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:background="@color/white"
             android:gravity="center"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/bnv_feedback_pronunciation"
-            app:layout_constraintEnd_toEndOf="@id/bnv_feedback_pronunciation"
-            app:layout_constraintStart_toStartOf="@id/bnv_feedback_pronunciation"
-            app:layout_constraintTop_toTopOf="@id/bnv_feedback_pronunciation">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_feedback_pronunciation_ai">
 
             <ImageView
                 android:id="@+id/iv_feedback_pronunciatoin_trash"
@@ -193,13 +174,13 @@
                 android:src="@drawable/ic_feedback_trash"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/gray" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lotti"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_feedback_pronunciation_check"
                 app:layout_constraintStart_toEndOf="@id/iv_feedback_pronunciatoin_trash"
@@ -216,7 +197,8 @@
                 android:src="@drawable/ic_feedback_check"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/gray" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
