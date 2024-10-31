@@ -11,8 +11,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
-import com.talkable.core.util.DialogKey.LOGOUT_DIALOG
-import com.talkable.core.util.DialogKey.WITHDRAW_DIALOG
 import com.talkable.core.util.Key.CHART_KEY
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.visible
@@ -38,7 +36,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         setClickEventOnTabLayout()
         initMyPageCalendarAdapter(getMonthDays(mockData.calendarYear, mockData.calendarMonth))
         initLogoutBtnClickListener()
-        initWithdrawBtnClickListener()
         initAlarmSettingBtnClickListener()
     }
 
@@ -135,7 +132,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun initMyPageCalendarAdapter(item: List<CalendarModel>) {
         with(binding) {
             vpMyPageCalendar.apply {
-                adapter = MyPageCalendarAdapter(requireContext()).apply { submitList(item) }
+                adapter = MyPageCalendarAdapter(requireContext(), onClickDate = { week, date ->
+                    binding.tvMyPageChartRecent.text = week + date.toString()
+                }, vpMyPageCalendar).apply { submitList(item) }
                 offscreenPageLimit = 1
                 post { setCurrentItem(findTodayIndex(item)) }
                 registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -146,7 +145,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                     }
 
                     override fun onPageScrolled(
-                        position: Int, positionOffset: Float, @Px positionOffsetPixels: Int
+                        position: Int, positionOffset: Float, @Px positionOffsetPixels: Int,
                     ) {
                     }
                 })
@@ -242,19 +241,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initLogoutBtnClickListener() {
         binding.tvMyPageLogoutLabel.setOnClickListener {
-            showLogoutDialog()
+            findNavController().navigate(R.id.action_my_page_to_setting)
         }
     }
-
-    private fun showLogoutDialog() = LogoutDialog().show(childFragmentManager, LOGOUT_DIALOG)
-
-    private fun initWithdrawBtnClickListener() {
-        binding.tvMyPageWithdrawLabel.setOnClickListener {
-            showWithdrawDialog()
-        }
-    }
-
-    private fun showWithdrawDialog() = WithdrawDialog().show(childFragmentManager, WITHDRAW_DIALOG)
 
     private fun initAlarmSettingBtnClickListener() {
         binding.tvMyPageAlarmLabel.setOnClickListener {

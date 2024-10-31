@@ -4,24 +4,25 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.talkable.core.view.ItemDiffCallback
 import com.talkable.databinding.ItemMyPageCalendarBinding
 import com.talkable.presentation.mypage.model.CalendarModel
 import com.talkable.presentation.mypage.viewholder.MyPageCalendarViewHolder
 
-class MyPageCalendarAdapter(context: Context) :
+class MyPageCalendarAdapter(context: Context, private val onClickDate: (String, Int) -> Unit,  private val viewPager: ViewPager2) :
     ListAdapter<CalendarModel, MyPageCalendarViewHolder>(
-        calendarDiffCallback
+        calendarDiffCallback,
     ) {
     private val inflater by lazy { LayoutInflater.from(context) }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): MyPageCalendarViewHolder {
         val binding =
             ItemMyPageCalendarBinding.inflate(inflater, parent, false)
-        return MyPageCalendarViewHolder(binding)
+        return MyPageCalendarViewHolder(binding, onClickDate, viewPager, itemCount)
     }
 
     override fun onBindViewHolder(holder: MyPageCalendarViewHolder, position: Int) {

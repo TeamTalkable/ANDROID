@@ -78,10 +78,8 @@
             android:id="@+id/action_fragment_my_page_to_saved"
             app:destination="@id/fragment_saved" />
         <action
-            android:id="@+id/action_my_page_to_login"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/fragment_home"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_my_page_to_setting"
+            app:destination="@id/myPageSettingFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_challenge"
@@ -271,4 +269,14 @@
         android:id="@+id/feedbackTabFragment"
         android:name="com.talkable.presentation.feedback.FeedbackTabFragment"
         android:label="FeedbackTabFragment" />
+    <fragment
+        android:id="@+id/myPageSettingFragment"
+        android:name="com.talkable.presentation.mypage.MyPageSettingFragment"
+        android:label="MyPageSettingFragment">
+        <action
+            android:id="@+id/action_my_page_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/fragment_home"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

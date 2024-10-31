@@ -78,10 +78,11 @@
     <string name="tv_my_page_alarm_divide">|</string>
     <string name="tv_my_page_logout_label">로그아웃</string>
     <string name="tv_my_page_withdraw_label">회원탈퇴</string>
+    <string name="tv_my_page_setting_tab_label">환경설정</string>
     <string name="tv_my_page_my_flower">My Flower</string>
     <string name="tv_my_page_chart_label">📈 내 실력차트</string>
     <string name="tv_my_page_chart_recent">최근학습</string>
-    <string name="tv_my_page_chart_before">이전학습</string>
+    <string name="tv_my_page_chart_before">직전학습</string>
     <string name="tv_my_page_navigate_save">저장 목록</string>
     <string name="tv_my_page_navigate_feedback">피드백</string>
     <string name="tv_my_page_chart_label_grammar">문법</string>
@@ -99,6 +100,7 @@
     <string name="tv_withdraw_description">기록이 모두 삭제되며,\n다시 복구할 수 없습니다.</string>
     <string name="btn_withdraw_yes">탈퇴</string>
     <string name="btn_withdraw_no">취소</string>
+    <string name="tv_my_page_navigate_chart_detail"><u>자세한 분석보기</u></string>
 
     <!--saved-->
     <string name="tv_saved_syntax">구문</string>
