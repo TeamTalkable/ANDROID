@@ -85,6 +85,7 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
 
     private fun initBackNavigationIconClickListener() {
         binding.layoutQuizAutoAppbar.toolbarQuiz.setNavigationOnClickListener {
+            blockFlashAutoHandleCallback()
             navigateToBack()
         }
     }
