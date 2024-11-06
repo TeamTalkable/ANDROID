@@ -283,7 +283,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun startVideoAndTTS() = with(binding) {
         Handler(Looper.getMainLooper()).postDelayed({
             handleTTSStartState(tvTalkEnglish.text.toString())
-            videoViewTalkBackground.start()
         }, 200)
 
         handleTTSEndState(btnTalkListen)
