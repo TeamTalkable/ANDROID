@@ -274,9 +274,19 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts?.language = Locale.US
+            startVideoAndTTS()
         } else {
             Timber.d("TTS 초기화 실패")
         }
+    }
+
+    private fun startVideoAndTTS() = with(binding) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            handleTTSStartState(tvTalkEnglish.text.toString())
+            videoViewTalkBackground.start()
+        }, 200)
+
+        handleTTSEndState(btnTalkListen)
     }
 
     // 음성 녹음 시작
