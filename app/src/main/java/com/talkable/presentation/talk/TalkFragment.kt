@@ -274,9 +274,47 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts?.language = Locale.US
+            setRandomVideo()
+            startVideoAndTTS()
         } else {
             Timber.d("TTS 초기화 실패")
         }
+    }
+
+    private fun startVideoAndTTS() = with(binding) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            videoViewTalkBackground.start()
+            val params = Bundle().apply {
+                putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
+            }
+
+            tts?.speak(
+                tvTalkEnglish.text.toString(),
+                TextToSpeech.QUEUE_FLUSH,
+                params,
+                "tts1"
+            )
+        }, 200)
+
+        tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+            override fun onStart(utteranceId: String) {}
+            override fun onDone(utteranceId: String) {
+                if (utteranceId == "tts1") {
+                    requireActivity().runOnUiThread {
+                        videoViewTalkBackground.pause()  // 비디오 일시정지
+                        videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
+                        btnTalkListen.isSelected = false  // 버튼 상태 초기화
+                        initSpeakGuide(isFirstAnswer = true)
+                    }
+                }
+            }
+
+            override fun onError(utteranceId: String) {
+                requireActivity().runOnUiThread {
+                    Timber.d("TTS 오류 발생")
+                }
+            }
+        })
     }
 
     // 음성 녹음 시작
