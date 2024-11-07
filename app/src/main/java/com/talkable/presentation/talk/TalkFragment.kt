@@ -274,9 +274,18 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts?.language = Locale.US
+            startVideoAndTTS()
         } else {
             Timber.d("TTS 초기화 실패")
         }
+    }
+
+    private fun startVideoAndTTS() = with(binding) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            handleTTSStartState(tvTalkEnglish.text.toString())
+        }, 200)
+
+        handleTTSEndState(btnTalkListen)
     }
 
     // 음성 녹음 시작
@@ -363,44 +372,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 btnTalkListen.isSelected = !btnTalkListen.isSelected
 
                 if (btnTalkListen.isSelected) {
-                    videoViewTalkBackground.start()
-
-                    // TTS 시작
-                    val params = Bundle().apply {
-                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts1")
-                    }
-                    tts?.speak(
-                        binding.tvTalkEnglish.text.toString(),
-                        TextToSpeech.QUEUE_FLUSH,
-                        params,
-                        "tts1"
-                    )
+                    handleTTSStartState(binding.tvTalkEnglish.text.toString())
                 } else {
-                    // 비디오 중지
-                    videoViewTalkBackground.pause()
-                    videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아감
+                    tts?.stop()
                 }
-
-                // TTS 종료
-                tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                    override fun onStart(utteranceId: String) {}
-                    override fun onDone(utteranceId: String) {
-                        if (utteranceId == "tts1") {
-                            requireActivity().runOnUiThread {
-                                videoViewTalkBackground.pause()  // 비디오 일시정지
-                                videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
-                                btnTalkListen.isSelected = false  // 버튼 상태 초기화
-                                initSpeakGuide(isFirstAnswer = true)
-                            }
-                        }
-                    }
-
-                    override fun onError(utteranceId: String) {
-                        requireActivity().runOnUiThread {
-                            Timber.d("TTS 오류 발생")
-                        }
-                    }
-                })
+                handleTTSEndState(btnTalkListen)
             }
         }
     }
