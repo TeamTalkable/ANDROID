@@ -46,7 +46,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
-                android:text="@{model.userNickName}"
                 android:textAppearance="@style/TextAppearance.Talkable.sb_16"
                 app:layout_constraintBottom_toBottomOf="@id/iv_my_page_profile_image"
                 app:layout_constraintStart_toEndOf="@id/iv_my_page_profile_image"

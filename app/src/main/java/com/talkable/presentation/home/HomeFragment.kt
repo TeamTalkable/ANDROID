@@ -5,12 +5,14 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.visible
+import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentHomeBinding
 import com.talkable.presentation.quiz.TodayQuizDialog
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun initView() {
         statusBarColorOf(R.color.white)
+        binding.tvHomeUserName.text = "${SharedManager.getNickname()}님,"
         initQuizBtnClickListener()
         initViewPagerAdapter()
         initStartBtnClickListener()
