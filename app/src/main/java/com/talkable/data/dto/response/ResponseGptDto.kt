@@ -2,6 +2,7 @@ package com.talkable.data.dto.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
 
 @Serializable
 data class ResponseGptDto(
@@ -30,7 +31,7 @@ data class Choice(
     @SerialName("finish_reason")
     val finishReason: String,
     @SerialName("logprobs")
-    val logprobs: Unit? = null,
+    val logprobs: JsonObject? = null,
 )
 
 @Serializable
@@ -40,9 +41,8 @@ data class Message(
     @SerialName("content")
     val content: String,
     @SerialName("refusal")
-    val refusal: Unit? = null,
-
-    )
+    val refusal: JsonObject? = null,
+)
 
 @Serializable
 data class Usage(
@@ -62,10 +62,18 @@ data class Usage(
 data class Token(
     @SerialName("reasoning_tokens")
     val totalTokens: Int? = null,
+    @SerialName("audio_tokens")
+    val audioTokens: Int? = null,
+    @SerialName("accepted_prediction_tokens")
+    val acceptedTokens: Int? = null,
+    @SerialName("rejected_prediction_tokens")
+    val rejectedTokens: Int? = null,
 )
 
 @Serializable
 data class PromptToken(
     @SerialName("cached_tokens")
     val cachedTokens: Int? = null,
+    @SerialName("audio_tokens")
+    val audioTokens: Int? = null,
 )

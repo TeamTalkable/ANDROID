@@ -3,12 +3,14 @@ package com.talkable
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
 import com.talkable.BuildConfig.NATIVE_APP_KEY
+import com.talkable.data.SharedManager
 import timber.log.Timber
 
 class TalkableApp : Application() {
     override fun onCreate() {
         super.onCreate()
         setTimber()
+        SharedManager.init(this)
 
         // Kakao SDK 초기화
         KakaoSdk.init(this, NATIVE_APP_KEY)

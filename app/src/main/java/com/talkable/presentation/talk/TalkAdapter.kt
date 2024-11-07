@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.core.view.ItemDiffCallback
+import com.talkable.data.dto.request.Message
 import com.talkable.databinding.ItemTalkAiBinding
 import com.talkable.databinding.ItemTalkUserBinding
 
-class TalkAdapter : ListAdapter<TalkData, RecyclerView.ViewHolder>(TalkAdapterDiffCallback) {
+class TalkAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(TalkAdapterDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_AI -> ItemTalkAiBinding.inflate(
@@ -37,7 +38,7 @@ class TalkAdapter : ListAdapter<TalkData, RecyclerView.ViewHolder>(TalkAdapterDi
 
     override fun getItemViewType(position: Int): Int {
         val talkData = getItem(position)
-        return if (talkData.type == "ai") {
+        return if (talkData.role == "ai") {
             VIEW_TYPE_AI
         } else {
             VIEW_TYPE_USER
@@ -48,8 +49,8 @@ class TalkAdapter : ListAdapter<TalkData, RecyclerView.ViewHolder>(TalkAdapterDi
         const val VIEW_TYPE_AI = 0
         const val VIEW_TYPE_USER = 1
 
-        private val TalkAdapterDiffCallback = ItemDiffCallback<TalkData>(
-            onItemsTheSame = { old, new -> old.type == new.type },
+        private val TalkAdapterDiffCallback = ItemDiffCallback<Message>(
+            onItemsTheSame = { old, new -> old.role == new.role },
             onContentsTheSame = { old, new -> old == new }
         )
     }

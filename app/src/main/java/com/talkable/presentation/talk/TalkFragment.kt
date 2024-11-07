@@ -163,6 +163,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
                     is FeedbackUiState.Loading -> setVisibleFeedbackLoading(true)
 
+                    is FeedbackUiState.Error -> toast("음성 인식 실패")
+
                     else -> Unit
                 }
             }
@@ -347,9 +349,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 setNextQuestionText((viewModel.uiState.value as FeedbackUiState.PatchGptFeedbacks).data)
                 tvTalkHint.visibility = View.INVISIBLE
                 btnTalkSpeak.visible(true)
-                tvTalkPronunciation.visible(true)
                 tvTalkPronunciation.text = script
-                initCheckPronunciationBtnClickListener(script)
+                if (script.isNotEmpty()) {
+                    tvTalkPronunciation.visible(true)
+                    initCheckPronunciationBtnClickListener(script)
+                } else toast("녹음을 다시 해주세요")
             }
 
             else -> Unit
@@ -538,7 +542,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     private fun initAppbarCancelClickListener() {
         binding.btnTalkClose.setOnClickListener {
-            viewModel.setEmptyState()
+            viewModel.postFeedback()
             navigateToTotalTalkFeedback()
         }
     }
@@ -659,7 +663,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         binding.layoutBottomSheetTalk.rvBottomSheet.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = TalkAdapter().apply {
-                submitList(talkMockData.toMutableList())
+                submitList(viewModel.messages)
             }
         }
     }
@@ -841,23 +845,5 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         const val RECORD_AUDIO_PERMISSION_CODE = 100
         const val TALK_DIALOG = "talkDialog"
         const val MAX_GUIDE_CLICK = 2
-
-        // 더미 데이터
-        val talkMockData = listOf(
-            TalkData(type = "ai", message = "What did you do today in scool?"),
-            TalkData(type = "user", message = "I took a science class today."),
-            TalkData(type = "ai", message = "What did you learn today?"),
-            TalkData(type = "user", message = "I learn about photosynthesis."),
-            TalkData(type = "ai", message = "What did you do today in scool?"),
-            TalkData(type = "user", message = "I took a science class today."),
-            TalkData(type = "ai", message = "What did you learn today?"),
-            TalkData(type = "user", message = "I took a science class today."),
-            TalkData(type = "ai", message = "What did you learn today?"),
-            TalkData(type = "user", message = "I learn about photosynthesis."),
-            TalkData(type = "ai", message = "What did you do today in scool?"),
-            TalkData(type = "user", message = "I took a science class today."),
-            TalkData(type = "ai", message = "What did you learn today?"),
-            TalkData(type = "user", message = "I learn about photosynthesis."),
-        )
     }
 }

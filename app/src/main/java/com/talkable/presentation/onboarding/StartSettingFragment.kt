@@ -11,6 +11,7 @@ import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.colorOf
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentStartSettingBinding
 import com.talkable.presentation.onboarding.model.User
 
@@ -23,7 +24,8 @@ class StartSettingFragment :
     }
 
     private fun setNameTextColor() {
-        binding.tvStartSettingTitle.text = getSpannableText(mockData.name)
+        val nickname = SharedManager.getNickname().toString()
+        binding.tvStartSettingTitle.text = getSpannableText(nickname)
     }
 
     private fun getSpannableText(
