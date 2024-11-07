@@ -61,6 +61,7 @@ class FeedbackViewModel : ViewModel() {
                     )
                 )
             }.onSuccess {
+                messages.add(Message("ai", question.first))
                 messages.add(Message("user", answer))
                 val response = it.choices.first().message
                 runCatching {
@@ -71,7 +72,6 @@ class FeedbackViewModel : ViewModel() {
                     expressionFeedback = data
                     script = Triple(question.first, question.second, answer)
                 }
-                messages.add(Message(response.role, response.content))
                 Timber.w(messages.toString())
             }.onFailure {
                 _uiState.value = FeedbackUiState.Error(it.message.toString())
