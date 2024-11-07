@@ -11,6 +11,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.DialogKey
+import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentSettingAlarmBinding
 import com.talkable.presentation.onboarding.StartSettingFragment.Companion.mockData
 import timber.log.Timber
@@ -54,6 +55,7 @@ class AlarmSettingFragment :
 
     private fun initCompleteBtnClickListener() {
         binding.btnSettingAlarm.setOnClickListener {
+            SharedManager.saveIsLogin(true)
             navigateToHomeFragment()
         }
     }

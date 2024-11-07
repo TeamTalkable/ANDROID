@@ -24,7 +24,7 @@ class FeedbackViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<FeedbackUiState>(FeedbackUiState.Empty)
     val uiState = _uiState.asStateFlow()
 
-    private val messages = mutableListOf<Message>()
+    val messages = mutableListOf<Message>()
     var feedback = TalkFeedbackModel()
     var expressionFeedback = FeedbackContainer()
     var script = Triple("", "", "")
@@ -85,6 +85,7 @@ class FeedbackViewModel : ViewModel() {
         FirebaseFactory.feedbackRef.child("learnedExpression").setValue(feedback.learnedExpression)
         FirebaseFactory.feedbackRef.child("learnedGrammar").setValue(feedback.learnedGrammar)
         feedback = TalkFeedbackModel()
+        _uiState.value = FeedbackUiState.Empty
     }
 
     private fun updateFeedback(data: FeedbackContainer) {

@@ -10,7 +10,6 @@ import android.speech.tts.UtteranceProgressListener
 import android.util.Base64
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
-import androidx.navigation.fragment.findNavController
 import com.google.api.gax.core.FixedCredentialsProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.speech.v1.RecognitionAudio
@@ -23,6 +22,7 @@ import com.google.cloud.speech.v1.SpeechSettings
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.toast
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.core.view.visible
@@ -211,9 +211,14 @@ class FeedbackPronunciationFragment :
     private fun initRecordCheckClickListener() {
         binding.ivFeedbackPronunciationCheck.setOnClickListener {
             stopVoiceRecorder()
-            viewModel.patchPronunciationEvaluation(transcription, base64AudioData)
-            FeedbackPronunciationCompleteDialog().show(childFragmentManager, PRONUNCIATION_DIALOG)
-            binding.layoutFeedbackPronunciationMick.visible(false)
+            if (transcription.isNotEmpty()) {
+                viewModel.patchPronunciationEvaluation(transcription, base64AudioData)
+                FeedbackPronunciationCompleteDialog().show(
+                    childFragmentManager,
+                    PRONUNCIATION_DIALOG
+                )
+                binding.layoutFeedbackPronunciationMick.visible(false)
+            } else toast("녹음을 다시 해주세요")
         }
     }
 
