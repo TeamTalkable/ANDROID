@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.talkable.R
 import com.talkable.core.base.BindingActivity
+import com.talkable.data.SharedManager
 import com.talkable.databinding.ActivityMainBinding
 
 var firstTalk = true
@@ -24,7 +25,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             setupWithNavController(navController)
             itemIconTintList = null
         }
-
+        if (!SharedManager.checkLogin()) navController.navigate(R.id.onboardingFragment)
         setBottomNaviVisible(navController)
     }
 

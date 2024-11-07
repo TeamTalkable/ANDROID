@@ -14,6 +14,7 @@ import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key.CHART_KEY
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.visible
+import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentMyPageBinding
 import com.talkable.presentation.mypage.model.BarChart
 import com.talkable.presentation.mypage.model.CalendarModel
@@ -29,6 +30,7 @@ import java.util.Random
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun initView() {
         binding.switchMyPageAlarm.isChecked = true
+        binding.tvMyPageProfileNickname.text = SharedManager.getNickname()
         statusBarColorOf(R.color.white)
         binding.model = mockData
         initMyFlowerBtnClickListener()

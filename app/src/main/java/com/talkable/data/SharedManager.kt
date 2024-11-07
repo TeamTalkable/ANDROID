@@ -25,7 +25,7 @@ object SharedManager {
         return sharedPreferences.getString(NICKNAME, null)
     }
 
-    fun getBoolean(): Boolean {
+    fun checkLogin(): Boolean {
         return sharedPreferences.getBoolean(AUTO_LOGIN, false)
     }
 }
