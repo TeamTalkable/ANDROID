@@ -12,10 +12,13 @@ import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.BottomSheetKey.QUIZ_AUTO_SPEED
 import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.core.view.setOnDuplicateBlockClick
 import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentQuizAutoBinding
 import com.talkable.presentation.quiz.QuizFlashFragment.Companion.mockLong
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 //TODO:나중에 REFATOR
 class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragment_quiz_auto) {
@@ -86,7 +89,10 @@ class QuizAutoFragment : BindingFragment<FragmentQuizAutoBinding>(R.layout.fragm
     private fun initBackNavigationIconClickListener() {
         binding.layoutQuizAutoAppbar.toolbarQuiz.setNavigationOnClickListener {
             blockFlashAutoHandleCallback()
-            navigateToBack()
+            viewLifeCycleScope.launch {
+                delay(500)
+                navigateToBack()
+            }
         }
     }
 
