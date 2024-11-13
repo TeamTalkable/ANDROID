@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class TalkFeedbackModel(
     val talkFeedbackId: Int = 0,
     val talkTime: String = "",
+    val talkDate: String = "",
     val flowerImage: String = "",
     val remainTime: String = "",
     val learnedExpression: MutableList<Learned.Expression> = mutableListOf(),
