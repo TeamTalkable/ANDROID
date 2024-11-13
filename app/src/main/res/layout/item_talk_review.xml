@@ -30,9 +30,9 @@
             android:id="@+id/tv_talk_review_time_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="대화 시간"
-            android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:layout_marginStart="8dp"
+            android:text="@string/tv_talk_review_time_label"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_16"
             android:textColor="@color/font_3"
             app:layout_constraintBottom_toBottomOf="@id/iv_talk_review_time"
             app:layout_constraintStart_toEndOf="@id/iv_talk_review_time"
@@ -49,5 +49,17 @@
             app:layout_constraintStart_toEndOf="@id/tv_talk_review_time_label"
             app:layout_constraintTop_toTopOf="@id/tv_talk_review_time_label"
             tools:text="10M" />
+
+        <TextView
+            android:id="@+id/tv_talk_review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:text="@{model.talkDate}"
+            android:textAppearance="@style/TextAppearance.Talkable.sub_r_10"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/iv_talk_review_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_talk_review_time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
