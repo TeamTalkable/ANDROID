@@ -41,7 +41,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_talk_saved_count"
                 style="@style/TalkReviewButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="28dp"
@@ -53,7 +53,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_talk_feedback_count"
                 style="@style/TalkReviewButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="20dp"
