@@ -78,6 +78,11 @@
         <item name="android:textSize">15dp</item>
     </style>
 
+    <style name="TextAppearance.Talkable.sb_14">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
     <style name="TextAppearance.Talkable.sb_16">
         <item name="fontFamily">@font/font_pretendard_semibold</item>
         <item name="android:textSize">16dp</item>
