@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 class TalkReviewFragment :
     BindingFragment<FragmentTalkReviewBinding>(R.layout.fragment_talk_review) {
-
+    private lateinit var reviewTopAdapter: TalkReviewTopAdapter
     private lateinit var feedbackLearnedAdapter: TalkFeedbackLearnedAdapter
 
     private val viewModel: FinalTalkFeedbackViewModel by viewModels({ activity as AppCompatActivity })
@@ -43,8 +43,9 @@ class TalkReviewFragment :
             viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
                 when (uiState) {
                     is FinalFeedbackUiState.Success -> {
+                        initReviewTopAdapter(uiState.data)
                         initFeedbackLearnedAdapter(uiState.data)
-                        setFeedbackAdapter(uiState.data)
+                        setFeedbackAdapters(uiState.data)
                         setFeedbackCount(calculateFeedbackCount(uiState.data))
                     }
 
@@ -52,6 +53,12 @@ class TalkReviewFragment :
                 }
             }
         }
+    }
+
+    private fun initReviewTopAdapter(data: TalkFeedbackModel) {
+        reviewTopAdapter = TalkReviewTopAdapter(
+            context = requireContext()
+        ).apply { submitList(listOf(data)) }
     }
 
     private fun initFeedbackLearnedAdapter(data: TalkFeedbackModel) {
@@ -93,8 +100,11 @@ class TalkReviewFragment :
         )
     }
 
-    private fun setFeedbackAdapter(data: TalkFeedbackModel) {
-        binding.rvTalkFeedback.adapter = ConcatAdapter(feedbackLearnedAdapter)
+    private fun setFeedbackAdapters(data: TalkFeedbackModel) {
+        if (::reviewTopAdapter.isInitialized && ::feedbackLearnedAdapter.isInitialized) {
+            binding.rvTalkFeedback.adapter =
+                ConcatAdapter(reviewTopAdapter, feedbackLearnedAdapter)
+        }
         setRecyclerviewItemDecoration(data)
     }
 
