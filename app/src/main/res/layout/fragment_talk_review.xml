@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.talkable.presentation.talk.feedback.model.TalkFeedbackModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="122dp">
+
+            <include
+                android:id="@+id/appbar_talk_review"
+                layout="@layout/view_review_app_bar"
+                app:title="@{`복습하기`}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_talk_feedback"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="18dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar_talk_review"
+                tools:listitem="@layout/item_talk_review" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_talk_saved_count"
+                style="@style/TalkReviewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/tv_home_learning_storage"
+                app:layout_constraintEnd_toStartOf="@id/btn_talk_feedback_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_talk_feedback" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_talk_feedback_count"
+                style="@style/TalkReviewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/tv_home_learning_feedback"
+                app:layout_constraintBottom_toBottomOf="@id/btn_talk_saved_count"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_talk_saved_count"
+                app:layout_constraintTop_toTopOf="@id/btn_talk_saved_count" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
