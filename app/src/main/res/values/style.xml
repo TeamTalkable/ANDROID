@@ -70,4 +70,14 @@
         <item name="android:background">@drawable/shape_white_fill_12_rect</item>
         <item name="android:textAppearance">@style/TextAppearance.Talkable.m_16</item>
     </style>
+
+    <!--복습하기 버튼-->
+    <style name="TalkReviewButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textAppearance">@style/TextAppearance.Talkable.sb_14</item>
+        <item name="android:background">@drawable/shape_font4_fill_40_rect</item>
+        <item name="backgroundTint">@color/main_1</item>
+        <item name="android:textColor">@color/font_3</item>
+        <item name="android:paddingHorizontal">38dp</item>
+        <item name="android:paddingVertical">18dp</item>
+    </style>
 </resources>

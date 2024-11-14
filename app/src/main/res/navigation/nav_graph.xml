@@ -33,6 +33,19 @@
         <action
             android:id="@+id/action_fragment_home_to_fragment_talk"
             app:destination="@id/fragment_talk" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_talk_review"
+            app:destination="@id/fragment_talk_review" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_talk_review"
+        android:name="com.talkable.presentation.home.TalkReviewFragment"
+        android:label="FeedbackReviewFragment"
+        tools:layout="@layout/fragment_talk_review">
+        <action
+            android:id="@+id/action_fragment_talk_review_to_today_saved"
+            app:destination="@id/fragment_today_saved"
+            app:popUpTo="@id/fragment_today_saved"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_review"

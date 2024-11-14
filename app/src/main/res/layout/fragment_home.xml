@@ -119,7 +119,7 @@
                 app:layout_constraintTop_toBottomOf="@id/card_view_home_main" />
 
             <include
-                android:id="@+id/include_layout_talk_guide"
+                android:id="@+id/include_talk_calendar"
                 layout="@layout/item_home_calendar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                 app:layout_constraintDimensionRatio="158:47"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/include_layout_talk_guide" />
+                app:layout_constraintTop_toBottomOf="@id/include_talk_calendar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
