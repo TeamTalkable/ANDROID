@@ -17,6 +17,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         initViewPagerAdapter()
         initStartBtnClickListener()
         setLearningTextView()
+        initTalkReviewBtnClickListener()
     }
 
     private fun initQuizBtnClickListener() {
@@ -27,7 +28,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun setLearningTextView() {
-        with(binding.includeLayoutTalkGuide) {
+        with(binding.includeTalkCalendar) {
             tvHomeLearningTime.text = getString(R.string.tv_home_learning_time, 20)
             tvHomeLearningStorage.text = getString(R.string.tv_home_learning_storage, 5)
             tvHomeLearningFeedback.text = getString(R.string.tv_home_learning_feedback, 3)
@@ -37,6 +38,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun initStartBtnClickListener() {
         binding.btnHomeTalkStart.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_home_to_fragment_talk)
+        }
+    }
+
+    private fun initTalkReviewBtnClickListener() {
+        binding.includeTalkCalendar.btnHomeLearningReview.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_home_to_fragment_talk_review)
         }
     }
 

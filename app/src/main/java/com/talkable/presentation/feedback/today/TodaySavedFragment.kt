@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.util.Key.SAVED_TAB_INDEX
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.databinding.FragmentTodaySavedBinding
 
@@ -16,6 +17,7 @@ class TodaySavedFragment :
         initSetToolbarColor()
         initBackBtnClickListener()
         initMyFeedbackViewPagerAdapter()
+        setInitialTab(getSelectedTabIndex())
     }
 
     private fun initSetToolbarColor() {
@@ -37,5 +39,18 @@ class TodaySavedFragment :
         TabLayoutMediator(binding.tlTodaySaved, binding.vpTodaySaved) { tab, position ->
             tab.text = TodaySavedCategory.values()[position].label
         }.attach()
+    }
+
+    private fun setInitialTab(selectedTabIndex: Int) {
+        binding.vpTodaySaved.setCurrentItem(selectedTabIndex, false)
+    }
+
+    private fun getSelectedTabIndex(): Int {
+        return arguments?.getInt(SAVED_TAB_INDEX) ?: FEEDBACK_TAB_FEEDBACK
+    }
+
+    companion object {
+        const val FEEDBACK_TAB_SAVED = 0
+        const val FEEDBACK_TAB_FEEDBACK = 1
     }
 }

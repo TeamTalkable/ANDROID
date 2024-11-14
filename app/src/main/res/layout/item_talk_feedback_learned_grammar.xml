@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
-        android:background="@color/white"
+        android:background="@drawable/shape_gray2_fill_top_12_rec"
         android:backgroundTint="@color/white"
         android:paddingBottom="24dp">
 
