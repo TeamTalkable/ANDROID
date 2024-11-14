@@ -2,7 +2,6 @@ package com.talkable.presentation.talk
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -21,7 +20,6 @@ import androidx.activity.addCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -183,7 +181,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         btnTalkNext.visible(true)
         initTalkNextBtnClickListener()
         includeBottomSheetTalk.visible(true)
-        tvTalkHint.visibility = View.INVISIBLE
         initFeedbackDetailTvClickListener()
         videoViewTalkBackground.pause()
         videoViewTalkBackground.seekTo(1)
@@ -347,7 +344,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         when (viewModel.uiState.value) {
             is FeedbackUiState.PatchGptFeedbacks -> {
                 setNextQuestionText((viewModel.uiState.value as FeedbackUiState.PatchGptFeedbacks).data)
-                tvTalkHint.visibility = View.INVISIBLE
                 btnTalkSpeak.visible(true)
                 tvTalkPronunciation.text = script
                 if (script.isNotEmpty()) {
@@ -592,7 +588,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     private fun setBtnTalkSpeakVisibility(isVisible: Boolean) = with(binding) {
         btnTalkSpeak.isVisible = isVisible
-        tvTalkHint.isInvisible = !isVisible
     }
 
     private fun navigateToSavedFeedback() =
@@ -767,6 +762,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             is FeedbackUiState.Empty -> {
                 includeBottomSheetTalk.isVisible = false
                 includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
+                TalkHintDialog().dismiss()
             }
 
             else -> Unit
@@ -810,34 +806,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     // 힌트 클릭
     private fun initHintTextViewClickListener() {
         with(binding) {
-            tvTalkHint.setOnClickListener {
-                when (clickCount) {
-                    FIRST_CLICK -> {
-                        HintToast.createToast(
-                            requireActivity(),
-                            getString(R.string.hint_talk),
-                            getString(R.string.tv_talk_content_hint)
-                        )?.show()
-                        changeHintText()
-                    }
-
-                    else -> {
-                        includeTalkToastExample.viewTalkToastExample.visibility = VISIBLE
-                    }
+            btnTalkHelp.setOnClickListener {
+                if (btnTalkSpeak.isVisible) {
+                    TalkHintDialog().show(childFragmentManager, "TalkHintDialog")
                 }
-                clickCount++
             }
         }
-    }
-
-    //2초 뒤 텍스트 변경
-    private fun changeHintText() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            with(binding) {
-                tvTalkHint.paintFlags = Paint.UNDERLINE_TEXT_FLAG // 밑줄
-                tvTalkHint.text = getString(R.string.hint_talk_example)
-            }
-        }, 2000)
     }
 
     companion object {
