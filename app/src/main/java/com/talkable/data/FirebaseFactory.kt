@@ -7,7 +7,8 @@ import com.talkable.data.FirebaseKey.TALK_FEEDBACK
 
 object FirebaseFactory {
     private val db = Firebase.database
-    val feedbackRef = db.getReference(TALK_FEEDBACK)
+    private val ref = db.getReference("0")
+    val feedbackRef = ref.child(TALK_FEEDBACK)
 }
 
 object FirebaseKey {

@@ -2,6 +2,7 @@ package com.talkable.presentation.feedback
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.talkable.core.type.RoleType
 import com.talkable.data.FirebaseFactory
 import com.talkable.data.ServicePool
 import com.talkable.data.dto.request.Argument
@@ -11,6 +12,7 @@ import com.talkable.data.dto.request.RequestPronunciationDto
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.talk.feedback.model.Learned
 import com.talkable.presentation.talk.feedback.model.TalkFeedbackModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -29,6 +31,11 @@ class FeedbackViewModel : ViewModel() {
     var expressionFeedback = FeedbackContainer()
     var script = Triple("", "", "")
     var byteArray: ByteArray = byteArrayOf()
+    private var talkStartTime: Long = 0L
+
+    fun updateTalkTime(startTime: Long) {
+        talkStartTime = startTime
+    }
 
     private val learnedModule = SerializersModule {
         polymorphic(Learned::class) {
@@ -61,8 +68,6 @@ class FeedbackViewModel : ViewModel() {
                     )
                 )
             }.onSuccess {
-                messages.add(Message("ai", question.first))
-                messages.add(Message("user", answer))
                 val response = it.choices.first().message
                 runCatching {
                     json.decodeFromString<FeedbackContainer>(response.content)
@@ -79,7 +84,23 @@ class FeedbackViewModel : ViewModel() {
         }
     }
 
+    fun updateEntireMessage(type: RoleType, talk: String) {
+        val role =
+            when (type) {
+                RoleType.USER -> RoleType.USER.name.lowercase()
+                RoleType.AI -> RoleType.AI.name.lowercase()
+            }
+        messages.add(Message(role, talk))
+    }
+
     fun postFeedback() {
+        val elapsedTimeMillis = System.currentTimeMillis() - talkStartTime
+        val elapsedTimeMinutes = elapsedTimeMillis / (1000.0 * 60)
+        val roundedElapsedTimeMinutes = Math.round(elapsedTimeMinutes * 100) / 100.0
+        viewModelScope.launch { delay(1000) }
+
+        FirebaseFactory.feedbackRef.child("talkTime")
+            .setValue(roundedElapsedTimeMinutes.toString())
         FirebaseFactory.feedbackRef.child("learnedAfterAnswer")
             .setValue(feedback.learnedAfterAnswer)
         FirebaseFactory.feedbackRef.child("learnedExpression").setValue(feedback.learnedExpression)
