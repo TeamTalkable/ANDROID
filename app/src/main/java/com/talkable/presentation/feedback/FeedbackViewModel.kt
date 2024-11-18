@@ -67,7 +67,7 @@ class FeedbackViewModel : ViewModel() {
                 runCatching {
                     json.decodeFromString<FeedbackContainer>(response.content)
                 }.onSuccess { data ->
-                    updateFeedback(data)
+                    updateFeedback(data, answer)
                     _uiState.value = FeedbackUiState.PatchGptFeedbacks(data)
                     expressionFeedback = data
                     script = Triple(question.first, question.second, answer)
@@ -88,7 +88,9 @@ class FeedbackViewModel : ViewModel() {
         _uiState.value = FeedbackUiState.Empty
     }
 
-    private fun updateFeedback(data: FeedbackContainer) {
+    private fun updateFeedback(data: FeedbackContainer, feedbackBefore: String) {
+        feedback = feedback.copy(feedbackBefore = feedbackBefore)
+
         feedback.learnedAfterAnswer.add(
             Learned.AfterAnswer(
                 afterFullAnswer = data.afterFullAnswer, afterAnswerParts = data.afterAnswerParts
