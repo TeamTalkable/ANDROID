@@ -762,7 +762,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             is FeedbackUiState.Empty -> {
                 includeBottomSheetTalk.isVisible = false
                 includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
-                TalkHintDialog().dismiss()
+                if (findNavController().currentDestination?.id == R.id.talkHintDialog) findNavController().popBackStack()
             }
 
             else -> Unit
@@ -807,8 +807,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initHintTextViewClickListener() {
         with(binding) {
             btnTalkHelp.setOnClickListener {
-                if (btnTalkSpeak.isVisible) {
-                    TalkHintDialog().show(childFragmentManager, "TalkHintDialog")
+                if (btnTalkSpeak.isVisible && (findNavController().currentDestination?.id != R.id.talkHintDialog)) {
+                    findNavController().navigate(R.id.action_talk_to_hint)
                 }
             }
         }

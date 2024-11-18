@@ -45,7 +45,7 @@
         <action
             android:id="@+id/action_fragment_talk_review_to_today_saved"
             app:destination="@id/fragment_today_saved"
-            app:popUpTo="@id/fragment_today_saved"/>
+            app:popUpTo="@id/fragment_today_saved" />
     </fragment>
     <fragment
         android:id="@+id/fragment_review"
@@ -147,6 +147,9 @@
         <action
             android:id="@+id/action_talk_to_feedback_pronunciation"
             app:destination="@id/feedbackTabFragment" />
+        <action
+            android:id="@+id/action_talk_to_hint"
+            app:destination="@id/talkHintDialog" />
     </fragment>
     <fragment
         android:id="@+id/fragment_talk_feedback"
@@ -292,4 +295,9 @@
             app:popUpTo="@id/fragment_home"
             app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/talkHintDialog"
+        android:name="com.talkable.presentation.talk.TalkHintDialog"
+        android:label="TalkHintDialog"
+        tools:layout="@layout/toast_talk_hint" />
 </navigation>
