@@ -39,6 +39,7 @@ import com.google.cloud.speech.v1.SpeechRecognitionResult
 import com.google.cloud.speech.v1.SpeechSettings
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
+import com.talkable.core.type.RoleType
 import com.talkable.core.util.Key.FEEDBACK_BEFORE
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_EN
 import com.talkable.core.util.Key.FEEDBACK_QUESTION_KO
@@ -112,6 +113,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackCloseBtnClickListener()
         tts = TextToSpeech(requireContext(), this) // TTS 초기화
         observeTvTalkEnglishTextChanges()
+        viewModel.updateTalkTime(startTime = System.currentTimeMillis())
     }
 
     private fun observeTvTalkEnglishTextChanges() = with(binding) {
@@ -195,6 +197,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun setNextQuestionText(data: FeedbackContainer) {
+        viewModel.updateEntireMessage(RoleType.AI, nextQuestionEn)
         nextQuestionEn = data.nextQuestionEn
         nextQuestionKo = data.nextQuestionKo
     }
@@ -560,10 +563,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     private fun initGetFeedbackBtnClickListener() = with(binding) {
         btnTalkNext.setOnClickListener {
+            val userTalk = includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
             btnTalkNext.visible(false)
+            viewModel.updateEntireMessage(RoleType.USER, userTalk)
             viewModel.patchGptFeedbacks(
                 Pair(nextQuestionEn, nextQuestionKo),
-                includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+                userTalk
             )
         }
     }
@@ -762,7 +767,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             is FeedbackUiState.Empty -> {
                 includeBottomSheetTalk.isVisible = false
                 includeLayoutTalkSpeech.layoutTalkSpeech.isVisible = true
-                TalkHintDialog().dismiss()
+                if (findNavController().currentDestination?.id == R.id.talkHintDialog) findNavController().popBackStack()
             }
 
             else -> Unit
@@ -807,8 +812,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initHintTextViewClickListener() {
         with(binding) {
             btnTalkHelp.setOnClickListener {
-                if (btnTalkSpeak.isVisible) {
-                    TalkHintDialog().show(childFragmentManager, "TalkHintDialog")
+                if (btnTalkSpeak.isVisible && (findNavController().currentDestination?.id != R.id.talkHintDialog)) {
+                    findNavController().navigate(R.id.action_talk_to_hint)
                 }
             }
         }
