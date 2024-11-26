@@ -14,6 +14,7 @@ import com.talkable.presentation.talk.feedback.model.Learned
 import com.talkable.presentation.talk.feedback.model.TalkFeedbackModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -26,13 +27,15 @@ class FeedbackViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<FeedbackUiState>(FeedbackUiState.Empty)
     val uiState = _uiState.asStateFlow()
 
-    private val messages = mutableListOf<Message>()
+    private val messages = mutableListOf(Message(RoleType.SYSTEM.name.lowercase(), GPT_SYSTEM))
     var feedback = TalkFeedbackModel()
     var expressionFeedback = FeedbackContainer()
     var script = Triple("", "", "")
     var byteArray: ByteArray = byteArrayOf()
     private var talkStartTime: Long = 0L
-    val bottomSheetMessage = mutableListOf<Message>()
+
+    private val _bottomSheetMessage = MutableStateFlow<List<Message>>(emptyList())
+    val bottomSheetMessage: StateFlow<List<Message>> = _bottomSheetMessage
 
     fun updateTalkTime(startTime: Long) {
         talkStartTime = startTime
@@ -56,6 +59,7 @@ class FeedbackViewModel : ViewModel() {
 
     fun patchGptFeedbacks(question: Pair<String, String>, answer: String) {
         viewModelScope.launch {
+            val gptRequest = generateRequestContent(question.first, answer)
             runCatching {
                 _uiState.value = FeedbackUiState.Loading
                 ServicePool.gptService.getGptAnswers(
@@ -63,24 +67,24 @@ class FeedbackViewModel : ViewModel() {
                         model = "gpt-3.5-turbo",
                         maxTokens = 1000,
                         messages = messages + Message(
-                            "user",
-                            generateRequestContent(question.first, answer)
+                            RoleType.USER.name.lowercase(),
+                            gptRequest
                         )
                     )
                 )
             }.onSuccess {
-                updateEntireMessage(RoleType.AI, question.first)
-                updateEntireMessage(RoleType.USER, answer)
-                val response = it.choices.first().message
+                val response = it.choices.first().message.content
+                updateEntireMessage(RoleType.USER, gptRequest)
+                updateEntireMessage(RoleType.ASSISTANT, response)
                 runCatching {
-                    json.decodeFromString<FeedbackContainer>(response.content)
+                    json.decodeFromString<FeedbackContainer>(response)
                 }.onSuccess { data ->
                     updateFeedback(data, answer)
                     _uiState.value = FeedbackUiState.PatchGptFeedbacks(data)
                     expressionFeedback = data
                     script = Triple(question.first, question.second, answer)
                 }
-                Timber.w(messages.toString())
+                Timber.w(response)
             }.onFailure {
                 _uiState.value = FeedbackUiState.Error(it.message.toString())
             }
@@ -208,8 +212,22 @@ class FeedbackViewModel : ViewModel() {
         }
     }
 
-    fun updateBottomSheetMessages(type: RoleType, talk: String) =
-        bottomSheetMessage.add(Message(type.name.lowercase(), talk))
+    fun updateBottomSheetMessages(type: RoleType, talk: String) {
+        val updatedMessages = _bottomSheetMessage.value.toMutableList().apply {
+            add(Message(type.name.lowercase(), talk))
+        }
+        _bottomSheetMessage.value = updatedMessages
+    }
+
+    fun resetTalk() {
+        messages.clear()
+        _bottomSheetMessage.value = emptyList()
+    }
+
+    companion object {
+        const val GPT_SYSTEM =
+            "You are a kind system that makes questions according to the level of user answers"
+    }
 }
 
 sealed interface FeedbackUiState {
