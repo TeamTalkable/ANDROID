@@ -29,6 +29,7 @@ import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentFeedbackPronunciationBinding
 import com.talkable.presentation.talk.VoiceRecorder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
@@ -211,14 +212,19 @@ class FeedbackPronunciationFragment :
     private fun initRecordCheckClickListener() {
         binding.ivFeedbackPronunciationCheck.setOnClickListener {
             stopVoiceRecorder()
-            if (transcription.isNotEmpty()) {
-                viewModel.patchPronunciationEvaluation(transcription, base64AudioData)
-                FeedbackPronunciationCompleteDialog().show(
-                    childFragmentManager,
-                    PRONUNCIATION_DIALOG
-                )
-                binding.layoutFeedbackPronunciationMick.visible(false)
-            } else toast("녹음을 다시 해주세요")
+            binding.layoutFeedbackPronunciationMick.visible(false)
+            binding.pbTalkLoading.visible(true)
+            viewLifeCycleScope.launch {
+                delay(1000)
+                if (transcription.isNotEmpty()) {
+                    viewModel.patchPronunciationEvaluation(transcription, base64AudioData)
+                    FeedbackPronunciationCompleteDialog().show(
+                        childFragmentManager,
+                        PRONUNCIATION_DIALOG
+                    )
+                } else toast("녹음을 다시 해주세요")
+                binding.pbTalkLoading.visible(false)
+            }
         }
     }
 

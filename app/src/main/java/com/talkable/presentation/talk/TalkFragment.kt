@@ -787,6 +787,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tvTalkPronunciation.visible(false)
         lottiTalkSpeak.visible(isSpeaking)
         btnTalkSpeak.isSelected = isSpeaking
+        tvTalkGuide.visible(isSpeaking)
     }
 
     // 권한 요청 후 처리
