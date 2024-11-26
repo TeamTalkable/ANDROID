@@ -26,12 +26,13 @@ class FeedbackViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<FeedbackUiState>(FeedbackUiState.Empty)
     val uiState = _uiState.asStateFlow()
 
-    val messages = mutableListOf<Message>()
+    private val messages = mutableListOf<Message>()
     var feedback = TalkFeedbackModel()
     var expressionFeedback = FeedbackContainer()
     var script = Triple("", "", "")
     var byteArray: ByteArray = byteArrayOf()
     private var talkStartTime: Long = 0L
+    val bottomSheetMessage = mutableListOf<Message>()
 
     fun updateTalkTime(startTime: Long) {
         talkStartTime = startTime
@@ -68,6 +69,8 @@ class FeedbackViewModel : ViewModel() {
                     )
                 )
             }.onSuccess {
+                updateEntireMessage(RoleType.AI, question.first)
+                updateEntireMessage(RoleType.USER, answer)
                 val response = it.choices.first().message
                 runCatching {
                     json.decodeFromString<FeedbackContainer>(response.content)
@@ -84,14 +87,8 @@ class FeedbackViewModel : ViewModel() {
         }
     }
 
-    fun updateEntireMessage(type: RoleType, talk: String) {
-        val role =
-            when (type) {
-                RoleType.USER -> RoleType.USER.name.lowercase()
-                RoleType.AI -> RoleType.AI.name.lowercase()
-            }
-        messages.add(Message(role, talk))
-    }
+    private fun updateEntireMessage(type: RoleType, talk: String) =
+        messages.add(Message(type.name.lowercase(), talk))
 
     fun postFeedback() {
         val elapsedTimeMillis = System.currentTimeMillis() - talkStartTime
@@ -210,6 +207,9 @@ class FeedbackViewModel : ViewModel() {
             }.onFailure { _uiState.value = FeedbackUiState.Error(it.message.toString()) }
         }
     }
+
+    fun updateBottomSheetMessages(type: RoleType, talk: String) =
+        bottomSheetMessage.add(Message(type.name.lowercase(), talk))
 }
 
 sealed interface FeedbackUiState {
