@@ -28,7 +28,11 @@ class QuizResultFragment :
         statusBarColorOf(R.color.main_3)
         setLayout()
         binding.btnQuizContinue.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_quiz_result_to_review)
+        }
+
+        binding.btnQuizBack.setOnClickListener {
+            findNavController().navigate(R.id.action_quiz_result_to_review)
         }
     }
 
