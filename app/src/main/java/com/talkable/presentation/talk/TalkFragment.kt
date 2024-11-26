@@ -14,7 +14,6 @@ import android.util.Base64
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewTreeObserver
 import android.widget.ImageButton
 import androidx.activity.addCallback
 import androidx.core.app.ActivityCompat
@@ -116,20 +115,15 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun observeTvTalkEnglishTextChanges() = with(binding) {
-        tvTalkEnglish.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            private var lastText: String = tvTalkEnglish.text.toString()
-
-            override fun onGlobalLayout() {
-                videoViewTalkBackground.pause()
-                val currentText = tvTalkEnglish.text.toString()
-                if (lastText != currentText) {
-                    lastText = currentText
-                    handleTTSStartState(currentText) // TTS 시작
-                    handleTTSEndState(btnTalkListen) // TTS 종료 상태 처리
-                }
+        var lastText = tvTalkEnglish.text.toString()
+        tvTalkEnglish.viewTreeObserver.addOnGlobalLayoutListener {
+            val currentText = tvTalkEnglish.text.toString()
+            if (lastText != currentText) {
+                viewModel.updateBottomSheetMessages(RoleType.AI, currentText)
+                lastText = currentText
+                handleTTSStartState(currentText) // TTS 시작
             }
-        })
+        }
     }
 
     private fun blockNavigateToBack() =
@@ -196,7 +190,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun setNextQuestionText(data: FeedbackContainer) {
-        viewModel.updateEntireMessage(RoleType.AI, nextQuestionEn)
         nextQuestionEn = data.nextQuestionEn
         nextQuestionKo = data.nextQuestionKo
     }
@@ -278,19 +271,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts?.language = Locale.US
-            startVideoAndTTS()
+            if (viewModel.uiState.value == FeedbackUiState.Empty) startVideoAndTTS()
         } else {
             Timber.d("TTS 초기화 실패")
         }
     }
 
     private fun startVideoAndTTS() = with(binding) {
-        Handler(Looper.getMainLooper()).postDelayed({
-            handleTTSStartState(tvTalkEnglish.text.toString())
-        }, 200)
-
+        handleTTSStartState(tvTalkEnglish.text.toString())
         handleTTSEndState(btnTalkListen)
     }
+
 
     // 음성 녹음 시작
     private fun startVoiceRecorder() {
@@ -566,8 +557,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initGetFeedbackBtnClickListener() = with(binding) {
         btnTalkNext.setOnClickListener {
             val userTalk = includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
+            viewModel.updateBottomSheetMessages(RoleType.USER, userTalk)
             btnTalkNext.visible(false)
-            viewModel.updateEntireMessage(RoleType.USER, userTalk)
             viewModel.patchGptFeedbacks(
                 Pair(nextQuestionEn, nextQuestionKo),
                 userTalk
@@ -665,7 +656,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         binding.layoutBottomSheetTalk.rvBottomSheet.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = TalkAdapter().apply {
-                submitList(viewModel.messages)
+                submitList(viewModel.bottomSheetMessage)
             }
         }
     }
