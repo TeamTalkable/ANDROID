@@ -91,6 +91,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
 
     override fun initView() {
+        tts = TextToSpeech(requireContext(), this) // TTS 초기화
         blockNavigateToBack()
         collect()
         initTalkGuide()
@@ -109,8 +110,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackListenBtnClickListener()
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
-        tts = TextToSpeech(requireContext(), this) // TTS 초기화
-        observeTvTalkEnglishTextChanges()
+        if (viewModel.uiState.value == FeedbackUiState.Empty) observeTvTalkEnglishTextChanges()
         viewModel.updateTalkTime(startTime = System.currentTimeMillis())
     }
 
@@ -177,8 +177,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initTalkNextBtnClickListener()
         includeBottomSheetTalk.visible(true)
         initFeedbackDetailTvClickListener()
-        videoViewTalkBackground.pause()
-        videoViewTalkBackground.seekTo(1)
     }
 
     private fun initTalkNextBtnClickListener() {
@@ -186,6 +184,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             initNextQuestionLayout()
             viewModel.setEmptyState()
             binding.btnTalkNext.visible(false)
+            observeTvTalkEnglishTextChanges()
         }
     }
 
@@ -271,14 +270,14 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts?.language = Locale.US
-            if (viewModel.uiState.value == FeedbackUiState.Empty) startVideoAndTTS()
+            if (viewModel.uiState.value == FeedbackUiState.Empty) startVideoAndTTS(binding.tvTalkEnglish.text.toString())
         } else {
             Timber.d("TTS 초기화 실패")
         }
     }
 
-    private fun startVideoAndTTS() = with(binding) {
-        handleTTSStartState(tvTalkEnglish.text.toString())
+    private fun startVideoAndTTS(text: String) = with(binding) {
+        handleTTSStartState(text)
         handleTTSEndState(btnTalkListen)
     }
 
