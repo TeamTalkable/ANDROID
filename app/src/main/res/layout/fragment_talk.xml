@@ -26,8 +26,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentInsetStart="0dp"
             android:background="@color/talk_toolbar_bg"
+            app:contentInsetStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -365,5 +365,19 @@
                 app:behavior_peekHeight="50dp"
                 app:layout_behavior="@string/bottom_sheet_behavior" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <ProgressBar
+            android:id="@+id/pb_talk_loading"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@anim/spinner_rotate"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

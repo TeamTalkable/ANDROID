@@ -54,6 +54,7 @@ import com.talkable.presentation.feedback.FeedbackViewModel
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
@@ -117,7 +118,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         tvTalkEnglish.viewTreeObserver.addOnGlobalLayoutListener {
             val currentText = tvTalkEnglish.text.toString()
             if (lastText != currentText) {
-                viewModel.updateBottomSheetMessages(RoleType.AI, currentText)
                 lastText = currentText
                 handleTTSStartState(currentText) // TTS 시작
             }
@@ -249,6 +249,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             initializeSpeechClient()
             if (::speechClient.isInitialized && byteArray.isNotEmpty()) {
                 transcribeRecording(byteArray)
+                binding.pbTalkLoading.visible(true)
             }
         }
     }
@@ -338,6 +339,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     }
 
     private fun handleUserPronunciation(script: String) = with(binding) {
+        pbTalkLoading.visible(false)
         when (viewModel.uiState.value) {
             is FeedbackUiState.PatchGptFeedbacks -> {
                 setNextQuestionText((viewModel.uiState.value as FeedbackUiState.PatchGptFeedbacks).data)
@@ -430,14 +432,17 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         }
     }
 
-    private fun initSpeakGuide(isFirstAnswer: Boolean) {
+    private fun initSpeakGuide() {
         binding.tvTalkGuide.apply {
             text =
-                if (isFirstAnswer) getString(R.string.tv_talk_guide) else getString(R.string.tv_talk_guide_again)
+                if (viewModel.uiState.value == FeedbackUiState.Empty) getString(R.string.tv_talk_guide) else getString(
+                    R.string.tv_talk_guide_again
+                )
             visible(true)
-            postDelayed({
+            viewLifeCycleScope.launch {
+                delay(3000)
                 visible(false)
-            }, 3000)
+            }
         }
     }
 
@@ -503,7 +508,11 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         videoViewTalkBackground.seekTo(1)  // 첫 프레임으로 돌아가기
                         button.isSelected = false  // 버튼 상태 초기화
                         if (btnTalkSpeak.isVisible)
-                            initSpeakGuide(isFirstAnswer = true)
+                            initSpeakGuide()
+                        viewModel.updateBottomSheetMessages(
+                            RoleType.AI,
+                            tvTalkEnglish.text.toString()
+                        )
                     }
                 }
             }
@@ -608,7 +617,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             binding.includeLayoutTalkSpeech.etTalkUserSpeech.text.toString()
         setFeedbackTextColor(fullText, partsText)
         initFeedbackDetailTvClickListener()
-        initSpeakGuide(isFirstAnswer = false)
+        initSpeakGuide()
         setBtnTalkSpeakVisibility(isVisible = true)
         initFeedbackAnswerTTS()
     }
