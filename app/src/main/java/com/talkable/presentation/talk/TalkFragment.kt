@@ -66,7 +66,6 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
 
     private val viewModel: FeedbackViewModel by activityViewModels()
 
-    private var clickCount = FIRST_CLICK
     private lateinit var speechRecognizer: SpeechRecognizer
     private var tts: TextToSpeech? = null
     private lateinit var nextQuestionEn: String
@@ -215,6 +214,8 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     private fun initTalkGuide() {
         if (guideClickCount == FIRST_CLICK) {
             with(binding) {
+                setBtnTalkSpeakVisibility(false)
+
                 btnTalkNext.setOnClickListener {
                     if (guideClickCount < MAX_GUIDE_CLICK) {
                         tvTalkEnglish.text = getString(englishGuideTextArray[textIndex])
@@ -229,8 +230,9 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                         tvTalkEnglish.isVisible = false
                         tvTalkTranslate.isVisible = false
                         tvTalkListen.isVisible = true
+                        setBtnTalkSpeakVisibility(true)
                         setQuestionLayout()
-                        binding.btnTalkNext.setOnClickListener { }
+                        btnTalkNext.setOnClickListener(null)
                     }
                 }
             }
