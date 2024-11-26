@@ -51,4 +51,5 @@
     <color name="black">#000000</color>
     <color name="btn_challenge">#FFA0A0</color>
     <color name="search_view_bg">#F1F1F1</color>
+    <color name="talk_toolbar_bg">#C4BCBA</color>
 </resources>
