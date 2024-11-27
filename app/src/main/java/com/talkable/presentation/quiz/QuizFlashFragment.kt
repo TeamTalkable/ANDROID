@@ -1,13 +1,13 @@
 package com.talkable.presentation.quiz
 
+import android.animation.AnimatorInflater
+import android.annotation.SuppressLint
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.Key
-import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentQuizFlashBinding
 
@@ -17,14 +17,46 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
     private var correctCount = 0
 
     override fun initView() {
-        statusBarColorOf(R.color.white)
-        binding.layoutQuizFlashCard.ivQuizAuto.load("https://github.com/user-attachments/assets/b070adad-2b6e-4b0e-81ad-56c63c72f8da")
+        hideCoachMark()
         binding.layoutQuizFlashAppbar.count =
             getString(R.string.label_quiz_app_bar_count, 1, mockLong.size)
         initBackNavigationIconClickListener()
-        initKoreanShowBtnClickEvent()
         initFlashLearnStatusLabelClickListener()
         observeQuestionIndex()
+        test()
+    }
+
+    private fun hideCoachMark() {
+        binding.ivFlashCoach.setOnClickListener {
+            binding.groupFlashCoachMark.visible(false)
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    private fun test() = with(binding) {
+        var isFront = true
+        val scale: Float = root.context.resources.displayMetrics.density
+        layoutFlashBack.cameraDistance = 8000 * scale
+        layoutFlashFront.cameraDistance = 8000 * scale
+
+        val frontAnim = AnimatorInflater.loadAnimator(root.context, R.anim.front_animator)
+        val backAnim = AnimatorInflater.loadAnimator(root.context, R.anim.back_animator)
+
+        ivFlashImg.setOnClickListener {
+            if (isFront) {
+                frontAnim.setTarget(layoutFlashFront)
+                backAnim.setTarget(layoutFlashBack)
+                frontAnim.start()
+                backAnim.start()
+                isFront = false
+            } else {
+                frontAnim.setTarget(layoutFlashBack)
+                backAnim.setTarget(layoutFlashFront)
+                frontAnim.start()
+                backAnim.start()
+                isFront = true
+            }
+        }
     }
 
     private fun initBackNavigationIconClickListener() {
@@ -33,18 +65,8 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
         }
     }
 
-    private fun initKoreanShowBtnClickEvent() = with(binding.layoutQuizFlashCard) {
-        ivQuizFlashShow.setOnClickListener {
-            val isSelected = ivQuizFlashShow.isSelected
-            ivQuizFlashShow.isSelected = !isSelected
-            tvQuizAutoKorean.visible(!isSelected)
-        }
-    }
-
     private fun initFlashLearnStatusLabelClickListener() = with(binding) {
         fun onFlashCardClick() {
-            layoutQuizFlashCard.tvQuizAutoKorean.visible(false)
-            layoutQuizFlashCard.ivQuizFlashShow.isSelected = false
             quizViewModel.setNextQuestion()
         }
 
@@ -70,6 +92,11 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
         }
     }
 
+    private fun updateNextFlashCard(data: Pair<String, String>) = with(binding) {
+        tvQuizEn.text = data.first
+        tvQuizKo.text = data.second
+    }
+
     private fun navigateToResult(totalCount: Int) =
         findNavController().navigate(
             R.id.action_quiz_flash_to_quiz_result,
@@ -79,11 +106,6 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
                 Key.QUIZ_RESULT_CORRECT to correctCount,
             )
         )
-
-    private fun updateNextFlashCard(data: Pair<String, String>) = with(binding) {
-        layoutQuizFlashCard.tvQuizAutoEnglish.text = data.first
-        layoutQuizFlashCard.tvQuizAutoKorean.text = data.second
-    }
 
     private fun navigateToBack() = findNavController().popBackStack()
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -20,19 +21,88 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/layout_quiz_flash_card"
-            layout="@layout/view_quiz_flash_auto_card"
+        <FrameLayout
+            android:id="@+id/flash"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="42dp"
             android:layout_marginBottom="69dp"
-            app:iconVisible="@{true}"
             app:layout_constraintBottom_toTopOf="@id/tv_quiz_flash_memorized"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_quiz_flash_appbar" />
+            app:layout_constraintTop_toBottomOf="@id/layout_quiz_flash_appbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_flash_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="42dp">
+
+                <View
+                    android:id="@+id/view_flash_back_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_white_fill_12_rect"
+                    android:backgroundTint="@color/font_5" />
+
+                <TextView
+                    android:id="@+id/tv_quiz_en"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="46dp"
+                    android:layout_marginBottom="15dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Talkable.sb_30"
+                    app:layout_constraintBottom_toTopOf="@id/tv_quiz_ko"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="@string/dummy" />
+
+                <TextView
+                    android:id="@+id/tv_quiz_ko"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="46dp"
+                    android:layout_marginTop="15dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Talkable.main_sm_20"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_quiz_en"
+                    tools:text="@string/dummy" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_flash_front"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="42dp">
+
+                <View
+                    android:id="@+id/view_flash_front_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_white_fill_12_rect"
+                    android:backgroundTint="@color/font_5" />
+
+                <ImageView
+                    android:id="@+id/iv_flash_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_flash_school"
+                    app:layout_constraintBottom_toBottomOf="@id/view_flash_front_bg"
+                    app:layout_constraintEnd_toEndOf="@id/view_flash_front_bg"
+                    app:layout_constraintStart_toStartOf="@id/view_flash_front_bg"
+                    app:layout_constraintTop_toTopOf="@id/view_flash_front_bg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_quiz_flash_memorized"
@@ -69,5 +139,30 @@
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_quiz_flash_memorized" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_flash_coach_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="iv_flash_coach, iv_flash_coach_bg" />
+
+        <View
+            android:id="@+id/iv_flash_coach_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/quiz_coach" />
+
+        <ImageView
+            android:id="@+id/iv_flash_coach"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="42dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_flash_coach_mark"
+            app:layout_constraintBottom_toBottomOf="@id/flash"
+            app:layout_constraintEnd_toEndOf="@id/flash"
+            app:layout_constraintStart_toStartOf="@id/flash"
+            app:layout_constraintTop_toTopOf="@id/flash" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
