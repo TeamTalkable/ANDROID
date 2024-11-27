@@ -280,7 +280,13 @@
         android:id="@+id/quizResultFragment"
         android:name="com.talkable.presentation.quiz.QuizResultFragment"
         android:label="QuizResultFragment"
-        tools:layout="@layout/fragment_quiz_result" />
+        tools:layout="@layout/fragment_quiz_result">
+        <action
+            android:id="@+id/action_quiz_result_to_review"
+            app:destination="@id/fragment_review"
+            app:popUpTo="@layout/fragment_quiz_result"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/feedbackTabFragment"
         android:name="com.talkable.presentation.feedback.FeedbackTabFragment"

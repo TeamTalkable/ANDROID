@@ -11,6 +11,7 @@ import com.talkable.core.util.Key
 import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
+import com.talkable.core.view.visible
 import com.talkable.databinding.FragmentTalkFeedbackBinding
 import com.talkable.presentation.mypage.MyPageFragment
 import com.talkable.presentation.talk.feedback.mapper.toLearnedList
@@ -39,6 +40,7 @@ class TalkFeedbackFragment :
                         initFeedbackLearnedAdapter(uiState.data)
                         initFeedbackBottomAdapter(uiState.data)
                         concatFeedbackAdapters(uiState.data)
+                        binding.pbTalkLoading.visible(false)
                     }
 
                     else -> Unit

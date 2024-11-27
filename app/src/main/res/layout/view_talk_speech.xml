@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_talk_speech"
-            android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.Talkable.sub_m_14"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/iv_talk_speech_title"
             app:layout_constraintEnd_toEndOf="@id/iv_talk_speech_title"
             app:layout_constraintStart_toStartOf="@id/iv_talk_speech_title"
@@ -40,23 +40,24 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/shape_speech_fill_12_top_rect"
-            app:layout_constraintTop_toTopOf="@id/et_talk_user_speech"
             app:layout_constraintBottom_toBottomOf="@id/et_talk_user_speech"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_talk_user_speech" />
 
         <EditText
             android:id="@+id/et_talk_user_speech"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
-            android:textAppearance="@style/TextAppearance.Talkable.m_20"
             android:layout_marginEnd="0dp"
-            android:paddingVertical="20dp"
             android:background="@null"
-            tools:text="I take a since class today.I take a since class today.I take a since class today."
+            android:hint="음성 받아 오는 중..."
+            android:paddingVertical="20dp"
+            android:textAppearance="@style/TextAppearance.Talkable.m_20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_talk_speech"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="I take a since class today.I take a since class today.I take a since class today." />
 
         <ImageButton
             android:id="@+id/iv_talk_speech"
