@@ -1,34 +1,70 @@
 package com.talkable.presentation.feedback.today
 
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.viewLifeCycle
+import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentTodaySavedListBinding
+import com.talkable.presentation.feedback.today.model.ItemType
 import com.talkable.presentation.feedback.today.model.TodaySaved
-import com.talkable.presentation.feedback.today.model.TodaySavedModel
+import com.talkable.presentation.home.TodaySavedUiState
+import com.talkable.presentation.home.TodaySavedViewModel
+import com.talkable.presentation.home.model.TalkSavedModel
 import com.talkable.presentation.mypage.saved.Constants
-
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class TodaySavedListFragment :
     BindingFragment<FragmentTodaySavedListBinding>(R.layout.fragment_today_saved_list) {
 
     private lateinit var todaySavedAdapter: TodaySavedAdapter
+    private val viewModel: TodaySavedViewModel by activityViewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.main_3)
+        collect()
         initSavedWordAdapter()
     }
 
+    private fun collect() {
+        viewLifeCycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
+                when (uiState) {
+                    is TodaySavedUiState.Success -> initTodaySavedAdapter(uiState.data)
+                    is TodaySavedUiState.Error -> Timber.e(uiState.errorMessage)
+                    else -> Unit
+                }
+            }
+        }
+    }
+
+    private fun initTodaySavedAdapter(data: TalkSavedModel) {
+        val savedItems = data.savedWordList.map { word ->
+            TodaySaved(word = word.wordEnglish, translation = word.wordKorean, type = ItemType.WORD)
+        } + data.savedSentenceList.map { sentence ->
+            TodaySaved(
+                sentence = sentence.sentenceEnglish,
+                translation = sentence.sentenceKorean,
+                type = ItemType.SENTENCE
+            )
+        }
+
+        todaySavedAdapter.submitList(savedItems)
+    }
 
     private fun initSavedWordAdapter() {
-        todaySavedAdapter = TodaySavedAdapter()
-        with(binding.rvSavedWord) {
+        if (!::todaySavedAdapter.isInitialized) {
+            todaySavedAdapter = TodaySavedAdapter()
+        }
+        binding.rvSavedWord.apply {
             adapter = todaySavedAdapter
             layoutManager = LinearLayoutManager(context)
         }
-        todaySavedAdapter.submitList(mockData.todaySavedList)
     }
 
     companion object {
@@ -40,28 +76,4 @@ class TodaySavedListFragment :
             }
         }
     }
-
-    private val mockData = TodaySavedModel(
-        todaySavedId = 1,
-        todaySavedList = listOf(
-            TodaySaved(
-                word = "inspire",
-                translation = "",
-                verb = "자극하다, 격려하다",
-                noun = "창의성"
-            ),
-            TodaySaved(
-                word = "resilience",
-                translation = "",
-                verb = "극복하다, 회복하다",
-                noun = ""
-            ),
-            TodaySaved(
-                word = "Met a great friend at school",
-                translation = "학교에서 좋은 친구를 만났어.",
-                verb = "",
-                noun = ""
-            )
-        )
-    )
 }
