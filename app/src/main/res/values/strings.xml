@@ -67,7 +67,7 @@
     <string name="tv_home_calendar_fri">금</string>
     <string name="tv_home_calendar_satur">토</string>
     <string name="tv_home_calendar_sun">일</string>
-    <string name="tv_home_learning_time">대화시간 %1$dM</string>
+    <string name="tv_home_learning_time">대화시간</string>
     <string name="tv_home_learning_storage">저장 목록 %1$d개</string>
     <string name="tv_home_learning_feedback">피드백 %1$d개</string>
     <string name="tv_home_learning_review">복습하기</string>
