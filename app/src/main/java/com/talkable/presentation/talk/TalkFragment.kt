@@ -56,6 +56,7 @@ import com.talkable.presentation.feedback.FeedbackUiState
 import com.talkable.presentation.feedback.FeedbackViewModel
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
+import com.talkable.presentation.home.SavedViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -67,6 +68,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
     TextToSpeech.OnInitListener {
 
     private val viewModel: FeedbackViewModel by activityViewModels()
+    private val savedViewModel: SavedViewModel by activityViewModels()
 
     private lateinit var speechRecognizer: SpeechRecognizer
     private var tts: TextToSpeech? = null
@@ -806,6 +808,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         with(binding.groupTalkFeedback.tvTalkFeedbackUserAfterAnswer) {
             if (selectionStart >= 0 && selectionEnd >= 0 && selectionStart != selectionEnd) {
                 val selectedText = text.subSequence(selectionStart, selectionEnd).toString()
+                savedViewModel.getSavedMeaning(selectedText)
                 toast("\"$selectedText\"를 저장하였습니다.")
             } else {
                 toast("선택된 텍스트가 없습니다.")
