@@ -7,7 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.R
 import com.talkable.databinding.ItemSavedWordBinding
-import com.talkable.presentation.mypage.saved.model.SavedWord
+import com.talkable.presentation.home.model.MemorizationStatus
+import com.talkable.presentation.home.model.Saved
 
 class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -17,17 +18,18 @@ class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
         initListenBtnClickListener()
     }
 
-    fun onBind(item: SavedWord) {
-        val backgroundColor = backgroundColors[item.type] ?: R.drawable.shape_main_fill_12_rect
-        val textColor = textColors[item.type] ?: R.color.white
+    fun onBind(item: Saved.Word) {
+        val context = binding.root.context
+        val backgroundColor = backgroundColors[item.status] ?: R.drawable.shape_main_fill_12_rect
+        val textColor = textColors[item.status] ?: R.color.white
 
         binding.run {
-            tvSavedWord.text = item.word
-            btnSavedWordTag.text = item.tag
-            tvSavedTranslation.text = item.translation
+            tvSavedWord.text = item.wordEnglish
+            btnSavedWordTag.text = item.status.getStatusText(context)
+            tvSavedTranslation.text = item.wordKorean
             btnSavedWordTag.background =
-                ContextCompat.getDrawable(btnSavedWordTag.context, backgroundColor)
-            btnSavedWordTag.setTextColor(ContextCompat.getColor(btnSavedWordTag.context, textColor))
+                ContextCompat.getDrawable(context, backgroundColor)
+            btnSavedWordTag.setTextColor(ContextCompat.getColor(context, textColor))
 
             tvSavedTranslation.visibility = View.GONE
         }
@@ -55,10 +57,6 @@ class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
     }
 
     companion object {
-        private const val TYPE_DIFFICULT = 0
-        private const val TYPE_MEMORIZED = 1
-        private const val TYPE_MEMORIZING = 2
-
         fun from(parent: ViewGroup): SavedWordViewHolder {
             val binding =
                 ItemSavedWordBinding.inflate(
@@ -70,15 +68,15 @@ class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
         }
 
         val backgroundColors = mapOf(
-            TYPE_DIFFICULT to R.drawable.shape_main_fill_12_rect,
-            TYPE_MEMORIZED to R.drawable.shape_main1_fill_12_rect,
-            TYPE_MEMORIZING to R.drawable.shape_gray_fill_12_rect
+            MemorizationStatus.DIFFICULT to R.drawable.shape_main_fill_12_rect,
+            MemorizationStatus.MEMORIZING to R.drawable.shape_main1_fill_12_rect,
+            MemorizationStatus.MEMORIZED to R.drawable.shape_gray_fill_12_rect
         )
 
         val textColors = mapOf(
-            TYPE_DIFFICULT to R.color.white,
-            TYPE_MEMORIZED to R.color.font,
-            TYPE_MEMORIZING to R.color.white
+            MemorizationStatus.DIFFICULT to R.color.white,
+            MemorizationStatus.MEMORIZING to R.color.font,
+            MemorizationStatus.MEMORIZED to R.color.white
         )
     }
 }
