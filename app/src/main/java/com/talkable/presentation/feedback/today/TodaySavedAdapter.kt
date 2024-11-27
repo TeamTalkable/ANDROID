@@ -19,7 +19,7 @@ class TodaySavedAdapter : ListAdapter<TodaySaved, TodaySavedViewHolder>(SavedWor
 
 class SavedWordDiffCallback : DiffUtil.ItemCallback<TodaySaved>() {
     override fun areItemsTheSame(oldItem: TodaySaved, newItem: TodaySaved): Boolean {
-        return oldItem.word == newItem.word
+        return oldItem.word == newItem.word || oldItem.sentence == newItem.sentence
     }
 
     override fun areContentsTheSame(oldItem: TodaySaved, newItem: TodaySaved): Boolean {
