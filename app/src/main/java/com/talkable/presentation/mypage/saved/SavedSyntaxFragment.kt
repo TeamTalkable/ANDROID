@@ -1,23 +1,48 @@
 package com.talkable.presentation.mypage.saved
 
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.viewLifeCycle
+import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentSavedSyntaxBinding
-import com.talkable.presentation.mypage.saved.model.SavedListModel
-import com.talkable.presentation.mypage.saved.model.SavedWord
+import com.talkable.presentation.home.TodaySavedUiState
+import com.talkable.presentation.home.TodaySavedViewModel
+import com.talkable.presentation.home.model.MemorizationStatus
+import com.talkable.presentation.home.model.TalkSavedModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SavedSyntaxFragment :
     BindingFragment<FragmentSavedSyntaxBinding>(R.layout.fragment_saved_syntax) {
 
+    private val viewModel: TodaySavedViewModel by activityViewModels()
     private lateinit var savedSyntaxAdapter: SavedSyntaxAdapter
 
     override fun initView() {
         statusBarColorOf(R.color.main_3)
-        initSavedSyntaxAdapter()
-        initSavedSyntaxChipClickListener()
+        collect()
         initTranslationBtnClickListener()
+    }
+
+    private fun collect() {
+        viewLifeCycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
+                when (uiState) {
+                    is TodaySavedUiState.Success -> {
+                        setSavedSyntaxCount(uiState.data)
+                        initSavedSyntaxAdapter(uiState.data)
+                        initSavedSyntaxChipClickListener(uiState.data)
+                    }
+
+                    is TodaySavedUiState.Error -> Timber.e(uiState.errorMessage)
+                    else -> Unit
+                }
+            }
+        }
     }
 
     private fun initTranslationBtnClickListener() {
@@ -34,23 +59,39 @@ class SavedSyntaxFragment :
         }
     }
 
-    private fun initSavedSyntaxAdapter() {
+    private fun initSavedSyntaxAdapter(data: TalkSavedModel) {
         savedSyntaxAdapter = SavedSyntaxAdapter()
         with(binding.rvSavedSyntax) {
             adapter = savedSyntaxAdapter
         }
-        savedSyntaxAdapter.submitList(mockData.savedWordList)
+        savedSyntaxAdapter.submitList(data.savedSentenceList)
     }
 
-    private fun initSavedSyntaxChipClickListener() {
+    private fun setSavedSyntaxCount(data: TalkSavedModel) {
+        binding.layoutSavedSort.tvSavedCount.text =
+            getString(R.string.tv_saved_sentence_count, data.savedSentenceList.size)
+    }
+
+    private fun initSavedSyntaxChipClickListener(data: TalkSavedModel) {
         binding.layoutSavedSort.cgSavedList.setOnCheckedStateChangeListener { chipGroup, _ ->
-            val newData = when (chipGroup.checkedChipId) {
-                R.id.chip_saved_difficult -> difficultSyntax.savedWordList
-                R.id.chip_saved_memorizing -> memorizingSyntax.savedWordList
-                R.id.chip_saved_memorized -> memorizedSyntax.savedWordList
-                else -> mockData.savedWordList
+            val filteredData = when (chipGroup.checkedChipId) {
+                R.id.chip_saved_difficult -> {
+                    data.savedSentenceList.filter { it.status == MemorizationStatus.DIFFICULT }
+                }
+
+                R.id.chip_saved_memorizing -> {
+                    data.savedSentenceList.filter { it.status == MemorizationStatus.MEMORIZING }
+                }
+
+                R.id.chip_saved_memorized -> {
+                    data.savedSentenceList.filter { it.status == MemorizationStatus.MEMORIZED }
+                }
+
+                else -> {
+                    data.savedSentenceList
+                }
             }
-            savedSyntaxAdapter.submitList(newData)
+            savedSyntaxAdapter.submitList(filteredData)
         }
     }
 
@@ -63,82 +104,4 @@ class SavedSyntaxFragment :
             }
         }
     }
-
-    private val mockData = SavedListModel(
-        savedWordId = 1, savedWordList = listOf(
-            SavedWord(
-                type = 0, word = "How was your day?", translation = "오늘 하루 어땠어?", tag = "어려워요"
-            ), SavedWord(
-                type = 1,
-                word = "Have you finished your homework?",
-                translation = "숙제 다 했니?",
-                tag = "외웠어요"
-            ), SavedWord(
-                type = 2,
-                word = "What did you eat for lunch?",
-                translation = "점심으로 뭐 먹었어?",
-                tag = "암기 중"
-            )
-        )
-    )
-
-    private val difficultSyntax = SavedListModel(
-        savedWordId = 2, savedWordList = listOf(
-            SavedWord(
-                type = 0,
-                word = "Can you help me with this problem?",
-                translation = "이 문제 좀 도와줄 수 있어?",
-                tag = "어려워요"
-            ), SavedWord(
-                type = 0,
-                word = "This is too difficult for me.",
-                translation = "이건 나에게 너무 어려워.",
-                tag = "어려워요"
-            ), SavedWord(
-                type = 0,
-                word = "I don't understand this topic.",
-                translation = "이 주제를 이해할 수 없어.",
-                tag = "어려워요"
-            )
-        )
-    )
-
-    private val memorizingSyntax = SavedListModel(
-        savedWordId = 3, savedWordList = listOf(
-            SavedWord(
-                type = 1,
-                word = "I'm trying to remember this.",
-                translation = "이걸 기억하려고 노력 중이야.",
-                tag = "암기 중"
-            ), SavedWord(
-                type = 1,
-                word = "I've been studying hard.",
-                translation = "열심히 공부하고 있어.",
-                tag = "암기 중"
-            ), SavedWord(
-                type = 1,
-                word = "I need to practice more.",
-                translation = "더 연습해야 돼.",
-                tag = "암기 중"
-            )
-        )
-    )
-
-    private val memorizedSyntax = SavedListModel(
-        savedWordId = 4, savedWordList = listOf(
-            SavedWord(
-                type = 2,
-                word = "I remember this perfectly.",
-                translation = "이걸 완벽하게 기억해.",
-                tag = "외웠어요"
-            ), SavedWord(
-                type = 2,
-                word = "This is easy for me now.",
-                translation = "이제 이건 나에게 쉬워.",
-                tag = "외웠어요"
-            ), SavedWord(
-                type = 2, word = "I have mastered this.", translation = "이걸 완전히 익혔어.", tag = "외웠어요"
-            )
-        )
-    )
 }
