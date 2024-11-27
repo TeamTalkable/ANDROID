@@ -1,7 +1,7 @@
 package com.talkable.presentation.home
 
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import com.talkable.R
@@ -21,8 +21,8 @@ import kotlinx.coroutines.launch
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private val viewModel: FinalTalkFeedbackViewModel by viewModels()
-    private val savedViewModel: TodaySavedViewModel by viewModels()
+    private val viewModel: FinalTalkFeedbackViewModel by activityViewModels()
+    private val savedViewModel: TodaySavedViewModel by activityViewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.white)
