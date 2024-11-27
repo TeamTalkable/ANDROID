@@ -8,6 +8,10 @@
         <item name="android:statusBarColor">@color/main_3</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@color/white</item>
+
+        <item name="android:textColorHighlight">@color/tv_highlight</item>
+        <item name="android:colorAccent">@color/tv_highlight</item>
+        <item name="colorControlNormal">@color/main</item>
     </style>
 
     <style name="Theme.Talkable" parent="Base.Theme.Talkable" />

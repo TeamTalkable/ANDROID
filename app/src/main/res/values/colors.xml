@@ -53,4 +53,5 @@
     <color name="search_view_bg">#F1F1F1</color>
     <color name="talk_toolbar_bg">#C4BCBA</color>
     <color name="quiz_coach">#66262626</color>
+    <color name="tv_highlight">#9EFFFF00</color>
 </resources>
