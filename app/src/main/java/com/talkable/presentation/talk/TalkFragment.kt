@@ -56,7 +56,7 @@ import com.talkable.presentation.feedback.FeedbackUiState
 import com.talkable.presentation.feedback.FeedbackViewModel
 import com.talkable.presentation.feedback.model.FeedbackContainer
 import com.talkable.presentation.firstTalk
-import com.talkable.presentation.home.SavedViewModel
+import com.talkable.presentation.review.model.SavedViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

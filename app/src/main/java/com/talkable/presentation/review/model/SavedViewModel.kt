@@ -1,4 +1,4 @@
-package com.talkable.presentation.home
+package com.talkable.presentation.review.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,9 +6,6 @@ import com.talkable.data.FirebaseFactory
 import com.talkable.data.ServicePool
 import com.talkable.data.dto.request.Message
 import com.talkable.data.dto.request.RequestGptDto
-import com.talkable.presentation.home.model.MemorizationStatus
-import com.talkable.presentation.home.model.Saved
-import com.talkable.presentation.home.model.TalkSavedModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

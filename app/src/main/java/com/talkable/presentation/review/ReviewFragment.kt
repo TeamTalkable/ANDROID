@@ -11,11 +11,11 @@ import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentReviewBinding
-import com.talkable.presentation.home.TodaySavedUiState
-import com.talkable.presentation.home.TodaySavedViewModel
-import com.talkable.presentation.home.model.TalkSavedModel
 import com.talkable.presentation.mypage.saved.SavedWordAdapter
 import com.talkable.presentation.quiz.Quiz
+import com.talkable.presentation.review.model.TalkSavedModel
+import com.talkable.presentation.review.model.TodaySavedUiState
+import com.talkable.presentation.review.model.TodaySavedViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

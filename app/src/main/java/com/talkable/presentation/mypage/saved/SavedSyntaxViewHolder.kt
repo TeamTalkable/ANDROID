@@ -7,9 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.R
 import com.talkable.databinding.ItemSavedSyntaxBinding
-import com.talkable.presentation.home.model.Saved
 import com.talkable.presentation.mypage.saved.SavedWordViewHolder.Companion.backgroundColors
 import com.talkable.presentation.mypage.saved.SavedWordViewHolder.Companion.textColors
+import com.talkable.presentation.review.model.Saved
 
 class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
     RecyclerView.ViewHolder(binding.root) {

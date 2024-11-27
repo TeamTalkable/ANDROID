@@ -12,8 +12,10 @@ import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.core.view.visible
 import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentHomeBinding
-import com.talkable.presentation.home.model.TalkSavedModel
 import com.talkable.presentation.quiz.TodayQuizDialog
+import com.talkable.presentation.review.model.TalkSavedModel
+import com.talkable.presentation.review.model.TodaySavedUiState
+import com.talkable.presentation.review.model.TodaySavedViewModel
 import com.talkable.presentation.talk.feedback.FinalFeedbackUiState
 import com.talkable.presentation.talk.feedback.FinalTalkFeedbackViewModel
 import com.talkable.presentation.talk.feedback.model.TalkFeedbackModel

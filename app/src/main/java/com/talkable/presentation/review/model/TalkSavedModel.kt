@@ -1,4 +1,4 @@
-package com.talkable.presentation.home.model
+package com.talkable.presentation.review.model
 
 import android.content.Context
 import com.talkable.R

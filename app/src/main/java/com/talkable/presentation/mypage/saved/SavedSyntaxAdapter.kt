@@ -3,7 +3,7 @@ package com.talkable.presentation.mypage.saved
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.talkable.presentation.home.model.Saved
+import com.talkable.presentation.review.model.Saved
 
 class SavedSyntaxAdapter :
     ListAdapter<Saved.Sentence, SavedSyntaxViewHolder>(SavedSyntaxDiffCallback()) {

@@ -14,7 +14,9 @@ import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentTalkReviewBinding
 import com.talkable.presentation.feedback.today.TodaySavedFragment.Companion.FEEDBACK_TAB_FEEDBACK
 import com.talkable.presentation.feedback.today.TodaySavedFragment.Companion.FEEDBACK_TAB_SAVED
-import com.talkable.presentation.home.model.TalkSavedModel
+import com.talkable.presentation.review.model.TalkSavedModel
+import com.talkable.presentation.review.model.TodaySavedUiState
+import com.talkable.presentation.review.model.TodaySavedViewModel
 import com.talkable.presentation.talk.feedback.FinalFeedbackUiState
 import com.talkable.presentation.talk.feedback.FinalTalkFeedbackViewModel
 import com.talkable.presentation.talk.feedback.TalkFeedbackLearnedAdapter

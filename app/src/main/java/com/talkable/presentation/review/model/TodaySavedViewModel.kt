@@ -1,12 +1,10 @@
-package com.talkable.presentation.home
+package com.talkable.presentation.review.model
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.talkable.data.FirebaseFactory
-import com.talkable.presentation.home.model.Saved
-import com.talkable.presentation.home.model.TalkSavedModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 

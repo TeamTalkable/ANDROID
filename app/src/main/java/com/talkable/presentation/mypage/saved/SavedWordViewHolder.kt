@@ -7,8 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.talkable.R
 import com.talkable.databinding.ItemSavedWordBinding
-import com.talkable.presentation.home.model.MemorizationStatus
-import com.talkable.presentation.home.model.Saved
+import com.talkable.presentation.review.model.MemorizationStatus
+import com.talkable.presentation.review.model.Saved
 
 class SavedWordViewHolder(private val binding: ItemSavedWordBinding) :
     RecyclerView.ViewHolder(binding.root) {
