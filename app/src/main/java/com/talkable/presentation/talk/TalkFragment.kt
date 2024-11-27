@@ -11,6 +11,9 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.text.SpannableStringBuilder
 import android.util.Base64
+import android.view.ActionMode
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -111,6 +114,7 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
         initFeedbackTranslateBtnClickListener()
         initFeedbackCloseBtnClickListener()
         viewModel.updateTalkTime(startTime = System.currentTimeMillis())
+        initTextSelection()
     }
 
     private fun observeTvTalkEnglishTextChanges() = with(binding) {
@@ -768,6 +772,46 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
                 }
             }
         }
+    }
+
+    private fun initTextSelection() {
+        binding.groupTalkFeedback.tvTalkFeedbackUserAfterAnswer.customSelectionActionModeCallback =
+            object : ActionMode.Callback {
+                override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                    menu?.clear()
+                    mode?.menuInflater?.inflate(R.menu.menu_save_text, menu)
+                    return true
+                }
+
+                override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                    return false
+                }
+
+                override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                    return when (item?.itemId) {
+                        R.id.save_text -> {
+                            saveSelectedText(mode)
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
+
+                override fun onDestroyActionMode(mode: ActionMode?) {}
+            }
+    }
+
+    private fun saveSelectedText(mode: ActionMode?) {
+        with(binding.groupTalkFeedback.tvTalkFeedbackUserAfterAnswer) {
+            if (selectionStart >= 0 && selectionEnd >= 0 && selectionStart != selectionEnd) {
+                val selectedText = text.subSequence(selectionStart, selectionEnd).toString()
+                toast("\"$selectedText\"를 저장하였습니다.")
+            } else {
+                toast("선택된 텍스트가 없습니다.")
+            }
+        }
+        mode?.finish()
     }
 
     private fun handleRecordingUiState() = with(binding) {
