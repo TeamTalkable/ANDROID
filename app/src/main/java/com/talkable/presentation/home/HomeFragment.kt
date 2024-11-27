@@ -12,6 +12,7 @@ import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.core.view.visible
 import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentHomeBinding
+import com.talkable.presentation.home.model.TalkSavedModel
 import com.talkable.presentation.quiz.TodayQuizDialog
 import com.talkable.presentation.talk.feedback.FinalFeedbackUiState
 import com.talkable.presentation.talk.feedback.FinalTalkFeedbackViewModel
@@ -21,11 +22,13 @@ import kotlinx.coroutines.launch
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel: FinalTalkFeedbackViewModel by viewModels()
+    private val savedViewModel: TodaySavedViewModel by viewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.white)
         binding.tvHomeUserName.text = "${SharedManager.getNickname()}님,"
         collectFeedback()
+        collectSavedList()
         initQuizBtnClickListener()
         initViewPagerAdapter()
         initStartBtnClickListener()
@@ -46,6 +49,21 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             }
         }
     }
+
+    private fun collectSavedList() {
+        viewLifeCycleScope.launch {
+            savedViewModel.uiState.flowWithLifecycle(viewLifeCycle).collect() { uiState ->
+                when (uiState) {
+                    is TodaySavedUiState.Success -> {
+                        setSavedCount(calculateSavedCount(uiState.data))
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
+    }
+
 
     private fun initQuizBtnClickListener() {
         binding.icHomeQuiz.setOnClickListener {
@@ -74,6 +92,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         return data.learnedExpression.size +
                 data.learnedGrammar.size +
                 data.learnedPronunciation.size
+    }
+
+    private fun setSavedCount(totalSavedCount: Int) {
+        binding.includeTalkCalendar.tvHomeLearningStorage.text =
+            getString(R.string.tv_home_learning_storage, totalSavedCount)
+    }
+
+    private fun calculateSavedCount(data: TalkSavedModel): Int {
+        return data.savedWordList.size +
+                data.savedSentenceList.size
     }
 
     private fun initStartBtnClickListener() {
