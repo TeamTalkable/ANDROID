@@ -1,8 +1,7 @@
 package com.talkable.presentation.home
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
@@ -15,6 +14,7 @@ import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentTalkReviewBinding
 import com.talkable.presentation.feedback.today.TodaySavedFragment.Companion.FEEDBACK_TAB_FEEDBACK
 import com.talkable.presentation.feedback.today.TodaySavedFragment.Companion.FEEDBACK_TAB_SAVED
+import com.talkable.presentation.home.model.TalkSavedModel
 import com.talkable.presentation.talk.feedback.FinalFeedbackUiState
 import com.talkable.presentation.talk.feedback.FinalTalkFeedbackViewModel
 import com.talkable.presentation.talk.feedback.TalkFeedbackLearnedAdapter
@@ -27,18 +27,19 @@ class TalkReviewFragment :
     private lateinit var reviewTopAdapter: TalkReviewTopAdapter
     private lateinit var feedbackLearnedAdapter: TalkFeedbackLearnedAdapter
 
-    private val viewModel: FinalTalkFeedbackViewModel by viewModels({ activity as AppCompatActivity })
+    private val viewModel: FinalTalkFeedbackViewModel by activityViewModels()
+    private val savedViewModel: TodaySavedViewModel by activityViewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.main_3)
-        collect()
+        collectFeedback()
+        collectSaved()
         initTalkSavedBtnClickListener()
         initTalkFeedbackBtnClickListener()
         initBackBtnClickListener()
-        setSavedCount()
     }
 
-    private fun collect() {
+    private fun collectFeedback() {
         viewLifeCycleScope.launch {
             viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
                 when (uiState) {
@@ -47,6 +48,20 @@ class TalkReviewFragment :
                         initFeedbackLearnedAdapter(uiState.data)
                         setFeedbackAdapters(uiState.data)
                         setFeedbackCount(calculateFeedbackCount(uiState.data))
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
+    }
+
+    private fun collectSaved() {
+        viewLifeCycleScope.launch {
+            savedViewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
+                when (uiState) {
+                    is TodaySavedUiState.Success -> {
+                        setSavedCount(calculateSavedCount(uiState.data))
                     }
 
                     else -> Unit
@@ -108,14 +123,19 @@ class TalkReviewFragment :
         setRecyclerviewItemDecoration(data)
     }
 
-    //TODO : Firebase 연결
-    private fun setSavedCount() {
-        binding.btnTalkSavedCount.text = getString(R.string.tv_home_learning_storage, 3)
+    private fun setSavedCount(totalSavedCount: Int) {
+        binding.btnTalkSavedCount.text =
+            getString(R.string.tv_home_learning_storage, totalSavedCount)
     }
 
     private fun setFeedbackCount(totalFeedbackCount: Int) {
         binding.btnTalkFeedbackCount.text =
             getString(R.string.tv_home_learning_feedback, totalFeedbackCount)
+    }
+
+    private fun calculateSavedCount(data: TalkSavedModel): Int {
+        return data.savedWordList.size +
+                data.savedSentenceList.size
     }
 
     private fun calculateFeedbackCount(data: TalkFeedbackModel): Int {
