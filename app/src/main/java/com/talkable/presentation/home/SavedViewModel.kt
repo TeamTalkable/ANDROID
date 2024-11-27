@@ -2,6 +2,7 @@ package com.talkable.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.talkable.data.FirebaseFactory
 import com.talkable.data.ServicePool
 import com.talkable.data.dto.request.Message
 import com.talkable.data.dto.request.RequestGptDto
@@ -88,12 +89,28 @@ class SavedViewModel : ViewModel() {
             status = MemorizationStatus.MEMORIZING
         )
         talkSavedModel.savedWordList.add(fixedWordData)
+        saveToFirebase(fixedWordData, "savedWordList")
     }
 
     // Sentence 데이터 처리
     private fun processSentence(sentenceData: Saved.Sentence) {
         val fixedSentenceData = sentenceData.copy(status = MemorizationStatus.MEMORIZING)
         talkSavedModel.savedSentenceList.add(fixedSentenceData)
+        saveToFirebase(fixedSentenceData, "savedSentenceList")
+    }
+
+    // Firebase 저장
+    private fun saveToFirebase(savedData: Saved, path: String) {
+        val serializedData = json.encodeToString(Saved.serializer(), savedData)
+        Timber.d("Saving to Firebase: $serializedData")
+
+        FirebaseFactory.savedRef.child(path).push().setValue(savedData)
+            .addOnSuccessListener {
+                Timber.d("$path 저장 성공: $savedData")
+            }
+            .addOnFailureListener { exception ->
+                Timber.e(exception, "$path 저장 실패: ${exception.message}")
+            }
     }
 
     // 요청 메시지 생성
