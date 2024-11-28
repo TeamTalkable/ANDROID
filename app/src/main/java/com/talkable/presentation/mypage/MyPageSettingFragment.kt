@@ -1,5 +1,6 @@
 package com.talkable.presentation.mypage
 
+import androidx.navigation.fragment.findNavController
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.DialogKey
@@ -9,6 +10,13 @@ class MyPageSettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.f
     override fun initView() {
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
+        initBackBtnClickListener()
+    }
+
+    private fun initBackBtnClickListener() {
+        binding.btnAppBarBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initLogoutBtnClickListener() {
@@ -17,7 +25,8 @@ class MyPageSettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.f
         }
     }
 
-    private fun showLogoutDialog() = LogoutDialog().show(childFragmentManager,
+    private fun showLogoutDialog() = LogoutDialog().show(
+        childFragmentManager,
         DialogKey.LOGOUT_DIALOG
     )
 
@@ -27,7 +36,8 @@ class MyPageSettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.f
         }
     }
 
-    private fun showWithdrawDialog() = WithdrawDialog().show(childFragmentManager,
+    private fun showWithdrawDialog() = WithdrawDialog().show(
+        childFragmentManager,
         DialogKey.WITHDRAW_DIALOG
     )
 }

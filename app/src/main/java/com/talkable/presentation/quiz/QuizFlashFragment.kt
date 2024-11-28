@@ -86,6 +86,7 @@ class QuizFlashFragment : BindingFragment<FragmentQuizFlashBinding>(R.layout.fra
                 updateNextFlashCard(mockLong[index])
                 binding.layoutQuizFlashAppbar.count =
                     getString(R.string.label_quiz_app_bar_count, index + 1, mockLong.size)
+                if (index == 1) binding.ivFlashImg.setImageResource(R.drawable.img_flash_book)
             } else {
                 navigateToResult(mockLong.size)
             }

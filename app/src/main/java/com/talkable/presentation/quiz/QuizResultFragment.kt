@@ -40,7 +40,7 @@ class QuizResultFragment :
         when (type) {
             Quiz.SPELLING.title -> {
                 groupQuizResultEtc.visible(true)
-                setTitle("스펠링 완료!")
+                setTitle("스펠링 테스트 완료!")
                 setCountText()
             }
 
@@ -53,7 +53,7 @@ class QuizResultFragment :
 
             Quiz.AUTO.title -> {
                 groupQuizResultAuto.visible(true)
-                setTitle("AUTO 완료!")
+                setTitle("자동전환 카드 완료!")
                 binding.tvQuizResultAutoCount.text = "${totalCount}개"
             }
 
