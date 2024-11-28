@@ -64,6 +64,7 @@
             android:layout_marginTop="20dp"
             android:paddingBottom="20dp"
             android:textAppearance="@style/TextAppearance.Talkable.m_16"
+            android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="@id/bg_talk_feedback_user_after_answer"
             app:layout_constraintStart_toEndOf="@id/iv_talk_feedback_sound"
             app:layout_constraintTop_toTopOf="@id/bg_talk_feedback_user_after_answer"

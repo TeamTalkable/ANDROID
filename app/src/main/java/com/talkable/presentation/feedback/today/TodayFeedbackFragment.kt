@@ -35,11 +35,24 @@ class TodayFeedbackFragment :
     }
 
     private fun initFeedbackChipClickListener() {
-        updateFeedbackData(binding.cgTodayFeedbackList.checkedChipId)
+        val largestChipId = getLargestFeedbackChipId()
+        binding.cgTodayFeedbackList.check(largestChipId)
+
+        updateFeedbackData(largestChipId)
 
         binding.cgTodayFeedbackList.setOnCheckedStateChangeListener { chipGroup, _ ->
             updateFeedbackData(chipGroup.checkedChipId)
         }
+    }
+
+    private fun getLargestFeedbackChipId(): Int {
+        val todayFeedback = viewModel.feedback.toTodayFeedback()
+        val sizes = mapOf(
+            R.id.chip_today_expression to todayFeedback.todayExpression.size,
+            R.id.chip_today_grammar to todayFeedback.todayGrammar.size,
+            R.id.chip_today_pronunciation to todayFeedback.todayPronunciation.size
+        )
+        return sizes.maxByOrNull { it.value }?.key ?: R.id.chip_today_expression
     }
 
     private fun updateFeedbackData(checkedChipId: Int) {

@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_today_saved_word"
+                android:id="@+id/tv_today_saved_english"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="19dp"
@@ -58,26 +58,15 @@
                 tools:text="@string/tv_talk_english" />
 
             <TextView
-                android:id="@+id/tv_today_saved_verb"
+                android:id="@+id/tv_today_saved_korean"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-                app:layout_constraintEnd_toEndOf="@id/tv_today_saved_word"
-                app:layout_constraintStart_toStartOf="@id/tv_today_saved_word"
-                app:layout_constraintTop_toBottomOf="@id/tv_today_saved_word"
+                app:layout_constraintEnd_toEndOf="@id/tv_today_saved_english"
+                app:layout_constraintStart_toStartOf="@id/tv_today_saved_english"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_saved_english"
                 tools:text="@string/tv_today_saved_verb" />
-
-            <TextView
-                android:id="@+id/tv_today_saved_noun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.Talkable.sub_m_12"
-                app:layout_constraintEnd_toEndOf="@id/tv_today_saved_verb"
-                app:layout_constraintStart_toStartOf="@id/tv_today_saved_verb"
-                app:layout_constraintTop_toBottomOf="@id/tv_today_saved_verb"
-                tools:text="@string/tv_today_saved_noun" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

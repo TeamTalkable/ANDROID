@@ -67,7 +67,7 @@
     <string name="tv_home_calendar_fri">금</string>
     <string name="tv_home_calendar_satur">토</string>
     <string name="tv_home_calendar_sun">일</string>
-    <string name="tv_home_learning_time">대화시간 %1$dM</string>
+    <string name="tv_home_learning_time">대화시간</string>
     <string name="tv_home_learning_storage">저장 목록 %1$d개</string>
     <string name="tv_home_learning_feedback">피드백 %1$d개</string>
     <string name="tv_home_learning_review">복습하기</string>
@@ -107,6 +107,8 @@
     <string name="tv_saved_difficult">어려워요</string>
     <string name="tv_saved_memorized">외웠어요</string>
     <string name="tv_saved_memorizing">암기 중</string>
+    <string name="tv_saved_word_count">%1$d개의 단어가 있어요!</string>
+    <string name="tv_saved_sentence_count">%1$d개의 구문이 있어요!</string>
 
     <!--today-->
     <string name="tv_today_saved_list">오늘 저장한 목록</string>

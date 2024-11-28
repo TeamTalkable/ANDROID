@@ -63,7 +63,8 @@
                 app:chipCornerRadius="40dp"
                 app:chipStrokeWidth="0dp"
                 app:textEndPadding="12dp"
-                app:textStartPadding="12dp" />
+                app:textStartPadding="12dp"
+                android:checked="true"/>
         </com.google.android.material.chip.ChipGroup>
 
         <ImageButton
@@ -106,7 +107,7 @@
             android:id="@+id/tv_saved_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="35개의 단어가 있어요!"
+            android:text="@string/tv_saved_word_count"
             android:layout_marginTop="14dp"
             app:layout_constraintTop_toBottomOf="@id/cg_saved_list"
             app:layout_constraintStart_toStartOf="parent"/>

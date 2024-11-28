@@ -9,7 +9,7 @@ import com.talkable.R
 import com.talkable.databinding.ItemSavedSyntaxBinding
 import com.talkable.presentation.mypage.saved.SavedWordViewHolder.Companion.backgroundColors
 import com.talkable.presentation.mypage.saved.SavedWordViewHolder.Companion.textColors
-import com.talkable.presentation.mypage.saved.model.SavedWord
+import com.talkable.presentation.review.model.Saved
 
 class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -19,17 +19,23 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
         initListenBtnClickListener()
     }
 
-    fun onBind(item: SavedWord) {
-        val backgroundColor = backgroundColors[item.type] ?: R.drawable.shape_main_fill_12_rect
-        val textColor = textColors[item.type] ?: R.color.white
+    fun onBind(item: Saved.Sentence) {
+        val context = binding.root.context
+        val backgroundColor = backgroundColors[item.status] ?: R.drawable.shape_main_fill_12_rect
+        val textColor = textColors[item.status] ?: R.color.white
 
         binding.run {
-            tvSavedSyntax.text = item.word
-            btnSavedSyntaxTag.text = item.tag
-            tvSavedTranslation.text = item.translation
+            tvSavedSyntax.text = item.sentenceEnglish
+            btnSavedSyntaxTag.text = item.status.getStatusText(context)
+            tvSavedTranslation.text = item.sentenceKorean
             btnSavedSyntaxTag.background =
                 ContextCompat.getDrawable(btnSavedSyntaxTag.context, backgroundColor)
-            btnSavedSyntaxTag.setTextColor(ContextCompat.getColor(btnSavedSyntaxTag.context, textColor))
+            btnSavedSyntaxTag.setTextColor(
+                ContextCompat.getColor(
+                    btnSavedSyntaxTag.context,
+                    textColor
+                )
+            )
 
             tvSavedTranslation.visibility = View.GONE
         }
@@ -49,7 +55,7 @@ class SavedSyntaxViewHolder(private val binding: ItemSavedSyntaxBinding) :
     }
 
     private fun initListenBtnClickListener() {
-        with(binding){
+        with(binding) {
             btnSavedSyntaxListen.setOnClickListener {
                 btnSavedSyntaxListen.isSelected = !btnSavedSyntaxListen.isSelected
             }
