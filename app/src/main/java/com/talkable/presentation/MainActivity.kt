@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.talkable.R
 import com.talkable.core.base.BindingActivity
+import com.talkable.core.util.context.statusBarColorOf
 import com.talkable.data.SharedManager
 import com.talkable.databinding.ActivityMainBinding
 
@@ -44,6 +45,11 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 } else {
                     View.GONE
                 }
+
+            when(destination.id){
+                R.id.fragment_quiz_flash -> statusBarColorOf(R.color.white)
+                R.id.fragment_talk -> statusBarColorOf(R.color.talk_toolbar_bg)
+            }
         }
     }
 
