@@ -83,7 +83,8 @@ class SavedViewModel : ViewModel() {
     private fun processWord(wordData: Saved.Word) {
         val fixedWordData = wordData.copy(
             wordKorean = wordData.wordKorean,
-            status = MemorizationStatus.MEMORIZING
+            status = MemorizationStatus.MEMORIZING,
+            timestamp = System.currentTimeMillis()
         )
         talkSavedModel.savedWordList.add(fixedWordData)
         saveToFirebase(fixedWordData, "savedWordList")
@@ -91,7 +92,10 @@ class SavedViewModel : ViewModel() {
 
     // Sentence 데이터 처리
     private fun processSentence(sentenceData: Saved.Sentence) {
-        val fixedSentenceData = sentenceData.copy(status = MemorizationStatus.MEMORIZING)
+        val fixedSentenceData = sentenceData.copy(
+            status = MemorizationStatus.MEMORIZING,
+            timestamp = System.currentTimeMillis()
+        )
         talkSavedModel.savedSentenceList.add(fixedSentenceData)
         saveToFirebase(fixedSentenceData, "savedSentenceList")
     }
