@@ -63,8 +63,7 @@
                 app:chipCornerRadius="40dp"
                 app:chipStrokeWidth="0dp"
                 app:textEndPadding="12dp"
-                app:textStartPadding="12dp"
-                android:checked="true"/>
+                app:textStartPadding="12dp"/>
         </com.google.android.material.chip.ChipGroup>
 
         <ImageButton
