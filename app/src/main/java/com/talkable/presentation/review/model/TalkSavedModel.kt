@@ -20,7 +20,8 @@ enum class MemorizationStatus {
 data class TalkSavedModel(
     val talkSavedId: Int = 0,
     val savedWordList: MutableList<Saved.Word> = mutableListOf(),
-    val savedSentenceList: MutableList<Saved.Sentence> = mutableListOf()
+    val savedSentenceList: MutableList<Saved.Sentence> = mutableListOf(),
+    val timestamp: Long = System.currentTimeMillis()
 )
 
 @Serializable
@@ -38,7 +39,9 @@ sealed class Saved {
         @SerialName("wordKorean")
         val wordKorean: String = "",
         @SerialName("partOfSpeech")
-        val partOfSpeech: String = "other"
+        val partOfSpeech: String = "other",
+        @SerialName("timestamp")
+        val timestamp: Long = 0L
     ) : Saved()
 
     @Serializable
@@ -50,5 +53,7 @@ sealed class Saved {
         val sentenceEnglish: String = "",
         @SerialName("sentenceKorean")
         val sentenceKorean: String = "",
+        @SerialName("timestamp")
+        val timestamp: Long = 0L
     ) : Saved()
 }
