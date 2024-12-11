@@ -50,6 +50,7 @@ import com.talkable.core.util.fragment.toast
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.core.view.visible
+import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentTalkBinding
 import com.talkable.presentation.FeedbackTextColor
 import com.talkable.presentation.feedback.FeedbackUiState
@@ -571,6 +572,12 @@ class TalkFragment : BindingFragment<FragmentTalkBinding>(R.layout.fragment_talk
             btnTalkNext.visible(true)
             tvTalkEnglish.text = getString(R.string.label_talk_next_to_feedback_en)
             tvTalkTranslate.text = getString(R.string.label_talk_next_to_feedback_ko)
+            tvTalkTranslate.setText(
+                String.format(
+                    getString(R.string.label_talk_next_to_feedback_ko),
+                    "${SharedManager.getNickname()}"
+                )
+            )
             initGetFeedbackBtnClickListener()
         }
     }

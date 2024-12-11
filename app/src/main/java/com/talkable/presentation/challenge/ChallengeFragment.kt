@@ -2,24 +2,50 @@ package com.talkable.presentation.challenge
 
 import android.os.Handler
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.talkable.R
 import com.talkable.core.base.BindingFragment
 import com.talkable.core.util.fragment.statusBarColorOf
+import com.talkable.core.util.fragment.viewLifeCycle
+import com.talkable.core.util.fragment.viewLifeCycleScope
+import com.talkable.data.SharedManager
 import com.talkable.databinding.FragmentChallengeBinding
+import com.talkable.presentation.talk.feedback.FinalFeedbackUiState
+import com.talkable.presentation.talk.feedback.FinalTalkFeedbackViewModel
+import com.talkable.presentation.talk.feedback.model.TalkFeedbackModel
+import kotlinx.coroutines.launch
 
-class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fragment_challenge), ChallengeDialog.OnJoinCompleteListener {
+class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fragment_challenge),
+    ChallengeDialog.OnJoinCompleteListener {
+
+    private val viewModel: FinalTalkFeedbackViewModel by activityViewModels()
 
     override fun initView() {
         statusBarColorOf(R.color.white)
+        collectFeedback()
         setChallengeTextView()
         initParticipationAdapter()
         initRecruitmentAdapter()
         initNavigateChallengeRecruitment()
-        setChallengeUserRanking()
         setChallengeRanking()
         initRankingAdapter()
+    }
+
+    private fun collectFeedback() {
+        viewLifeCycleScope.launch {
+            viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
+                when (uiState) {
+                    is FinalFeedbackUiState.Success -> {
+                        setChallengeUserRanking(uiState.data)
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
     }
 
     private fun initNavigateChallengeRecruitment() {
@@ -68,7 +94,11 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
             offscreenPageLimit = 2
 
             adapter = ChallengeRecruitmentAdapter(challengeList, { recruitment ->
-                ChallengeDialog(requireContext(), recruitment, this@ChallengeFragment).show() // 콜백 전달
+                ChallengeDialog(
+                    requireContext(),
+                    recruitment,
+                    this@ChallengeFragment
+                ).show()
             }, this@ChallengeFragment)
         }
     }
@@ -118,11 +148,11 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
         }
     }
 
-    private fun setChallengeUserRanking() {
+    private fun setChallengeUserRanking(data: TalkFeedbackModel) {
         with(binding) {
             tvChallengeUserRanking.text = userRankingMockData.rank
             tvChallengeUserName.text = userRankingMockData.name
-            tvChallengeUserTime.text = userRankingMockData.time
+            tvChallengeUserTime.text = data.talkTime + "분"
         }
     }
 
@@ -175,6 +205,6 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     )
 
     private val userRankingMockData = Ranking(
-        rank = "115위", name = "김지은", time = "15분"
+        rank = "115위", name = "${SharedManager.getNickname()}", time = "15분"
     )
 }
