@@ -3,6 +3,7 @@ package com.talkable.presentation.review.model
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.talkable.data.FirebaseFactory
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,22 +13,36 @@ class TodaySavedViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<TodaySavedUiState>(TodaySavedUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
+    private var savedWordList: MutableList<Saved.Word> = mutableListOf()
+    private var savedSentenceList: MutableList<Saved.Sentence> = mutableListOf()
+
     init {
         getTodaySaved()
     }
 
     private fun getTodaySaved() {
-        FirebaseFactory.savedRef.addValueEventListener(object : ValueEventListener {
+        val savedWordQuery: Query =
+            FirebaseFactory.savedRef.child("savedWordList").orderByChild("timestamp")
+        val savedSentenceQuery: Query =
+            FirebaseFactory.savedRef.child("savedSentenceList").orderByChild("timestamp")
+
+        savedWordQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val savedWordList = getSavedWordList(snapshot)
-                val savedSentenceList = getSavedSentenceList(snapshot)
+                savedWordList = getSavedWordList(snapshot)
+                savedWordList.sortByDescending { it.timestamp }
+                updateUiState()
+            }
 
-                val talkSavedModel = TalkSavedModel(
-                    savedWordList = savedWordList,
-                    savedSentenceList = savedSentenceList
-                )
+            override fun onCancelled(error: DatabaseError) {
+                _uiState.value = TodaySavedUiState.Error(error.message)
+            }
+        })
 
-                _uiState.value = TodaySavedUiState.Success(talkSavedModel)
+        savedSentenceQuery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                savedSentenceList = getSavedSentenceList(snapshot)
+                savedSentenceList.sortByDescending { it.timestamp }
+                updateUiState()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -36,9 +51,19 @@ class TodaySavedViewModel : ViewModel() {
         })
     }
 
+    private fun updateUiState() {
+        if (savedWordList.isNotEmpty() || savedSentenceList.isNotEmpty()) {
+            val talkSavedModel = TalkSavedModel(
+                savedWordList = savedWordList,
+                savedSentenceList = savedSentenceList
+            )
+            _uiState.value = TodaySavedUiState.Success(talkSavedModel)
+        }
+    }
+
     private fun getSavedWordList(snapshot: DataSnapshot): MutableList<Saved.Word> {
         val savedWordList = mutableListOf<Saved.Word>()
-        snapshot.child("savedWordList").children.forEach { dataSnapshot ->
+        snapshot.children.forEach { dataSnapshot ->
             dataSnapshot.getValue(Saved.Word::class.java)?.let { savedWordList.add(it) }
         }
         return savedWordList
@@ -46,7 +71,7 @@ class TodaySavedViewModel : ViewModel() {
 
     private fun getSavedSentenceList(snapshot: DataSnapshot): MutableList<Saved.Sentence> {
         val savedSentenceList = mutableListOf<Saved.Sentence>()
-        snapshot.child("savedSentenceList").children.forEach { dataSnapshot ->
+        snapshot.children.forEach { dataSnapshot ->
             dataSnapshot.getValue(Saved.Sentence::class.java)?.let { savedSentenceList.add(it) }
         }
         return savedSentenceList
