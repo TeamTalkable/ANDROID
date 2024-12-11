@@ -38,7 +38,7 @@
     <string name="error_talk_permission">음성 인식을 위해 마이크 권한이 필요합니다.</string>
     <string name="tv_talk_feedback_detail"><u>자세한 피드백 보기</u></string>
     <string name="label_talk_next_to_feedback_en">I\'ve revised your response to make it more natural and accurate.\nTap the button below to check it out.</string>
-    <string name="label_talk_next_to_feedback_ko">(사용자 이름)의 대답을 더 자연스럽고 올바르게 고쳐줄게.\n아래 버튼을 눌러 확인해봐.</string>
+    <string name="label_talk_next_to_feedback_ko">%1$s의 대답을 더 자연스럽고 올바르게 고쳐줄게.\n아래 버튼을 눌러 확인해봐.</string>
 
     <!--guide-->
     <string name="tv_talk_first_en">Hi! My name is Amy. I want to be a friends with you.</string>
