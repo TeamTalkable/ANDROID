@@ -32,7 +32,7 @@
     <string name="tv_talk_show_full_conversation">전체 대화보기</string>
     <string name="tv_talk_listen">Amy의 말을 잘 들어보세요!</string>
     <string name="tv_talk_content_hint">take를 사용해서 말해보세요!</string>
-    <string name="tv_talk_content_example">I took a science class.</string>
+    <string name="tv_talk_content_example">I play with my friend and learn English.</string>
     <string name="tv_talk_feedback_retry">교정받은 문장으로 다시 말해보세요!</string>
     <string name="error_talk_retry">음성 인식을 처리할 수 없습니다.\n다시 시도해 주세요.</string>
     <string name="error_talk_permission">음성 인식을 위해 마이크 권한이 필요합니다.</string>
