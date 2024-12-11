@@ -12,8 +12,9 @@ import com.talkable.core.util.fragment.statusBarColorOf
 import com.talkable.core.util.fragment.viewLifeCycle
 import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentTalkReviewBinding
+import com.talkable.presentation.feedback.today.TodaySavedCategory
 import com.talkable.presentation.feedback.today.TodaySavedFragment.Companion.FEEDBACK_TAB_FEEDBACK
-import com.talkable.presentation.feedback.today.TodaySavedFragment.Companion.FEEDBACK_TAB_SAVED
+import com.talkable.presentation.mypage.saved.Constants
 import com.talkable.presentation.review.model.TalkSavedModel
 import com.talkable.presentation.review.model.TodaySavedUiState
 import com.talkable.presentation.review.model.TodaySavedViewModel
@@ -106,7 +107,7 @@ class TalkReviewFragment :
     private fun navigateToSavedFragment() {
         findNavController().navigate(
             R.id.action_fragment_talk_review_to_today_saved,
-            bundleOf(Key.SAVED_TAB_INDEX to FEEDBACK_TAB_SAVED)
+            bundleOf(Constants.KEY_CATEGORY to TodaySavedCategory.FEEDBACK)
         )
     }
 

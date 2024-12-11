@@ -13,6 +13,7 @@ import com.talkable.core.util.fragment.viewLifeCycleScope
 import com.talkable.databinding.FragmentReviewBinding
 import com.talkable.presentation.mypage.saved.SavedWordAdapter
 import com.talkable.presentation.quiz.Quiz
+import com.talkable.presentation.review.model.Saved
 import com.talkable.presentation.review.model.TalkSavedModel
 import com.talkable.presentation.review.model.TodaySavedUiState
 import com.talkable.presentation.review.model.TodaySavedViewModel
@@ -23,6 +24,7 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
 
     private val viewModel: TodaySavedViewModel by activityViewModels()
     private lateinit var savedWordAdapter: SavedWordAdapter
+    private lateinit var feedbackWordAdapter: SavedWordAdapter
 
     override fun initView() {
         statusBarColorOf(R.color.main_2)
@@ -34,7 +36,6 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
         initNavigateSavedBtnClickListener()
         initNavigateFeedbackBtnClickListener()
         initSetSavedListAdapter()
-        initGetFeedbackList()
     }
 
     private fun collect() {
@@ -42,9 +43,10 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
             viewModel.uiState.flowWithLifecycle(viewLifeCycle).collect { uiState ->
                 when (uiState) {
                     is TodaySavedUiState.Success -> {
-                        initGetSavedList(uiState.data)
+                        val data = uiState.data
+                        initGetSavedList(data)
+                        initGetFeedbackList(data)
                     }
-
                     is TodaySavedUiState.Error -> Timber.e(uiState.errorMessage)
                     else -> Unit
                 }
@@ -109,16 +111,25 @@ class ReviewFragment : BindingFragment<FragmentReviewBinding>(R.layout.fragment_
     private fun initSetSavedListAdapter() {
         savedWordAdapter = SavedWordAdapter()
         binding.includeReviewSaved.rvReviewSaved.adapter = savedWordAdapter
-        binding.includeReviewFeedback.rvReviewSaved.adapter = savedWordAdapter
+
+        feedbackWordAdapter = SavedWordAdapter()
+        binding.includeReviewFeedback.rvReviewSaved.adapter = feedbackWordAdapter
     }
 
     private fun initGetSavedList(data: TalkSavedModel) {
         binding.includeReviewSaved.title = getString(R.string.tv_my_page_navigate_save)
-        val limitedWordList = data.savedWordList.take(2)
-        savedWordAdapter.submitList(limitedWordList)
+        val latestWordList = data.savedWordList
+            .sortedWith(compareByDescending<Saved.Word> { it.timestamp }.thenBy { it.wordEnglish })
+            .shuffled()
+            .take(2)
+        savedWordAdapter.submitList(latestWordList)
     }
 
-    private fun initGetFeedbackList() {
+    private fun initGetFeedbackList(data: TalkSavedModel) {
         binding.includeReviewFeedback.title = getString(R.string.tv_my_feedback_title)
+        val oldestWordList = data.savedWordList
+            .sortedWith(compareBy<Saved.Word> { it.timestamp }.thenBy { it.wordEnglish })
+            .take(2)
+        feedbackWordAdapter.submitList(oldestWordList)
     }
 }
